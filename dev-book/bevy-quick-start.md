@@ -122,12 +122,15 @@ sudo apt install -y --no-install-recommends curl ca-certificates
 
 curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain stable -y
 
+. "$HOME/.cargo/env"
+
+
 cargo version
 
 # cargo 1.86.0 (adf9b6ad1 2025-02-28)
 
 
-# Project
+# Project Setup
 
 
 mkdir smartrobot-bevy
@@ -259,7 +262,6 @@ rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 
 
 echo 'use bevy::prelude::*;
-use bevy::prelude::*;
 
 pub struct HelloPlugin;
 
@@ -342,7 +344,7 @@ ubuntu:25.04
 # cargo ...
 
 
-# Project Build Image
+# Project Devel Image
 
 docker build \
 --platform linux/amd64 \
@@ -403,7 +405,7 @@ debian:12
 # cargo ...
 
 
-# Project Build Image
+# Project Devel Image
 
 docker build \
 --platform linux/arm64 \
