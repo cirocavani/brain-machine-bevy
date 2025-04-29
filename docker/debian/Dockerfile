@@ -20,6 +20,7 @@ RUN apt update && \
     libwayland-dev \
     libxkbcommon-dev \
     mesa-vulkan-drivers \
+    mesa-utils \
     vulkan-tools && \
     apt clean && \
     rm -rf /var/lib/apt/lists/*

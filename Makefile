@@ -54,8 +54,35 @@ docker-run-ubuntu-amd64:
 	smartrobot-bevy-devel:ubuntu-amd64 \
 	cargo run --features bevy/wayland
 
+.PHONY: docker-run-ubuntu-amd64-nvidia
+docker-run-ubuntu-amd64-nvidia:
+	docker run \
+	--rm \
+	-it \
+	--platform linux/amd64 \
+	--runtime nvidia \
+	--gpus all \
+	--device /dev/dri \
+	--group-add $(shell getent group video | cut -d ':' -f 3) \
+	--group-add $(shell getent group render | cut -d ':' -f 3) \
+	-e NVIDIA_DRIVER_CAPABILITIES=all \
+	-e WAYLAND_DISPLAY=${WAYLAND_DISPLAY} \
+	-e XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR} \
+	-v ${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}:${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY} \
+	-v /etc/machine-id:/etc/machine-id:ro \
+	-e CARGO_TARGET_DIR=/home/user/project/target/x86_64-unknown-linux-gnu \
+	-v ${PWD}:/home/user/project \
+	-v ${HOME}/.cargo/registry:/home/user/.cargo/registry \
+	-v ${HOME}/.cargo/git:/home/user/.cargo/git \
+	smartrobot-bevy-devel:ubuntu-amd64 \
+	cargo run --features bevy/wayland
+
+
 .PHONY: docker-ubuntu-amd64
 docker-ubuntu-amd64: docker-build-ubuntu-amd64 docker-run-ubuntu-amd64
+
+.PHONY: docker-ubuntu-amd64-nvidia
+docker-ubuntu-amd64-nvidia: docker-build-ubuntu-amd64 docker-run-ubuntu-amd64-nvidia
 
 .PHONY: docker-build-debian-arm64
 docker-build-debian-arm64:

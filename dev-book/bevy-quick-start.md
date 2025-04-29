@@ -8,10 +8,10 @@ Based on:
 Development Host:
 
 - Ubuntu 25.04
+- Gnome 48 on Wayland
 - CPU Intel Core 7 x86_64
 - GPU Integrated Intel Graphics
 - GPU Discrete NVidia GeForce MX570 A 2GB
-- Gnome 48 on Wayland
 
 Targets:
 
@@ -357,6 +357,7 @@ docker build \
 docker run \
 --rm \
 -it \
+--platform linux/amd64 \
 -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY \
 -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
 -v $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY \
