@@ -175,7 +175,7 @@ default = ["bevy-dev", "log-max"]
 bevy-dev = ["bevy/dynamic_linking"]
 log-max = ["log/max_level_debug", "log/release_max_level_warn"]
 ' \
->> Carto.toml
+>> Cargo.toml
 
 
 # Compile with Performance Optimizations
