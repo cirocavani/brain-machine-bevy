@@ -10,135 +10,444 @@
 
 ## Setup
 
-
 Pre-requisites:
 
 - Rust Toolchain
 - Docker Engine / CLI
-- Vulkan support (NVidia GPU)
+- Vulkan support
 - Wayland window system
 
 ...
 
-Ubuntu 25.04 Plucky with NVidia GPU:
+Ubuntu 25.04 Plucky with NVIDIA GPU:
 
 > WARNING: use with caution
 
 [`setup-ubuntu2504.sh`](./setup-ubuntu2504.sh)
 
+
+### Build Dependencies
+
+<https://github.com/bevyengine/bevy/blob/main/docs/linux_dependencies.md#ubuntu>
+
 ```sh
-./setup-ubuntu2504.sh
+sudo apt update
+
+sudo apt install -y \
+--no-install-recommends \
+pkg-config \
+libasound2-dev \
+libudev-dev \
+libx11-dev \
+libxkbcommon-x11-0 \
+libwayland-dev \
+libxkbcommon-dev \
+mesa-vulkan-drivers \
+mesa-utils \
+vulkan-tools
+```
+
+
+### Rust Toolchain
+
+```sh
+sudo apt update
+
+sudo apt install -y ca-certificates curl
+
+curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | \
+sh -s -- --default-toolchain stable -y
+
+
+. "$HOME/.cargo/env"
+
+cargo version
+
+# cargo 1.86.0 (adf9b6ad1 2025-02-28)
+```
+
+
+### Compiler clang / lld
+
+```sh
+sudo apt install -y --no-install-recommends clang lld
+
+
+clang --version
+
+# Ubuntu clang version 20.1.2 (0ubuntu1)
+# Target: x86_64-pc-linux-gnu
+# Thread model: posix
+# InstalledDir: /usr/lib/llvm-20/bin
+```
+
+
+### Docker Engine
+
+<https://docs.docker.com/engine/install/ubuntu/>
+
+```sh
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+sudo gpg --dearmor -o /usr/share/keyrings/docker-keyring.gpg --yes
+
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/docker-keyring.gpg] https://download.docker.com/linux/ubuntu plucky stable' | \
+sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+
+
+sudo apt install -y \
+--no-install-recommends \
+docker-ce \
+docker-ce-cli \
+containerd.io \
+docker-buildx-plugin \
+docker-compose-plugin
+
+sudo usermod -aG docker $USER
+
+newgrp docker
+
+
+docker run --rm ubuntu:25.04 uname -mo
+
+# x86_64 GNU/Linux
+
+
+docker run \
+--rm \
+--device /dev/dri \
+-e WAYLAND_DISPLAY=$WAYLAND_DISPLAY \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-v $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY \
+-v /etc/machine-id:/etc/machine-id:ro \
+ubuntu:25.04 \
+sh -c 'export DEBIAN_FRONTEND=noninteractive;
+apt update;
+apt install -y --no-install-recommends mesa-vulkan-drivers mesa-utils vulkan-tools;
+vulkaninfo --summary'
+
+# -> [Output vulkaninfo]
 ```
 
 <details>
-<summary>Output.</summary>
+<summary>Output vulkaninfo.</summary>
 
 ```text
-Install Rust Toolchain
+'DISPLAY' environment variable not set... skipping surface info
+==========
+VULKANINFO
+==========
 
-Get:1 https://nvidia.github.io/libnvidia-container/stable/deb/amd64  InRelease [1477 B]
-Hit:2 https://download.docker.com/linux/ubuntu plucky InRelease
-Hit:4 http://archive.ubuntu.com/ubuntu plucky InRelease
-Hit:5 http://archive.ubuntu.com/ubuntu plucky-updates InRelease
-Hit:7 http://archive.ubuntu.com/ubuntu plucky-security InRelease
-Hit:8 http://archive.ubuntu.com/ubuntu plucky-backports InRelease
-Fetched 1477 B in 1s (1082 B/s)
-All packages are up to date.
-ca-certificates is already the newest version (20241223).
-curl is already the newest version (8.12.1-3ubuntu1).
-Summary:
-  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 0
-info: downloading installer
-warn: It looks like you have an existing rustup settings file at:
-warn: /home/cavani/.rustup/settings.toml
-warn: Rustup will install the default toolchain as specified in the settings file,
-warn: instead of the one inferred from the default host triple.
-info: profile set to 'default'
-info: default host triple is x86_64-unknown-linux-gnu
-warn: Updating existing toolchain, profile choice will be ignored
-info: syncing channel updates for 'stable-x86_64-unknown-linux-gnu'
-info: default toolchain set to 'stable-x86_64-unknown-linux-gnu'
-
-  stable-x86_64-unknown-linux-gnu unchanged - rustc 1.86.0 (05f9846f8 2025-03-31)
+Vulkan Instance Version: 1.4.304
 
 
-Rust is installed now. Great!
+Instance Extensions: count = 24
+-------------------------------
+VK_EXT_acquire_drm_display             : extension revision 1
+VK_EXT_acquire_xlib_display            : extension revision 1
+VK_EXT_debug_report                    : extension revision 10
+VK_EXT_debug_utils                     : extension revision 2
+VK_EXT_direct_mode_display             : extension revision 1
+VK_EXT_display_surface_counter         : extension revision 1
+VK_EXT_headless_surface                : extension revision 1
+VK_EXT_surface_maintenance1            : extension revision 1
+VK_EXT_swapchain_colorspace            : extension revision 5
+VK_KHR_device_group_creation           : extension revision 1
+VK_KHR_display                         : extension revision 23
+VK_KHR_external_fence_capabilities     : extension revision 1
+VK_KHR_external_memory_capabilities    : extension revision 1
+VK_KHR_external_semaphore_capabilities : extension revision 1
+VK_KHR_get_display_properties2         : extension revision 1
+VK_KHR_get_physical_device_properties2 : extension revision 2
+VK_KHR_get_surface_capabilities2       : extension revision 1
+VK_KHR_portability_enumeration         : extension revision 1
+VK_KHR_surface                         : extension revision 25
+VK_KHR_surface_protected_capabilities  : extension revision 1
+VK_KHR_wayland_surface                 : extension revision 6
+VK_KHR_xcb_surface                     : extension revision 6
+VK_KHR_xlib_surface                    : extension revision 6
+VK_LUNARG_direct_driver_loading        : extension revision 1
 
-To get started you may need to restart your current shell.
-This would reload your PATH environment variable to include
-Cargo's bin directory ($HOME/.cargo/bin).
+Instance Layers: count = 3
+--------------------------
+VK_LAYER_INTEL_nullhw       INTEL NULL HW                1.1.73   version 1
+VK_LAYER_MESA_device_select Linux device selection layer 1.4.303  version 1
+VK_LAYER_MESA_overlay       Mesa Overlay layer           1.4.303  version 1
 
-To configure your current shell, you need to source
-the corresponding env file under $HOME/.cargo.
+Devices:
+========
+GPU0:
+        apiVersion         = 1.4.305
+        driverVersion      = 25.0.3
+        vendorID           = 0x8086
+        deviceID           = 0xa7ac
+        deviceType         = PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU
+        deviceName         = Intel(R) Graphics (RPL-U)
+        driverID           = DRIVER_ID_INTEL_OPEN_SOURCE_MESA
+        driverName         = Intel open-source Mesa driver
+        driverInfo         = Mesa 25.0.3-1ubuntu2
+        conformanceVersion = 1.4.0.0
+        deviceUUID         = 8680aca7-0400-0000-0002-000000000000
+        driverUUID         = b7bfe4ab-94df-c0d4-616d-43a427c11fca
+GPU1:
+        apiVersion         = 1.4.305
+        driverVersion      = 0.0.1
+        vendorID           = 0x10005
+        deviceID           = 0x0000
+        deviceType         = PHYSICAL_DEVICE_TYPE_CPU
+        deviceName         = llvmpipe (LLVM 19.1.7, 256 bits)
+        driverID           = DRIVER_ID_MESA_LLVMPIPE
+        driverName         = llvmpipe
+        driverInfo         = Mesa 25.0.3-1ubuntu2 (LLVM 19.1.7)
+        conformanceVersion = 1.3.1.1
+        deviceUUID         = 6d657361-3235-2e30-2e33-2d3175627500
+        driverUUID         = 6c6c766d-7069-7065-5555-494400000000
+```
+</details>
 
-This is usually done by running one of the following (note the leading DOT):
-. "$HOME/.cargo/env"            # For sh/bash/zsh/ash/dash/pdksh
-source "$HOME/.cargo/env.fish"  # For fish
-source "$HOME/.cargo/env.nu"    # For nushell
 
-Install Compiler (clang / lld)
+### Docker ARM64
 
-clang is already the newest version (1:20.0-63ubuntu1).
-lld is already the newest version (1:20.0-63ubuntu1).
-Summary:
-  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 0
+```sh
+sudo apt install -y --no-install-recommends qemu-user-static binfmt-support
 
-Install Build Dependencies
 
-pkg-config is already the newest version (1.8.1-4).
-libasound2-dev is already the newest version (1.2.13-1build1).
-libudev-dev is already the newest version (257.4-1ubuntu3).
-libx11-dev is already the newest version (2:1.8.10-2).
-libxkbcommon-x11-0 is already the newest version (1.7.0-2).
-libwayland-dev is already the newest version (1.23.1-3).
-libxkbcommon-dev is already the newest version (1.7.0-2).
-mesa-vulkan-drivers is already the newest version (25.0.3-1ubuntu2).
-mesa-utils is already the newest version (9.0.0-2).
-vulkan-tools is already the newest version (1.4.304.0+dfsg1-1).
-Summary:
-  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 0
+docker run --rm --platform linux/arm64 debian:12 uname -mo
 
-Install Docker Engine
+# aarch64 GNU/Linux
 
-Hit:1 https://download.docker.com/linux/ubuntu plucky InRelease
-Get:2 https://nvidia.github.io/libnvidia-container/stable/deb/amd64  InRelease [1477 B]
-Hit:4 http://archive.ubuntu.com/ubuntu plucky InRelease
-Hit:5 http://archive.ubuntu.com/ubuntu plucky-updates InRelease
-Hit:6 http://archive.ubuntu.com/ubuntu plucky-security InRelease
-Hit:7 http://archive.ubuntu.com/ubuntu plucky-backports InRelease
-Fetched 1477 B in 2s (823 B/s)
-All packages are up to date.
-docker-ce is already the newest version (5:28.1.1-1~ubuntu.25.04~plucky).
-docker-ce-cli is already the newest version (5:28.1.1-1~ubuntu.25.04~plucky).
-containerd.io is already the newest version (1.7.27-1).
-docker-buildx-plugin is already the newest version (0.23.0-1~ubuntu.25.04~plucky).
-docker-compose-plugin is already the newest version (2.35.1-1~ubuntu.25.04~plucky).
-Summary:
-  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 0
 
-Install QEMU (Docker uses to run ARM64 on AMD64)
+docker run \
+--rm \
+--platform linux/arm64 \
+-e WAYLAND_DISPLAY=$WAYLAND_DISPLAY \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-v $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY \
+-v /etc/machine-id:/etc/machine-id:ro \
+debian:12 \
+sh -c 'export DEBIAN_FRONTEND=noninteractive;
+apt update;
+apt install -y --no-install-recommends mesa-vulkan-drivers mesa-utils vulkan-tools;
+vulkaninfo --summary'
 
-qemu-user-static is already the newest version (1:9.2.1+ds-1ubuntu5).
-binfmt-support is already the newest version (2.2.2-7).
-Summary:
-  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 0
+# -> [Output vulkaninfo]
+```
 
-Install NVidia Container Toolkit
+<details>
+<summary>Output vulkaninfo.</summary>
 
-Hit:1 https://download.docker.com/linux/ubuntu plucky InRelease
-Get:2 https://nvidia.github.io/libnvidia-container/stable/deb/amd64  InRelease [1477 B]
-Hit:4 http://archive.ubuntu.com/ubuntu plucky InRelease
-Hit:5 http://archive.ubuntu.com/ubuntu plucky-updates InRelease
-Hit:7 http://archive.ubuntu.com/ubuntu plucky-security InRelease
-Hit:9 http://archive.ubuntu.com/ubuntu plucky-backports InRelease
-Fetched 1477 B in 1s (1025 B/s)
-All packages are up to date.
-nvidia-driver-570 is already the newest version (570.133.07-0ubuntu2).
-Summary:
-  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 0
-nvidia-container-toolkit is already the newest version (1.17.6-1).
-Summary:
-  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 0
+```text
+'DISPLAY' environment variable not set... skipping surface info
+==========
+VULKANINFO
+==========
+
+Vulkan Instance Version: 1.3.239
+
+
+Instance Extensions: count = 20
+-------------------------------
+VK_EXT_acquire_drm_display             : extension revision 1
+VK_EXT_acquire_xlib_display            : extension revision 1
+VK_EXT_debug_report                    : extension revision 10
+VK_EXT_debug_utils                     : extension revision 2
+VK_EXT_direct_mode_display             : extension revision 1
+VK_EXT_display_surface_counter         : extension revision 1
+VK_KHR_device_group_creation           : extension revision 1
+VK_KHR_display                         : extension revision 23
+VK_KHR_external_fence_capabilities     : extension revision 1
+VK_KHR_external_memory_capabilities    : extension revision 1
+VK_KHR_external_semaphore_capabilities : extension revision 1
+VK_KHR_get_display_properties2         : extension revision 1
+VK_KHR_get_physical_device_properties2 : extension revision 2
+VK_KHR_get_surface_capabilities2       : extension revision 1
+VK_KHR_portability_enumeration         : extension revision 1
+VK_KHR_surface                         : extension revision 25
+VK_KHR_surface_protected_capabilities  : extension revision 1
+VK_KHR_wayland_surface                 : extension revision 6
+VK_KHR_xcb_surface                     : extension revision 6
+VK_KHR_xlib_surface                    : extension revision 6
+
+Instance Layers: count = 2
+--------------------------
+VK_LAYER_MESA_device_select Linux device selection layer 1.3.211  version 1
+VK_LAYER_MESA_overlay       Mesa Overlay layer           1.3.211  version 1
+
+Devices:
+========
+GPU0:
+        apiVersion         = 1.3.230
+        driverVersion      = 0.0.1
+        vendorID           = 0x10005
+        deviceID           = 0x0000
+        deviceType         = PHYSICAL_DEVICE_TYPE_CPU
+        deviceName         = llvmpipe (LLVM 15.0.6, 128 bits)
+        driverID           = DRIVER_ID_MESA_LLVMPIPE
+        driverName         = llvmpipe
+        driverInfo         = Mesa 22.3.6 (LLVM 15.0.6)
+        conformanceVersion = 1.3.1.1
+        deviceUUID         = 6d657361-3232-2e33-2e36-000000000000
+        driverUUID         = 6c6c766d-7069-7065-5555-494400000000
+```
+</details>
+
+
+### Docker NVIDIA GPU
+
+<https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html>
+
+```sh
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | \
+sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg --yes
+
+echo 'deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://nvidia.github.io/libnvidia-container/stable/deb/$(ARCH) /' | \
+sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list > /dev/null
+
+sudo apt update
+
+sudo apt install -y --no-install-recommends nvidia-driver-570
+sudo apt install -y --no-install-recommends nvidia-container-toolkit
+
+# reboot
+
+
+docker run --rm --runtime nvidia --gpus all ubuntu:25.04 nvidia-smi
+
+# -> [Output nvidia-smi]
+
+docker run --rm \
+--runtime nvidia \
+--gpus all \
+--device /dev/dri \
+-e NVIDIA_DRIVER_CAPABILITIES=all \
+-e WAYLAND_DISPLAY=$WAYLAND_DISPLAY \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-v $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY \
+-v /etc/machine-id:/etc/machine-id:ro \
+ubuntu:25.04 \
+sh -c 'export DEBIAN_FRONTEND=noninteractive;
+apt update;
+apt install -y --no-install-recommends mesa-vulkan-drivers mesa-utils vulkan-tools;
+vulkaninfo --summary'
+
+# -> [Output vulkaninfo]
+```
+
+<details>
+<summary>Output nvidia-smi.</summary>
+
+```text
+Tue Apr 29 14:12:52 2025
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.133.07             Driver Version: 570.133.07     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce MX570 A         Off |   00000000:01:00.0 Off |                  N/A |
+| N/A   48C    P8              3W /    8W |      11MiB /   2048MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
++-----------------------------------------------------------------------------------------+
+```
+</details>
+
+<details>
+<summary>Output vulkaninfo.</summary>
+
+```text
+'DISPLAY' environment variable not set... skipping surface info
+==========
+VULKANINFO
+==========
+
+Vulkan Instance Version: 1.4.304
+
+
+Instance Extensions: count = 25
+-------------------------------
+VK_EXT_acquire_drm_display             : extension revision 1
+VK_EXT_acquire_xlib_display            : extension revision 1
+VK_EXT_debug_report                    : extension revision 10
+VK_EXT_debug_utils                     : extension revision 2
+VK_EXT_direct_mode_display             : extension revision 1
+VK_EXT_display_surface_counter         : extension revision 1
+VK_EXT_headless_surface                : extension revision 1
+VK_EXT_surface_maintenance1            : extension revision 1
+VK_EXT_swapchain_colorspace            : extension revision 5
+VK_KHR_device_group_creation           : extension revision 1
+VK_KHR_display                         : extension revision 23
+VK_KHR_external_fence_capabilities     : extension revision 1
+VK_KHR_external_memory_capabilities    : extension revision 1
+VK_KHR_external_semaphore_capabilities : extension revision 1
+VK_KHR_get_display_properties2         : extension revision 1
+VK_KHR_get_physical_device_properties2 : extension revision 2
+VK_KHR_get_surface_capabilities2       : extension revision 1
+VK_KHR_portability_enumeration         : extension revision 1
+VK_KHR_surface                         : extension revision 25
+VK_KHR_surface_protected_capabilities  : extension revision 1
+VK_KHR_wayland_surface                 : extension revision 6
+VK_KHR_xcb_surface                     : extension revision 6
+VK_KHR_xlib_surface                    : extension revision 6
+VK_LUNARG_direct_driver_loading        : extension revision 1
+VK_NV_display_stereo                   : extension revision 1
+
+Instance Layers: count = 4
+--------------------------
+VK_LAYER_INTEL_nullhw       INTEL NULL HW                1.1.73   version 1
+VK_LAYER_MESA_device_select Linux device selection layer 1.4.303  version 1
+VK_LAYER_MESA_overlay       Mesa Overlay layer           1.4.303  version 1
+VK_LAYER_NV_optimus         NVIDIA Optimus layer         1.4.303  version 1
+
+Devices:
+========
+GPU0:
+        apiVersion         = 1.4.305
+        driverVersion      = 25.0.3
+        vendorID           = 0x8086
+        deviceID           = 0xa7ac
+        deviceType         = PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU
+        deviceName         = Intel(R) Graphics (RPL-U)
+        driverID           = DRIVER_ID_INTEL_OPEN_SOURCE_MESA
+        driverName         = Intel open-source Mesa driver
+        driverInfo         = Mesa 25.0.3-1ubuntu2
+        conformanceVersion = 1.4.0.0
+        deviceUUID         = 8680aca7-0400-0000-0002-000000000000
+        driverUUID         = b7bfe4ab-94df-c0d4-616d-43a427c11fca
+GPU1:
+        apiVersion         = 1.4.303
+        driverVersion      = 570.133.7.0
+        vendorID           = 0x10de
+        deviceID           = 0x25aa
+        deviceType         = PHYSICAL_DEVICE_TYPE_DISCRETE_GPU
+        deviceName         = NVIDIA GeForce MX570 A
+        driverID           = DRIVER_ID_NVIDIA_PROPRIETARY
+        driverName         = NVIDIA
+        driverInfo         = 570.133.07
+        conformanceVersion = 1.4.1.0
+        deviceUUID         = ffacb06a-ba56-5cc1-58da-90cadf3cc4e0
+        driverUUID         = a312329b-a338-5885-bebf-8b95ca9ae741
+GPU2:
+        apiVersion         = 1.4.305
+        driverVersion      = 0.0.1
+        vendorID           = 0x10005
+        deviceID           = 0x0000
+        deviceType         = PHYSICAL_DEVICE_TYPE_CPU
+        deviceName         = llvmpipe (LLVM 19.1.7, 256 bits)
+        driverID           = DRIVER_ID_MESA_LLVMPIPE
+        driverName         = llvmpipe
+        driverInfo         = Mesa 25.0.3-1ubuntu2 (LLVM 19.1.7)
+        conformanceVersion = 1.3.1.1
+        deviceUUID         = 6d657361-3235-2e30-2e33-2d3175627500
+        driverUUID         = 6c6c766d-7069-7065-5555-494400000000
 ```
 </details>
 
@@ -147,7 +456,6 @@ Summary:
 
 
 ### Project
-
 
 ```sh
 # run tests from `tests` modules
@@ -168,7 +476,6 @@ make clean
 
 
 ### Execution
-
 
 ```sh
 # Ubuntu 25.04 x86_64 (development)
@@ -203,6 +510,5 @@ make docker-debian-arm64
 
 
 ## Book of Dev
-
 
 [README](./dev-book/README.md)

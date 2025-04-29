@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Project Setup - Ubuntu 25.04 Plucky (NVidia GPU)
+# Project Setup - Ubuntu 25.04 Plucky (NVIDIA GPU)
 
 set -eu
 
@@ -34,6 +34,8 @@ sudo apt install -y --no-install-recommends clang lld
 echo
 echo "Install Build Dependencies"
 echo
+
+# https://github.com/bevyengine/bevy/blob/main/docs/linux_dependencies.md#ubuntu
 
 sudo apt install -y \
 --no-install-recommends \
@@ -83,7 +85,7 @@ sudo apt install -y --no-install-recommends qemu-user-static binfmt-support
 
 
 echo
-echo "Install NVidia Container Toolkit"
+echo "Install NVIDIA Container Toolkit"
 echo
 
 # https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html

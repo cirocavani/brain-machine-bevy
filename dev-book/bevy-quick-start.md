@@ -11,13 +11,15 @@ Development Host:
 - Gnome 48 on Wayland
 - CPU Intel Core 7 x86_64
 - GPU Integrated Intel Graphics
-- GPU Discrete NVidia GeForce MX570 A 2GB
+- GPU Discrete NVIDIA GeForce MX570 A 2GB
 
 Targets:
 
-- Ubuntu 25.04 x86_64 (= development)
-- Debian 12 aarch64 (Raspbery Pi)
+- Ubuntu 25.04 AMD64 (x86_64) -> Development Host
+- Debian 12 ARM64 (aarch64) -> Raspberry Pi
 
+
+## Quick Start Project
 
 ```sh
 # GPU Vulkan
@@ -319,9 +321,64 @@ fn main() {
 cargo run --features bevy/wayland
 
 # -> [Output Dev]
+```
+
+<details>
+<summary>Output Dev.</summary>
+
+```text
+cargo run --features bevy/wayland
+    Finished `dev` profile [optimized + debuginfo] target(s) in 6m 39s
+     Running `target/debug/smartrobot-bevy`
+2025-04-28T22:53:41.224703Z  INFO bevy_render::renderer: AdapterInfo { name: "NVIDIA GeForce MX570 A", vendor: 4318, device: 9642, device_type: DiscreteGpu, driver: "NVIDIA", driver_info: "570.133.07", backend: Vulkan }
+2025-04-28T22:53:41.520430Z  INFO bevy_render::batching::gpu_preprocessing: GPU preprocessing is fully supported on this device.
+2025-04-28T22:53:41.572693Z  INFO bevy_winit::system: Creating new window App (0v1)
+2025-04-28T22:53:41.755552Z  WARN sctk_adwaita::buttons: Ignoring unknown button type:
+hello Elaina Hume!
+hello Renzo Hume!
+hello Zayna Nieves!
+hello Elaina Hume!
+hello Renzo Hume!
+hello Zayna Nieves!
+2025-04-28T22:53:47.700346Z  INFO bevy_window::system: No windows are open, exiting
+2025-04-28T22:53:47.701109Z  INFO bevy_winit::system: Closing window 0v1
+```
+</details>
 
 
-# Docker Builds
+## Docker Development
+
+
+Targets:
+
+- Ubuntu 25.04 AMD64 (x86_64) -> Development Host
+- Debian 12 ARM64 (aarch64) -> Raspberry Pi
+
+```sh
+# Docker
+
+# https://docs.docker.com/engine/install/ubuntu/
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+sudo gpg --dearmor -o /usr/share/keyrings/docker-keyring.gpg --yes
+
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/docker-keyring.gpg] https://download.docker.com/linux/ubuntu plucky stable' | \
+sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+
+
+sudo apt install -y \
+--no-install-recommends \
+docker-ce \
+docker-ce-cli \
+containerd.io \
+docker-buildx-plugin \
+docker-compose-plugin
+
+sudo usermod -aG docker $USER
+
+newgrp docker
 
 
 # Ubuntu 25.04 AMD64 -> development
@@ -444,28 +501,6 @@ ls -alh target/aarch64-unknown-linux-gnu/debug/smartrobot-bevy
 ```
 
 <details>
-<summary>Output Dev.</summary>
-
-```text
-cargo run --features bevy/wayland
-    Finished `dev` profile [optimized + debuginfo] target(s) in 6m 39s
-     Running `target/debug/smartrobot-bevy`
-2025-04-28T22:53:41.224703Z  INFO bevy_render::renderer: AdapterInfo { name: "NVIDIA GeForce MX570 A", vendor: 4318, device: 9642, device_type: DiscreteGpu, driver: "NVIDIA", driver_info: "570.133.07", backend: Vulkan }
-2025-04-28T22:53:41.520430Z  INFO bevy_render::batching::gpu_preprocessing: GPU preprocessing is fully supported on this device.
-2025-04-28T22:53:41.572693Z  INFO bevy_winit::system: Creating new window App (0v1)
-2025-04-28T22:53:41.755552Z  WARN sctk_adwaita::buttons: Ignoring unknown button type:
-hello Elaina Hume!
-hello Renzo Hume!
-hello Zayna Nieves!
-hello Elaina Hume!
-hello Renzo Hume!
-hello Zayna Nieves!
-2025-04-28T22:53:47.700346Z  INFO bevy_window::system: No windows are open, exiting
-2025-04-28T22:53:47.701109Z  INFO bevy_winit::system: Closing window 0v1
-```
-</details>
-
-<details>
 <summary>Output ubuntu-amd64 (Docker).</summary>
 
 ```text
@@ -537,5 +572,147 @@ hello Renzo Hume!
 hello Zayna Nieves!
 2025-04-28T22:35:46.867140Z  INFO bevy_window::system: No windows are open, exiting
 2025-04-28T22:35:46.877311Z  INFO bevy_winit::system: Closing window 0v1
+```
+</details>
+
+
+## Running on Docker Ubuntu using NVIDIA GPU
+
+
+NVIDIA Container Toolkit
+
+<https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/index.html>
+
+```sh
+# Using Docker Development Ubuntu 25.04 AMD64 Image
+
+
+# NVIDIA Container Toolkit
+
+# https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
+
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | \
+sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg --yes
+
+echo 'deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://nvidia.github.io/libnvidia-container/stable/deb/$(ARCH) /' | \
+sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list > /dev/null
+
+sudo apt update
+
+sudo apt install -y --no-install-recommends nvidia-driver-570
+sudo apt install -y --no-install-recommends nvidia-container-toolkit
+
+
+docker run \
+--rm \
+-it \
+--platform linux/amd64 \
+--runtime nvidia \
+--gpus all \
+--device /dev/dri \
+--group-add $(getent group video | cut -d ':' -f 3) \
+--group-add $(getent group render | cut -d ':' -f 3) \
+-e NVIDIA_DRIVER_CAPABILITIES=all \
+-e WAYLAND_DISPLAY=$WAYLAND_DISPLAY \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-v $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY \
+-v /etc/machine-id:/etc/machine-id:ro \
+-e CARGO_TARGET_DIR=/home/user/project/target/x86_64-unknown-linux-gnu \
+-v $PWD:/home/user/project \
+-v $HOME/.cargo/registry:/home/user/.cargo/registry \
+-v $HOME/.cargo/git:/home/user/.cargo/git \
+smartrobot-bevy-devel:ubuntu-amd64 \
+cargo run --features bevy/wayland
+
+# -> [Output ubuntu-amd64 (NVIDIA)]
+```
+
+<details>
+<summary>Output ubuntu-amd64 (NVIDIA).</summary>
+
+```text
+cargo run --features bevy/wayland
+    Finished `dev` profile [optimized + debuginfo] target(s) in 0.18s
+     Running `target/x86_64-unknown-linux-gnu/debug/smartrobot-bevy`
+2025-04-29T13:26:28.847748Z  INFO bevy_render::renderer: AdapterInfo { name: "NVIDIA GeForce MX570 A", vendor: 4318, device: 9642, device_type: DiscreteGpu, driver: "NVIDIA", driver_info: "570.133.07", backend: Vulkan }
+ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5728:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) Unknown PCM default
+2025-04-29T13:26:29.093659Z  WARN bevy_audio::audio_output: No audio device found.
+2025-04-29T13:26:29.108755Z  INFO bevy_render::batching::gpu_preprocessing: GPU preprocessing is fully supported on this device.
+2025-04-29T13:26:29.140082Z  INFO bevy_winit::system: Creating new window App (0v1)
+hello Elaina Hume!
+hello Renzo Hume!
+hello Zayna Nieves!
+hello Elaina Hume!
+hello Renzo Hume!
+hello Zayna Nieves!
+hello Elaina Hume!
+hello Renzo Hume!
+hello Zayna Nieves!
+2025-04-29T13:26:35.212520Z  INFO bevy_window::system: No windows are open, exiting
+2025-04-29T13:26:35.212909Z  INFO bevy_winit::system: Closing window 0v1
+```
+</details>
+
+
+## Running on Raspbery Pi
+
+
+(Vulkan error)
+
+```sh
+# Raspbery Pi OS -> Debian 12 ARM64
+
+cargo run
+```
+
+<details>
+<summary>Output Dev (RPi).</summary>
+
+```text
+cargo run
+    Finished `dev` profile [optimized + debuginfo] target(s) in 22m 55s
+     Running `target/debug/smartrobot-bevy`
+libEGL warning: DRI3: Screen seems not DRI3 capable
+libEGL warning: DRI3: Screen seems not DRI3 capable
+2025-04-29T13:23:21.515192Z  INFO bevy_render::renderer: AdapterInfo { name: "V3D 7.1.7.0", vendor: 5348, device: 1433410611, device_type: IntegratedGpu, driver: "V3DV Mesa", driver_info: "Mesa 24.2.8-1~bpo12+rpt2", backend: Vulkan }
+ALSA lib pcm_dmix.c:999:(snd_pcm_dmix_open) unable to open slave
+ALSA lib pcm_dmix.c:999:(snd_pcm_dmix_open) unable to open slave
+ALSA lib pcm_dmix.c:999:(snd_pcm_dmix_open) unable to open slave
+ALSA lib pcm_dmix.c:999:(snd_pcm_dmix_open) unable to open slave
+ALSA lib pcm_dmix.c:999:(snd_pcm_dmix_open) unable to open slave
+ALSA lib pcm_dmix.c:999:(snd_pcm_dmix_open) unable to open slave
+ALSA lib pcm_dmix.c:999:(snd_pcm_dmix_open) unable to open slave
+ALSA lib pcm_dmix.c:999:(snd_pcm_dmix_open) unable to open slave
+ALSA lib pcm_dmix.c:999:(snd_pcm_dmix_open) unable to open slave
+ALSA lib pcm_dsnoop.c:540:(snd_pcm_dsnoop_open) The dsnoop plugin supports only capture stream
+ALSA lib pcm_dsnoop.c:540:(snd_pcm_dsnoop_open) The dsnoop plugin supports only capture stream
+ALSA lib pcm_asym.c:105:(_snd_pcm_asym_open) capture slave is not defined
+ALSA lib pcm_asym.c:105:(_snd_pcm_asym_open) capture slave is not defined
+ALSA lib pcm_dmix.c:999:(snd_pcm_dmix_open) unable to open slave
+ALSA lib pcm_dmix.c:972:(snd_pcm_dmix_open) The dmix plugin supports only playback stream
+ALSA lib pcm_asym.c:105:(_snd_pcm_asym_open) capture slave is not defined
+ALSA lib pcm_asym.c:105:(_snd_pcm_asym_open) capture slave is not defined
+ALSA lib pcm_dmix.c:999:(snd_pcm_dmix_open) unable to open slave
+ALSA lib pcm_dmix.c:972:(snd_pcm_dmix_open) The dmix plugin supports only playback stream
+2025-04-29T13:23:21.834727Z  INFO bevy_render::batching::gpu_preprocessing: Some GPU preprocessing are limited on this device.
+2025-04-29T13:23:21.873529Z  WARN bevy_pbr::ssao: ScreenSpaceAmbientOcclusionPlugin not loaded. GPU lacks support: Limits::max_storage_textures_per_shader_stage is less than 5.
+2025-04-29T13:23:21.873721Z ERROR wgpu::backend::wgpu_core: Handling wgpu errors as fatal by default
+
+thread 'main' panicked at /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-24.0.3/src/backend/wgpu_core.rs:1079:26:
+wgpu error: Validation Error
+
+Caused by:
+  In Device::create_bind_group_layout, label = 'build mesh uniforms GPU early occlusion culling bind group layout'
+    Too many bindings of type StorageBuffers in Stage ShaderStages(COMPUTE), limit is 8, count was 9. Check the limit `max_storage_buffers_per_shader_stage` passed to `Adapter::request_device`
+
+
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
 </details>
