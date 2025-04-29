@@ -463,7 +463,7 @@ hello Zayna Nieves!
 </details>
 
 <details>
-<summary>Output `ubuntu-amd64` (Docker)</summary>
+<summary>Output ubuntu-amd64 (Docker).</summary>
 
 ```text
 cargo run --features bevy/wayland
@@ -500,7 +500,7 @@ hello Zayna Nieves!
 </details>
 
 <details>
-<summary>Output `debian-arm64` (Docker).</summary>
+<summary>Output debian-arm64 (Docker).</summary>
 
 ```text
 cargo run --features bevy/wayland

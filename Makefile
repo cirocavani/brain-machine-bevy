@@ -33,7 +33,7 @@ docker-build-ubuntu-amd64:
 	--platform linux/amd64 \
 	--build-arg USER_ID=`id -u` \
 	--build-arg GROUP_ID=`id -g` \
-	-t smartrobot-bevy-build:ubuntu-amd64 \
+	-t smartrobot-bevy-devel:ubuntu-amd64 \
 	-f docker/ubuntu/Dockerfile \
 	.
 
@@ -51,7 +51,7 @@ docker-run-ubuntu-amd64:
 	-v ${PWD}:/home/user/project \
 	-v ${HOME}/.cargo/registry:/home/user/.cargo/registry \
 	-v ${HOME}/.cargo/git:/home/user/.cargo/git \
-	smartrobot-bevy-build:ubuntu-amd64 \
+	smartrobot-bevy-devel:ubuntu-amd64 \
 	cargo run --features bevy/wayland
 
 .PHONY: docker-ubuntu-amd64
@@ -63,7 +63,7 @@ docker-build-debian-arm64:
 	--platform linux/arm64 \
 	--build-arg USER_ID=`id -u` \
 	--build-arg GROUP_ID=`id -g` \
-	-t smartrobot-bevy-build:debian-arm64 \
+	-t smartrobot-bevy-devel:debian-arm64 \
 	-f docker/debian/Dockerfile \
 	.
 
@@ -81,7 +81,7 @@ docker-run-debian-arm64:
 	-v ${PWD}:/home/user/project \
 	-v ${HOME}/.cargo/registry:/home/user/.cargo/registry \
 	-v ${HOME}/.cargo/git:/home/user/.cargo/git \
-	smartrobot-bevy-build:debian-arm64 \
+	smartrobot-bevy-devel:debian-arm64 \
 	cargo run --features bevy/wayland
 
 .PHONY: docker-debian-arm64
