@@ -1,1 +1,5 @@
 /target
+/web-app/*
+!/web-app/index.html
+
+*.deb
