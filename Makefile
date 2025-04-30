@@ -25,7 +25,7 @@ clean:
 	cargo clean
 
 
-# Local deploy
+# Docker (local)
 
 .PHONY: docker-build-ubuntu-amd64
 docker-build-ubuntu-amd64:
@@ -113,3 +113,49 @@ docker-run-debian-arm64:
 
 .PHONY: docker-debian-arm64
 docker-debian-arm64: docker-build-debian-arm64 docker-run-debian-arm64
+
+
+# WebAssembly
+
+.PHONY: build-wasm
+build-wasm:
+	cargo build \
+	--profile wasm-release \
+	--target wasm32-unknown-unknown \
+	--no-default-features \
+	--features log-max
+
+.PHONY: build-web
+build-web: build-wasm
+	rm web-app/smartrobot_bevy*;
+	wasm-bindgen \
+	--out-name smartrobot_bevy \
+	--out-dir web-app \
+	--target web \
+	target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
+
+.PHONY: serve-app
+serve-app:
+	simple-http-server -i web-app/
+
+.PHONY: open-app
+open-app: export __NV_PRIME_RENDER_OFFLOAD=1
+open-app: export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+open-app: export __GLX_VENDOR_LIBRARY_NAME=nvidia
+open-app: export __VK_LAYER_NV_optimus=NVIDIA_only
+open-app: export VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json
+open-app: 
+	google-chrome \
+	--no-default-browser-check \
+	--no-first-run \
+	--disable-sync \
+	--disable-translate \
+	--disable-background-networking \
+	--safebrowsing-disable-auto-update \
+	--safebrowsing-disable-download-protection \
+	--metrics-recording-only \
+	--enable-logging \
+	--log-level=1 \
+	--full-memory-crash-report \
+	--auto-open-devtools-for-tabs \
+	--app=http://127.0.0.1:8000/

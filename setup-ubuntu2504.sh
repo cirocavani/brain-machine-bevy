@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Project Setup - Ubuntu 25.04 Plucky (NVIDIA GPU)
+# Project Setup
+# Ubuntu 25.04 Plucky (NVIDIA GPU)
 
 set -eu
 
@@ -14,6 +15,8 @@ sudo apt install -y ca-certificates curl
 
 curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | \
 sh -s -- --default-toolchain stable -y
+
+. "$HOME/.cargo/env"
 
 
 echo
@@ -100,3 +103,44 @@ sudo apt update
 
 sudo apt install -y --no-install-recommends nvidia-driver-570
 sudo apt install -y --no-install-recommends nvidia-container-toolkit
+
+
+echo
+echo "Cargo Binary Install"
+echo
+
+# https://github.com/cargo-bins/cargo-binstall
+
+curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | \
+bash
+
+
+echo
+echo "Rust WebAssembly Target"
+echo
+
+rustup target add wasm32-unknown-unknown
+
+cargo binstall -y wasm-bindgen-cli
+
+
+echo
+echo "HTTP Server"
+echo
+
+cargo binstall -y simple-http-server
+
+
+echo
+echo "Google Chrome"
+echo
+
+curl -LO --proto '=https' --tlsv1.2 -sSf https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+
+sudo apt install -f
+
+
+echo
+echo "Setup Done."

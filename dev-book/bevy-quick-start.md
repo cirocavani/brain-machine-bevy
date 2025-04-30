@@ -787,6 +787,11 @@ echo '<!doctype html>
 
 cargo binstall -y simple-http-server
 
+simple-http-server --version
+
+# Simple HTTP(s) Server 0.6.12
+
+
 simple-http-server -i web-app/
 
 # -> [Output http-server]
@@ -834,7 +839,7 @@ google-chrome \
 
 google-chrome chrome://gpu/
 
-# -> [Output Ghrome GPU info]
+# -> [Output Chrome GPU info]
 ```
 
 <details>
@@ -966,3 +971,4 @@ Problems Detected
 
 ...
 ```
+</details>

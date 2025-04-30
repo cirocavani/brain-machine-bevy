@@ -64,6 +64,37 @@ sh -s -- --default-toolchain stable -y
 cargo version
 
 # cargo 1.86.0 (adf9b6ad1 2025-02-28)
+
+
+# Cargo Binary Install
+
+# https://github.com/cargo-bins/cargo-binstall
+
+curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+
+cargo binstall -V
+
+# 1.12.3
+
+
+# WebAssembly target
+
+rustup target add wasm32-unknown-unknown
+
+cargo binstall -y wasm-bindgen-cli
+
+wasm-bindgen --version
+
+# wasm-bindgen 0.2.100
+
+
+# HTTP Server
+
+cargo binstall -y simple-http-server
+
+simple-http-server --version
+
+# Simple HTTP(s) Server 0.6.12
 ```
 
 
@@ -452,6 +483,128 @@ GPU2:
 </details>
 
 
+## Google Chrome (NVIDIA CPU)
+
+> NOTE
+>
+> - Ubuntu Snap Firefox does not use NVIDIA discrete CPU by default
+> - Chrome can default to NVIDIA discrete GPU with environment variable configuration
+
+```sh
+curl -LO --proto '=https' --tlsv1.2 -sSf https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+
+sudo apt install -f
+
+google-chrome --version
+
+# Google Chrome 136.0.7103.59
+
+
+export __NV_PRIME_RENDER_OFFLOAD=1
+export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export __VK_LAYER_NV_optimus=NVIDIA_only
+export VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json
+
+google-chrome chrome://gpu/
+
+# -> [Output Chrome GPU info]
+```
+
+<details>
+<summary>Output Chrome GPU info</summary>
+
+```text
+Graphics Feature Status
+=======================
+*   Canvas: Hardware accelerated
+*   Direct Rendering Display Compositor: Disabled
+*   Compositing: Hardware accelerated
+*   Multiple Raster Threads: Enabled
+*   OpenGL: Enabled
+*   Rasterization: Hardware accelerated
+*   Raw Draw: Disabled
+*   Skia Graphite: Disabled
+*   Video Decode: Hardware accelerated
+*   Video Encode: Software only. Hardware acceleration disabled
+*   Vulkan: Disabled
+*   WebGL: Hardware accelerated
+*   WebGL2: Hardware accelerated
+*   WebGPU: Disabled
+*   WebNN: Disabled
+
+...
+
+GPU0                            : VENDOR= 0x10de, DEVICE=0x25aa, DRIVER_VENDOR=NVIDIA, DRIVER_VERSION=570.133.07 *ACTIVE*
+GPU1                            : VENDOR= 0x8086, DEVICE=0xa7ac
+Optimus                         : true
+Display type                    : ANGLE_OPENGL
+GL_VENDOR                       : Google Inc. (NVIDIA Corporation)
+GL_RENDERER                     : ANGLE (NVIDIA Corporation, NVIDIA GeForce MX570 A/PCIe/SSE2, OpenGL 4.5.0 NVIDIA 570.133.07)
+GL_VERSION                      : OpenGL ES 2.0.0 (ANGLE 2.1.25160 git hash: ecc378cc6110)
+
+...
+
+Driver Bug Workarounds
+======================
+*   disable_discard_framebuffer
+*   enable_webgl_timer_query_extensions
+*   exit_on_context_lost
+*   force_cube_complete
+*   init_gl_position_in_vertex_shader
+*   unpack_overlapping_rows_separately_unpack_buffer
+*   disabled_extension_GL_KHR_blend_equation_advanced
+*   disabled_extension_GL_KHR_blend_equation_advanced_coherent
+*   disabled_extension_GL_MESA_framebuffer_flip_y
+
+Problems Detected
+=================
+*   WebGPU has been disabled via blocklist or the command line.
+    Disabled Features: webgpu
+
+*   Accelerated video encode has been disabled, either via blocklist, about:flags or the command line.
+    Disabled Features: video_encode
+
+*   Program link fails in NVIDIA Linux if gl_Position is not set:
+    (http://crbug.com/286468)
+    Applied Workarounds: init_gl_position_in_vertex_shader
+
+*   NVIDIA fails glReadPixels from incomplete cube map texture:
+    (http://crbug.com/518889)
+    Applied Workarounds: force_cube_complete
+
+*   Framebuffer discarding can hurt performance on non-tilers:
+    (http://crbug.com/570897)
+    Applied Workarounds: disable_discard_framebuffer
+
+*   Unpacking overlapping rows from unpack buffers is unstable on NVIDIA GL driver:
+    (http://crbug.com/596774)
+    Applied Workarounds: unpack_overlapping_rows_separately_unpack_buffer
+
+*   Disable KHR_blend_equation_advanced until cc shaders are updated:
+    (http://crbug.com/661715)
+    Applied Workarounds: disable(GL_KHR_blend_equation_advanced),
+        disable(GL_KHR_blend_equation_advanced_coherent)
+
+*   Expose WebGL's disjoint_timer_query extensions on platforms with site isolation:
+    (http://crbug.com/808744), (http://crbug.com/870491)
+    Applied Workarounds: enable_webgl_timer_query_extensions
+
+*   Some drivers can't recover after OUT_OF_MEM and context lost:
+    (http://crbug.com/893177)
+    Applied Workarounds: exit_on_context_lost
+
+*   Disable GL_MESA_framebuffer_flip_y for desktop GL:
+    (http://crbug.com/964010)
+    Applied Workarounds: disable(GL_MESA_framebuffer_flip_y)
+
+...
+```
+</details>
+
+
 ## Development
 
 
@@ -475,7 +628,7 @@ make clean
 ```
 
 
-### Execution
+### Docker
 
 ```sh
 # Ubuntu 25.04 x86_64 (development)
@@ -506,6 +659,25 @@ make docker-run-debian-arm64
 # Alias for build and run with debian-arm64
 # (open a window using Wayland)
 make docker-debian-arm64
+```
+
+
+### WebAssembly
+
+```sh
+# build WASM target
+make build-wasm
+
+# build Web App package
+make build-web
+
+# run Web App server
+make serve-app
+
+# run Web App browser
+# (open a Chrome window without 'chrome' with a second Dev Tools window)
+# (assumes NVIDIA Discrete GPU)
+make open-app
 ```
 
 
