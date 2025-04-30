@@ -75,26 +75,6 @@ curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-
 cargo binstall -V
 
 # 1.12.3
-
-
-# WebAssembly target
-
-rustup target add wasm32-unknown-unknown
-
-cargo binstall -y wasm-bindgen-cli
-
-wasm-bindgen --version
-
-# wasm-bindgen 0.2.100
-
-
-# HTTP Server
-
-cargo binstall -y simple-http-server
-
-simple-http-server --version
-
-# Simple HTTP(s) Server 0.6.12
 ```
 
 
@@ -483,7 +463,32 @@ GPU2:
 </details>
 
 
-## Google Chrome (NVIDIA CPU)
+
+### WebAssembly
+
+#### Rust Support
+
+```sh
+rustup target add wasm32-unknown-unknown
+
+cargo binstall -y wasm-bindgen-cli
+
+wasm-bindgen --version
+
+# wasm-bindgen 0.2.100
+```
+
+#### HTTP Server
+
+```sh
+cargo binstall -y simple-http-server
+
+simple-http-server --version
+
+# Simple HTTP(s) Server 0.6.12
+```
+
+#### Google Chrome (NVIDIA CPU)
 
 > NOTE
 >

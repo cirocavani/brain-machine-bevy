@@ -20,6 +20,16 @@ sh -s -- --default-toolchain stable -y
 
 
 echo
+echo "Cargo Binary Install"
+echo
+
+# https://github.com/cargo-bins/cargo-binstall
+
+curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | \
+bash
+
+
+echo
 echo "Install Compiler (clang / lld)"
 echo
 
@@ -106,17 +116,7 @@ sudo apt install -y --no-install-recommends nvidia-container-toolkit
 
 
 echo
-echo "Cargo Binary Install"
-echo
-
-# https://github.com/cargo-bins/cargo-binstall
-
-curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | \
-bash
-
-
-echo
-echo "Rust WebAssembly Target"
+echo "Rust WebAssembly Support"
 echo
 
 rustup target add wasm32-unknown-unknown
