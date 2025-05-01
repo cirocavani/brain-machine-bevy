@@ -127,7 +127,7 @@ build-wasm:
 
 .PHONY: build-web
 build-web: build-wasm
-	rm web-app/smartrobot_bevy*;
+	rm -f web-app/smartrobot_bevy*;
 	wasm-bindgen \
 	--out-name smartrobot_bevy \
 	--out-dir web-app \
