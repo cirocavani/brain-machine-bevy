@@ -48,7 +48,7 @@ vulkan-tools
 ```
 
 
-### Rust Toolchain
+### Rust
 
 ```sh
 sudo apt update
