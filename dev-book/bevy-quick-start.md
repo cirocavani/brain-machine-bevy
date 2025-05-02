@@ -1826,7 +1826,7 @@ adb -d logcat | grep -e smartrobot -e 27815
 ```
 
 <details>
-<summary>Output adb -e logdet</summary>
+<summary>Output adb -e logcat</summary>
 
 ```text
 adb -e logcat | grep -e smartrobot -e 4063
@@ -2120,7 +2120,7 @@ adb -e logcat | grep -e smartrobot -e 4063
 </details>
 
 <details>
-<summary>Output adb -e logdet</summary>
+<summary>Output adb -d logcat</summary>
 
 ```text
 adb -d logcat | grep -e smartrobot -e 27815
