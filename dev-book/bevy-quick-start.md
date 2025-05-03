@@ -7,7 +7,7 @@ Based on:
 
 Development Host:
 
-- Ubuntu 25.04
+- Ubuntu 25.04 Plucky
 - Gnome 48 on Wayland
 - CPU Intel Core 7 x86_64
 - GPU Integrated Intel Graphics

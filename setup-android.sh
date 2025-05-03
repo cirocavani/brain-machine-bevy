@@ -5,7 +5,7 @@ set -eu
 
 
 echo
-echo "Rust Android Support"
+echo "Install Rust Android Support"
 echo
 
 rustup target add \
@@ -16,7 +16,7 @@ cargo binstall -y cargo-ndk
 
 
 echo
-echo Android SDK / NDK
+echo "Install Android SDK / NDK"
 echo
 
 sudo apt install -y \

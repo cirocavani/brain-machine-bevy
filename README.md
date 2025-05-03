@@ -19,9 +19,16 @@ Pre-requisites:
 
 ...
 
-Ubuntu 25.04 Plucky with NVIDIA GPU:
+Development Host:
 
-> WARNING: use with caution
+- Ubuntu 25.04 Plucky
+- Gnome 48 on Wayland
+- CPU Intel Core 7 x86_64
+- GPU Integrated Intel Graphics
+- GPU Discrete NVIDIA GeForce MX570 A 2GB
+
+
+> WARNING: use setup script with caution
 
 [`setup-ubuntu2504.sh`](./setup-ubuntu2504.sh)
 
@@ -520,7 +527,7 @@ GPU2:
 
 ### WebAssembly
 
-> WARNING: use with caution
+> WARNING: use setup script with caution
 
 [`setup-wasm.sh`](./setup-wasm.sh)
 
@@ -670,7 +677,7 @@ Problems Detected
 
 ### Android
 
-> WARNING: use with caution
+> WARNING: use setup script with caution
 
 [`setup-android.sh`](./setup-android.sh)
 
@@ -775,19 +782,19 @@ emulator -list-avds
 ### Project
 
 ```sh
-# run tests from `tests` modules
+# Run tests from `tests` modules
 make test
 
-# run lint on rs files in `src` directory
+# Run lint on rs files in `src` directory
 make lint
 
-# format rs files
+# Format rs files
 make format
 
-# build all targets
+# Build all targets
 make build
 
-# remove builds
+# Remove builds
 make clean
 ```
 
