@@ -158,3 +158,51 @@ open-web:
 	--full-memory-crash-report \
 	--auto-open-devtools-for-tabs \
 	--app=http://127.0.0.1:8000/
+
+
+# Android
+
+.PHONY: build-android-lib
+build-android-lib:
+	. android-env.sh && \
+	rm -rf android/app/src/main/jniLibs/ && \
+	cargo ndk \
+	-t arm64-v8a \
+	-t x86_64 \
+	-o android/app/src/main/jniLibs \
+	build \
+	--lib \
+	--profile mobile-release \
+	--features log-max
+
+.PHONY: build-android-apk
+build-android-apk:
+	. android-env.sh && \
+	cd android/ && \
+	./gradlew --warning-mode all clean build
+
+.PHONY: install-apk-emulator
+install-apk-emulator:
+	. android-env.sh && \
+	adb -e install android/app/build/outputs/apk/debug/app-debug.apk
+
+.PHONY: install-apk-device
+install-apk-device:
+	. android-env.sh && \
+	adb -d install android/app/build/outputs/apk/debug/app-debug.apk
+
+.PHONY: open-android-emulator
+open-android-emulator: export __NV_PRIME_RENDER_OFFLOAD=1
+open-android-emulator: export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+open-android-emulator: export __GLX_VENDOR_LIBRARY_NAME=nvidia
+open-android-emulator: export __VK_LAYER_NV_optimus=NVIDIA_only
+open-android-emulator: export VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json
+open-android-emulator:
+	. android-env.sh && \
+	emulator -avd Pixel_9_Pro_API_35 -netdelay none -netspeed full
+
+.PHONY: android-device
+android-device: build-android-lib build-android-apk install-apk-device
+
+.PHONY: android-emulator
+android-emulator: build-android-lib build-android-apk install-apk-emulator

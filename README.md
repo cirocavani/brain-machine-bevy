@@ -25,6 +25,10 @@ Ubuntu 25.04 Plucky with NVIDIA GPU:
 
 [`setup-ubuntu2504.sh`](./setup-ubuntu2504.sh)
 
+[`setup-wasm.sh`](./setup-wasm.sh)
+
+[`setup-android.sh`](./setup-android.sh)
+
 
 ### Basic Utilities
 
@@ -35,7 +39,8 @@ sudo apt install -y \
 --no-install-recommends \
 ca-certificates \
 curl \
-gpg
+gpg \
+unzip
 ```
 
 
@@ -515,6 +520,10 @@ GPU2:
 
 ### WebAssembly
 
+> WARNING: use with caution
+
+[`setup-wasm.sh`](./setup-wasm.sh)
+
 #### Rust Support
 
 ```sh
@@ -659,6 +668,107 @@ Problems Detected
 </details>
 
 
+### Android
+
+> WARNING: use with caution
+
+[`setup-android.sh`](./setup-android.sh)
+
+#### Rust Support
+
+```sh
+rustup target add \
+aarch64-linux-android \
+x86_64-linux-android
+
+cargo binstall -y cargo-ndk
+
+
+cargo ndk --version
+
+# cargo-ndk 3.5.4
+```
+
+### Android SDK / NDK
+
+```sh
+sudo apt install -y \
+--no-install-recommends \
+openjdk-17-jdk-headless \
+openjdk-17-jre-headless \
+java-common
+
+sudo update-java-alternatives --set java-1.17.0-openjdk-amd64
+
+
+export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
+export ANDROID_HOME="$HOME/Android/Sdk"
+export ANDROID_AVD_HOME="$HOME/.config/.android/avd"
+export NDK_HOME="$ANDROID_HOME/ndk/27.0.12077973"
+export PATH="$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin"
+# fish_add_path --path $ANDROID_HOME/emulator $ANDROID_HOME/platform-tools $ANDROID_HOME/cmdline-tools/latest/bin
+
+mkdir -p $ANDROID_HOME
+
+
+curl --proto '=https' --tlsv1.2 -sSfLO https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip
+
+unzip commandlinetools-linux-13114758_latest.zip
+
+
+cmdline-tools/bin/sdkmanager \
+--sdk_root=$ANDROID_HOME \
+--install \
+'build-tools;35.0.0' \
+'cmake;3.22.1' \
+'cmdline-tools;latest' \
+'ndk;27.0.12077973' \
+platform-tools \
+'platforms;android-35' \
+emulator \
+'system-images;android-35;default;x86_64'
+
+rm -rf cmdline-tools/ commandlinetools-linux-13114758_latest.zip
+
+
+avdmanager create avd \
+--name Pixel_9_Pro_API_35 \
+--device pixel_9_pro \
+--package 'system-images;android-35;default;x86_64'
+
+
+sdkmanager --list_installed
+
+# Installed packages:
+#   Path                                    | Version       | Description                             | Location
+#   -------                                 | -------       | -------                                 | -------
+#   build-tools;35.0.0                      | 35.0.0        | Android SDK Build-Tools 35              | build-tools/35.0.0
+#   cmake;3.22.1                            | 3.22.1        | CMake 3.22.1                            | cmake/3.22.1
+#   cmdline-tools;latest                    | 19.0          | Android SDK Command-line Tools (latest) | cmdline-tools/latest
+#   emulator                                | 35.4.9        | Android Emulator                        | emulator
+#   ndk;27.0.12077973                       | 27.0.12077973 | NDK (Side by side) 27.0.12077973        | ndk/27.0.12077973
+#   platform-tools                          | 35.0.2        | Android SDK Platform-Tools              | platform-tools
+#   platforms;android-35                    | 2             | Android SDK Platform 35                 | platforms/android-35
+#   system-images;android-35;default;x86_64 | 2             | Intel x86_64 Atom System Image          | system-images/android-35/default/x86_64
+
+
+avdmanager list avd
+
+# Available Android Virtual Devices:
+#     Name: Pixel_9_Pro_API_35
+#   Device: pixel_9_pro (Google)
+#     Path: /home/cavani/.config/.android/avd/Pixel_9_Pro_API_35.avd
+#   Target: Default Android System Image
+#           Based on: Android 15.0 ("VanillaIceCream") Tag/ABI: default/x86_64
+#   Sdcard: 512 MB
+
+
+emulator -list-avds
+
+# Pixel_9_Pro_API_35
+```
+
+
 ## Development
 
 
@@ -719,19 +829,47 @@ make docker-debian-arm64
 ### WebAssembly
 
 ```sh
-# build WASM target
+# Build WASM target
 make build-wasm
 
-# build Web App package
+# Build Web App package
 make build-web
 
-# run Web App server
+# Run Web App server
 make serve-web
 
-# run Web App browser
-# (open a Chrome window without 'chrome' with a second Dev Tools window)
+# Run Web App browser
+# (open a Chrome App window with a second Dev Tools window)
 # (assumes NVIDIA Discrete GPU)
 make open-web
+```
+
+
+### Android
+
+```sh
+# Build Rust dynamic library (.so)
+make build-android-lib
+
+# Build Android project (Gradle)
+make build-android-apk
+
+# Instal debug APK (TCP/IP device - Emulator)
+make install-apk-emulator
+
+# Install debug APK (USB device)
+make install-apk-device
+
+# Run Android Emulator
+# (open an Android interface)
+# (assumes NVIDIA Discrete GPU)
+make open-android-emulator
+
+# Alias for build and install APK on device
+make android-device
+
+# Alias for build and install APK on emulator
+make android-emulator
 ```
 
 
