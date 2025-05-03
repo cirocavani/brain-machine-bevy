@@ -1448,6 +1448,7 @@ cargo ndk \
 -t arm64-v8a \
 -t x86_64 \
 -o android/app/src/main/jniLibs \
+--no-strip \
 build \
 --lib \
 --profile dev \
@@ -1455,13 +1456,16 @@ build \
 
 file -b android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libsmartrobot_bevy.so
 
+# ELF 64-bit LSB shared object, ARM aarch64, version 1 (SYSV), dynamically linked, with debug_info, not stripped
+# ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, with debug_info, not stripped
+
 # ELF 64-bit LSB shared object, ARM aarch64, version 1 (SYSV), dynamically linked, stripped
 # ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, stripped
 
 ls -alh android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libsmartrobot_bevy.so
 
-# -rwxrwxr-x 1 cavani cavani 70M May  2 10:46 android/app/src/main/jniLibs/arm64-v8a/libsmartrobot_bevy.so
-# -rwxrwxr-x 1 cavani cavani 78M May  2 10:46 android/app/src/main/jniLibs/x86_64/libsmartrobot_bevy.so
+# -rwxrwxr-x 1 cavani cavani 1.2G May  3 01:26 android/app/src/main/jniLibs/arm64-v8a/libsmartrobot_bevy.so
+# -rwxrwxr-x 1 cavani cavani 1.2G May  3 01:26 android/app/src/main/jniLibs/x86_64/libsmartrobot_bevy.so
 
 
 # Release
