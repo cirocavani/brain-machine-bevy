@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "dev.smartrobot.bevy_app"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "dev.smartrobot.bevy_app"
         minSdk = 31
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
         // need this otherwise it won't insert libc++_shared.so

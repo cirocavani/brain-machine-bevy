@@ -1025,6 +1025,17 @@ Samsung Galaxy Note 10 Plus, Android 12, API 31, USB, 2019.
 <https://developer.android.com/studio/debug/dev-options>
 
 
+Android Gradle Plugin:
+
+- latest version: 8.9.1
+- Gradle 8.11.1+
+- SDK Build Tools 35.0.0
+- NDK 27.0.12077973
+- JDK 17
+
+<https://developer.android.com/build/releases/gradle-plugin#compatibility>
+
+
 ```sh
 #
 # Android SDK / NDK
@@ -1084,17 +1095,17 @@ mkdir -p $ANDROID_HOME
 cmdline-tools/bin/sdkmanager \
 --sdk_root=$ANDROID_HOME \
 --install \
-'build-tools;34.0.0' \
+'build-tools;35.0.0' \
 'cmake;3.22.1' \
 'cmdline-tools;latest' \
-'ndk;26.1.10909125' \
+'ndk;27.0.12077973' \
 platform-tools \
-'platforms;android-34' \
+'platforms;android-35' \
 emulator \
-'system-images;android-34;google_apis;x86_64'
+'system-images;android-35;default;x86_64'
 
 
-export NDK_HOME="$ANDROID_HOME/ndk/26.1.10909125"
+export NDK_HOME="$ANDROID_HOME/ndk/27.0.12077973"
 export PATH="$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin"
 # fish_add_path --path $ANDROID_HOME/emulator $ANDROID_HOME/platform-tools $ANDROID_HOME/cmdline-tools/latest/bin
 
@@ -1112,18 +1123,18 @@ avdmanager --help
 
 
 avdmanager create avd \
---name Pixel_6_Pro_API_34 \
---device pixel_6_pro \
---package 'system-images;android-34;google_apis;x86_64'
+--name Pixel_9_Pro_API_35 \
+--device pixel_9_pro \
+--package 'system-images;android-35;default;x86_64'
 
 avdmanager list avd
 
 # Available Android Virtual Devices:
-#     Name: Pixel_6_Pro_API_34
-#   Device: pixel_6_pro (Google)
-#     Path: /home/cavani/.config/.android/avd/Pixel_6_Pro_API_34.avd
-#   Target: Google APIs (Google Inc.)
-#           Based on: Android 14.0 ("UpsideDownCake") Tag/ABI: google_apis/x86_64
+#     Name: Pixel_9_Pro_API_35
+#   Device: pixel_9_pro (Google)
+#     Path: /home/cavani/.config/.android/avd/Pixel_9_Pro_API_35.avd
+#   Target: Default Android System Image
+#           Based on: Android 15.0 ("VanillaIceCream") Tag/ABI: default/x86_64
 #   Sdcard: 512 MB
 
 
@@ -1132,7 +1143,7 @@ export ANDROID_AVD_HOME="$HOME/.config/.android/avd"
 
 emulator -list-avds
 
-# Pixel_6_Pro_API_34
+# Pixel_9_Pro_API_35
 
 
 export __NV_PRIME_RENDER_OFFLOAD=1
@@ -1141,7 +1152,7 @@ export __GLX_VENDOR_LIBRARY_NAME=nvidia
 export __VK_LAYER_NV_optimus=NVIDIA_only
 export VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json
 
-emulator -avd Pixel_6_Pro_API_34 -netdelay none -netspeed full
+emulator -avd Pixel_9_Pro_API_35 -netdelay none -netspeed full
 
 # [open emulator window running Android UI]
 
@@ -1152,7 +1163,7 @@ echo '# Android env
 export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
 export ANDROID_HOME="$HOME/Android/Sdk"
 export ANDROID_AVD_HOME="$HOME/.config/.android/avd"
-export NDK_HOME="$ANDROID_HOME/ndk/26.1.10909125"
+export NDK_HOME="$ANDROID_HOME/ndk/27.0.12077973"
 export PATH="$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin"
 # fish_add_path --path $ANDROID_HOME/emulator $ANDROID_HOME/platform-tools $ANDROID_HOME/cmdline-tools/latest/bin' \
 > android-env.sh
@@ -1182,17 +1193,16 @@ adb devices
 sdkmanager --list_installed
 
 # Installed packages:
-#   Path                                        | Version           | Description                                | Location
-#   -------                                     | -------           | -------                                    | -------
-#   build-tools;34.0.0                          | 34.0.0            | Android SDK Build-Tools 34                 | build-tools/34.0.0
-#   cmake;3.22.1                                | 3.22.1            | CMake 3.22.1
-#   cmdline-tools;latest                        | 19.0              | Android SDK Command-line Tools (latest)    | cmdline-tools/latest
-#   emulator                                    | 35.4.9            | Android Emulator                           | emulator
-#   ndk;26.1.10909125                           | 26.1.10909125     | NDK (Side by side) 26.1.10909125           | ndk/26.1.10909125
-#   platform-tools                              | 35.0.2            | Android SDK Platform-Tools                 | platform-tools
-#   platforms;android-34                        | 3                 | Android SDK Platform 34                    | platforms/android-34
-#   system-images;android-34;google_apis;x86_64 | 14                | Google APIs Intel x86_64 Atom System Image | system-images/android-34/google_apis/x86_64
-
+#   Path                                    | Version       | Description                             | Location
+#   -------                                 | -------       | -------                                 | -------
+#   build-tools;35.0.0                      | 35.0.0        | Android SDK Build-Tools 35              | build-tools/35.0.0
+#   cmake;3.22.1                            | 3.22.1        | CMake 3.22.1                            | cmake/3.22.1
+#   cmdline-tools;latest                    | 19.0          | Android SDK Command-line Tools (latest) | cmdline-tools/latest
+#   emulator                                | 35.4.9        | Android Emulator                        | emulator
+#   ndk;27.0.12077973                       | 27.0.12077973 | NDK (Side by side) 27.0.12077973        | ndk/27.0.12077973
+#   platform-tools                          | 35.0.2        | Android SDK Platform-Tools              | platform-tools
+#   platforms;android-35                    | 2             | Android SDK Platform 35                 | platforms/android-35
+#   system-images;android-35;default;x86_64 | 2             | Intel x86_64 Atom System Image          | system-images/android-35/default/x86_64
 
 
 #
@@ -1629,12 +1639,12 @@ echo 'plugins {
 
 android {
     namespace = "dev.smartrobot.bevy_app"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "dev.smartrobot.bevy_app"
         minSdk = 31
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
         // need this otherwise it won'"'"'t insert libc++_shared.so
@@ -1752,7 +1762,7 @@ include ":app"' \
 
 
 echo '[versions]
-agp = "8.6.1"
+agp = "8.9.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
@@ -1800,26 +1810,26 @@ find . -type f
 
 ls -alh ./app/build/outputs/apk/debug/app-debug.apk
 
-# -rw-rw-r-- 1 cavani cavani 78M May  2 12:04 ./app/build/outputs/apk/debug/app-debug.apk
+# -rw-rw-r-- 1 cavani cavani 80M May  3 09:52 ./app/build/outputs/apk/debug/app-debug.apk
 
 unzip -l ./app/build/outputs/apk/debug/app-debug.apk | grep lib
 
-#   1330832  1981-01-01 01:01   lib/arm64-v8a/libc++_shared.so
-#  30134408  1981-01-01 01:01   lib/arm64-v8a/libsmartrobot_bevy.so
-#   1275840  1981-01-01 01:01   lib/x86_64/libc++_shared.so
-#  37441392  1981-01-01 01:01   lib/x86_64/libsmartrobot_bevy.so
+#   1292896  1981-01-01 01:01   lib/arm64-v8a/libc++_shared.so
+#  30133272  1981-01-01 01:01   lib/arm64-v8a/libsmartrobot_bevy.so
+#   1252080  1981-01-01 01:01   lib/x86_64/libc++_shared.so
+#  37442384  1981-01-01 01:01   lib/x86_64/libsmartrobot_bevy.so
 
 
 ls -alh ./app/build/outputs/apk/release/app-release-unsigned.apk
 
-# -rw-rw-r-- 1 cavani cavani 77M May  2 12:04 ./app/build/outputs/apk/release/app-release-unsigned.apk
+# -rw-rw-r-- 1 cavani cavani 78M May  3 09:52 ./app/build/outputs/apk/release/app-release-unsigned.apk
 
 unzip -l ./app/build/outputs/apk/release/app-release-unsigned.apk | grep lib
 
-#   1330832  1981-01-01 01:01   lib/arm64-v8a/libc++_shared.so
-#  30134408  1981-01-01 01:01   lib/arm64-v8a/libsmartrobot_bevy.so
-#   1275840  1981-01-01 01:01   lib/x86_64/libc++_shared.so
-#  37441392  1981-01-01 01:01   lib/x86_64/libsmartrobot_bevy.so
+#   1292896  1981-01-01 01:01   lib/arm64-v8a/libc++_shared.so
+#  30133272  1981-01-01 01:01   lib/arm64-v8a/libsmartrobot_bevy.so
+#   1252080  1981-01-01 01:01   lib/x86_64/libc++_shared.so
+#  37442384  1981-01-01 01:01   lib/x86_64/libsmartrobot_bevy.so
 
 
 adb -e install ./app/build/outputs/apk/debug/app-debug.apk
@@ -1827,21 +1837,23 @@ adb -e install ./app/build/outputs/apk/debug/app-debug.apk
 adb -e logcat | grep smartrobot
 
 # ...
-# 05-02 14:05:09.911  4123  4123 F DEBUG   : Cmdline: dev.smartrobot.bevy_app
-# 05-02 14:05:09.911  4123  4123 F DEBUG   : pid: 4063, tid: 4090, name: Async Compute T  >>> dev.smartrobot.bevy_app <<<
-# 05-02 14:05:09.911  4123  4123 F DEBUG   :       #01 pc 00000000020e20a9  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
+# 05-03 09:56:26.700  2311  2311 F DEBUG   : Cmdline: dev.smartrobot.bevy_app
+# 05-03 09:56:26.700  2311  2311 F DEBUG   : pid: 2265, tid: 2288, name: Async Compute T  >>> dev.smartrobot.bevy_app <<<
+# 05-03 09:56:26.700  2311  2311 F DEBUG   :       #01 pc 00000000020e22e9  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
 # ...
 
-adb -e logcat | grep 4063
+adb -e logcat | grep RustStdoutStderr
 
-# ...
-# 05-02 14:05:09.627  4063  4088 I RustStdoutStderr:
-# 05-02 14:05:09.627  4063  4088 I RustStdoutStderr: thread 'Async Compute Task Pool (0)' panicked at /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga-24.0.0/src/span.rs:74:29:
-# 05-02 14:05:09.627  4063  4088 I RustStdoutStderr: byte index 96489672 is out of bounds of ``
-# 05-02 14:05:09.627  4063  4088 I RustStdoutStderr: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-# ...
+# 05-03 09:56:26.268  2265  2286 I RustStdoutStderr: s_glBindAttribLocation: bind attrib 0 name position
+# 05-03 09:56:26.269  2265  2286 I RustStdoutStderr: s_glBindAttribLocation: bind attrib 1 name color
+# 05-03 09:56:26.272  2265  2286 I RustStdoutStderr: s_glBindAttribLocation: bind attrib 0 name position
+# 05-03 09:56:26.272  2265  2286 I RustStdoutStderr: s_glBindAttribLocation: bind attrib 1 name color
+# 05-03 09:56:26.457  2265  2286 I RustStdoutStderr:
+# 05-03 09:56:26.457  2265  2286 I RustStdoutStderr: thread 'Async Compute Task Pool (0)' panicked at /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga-24.0.0/src/span.rs:74:29:
+# 05-03 09:56:26.457  2265  2286 I RustStdoutStderr: byte index 96489672 is out of bounds of ``
+# 05-03 09:56:26.457  2265  2286 I RustStdoutStderr: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 
-adb -e logcat | grep -e smartrobot -e 4063
+adb -e logcat | grep -e smartrobot -e 2265
 
 # -> [Output adb -e logcat]
 
@@ -1850,9 +1862,13 @@ adb -d install ./app/build/outputs/apk/debug/app-debug.apk
 
 adb -d logcat | grep AdapterInfo
 
-# 05-02 14:17:14.638 27815 27857 I event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_render-0.16.0/srcAdapterInfo { name: "Mali-G76", vendor: 5045, device: 1913716736, device_type: IntegratedGpu, driver: "Mali-G76", driver_info: "v1.r32p1-01bet2-mbs2v39_0.131801e953429f661ecce1d5e1d2b3ef", backend: Vulkan }
+# 05-03 10:12:19.864 29974 30018 I event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_render-0.16.0/srcAdapterInfo { name: "Mali-G76", vendor: 5045, device: 1913716736, device_type: IntegratedGpu, driver: "Mali-G76", driver_info: "v1.r32p1-01bet2-mbs2v39_0.131801e953429f661ecce1d5e1d2b3ef", backend: Vulkan }
 
-adb -d logcat | grep -e smartrobot -e 27815
+adb -d logcat | grep RustStdoutStderr
+
+# (empty)
+
+adb -d logcat | grep -e smartrobot -e 29974
 
 # -> [Output adb -d logcat]
 ```
@@ -1861,293 +1877,296 @@ adb -d logcat | grep -e smartrobot -e 27815
 <summary>Output adb -e logcat</summary>
 
 ```text
-adb -e logcat | grep -e smartrobot -e 4063
+adb -e logcat | grep -e smartrobot -e 2265
 
-05-02 14:02:30.074   549   608 D SystemServerTimingAsync: InitThreadPoolExec:Update app-ops uidState in case package dev.smartrobot.bevy_app changed
-05-02 14:02:30.074   549   608 D SystemServerInitThreadPool: Started executing Update app-ops uidState in case package dev.smartrobot.bevy_app changed
-05-02 14:02:30.076   549   608 D SystemServerInitThreadPool: Finished executing Update app-ops uidState in case package dev.smartrobot.bevy_app changed
-05-02 14:02:30.076   549   608 V SystemServerTimingAsync: InitThreadPoolExec:Update app-ops uidState in case package dev.smartrobot.bevy_app changed took to complete: 3ms
-05-02 14:02:30.715   549   549 V StorageManagerService: Package dev.smartrobot.bevy_app does not have legacy storage
-05-02 14:05:08.107   549  2008 V SplashScreenExceptionList: SplashScreen checking exception for package dev.smartrobot.bevy_app (target sdk:34) -> false
-05-02 14:05:08.109   760   799 V WindowManagerShell: Transition requested: android.os.BinderProxy@594a1b5 TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=18 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} topActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} numActivities=1 lastActiveTime=171756 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@8c304a} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 145 - 0, 0) topActivityInfo=ActivityInfo{5a34bbb dev.smartrobot.bevy_app.MainActivity} launchCookies=[android.os.BinderProxy@53c68d8] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@1baa431, appThread = android.app.IApplicationThread$Stub$Proxy@9650716, debugName = QuickstepLaunch }, displayChange = null }
-05-02 14:05:08.111   549  2008 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity bnds=[1109,2416][1340,2676]} with LAUNCH_MULTIPLE from uid 10168 (BAL_ALLOW_ALLOWLISTED_COMPONENT) result code=0
-05-02 14:05:08.120   363   363 D Zygote  : Forked child process 4063
-05-02 14:05:08.121   549   580 I ActivityManager: Start proc 4063:dev.smartrobot.bevy_app/u0a193 for next-top-activity {dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}
-05-02 14:05:08.157   549  2293 D CoreBackPreview: Window{a1f7e59 u0 Splash Screen dev.smartrobot.bevy_app}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@e2d401b, mPriority=0, mIsAnimationCallback=false}
-05-02 14:05:08.189  4063  4063 I trobot.bevy_app: Late-enabling -Xcheck:jni
-05-02 14:05:08.206  4063  4063 I trobot.bevy_app: Using CollectorTypeCC GC.
-05-02 14:05:08.207  4063  4063 W trobot.bevy_app: Unexpected CPU variant for x86: x86_64.
-05-02 14:05:08.207  4063  4063 W trobot.bevy_app: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, tremont, kabylake, default
-05-02 14:05:08.230   443   466 I adbd    : jdwp connection from 4063
-05-02 14:05:08.233   549   567 V WindowManager: Sent Transition #7 createdAt=05-02 14:05:08.101 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=18 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} topActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} numActivities=1 lastActiveTime=171756 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{2757564 Task{1bca95d #18 type=standard A=10193:dev.smartrobot.bevy_app}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 145 - 0, 0) topActivityInfo=ActivityInfo{51fa3cd dev.smartrobot.bevy_app.MainActivity} launchCookies=[android.os.BinderProxy@fef6482] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@8199793, appThread = android.app.IApplicationThread$Stub$Proxy@dc683d0, debugName = QuickstepLaunch }, displayChange = null }
-05-02 14:05:08.234   549   567 V WindowManager:     info={id=7 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{RemoteToken{2757564 Task{1bca95d #18 type=standard A=10193:dev.smartrobot.bevy_app}}} m=OPEN f=NONE leash=Surface(name=Task=18)/@0x5454ef6 sb=Rect(0, 0 - 1440, 3120) eb=Rect(0, 0 - 1440, 3120) d=0},{WCT{RemoteToken{c8fafc9 Task{5c8162 #1 type=home}}} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0xf3b2dfb sb=Rect(0, 0 - 1440, 3120) eb=Rect(0, 0 - 1440, 3120) d=0}]}
-05-02 14:05:08.238   549  2293 I AppsFilter: interaction: PackageSetting{b16fce8 dev.smartrobot.bevy_app/10193} -> PackageSetting{d488f01 com.google.android.apps.nexuslauncher/10168} BLOCKED
-05-02 14:05:08.244  4063  4063 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10193; state: ENABLED
-05-02 14:05:08.244  4063  4063 D CompatibilityChangeReporter: Compat change id reported: 242716250; UID 10193; state: ENABLED
-05-02 14:05:08.248  4063  4063 W ziparchive: Unable to open '/data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.dm': No such file or directory
-05-02 14:05:08.248  4063  4063 W ziparchive: Unable to open '/data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.dm': No such file or directory
-05-02 14:05:08.336  4063  4063 D nativeloader: Configuring clns-6 for other apk /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk. target_sdk_version=34, uses_libraries=, library_path=/data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/lib/x86_64:/data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/dev.smartrobot.bevy_app
-05-02 14:05:08.343  4063  4063 V GraphicsEnvironment: Currently set values for:
-05-02 14:05:08.343  4063  4063 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
-05-02 14:05:08.343  4063  4063 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
-05-02 14:05:08.343  4063  4063 V GraphicsEnvironment: ANGLE GameManagerService for dev.smartrobot.bevy_app: false
-05-02 14:05:08.343  4063  4063 V GraphicsEnvironment: dev.smartrobot.bevy_app is not listed in per-application setting
-05-02 14:05:08.344  4063  4063 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
-05-02 14:05:08.354   549   611 I ActivityManager: Flag disabled. Ignoring finishAttachApplication from uid: 10193. pid: 4063
-05-02 14:05:08.361  4063  4086 D libEGL  : loaded /vendor/lib64/egl/libEGL_emulation.so
-05-02 14:05:08.362  4063  4086 D libEGL  : loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
-05-02 14:05:08.412  4063  4086 D libEGL  : loaded /vendor/lib64/egl/libGLESv2_emulation.so
-05-02 14:05:08.422  4063  4063 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
-05-02 14:05:08.447  4063  4063 W trobot.bevy_app: Accessing hidden method Landroid/view/View;->computeFitSystemWindows(Landroid/graphics/Rect;Landroid/graphics/Rect;)Z (unsupported, reflection, allowed)
-05-02 14:05:08.447  4063  4063 W trobot.bevy_app: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (unsupported, reflection, allowed)
-05-02 14:05:08.448  4063  4063 I GameActivity: Looking for library libsmartrobot_bevy.so
-05-02 14:05:08.449  4063  4063 I GameActivity: Found library libsmartrobot_bevy.so. Loading...
-05-02 14:05:08.456  4063  4063 D GameActivity: GameActivity_register
-05-02 14:05:08.456  4063  4063 V GameActivity: Registering com/google/androidgamesdk/GameActivity's 22 native methods...
-05-02 14:05:08.457  4063  4063 V threaded_app: Creating: 0x715fb6158090
-05-02 14:05:08.457  4063  4063 V threaded_app: Callbacks set: 0x715fb61580e0
-05-02 14:05:08.457  4063  4063 V threaded_app: Launching android_app_entry in a thread
-05-02 14:05:08.458  4063  4087 V threaded_app: android_app_entry called
-05-02 14:05:08.458  4063  4087 V threaded_app: android_app = 0x715f76164bd0
-05-02 14:05:08.458  4063  4087 V threaded_app: config = 0x715fc616deb0
-05-02 14:05:08.458  4063  4087 V threaded_app: activity = 0x715fb6158090
-05-02 14:05:08.458  4063  4087 V threaded_app: assetmanager = 0x715fb615f430
-05-02 14:05:08.458  4063  4087 V threaded_app: Config: mcc=310 mnc=260 lang=en cnt=US orien=1 touch=3 dens=560 keys=2 nav=1 keysHid=1 navHid=0 sdk=34 size=2 long=2 modetype=1 modenight=1
-05-02 14:05:08.484  4063  4063 V GameActivity: onStart_native
-05-02 14:05:08.484  4063  4063 V threaded_app: Start: 0x715fb6158090
-05-02 14:05:08.578  4063  4087 E platform: Failed to open rendernode: No such file or directory
-05-02 14:05:08.578  4063  4087 I androidemu: HealthMonitor enabled. Returning monitor.
-05-02 14:05:08.582  4063  4087 D vulkan  : searching for layers in '/data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/lib/x86_64'
-05-02 14:05:08.582  4063  4087 D vulkan  : searching for layers in '/data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk!/lib/x86_64'
-05-02 14:05:08.686  4063  4087 I event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_render-0.16.0/srcAdapterInfo { name: "NVIDIA GeForce MX570 A", vendor: 4318, device: 9642, device_type: DiscreteGpu, driver: "NVIDIA", driver_info: "570.133.07", backend: Vulkan }
-05-02 14:05:09.014  4063  4087 I OboeAudio: openStreamInternal() OUTPUT -------- OboeVersion1.8.1 --------
-05-02 14:05:09.015  4063  4087 I AAudio  : AAudioStreamBuilder_openStream() called ----------------------------------------
-05-02 14:05:09.015  4063  4087 I AudioStreamBuilder: rate   =  44100, channels  = 2, channelMask = 0x80000003, format   = 5, sharing = SH, dir = OUTPUT
-05-02 14:05:09.015  4063  4087 I AudioStreamBuilder: device =      0, sessionId = -1, perfMode = 10, callback: ON with frames = 0
-05-02 14:05:09.015  4063  4087 I AudioStreamBuilder: usage  =      1, contentType = 2, inputPreset = 6, allowedCapturePolicy = 0
-05-02 14:05:09.015  4063  4087 I AudioStreamBuilder: privacy sensitive = false, opPackageName = (null), attributionTag = (null)
-05-02 14:05:09.015  4063  4087 D AudioStreamBuilder: build() MMAP not used because AAUDIO_PERFORMANCE_MODE_LOW_LATENCY not requested.
-05-02 14:05:09.015  4063  4087 D trobot.bevy_app: PlayerBase::PlayerBase()
-05-02 14:05:09.015  4063  4087 D AudioStreamTrack: open(), request notificationFrames = 0, frameCount = 0
-05-02 14:05:09.019  4063  4087 D AAudioStream: setState(s#1) from 0 to 2
-05-02 14:05:09.020  4063  4087 I AAudio  : AAudioStreamBuilder_openStream() returns 0 = AAUDIO_OK for s#1 ----------------
-05-02 14:05:09.020  4063  4087 D AAudio  : AAudioStream_requestStart(s#1) called --------------
-05-02 14:05:09.020  4063  4087 D AAudioStream: setState(s#1) from 2 to 3
-05-02 14:05:09.021  4063  4087 D AAudio  : AAudioStream_requestStart(s#1) returned 0 ---------
-05-02 14:05:09.022  4063  4087 E event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_gilrs-0.16.0/src/Failed to start Gilrs. Gilrs does not support current platform.
-05-02 14:05:09.026  4063  4080 D AudioStreamLegacy: onAudioDeviceUpdate(deviceId = 2)
-05-02 14:05:09.048  4063  4087 I event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_render-0.16.0/srcGPU preprocessing is fully supported on this device.
-05-02 14:05:09.072  4063  4113 D AAudioStream: setState(s#1) from 3 to 4
-05-02 14:05:09.114  4063  4087 I event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_winit-0.16.0/src/Creating new window App (0v1)
-05-02 14:05:09.114  4063  4087 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_winit-0.16.0/src/Display information:  Window physical resolution: 1280x720  Window logical resolution: 1280x720  Monitor name: Android Device  Scale factor: 3.5  Refresh rate (Hz): 0.000
-05-02 14:05:09.114  4063  4087 E event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfCannot get the native window, it's null and will always be null before Event::Resumed and after Event::Suspended. Make sure you only call this function between those events.
-05-02 14:05:09.146  4063  4087 V threaded_app: activityState=10
-05-02 14:05:09.147  4063  4087 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: forward onStart notification to application
-05-02 14:05:09.148  4063  4063 V threaded_app: Resume: 0x715fb6158090
-05-02 14:05:09.148  4063  4087 V threaded_app: activityState=11
-05-02 14:05:09.149  4063  4087 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfApp Resumed - is running
-05-02 14:05:09.152  4063  4063 D CompatibilityChangeReporter: Compat change id reported: 237531167; UID 10193; state: DISABLED
-05-02 14:05:09.154  4063  4063 W OpenGLRenderer: Unknown dataspace 0
-05-02 14:05:09.159  4063  4063 I Choreographer: Skipped 48 frames!  The application may be doing too much work on its main thread.
-05-02 14:05:09.162  4063  4063 V threaded_app: WindowInsetsChanged: 0x715fb6158090
-05-02 14:05:09.163   549  1840 D CoreBackPreview: Window{8778056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@fbf0cad, mPriority=0, mIsAnimationCallback=false}
-05-02 14:05:09.166   428   738 W ServiceManagerCppClient: Permission failure: android.permission.INTERNAL_SYSTEM_WINDOW from uid=10193 pid=4063
-05-02 14:05:09.166   428   738 W ServiceManagerCppClient: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10193 pid=4063
-05-02 14:05:09.168  4063  4063 V threaded_app: ContentRectChanged: 0x715fb6158090 -- (0 0) (1440 3120)
-05-02 14:05:09.175  4063  4063 V GameActivity: onSurfaceCreated_native
-05-02 14:05:09.175  4063  4063 V threaded_app: NativeWindowCreated: 0x715fb6158090 -- 0x715ee617a5c0
-05-02 14:05:09.175  4063  4063 V threaded_app: android_app_set_window called
-05-02 14:05:09.177  4063  4084 W OpenGLRenderer: Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
-05-02 14:05:09.177  4063  4084 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
-05-02 14:05:09.237  4063  4084 I Gralloc4: mapper 4.x is not supported
-05-02 14:05:09.283  4063  4084 E OpenGLRenderer: Unable to match the desired swap behavior.
-05-02 14:05:09.301  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::fullscreen_vertex_shader with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
-05-02 14:05:09.302  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::fullscreen_vertex_shader with defs: {}
-05-02 14:05:09.303  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::fullscreen_vertex_shader with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
-05-02 14:05:09.304  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
-05-02 14:05:09.305  4063  4087 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: handle Android InsetsChanged notification
-05-02 14:05:09.306  4063  4087 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: find a way to notify application of content rect change
-05-02 14:05:09.311  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_preprocess_types with defs: {}
-05-02 14:05:09.311  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_types with defs: {}
-05-02 14:05:09.311  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::view with defs: {}
-05-02 14:05:09.312  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_view_types with defs: {"MAX_DIRECTIONAL_LIGHTS": UInt(10), "MAX_CASCADES_PER_LIGHT": UInt(4)}
-05-02 14:05:09.312  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::globals with defs: {}
-05-02 14:05:09.312  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_view_bindings with defs: {}
-05-02 14:05:09.313  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::maths with defs: {}
-05-02 14:05:09.314  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::prepass_bindings with defs: {}
-05-02 14:05:09.315  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::view_transformations with defs: {}
-05-02 14:05:09.315  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::occlusion_culling with defs: {}
-05-02 14:05:09.320  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_preprocess_types with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
-05-02 14:05:09.321  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_types with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
-05-02 14:05:09.322  4063  4087 V threaded_app: APP_CMD_INIT_WINDOW
-05-02 14:05:09.323  4063  4063 V threaded_app: NativeWindowResized: 0x715fb6158090 -- 0x715ee617a5c0 ( 1440 x 3120 )
-05-02 14:05:09.323  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::maths with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
-05-02 14:05:09.324  4063  4087 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_winit-0.16.0/src/Display information:  Window physical resolution: 4480x2520  Window logical resolution: 1280x720  Monitor name: Android Device  Scale factor: 3.5  Refresh rate (Hz): 0.000
-05-02 14:05:09.326  4063  4063 V threaded_app: NativeWindowRedrawNeeded: 0x715fb6158090 -- 0x715ee617a5c0
-05-02 14:05:09.327  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::view with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
-05-02 14:05:09.329  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_view_types with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
-05-02 14:05:09.329  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::globals with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
-05-02 14:05:09.329  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_view_bindings with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
-05-02 14:05:09.333  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
-05-02 14:05:09.340  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_preprocess_types with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "EARLY_PHASE": Bool(true), "OCCLUSION_CULLING": Bool(true)}
-05-02 14:05:09.341  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "EARLY_PHASE": Bool(true), "OCCLUSION_CULLING": Bool(true)}
-05-02 14:05:09.344  4063  4088 I RustStdoutStderr: s_glBindAttribLocation: bind attrib 0 name position
-05-02 14:05:09.345  4063  4088 I RustStdoutStderr: s_glBindAttribLocation: bind attrib 1 name color
-05-02 14:05:09.346  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
-05-02 14:05:09.347  4063  4088 I RustStdoutStderr: s_glBindAttribLocation: bind attrib 0 name position
-05-02 14:05:09.347  4063  4088 I RustStdoutStderr: s_glBindAttribLocation: bind attrib 1 name color
-05-02 14:05:09.356  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "INDIRECT": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "FRUSTUM_CULLING": Bool(true)}
-05-02 14:05:09.363  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "MAIN_PHASE": Bool(true), "OCCLUSION_CULLING": Bool(true)}
-05-02 14:05:09.366  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"OCCLUSION_CULLING": Bool(true), "LATE_PHASE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "INDEXED": Bool(true)}
-05-02 14:05:09.377  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
-05-02 14:05:09.383  4063  4081 I OpenGLRenderer: Davey! duration=1030ms; Flags=1, FrameTimelineVsyncId=68821, IntendedVsync=171999011849, Vsync=172799011817, InputEventId=0, HandleInputStart=172807310354, AnimationStart=172807312614, PerformTraversalsStart=172807411047, DrawStart=172979646321, FrameDeadline=172015678515, FrameInterval=172807146831, FrameStartTime=16666666, SyncQueued=172981991223, SyncStart=172982853094, IssueDrawCommandsStart=172988019516, SwapBuffers=172999378584, FrameCompleted=173030822762, DequeueBufferDuration=28539652, QueueBufferDuration=595562, GpuCompleted=173002206928, SwapBuffersCompleted=173030822762, DisplayPresentTime=0, CommandSubmissionCompleted=172999378584,
-05-02 14:05:09.385  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::types with defs: {}
-05-02 14:05:09.385  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::bindings with defs: {}
-05-02 14:05:09.386  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::bruneton_functions with defs: {}
-05-02 14:05:09.388  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::functions with defs: {}
-05-02 14:05:09.391  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::types with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
-05-02 14:05:09.391  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::bindings with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
-05-02 14:05:09.398  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::bruneton_functions with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
-05-02 14:05:09.399   549   567 W ziparchive: Unable to open '/data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.dm': No such file or directory
-05-02 14:05:09.400  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::functions with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
-05-02 14:05:09.406  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
-05-02 14:05:09.411   549   567 I ActivityTaskManager: Displayed dev.smartrobot.bevy_app/.MainActivity for user 0: +1s297ms
-05-02 14:05:09.412  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "MAX_CASCADES_PER_LIGHT": UInt(4)}
-05-02 14:05:09.440  4063  4063 V threaded_app: WindowFocusChanged: 0x715fb6158090 -- 1
-05-02 14:05:09.440  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"OCCLUSION_CULLING": Bool(true), "LATE_PHASE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
-05-02 14:05:09.447  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "INDEXED": Bool(true)}
-05-02 14:05:09.451   549  1840 I ImeTracker: dev.smartrobot.bevy_app:fb136c1d: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
-05-02 14:05:09.452   549  1840 I ImeTracker: dev.smartrobot.bevy_app:fb136c1d: onCancelled at PHASE_SERVER_SHOULD_HIDE
-05-02 14:05:09.457  4063  4063 V threaded_app: WindowInsetsChanged: 0x715fb6158090
-05-02 14:05:09.468  1410  1410 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=dev.smartrobot.bevy_app fieldId=0 fieldName=null extras=null}, false)
-05-02 14:05:09.469  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"OCCLUSION_CULLING": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "MAIN_PHASE": Bool(true), "INDEXED": Bool(true)}
-05-02 14:05:09.472  4063  4063 V threaded_app: WindowInsetsChanged: 0x715fb6158090
-05-02 14:05:09.474  4063  4063 V threaded_app: NativeWindowResized: 0x715fb6158090 -- 0x715ee617a5c0 ( 1440 x 2975 )
-05-02 14:05:09.474  4063  4063 V threaded_app: NativeWindowRedrawNeeded: 0x715fb6158090 -- 0x715ee617a5c0
-05-02 14:05:09.475  4063  4063 V threaded_app: ContentRectChanged: 0x715fb6158090 -- (0 0) (1440 2975)
-05-02 14:05:09.477  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::prepass_bindings with defs: {"WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "INDIRECT": Bool(true), "LATE_PHASE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "FRUSTUM_CULLING": Bool(true), "OCCLUSION_CULLING": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
-05-02 14:05:09.477  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::view_transformations with defs: {"WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "INDIRECT": Bool(true), "LATE_PHASE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "FRUSTUM_CULLING": Bool(true), "OCCLUSION_CULLING": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
-05-02 14:05:09.478  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::occlusion_culling with defs: {"WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "INDIRECT": Bool(true), "LATE_PHASE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "FRUSTUM_CULLING": Bool(true), "OCCLUSION_CULLING": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
-05-02 14:05:09.480  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "INDIRECT": Bool(true), "LATE_PHASE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "FRUSTUM_CULLING": Bool(true), "OCCLUSION_CULLING": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
-05-02 14:05:09.496  4063  4084 E OpenGLRenderer: Unable to match the desired swap behavior.
-05-02 14:05:09.543  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
-05-02 14:05:09.547  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::forward_io with defs: {}
-05-02 14:05:09.547  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_bindings with defs: {}
-05-02 14:05:09.547  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::morph with defs: {}
-05-02 14:05:09.548  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_functions with defs: {}
-05-02 14:05:09.549  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::skinning with defs: {}
-05-02 14:05:09.550  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::forward_io with defs: {"TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_UVS_A": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VERTEX_UVS": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_NORMALS": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_POSITIONS": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "BINDLESS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true)}
-05-02 14:05:09.552  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_bindings with defs: {"TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_UVS_A": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VERTEX_UVS": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_NORMALS": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_POSITIONS": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "BINDLESS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true)}
-05-02 14:05:09.555  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_view_bindings with defs: {"TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_UVS_A": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VERTEX_UVS": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_NORMALS": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_POSITIONS": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "BINDLESS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true)}
-05-02 14:05:09.556  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::view_transformations with defs: {"TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_UVS_A": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VERTEX_UVS": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_NORMALS": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_POSITIONS": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "BINDLESS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true)}
-05-02 14:05:09.559  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_functions with defs: {"TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_UVS_A": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VERTEX_UVS": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_NORMALS": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_POSITIONS": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "BINDLESS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true)}
-05-02 14:05:09.561  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_UVS_A": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VERTEX_UVS": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_NORMALS": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_POSITIONS": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "BINDLESS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true)}
-05-02 14:05:09.563  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::prepass_io with defs: {}
-05-02 14:05:09.563  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::meshlet_visibility_buffer_resolve with defs: {}
-05-02 14:05:09.564  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_types with defs: {}
-05-02 14:05:09.567  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::lighting with defs: {}
-05-02 14:05:09.567  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::color_operations with defs: {}
-05-02 14:05:09.568  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::utils with defs: {}
-05-02 14:05:09.569  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::clustered_forward with defs: {}
-05-02 14:05:09.572  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::shadow_sampling with defs: {}
-05-02 14:05:09.572  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::shadows with defs: {}
-05-02 14:05:09.573  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::ambient with defs: {}
-05-02 14:05:09.573  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::light_probe with defs: {}
-05-02 14:05:09.573  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::irradiance_volume with defs: {}
-05-02 14:05:09.574  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::environment_map with defs: {}
-05-02 14:05:09.574  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::prepass_utils with defs: {}
-05-02 14:05:09.574  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::tonemapping_lut_bindings with defs: {}
-05-02 14:05:09.575  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::tonemapping with defs: {}
-05-02 14:05:09.576  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::transmission with defs: {}
-05-02 14:05:09.576  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::fog with defs: {}
-05-02 14:05:09.578  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_functions with defs: {}
-05-02 14:05:09.578  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::decal::forward with defs: {}
-05-02 14:05:09.579  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_bindings with defs: {}
-05-02 14:05:09.579  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::bindless with defs: {}
-05-02 14:05:09.579  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::parallax_mapping with defs: {}
-05-02 14:05:09.579  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::ssao_utils with defs: {}
-05-02 14:05:09.580  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::lightmap with defs: {}
-05-02 14:05:09.581  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_fragment with defs: {}
-05-02 14:05:09.582  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::decal::clustered with defs: {}
-05-02 14:05:09.582  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_deferred_types with defs: {}
-05-02 14:05:09.582  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::rgb9e5 with defs: {}
-05-02 14:05:09.583  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_prepass_functions with defs: {}
-05-02 14:05:09.583  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_deferred_functions with defs: {}
-05-02 14:05:09.583  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::oit with defs: {}
-05-02 14:05:09.587  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::pbr_types with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "DEBAND_DITHER": Bool(true), "VERTEX_POSITIONS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_UVS": Bool(true), "BINDLESS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true)}
-05-02 14:05:09.593  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::lighting with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "DEBAND_DITHER": Bool(true), "VERTEX_POSITIONS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_UVS": Bool(true), "BINDLESS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true)}
-05-02 14:05:09.596  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::clustered_forward with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "DEBAND_DITHER": Bool(true), "VERTEX_POSITIONS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_UVS": Bool(true), "BINDLESS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true)}
-05-02 14:05:09.600  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::utils with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "DEBAND_DITHER": Bool(true), "VERTEX_POSITIONS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_UVS": Bool(true), "BINDLESS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true)}
-05-02 14:05:09.601  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::shadow_sampling with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "DEBAND_DITHER": Bool(true), "VERTEX_POSITIONS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_UVS": Bool(true), "BINDLESS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true)}
-05-02 14:05:09.605  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::color_operations with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "DEBAND_DITHER": Bool(true), "VERTEX_POSITIONS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_UVS": Bool(true), "BINDLESS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true)}
-05-02 14:05:09.606  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::shadows with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "DEBAND_DITHER": Bool(true), "VERTEX_POSITIONS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_UVS": Bool(true), "BINDLESS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true)}
-05-02 14:05:09.608  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::ambient with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "DEBAND_DITHER": Bool(true), "VERTEX_POSITIONS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_UVS": Bool(true), "BINDLESS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true)}
-05-02 14:05:09.610  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::tonemapping_lut_bindings with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "DEBAND_DITHER": Bool(true), "VERTEX_POSITIONS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_UVS": Bool(true), "BINDLESS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true)}
-05-02 14:05:09.610  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::tonemapping with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "DEBAND_DITHER": Bool(true), "VERTEX_POSITIONS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_UVS": Bool(true), "BINDLESS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true)}
-05-02 14:05:09.612  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::pbr_functions with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "DEBAND_DITHER": Bool(true), "VERTEX_POSITIONS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_UVS": Bool(true), "BINDLESS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true)}
-05-02 14:05:09.616  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::pbr_bindings with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "DEBAND_DITHER": Bool(true), "VERTEX_POSITIONS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_UVS": Bool(true), "BINDLESS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true)}
-05-02 14:05:09.616  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::bindless with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "DEBAND_DITHER": Bool(true), "VERTEX_POSITIONS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_UVS": Bool(true), "BINDLESS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true)}
-05-02 14:05:09.616  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::pbr_fragment with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "DEBAND_DITHER": Bool(true), "VERTEX_POSITIONS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_UVS": Bool(true), "BINDLESS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true)}
-05-02 14:05:09.620  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::decal::clustered with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "DEBAND_DITHER": Bool(true), "VERTEX_POSITIONS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_UVS": Bool(true), "BINDLESS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true)}
-05-02 14:05:09.621  4063  4090 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "DEBAND_DITHER": Bool(true), "VERTEX_POSITIONS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_UVS": Bool(true), "BINDLESS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true)}
-05-02 14:05:09.627  4063  4088 I RustStdoutStderr:
-05-02 14:05:09.627  4063  4088 I RustStdoutStderr: thread 'Async Compute Task Pool (0)' panicked at /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga-24.0.0/src/span.rs:74:29:
-05-02 14:05:09.627  4063  4088 I RustStdoutStderr: byte index 96489672 is out of bounds of ``
-05-02 14:05:09.627  4063  4088 I RustStdoutStderr: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-05-02 14:05:09.627  4063  4090 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 4090 (Async Compute T), pid 4063 (trobot.bevy_app)
-05-02 14:05:09.675  4123  4123 I crash_dump64: performing dump of process 4063 (target tid = 4090)
-05-02 14:05:09.790   549  1840 D CoreBackPreview: Window{a1f7e59 u0 Splash Screen dev.smartrobot.bevy_app EXITING}: Setting back callback null
-05-02 14:05:09.791   549  1840 W InputManager-JNI: Input channel object 'a1f7e59 Splash Screen dev.smartrobot.bevy_app (client)' was disposed without first being removed with the input manager!
-05-02 14:05:10.346     0     0 I logd    : logdr: UID=10193 GID=10193 PID=4123 n tail=500 logMask=8 pid=4063 start=0ns deadline=0ns
-05-02 14:05:10.352     0     0 I logd    : logdr: UID=10193 GID=10193 PID=4123 n tail=500 logMask=1 pid=4063 start=0ns deadline=0ns
-05-02 14:05:09.911  4123  4123 F DEBUG   : Cmdline: dev.smartrobot.bevy_app
-05-02 14:05:09.911  4123  4123 F DEBUG   : pid: 4063, tid: 4090, name: Async Compute T  >>> dev.smartrobot.bevy_app <<<
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #01 pc 00000000020e20a9  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #02 pc 00000000020e2091  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #03 pc 00000000020d2a5d  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #04 pc 00000000020d2874  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #05 pc 00000000020d2509  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #06 pc 00000000020d0ca8  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #07 pc 00000000020d219c  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #08 pc 00000000020f60ef  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #09 pc 00000000020fd981  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #10 pc 00000000020fd5e9  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #11 pc 0000000001be7462  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #12 pc 0000000001c53c89  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #13 pc 0000000001aeadb7  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #14 pc 0000000001af28e1  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #15 pc 0000000001af37ac  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #16 pc 0000000001af3f78  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #17 pc 0000000001a7c769  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #18 pc 0000000001a7d182  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #19 pc 0000000001996d1f  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #20 pc 00000000019ae045  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #21 pc 000000000194f339  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #22 pc 0000000002046ac1  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #23 pc 00000000020452be  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #24 pc 00000000020438fc  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #25 pc 0000000002044e73  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #26 pc 0000000002045037  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #27 pc 0000000002044d8a  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #28 pc 0000000002045797  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.911  4123  4123 F DEBUG   :       #29 pc 00000000020d441a  /data/app/~~iwcOXWdqh-GPveEspYZZhw==/dev.smartrobot.bevy_app-3V4P4_yseopfD3hv9QFe_g==/base.apk (offset 0x28b4000)
-05-02 14:05:09.929   549  4131 W ActivityTaskManager:   Force finishing activity dev.smartrobot.bevy_app/.MainActivity
-05-02 14:05:09.971   549  1143 I ActivityManager: Process dev.smartrobot.bevy_app (pid 4063) has died: fg  TOP
-05-02 14:05:09.972   549  2293 I ImeTracker: dev.smartrobot.bevy_app:c4b496f9: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_REMOVE_CLIENT
-05-02 14:05:09.972   549   582 I libprocessgroup: Successfully killed process cgroup uid 10193 pid 4063 in 0ms
-05-02 14:05:09.973   549  2293 I ImeTracker: dev.smartrobot.bevy_app:c4b496f9: onCancelled at PHASE_SERVER_SHOULD_HIDE
-05-02 14:05:09.976   363   363 I Zygote  : Process 4063 exited due to signal 6 (Aborted)
-05-02 14:05:09.981   549   571 W WindowManager: Failed to deliver inset control state change to w=Window{8778056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}
-05-02 14:05:09.988   549  2293 I WindowManager: WIN DEATH: Window{8778056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}
-05-02 14:05:09.988   549  2293 W InputManager-JNI: Input channel object '8778056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity (client)' was disposed without first being removed with the input manager!
-05-02 14:05:09.995   549  1143 W InputManager-JNI: Input channel object 'Letterbox_fullWindow_ActivityRecord{593d734 u0 dev.smartrobot.bevy_app/.MainActivity t18} (client)' was disposed without first being removed with the input manager!
-05-02 14:05:10.027   549   571 W WindowManager: Failed to deliver inset control state change to w=Window{8778056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity EXITING}
-05-02 14:05:10.211   549   567 V WindowManager:     info={id=8 t=CLOSE f=0x10 trk=0 r=[0@Point(0, 0)] c=[{WCT{RemoteToken{c8fafc9 Task{5c8162 #1 type=home}}} m=TO_FRONT f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0xf3b2dfb sb=Rect(0, 0 - 1440, 3120) eb=Rect(0, 0 - 1440, 3120) d=0},{WCT{RemoteToken{2757564 Task{1bca95d #18 type=standard A=10193:dev.smartrobot.bevy_app}}} m=CLOSE f=NONE leash=Surface(name=Task=18)/@0x5454ef6 sb=Rect(0, 0 - 1440, 3120) eb=Rect(0, 0 - 1440, 3120) d=0},{null m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{498f1f3 token=android.os.Binder@5842c62})/@0x102a9f5 sb=Rect(0, 0 - 1440, 3120) eb=Rect(0, 0 - 1440, 3120) d=0}]}
-05-02 14:05:10.245   549   571 W WindowManager: Failed to deliver inset control state change to w=Window{8778056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity EXITING}
-05-02 14:05:10.431   549   570 W ActivityTaskManager: Activity top resumed state loss timeout for ActivityRecord{593d734 u0 dev.smartrobot.bevy_app/.MainActivity t18 f} isExiting}
-05-02 14:05:10.872   549  1143 W WindowManager: Exception thrown during dispatchAppVisibility Window{8778056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity EXITING}
-05-02 14:05:10.872   549  1143 I Process : Sending signal. PID: 4063 SIG: 9
-05-02 14:05:10.873   549   570 W ActivityManager: setHasOverlayUi called on unknown pid: 4063
+05-03 09:55:28.692   568   624 V BackupManagerService: [UserID:0] restoreAtInstall pkg=dev.smartrobot.bevy_app token=1 restoreSet=0
+05-03 09:55:28.714  1147  1188 D SessionCommitReceiver: Removing PromiseIcon for package: dev.smartrobot.bevy_app, install reason: 0, alreadyAddedPromiseIcon: false
+05-03 09:55:28.720   568   891 I SdkSandboxManager: No SDKs used. Skipping SDK data reconcilation for CallingInfo{mUid=10148, mPackageName='dev.smartrobot.bevy_app, mAppProcessToken='null'}
+05-03 09:55:28.730  1147  1188 D PackageUpdatedTask: Package updated: mOp=ADD packages=[dev.smartrobot.bevy_app]
+05-03 09:55:28.744   568   883 D ShortcutService: adding package: dev.smartrobot.bevy_app userId0
+05-03 09:55:28.744   568   883 D ShortcutService: handlePackageAdded: dev.smartrobot.bevy_app user=0
+05-03 09:55:28.744   568   883 D ShortcutService: rescanPackageIfNeeded 0@dev.smartrobot.bevy_app, forceRescan=true , isNewApp=true
+05-03 09:55:28.744   568   883 D ShortcutService: Package dev.smartrobot.bevy_app has 0 manifest shortcut(s), and 0 share target(s)
+05-03 09:55:28.745   568   883 D ShortcutService: changing package: dev.smartrobot.bevy_app userId0
+05-03 09:55:28.745   568   883 D ShortcutService: handlePackageChanged: dev.smartrobot.bevy_app user=0
+05-03 09:55:28.745   568   883 D ShortcutService: rescanPackageIfNeeded 0@dev.smartrobot.bevy_app, forceRescan=true , isNewApp=true
+05-03 09:55:28.745   568   883 D ShortcutService: Package dev.smartrobot.bevy_app has 0 manifest shortcut(s), and 0 share target(s)
+05-03 09:55:28.747  1102  1102 D CarrierSvcBindHelper: onPackageAdded: dev.smartrobot.bevy_app
+05-03 09:55:28.773  1147  1188 D PackageUpdatedTask: Package updated: mOp=UPDATE packages=[dev.smartrobot.bevy_app]
+05-03 09:55:28.782  1102  1284 D ImsResolver: maybeAddedImsService, packageName: dev.smartrobot.bevy_app
+05-03 09:55:28.789  1102  1102 D CarrierSvcBindHelper: onPackageModified: dev.smartrobot.bevy_app
+05-03 09:55:28.798   924   924 I SafetyLabelChangedBroadcastReceiver: received broadcast packageName: dev.smartrobot.bevy_app, current user: UserHandle{0}, packageChangeEvent: NEW_INSTALL, intent user: UserHandle{0}
+05-03 09:55:28.802  1102  1284 D ImsResolver: maybeAddedImsService, packageName: dev.smartrobot.bevy_app
+05-03 09:56:25.218   568  1016 V SplashScreenExceptionList: SplashScreen checking exception for package dev.smartrobot.bevy_app (target sdk:35) -> false
+05-03 09:56:25.220   568  1016 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity bnds=[0,981][256,1341]} with LAUNCH_MULTIPLE from uid 10120 (BAL_ALLOW_VISIBLE_WINDOW) result code=0
+05-03 09:56:25.222   917   957 V WindowManagerShell: Transition requested (#5): android.os.BinderProxy@a2c368f TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} topActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} numActivities=1 lastActiveTime=983835 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@f0cfd1c} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{d4e7d25 dev.smartrobot.bevy_app.MainActivity} launchCookies=[android.os.BinderProxy@42abefa] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= falseisLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false topActivityEligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=1280 topActivityLetterboxHeight=2856 isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false cameraCompatTaskInfo=CameraCompatTaskInfo { cameraCompatControlState=hidden freeformCameraCompatMode=inactive}}}, pipTask = null, remoteTransition = RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@bbfacab, appThread = android.app.IApplicationThread$Stub$Proxy@e7acf08, debugName = QuickstepLaunch }, displayChange = null, flags = 0, debugId = 5 }
+05-03 09:56:25.233  1147  1147 I TopTaskTracker: onTaskMovedToFront: (moved taskInfo to front) taskId=8, baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity }
+05-03 09:56:25.234   568   864 I AppWidgetServiceImpl: Updating package stopped masked state for uid 10148 package dev.smartrobot.bevy_app isStopped false
+05-03 09:56:25.250   372   372 D Zygote  : Forked child process 2265
+05-03 09:56:25.258   568   602 I ActivityManager: Start proc 2265:dev.smartrobot.bevy_app/u0a148 for next-top-activity {dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}
+05-03 09:56:25.260  2265  2265 I trobot.bevy_app: Late-enabling -Xcheck:jni
+05-03 09:56:25.281  2265  2265 I trobot.bevy_app: Using CollectorTypeCMC GC.
+05-03 09:56:25.282  2265  2265 W trobot.bevy_app: Unexpected CPU variant for x86: x86_64.
+05-03 09:56:25.282  2265  2265 W trobot.bevy_app: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, goldmont-without-sha-xsaves, tremont, kabylake, default
+05-03 09:56:25.286   568  1010 D CoreBackPreview: Window{720942 u0 Splash Screen dev.smartrobot.bevy_app}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@c2403cb, mPriority=0, mIsAnimationCallback=false}
+05-03 09:56:25.304   450   458 I adbd    : jdwp connection from 2265
+05-03 09:56:25.310  2265  2265 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+05-03 09:56:25.324  2265  2265 W ziparchive: Unable to open '/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.dm': No such file or directory
+05-03 09:56:25.324  2265  2265 W ziparchive: Unable to open '/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.dm': No such file or directory
+05-03 09:56:25.380  2265  2265 D nativeloader: Configuring clns-7 for other apk /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/lib/x86_64:/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/dev.smartrobot.bevy_app
+05-03 09:56:25.383  2265  2265 D CompatChangeReporter: Compat change id reported: 202956589; UID 10148; state: ENABLED
+05-03 09:56:25.389  2265  2265 V GraphicsEnvironment: Currently set values for:
+05-03 09:56:25.390  2265  2265 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+05-03 09:56:25.390  2265  2265 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+05-03 09:56:25.390  2265  2265 V GraphicsEnvironment: Global.Settings values are invalid: number of packages: 0, number of values: 0
+05-03 09:56:25.390  2265  2265 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+05-03 09:56:25.404  2265  2265 D CompatChangeReporter: Compat change id reported: 279646685; UID 10148; state: ENABLED
+05-03 09:56:25.409   568  1010 I AppsFilter: interaction: PackageSetting{aa346f2 dev.smartrobot.bevy_app/10148} -> PackageSetting{84f2143 com.android.launcher3/10120} BLOCKED
+05-03 09:56:25.520   568   589 V WindowManager: Sent Transition (#5) createdAt=05-03 09:56:25.213 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} topActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} numActivities=1 lastActiveTime=983835 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{3e0c24a Task{ddf6265 #8 type=standard A=10148:dev.smartrobot.bevy_app}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{12175bb dev.smartrobot.bevy_app.MainActivity} launchCookies=[android.os.BinderProxy@6c04ad8] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= falseisLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false topActivityEligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=1280 topActivityLetterboxHeight=2856 isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false cameraCompatTaskInfo=CameraCompatTaskInfo { cameraCompatControlState=hidden freeformCameraCompatMode=inactive}}}, pipTask = null, remoteTransition = RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@1bdde31, appThread = android.app.IApplicationThread$Stub$Proxy@270b916, debugName = QuickstepLaunch }, displayChange = null, flags = 0, debugId = 5 }
+05-03 09:56:25.520   568   589 V WindowManager:         {WCT{RemoteToken{3e0c24a Task{ddf6265 #8 type=standard A=10148:dev.smartrobot.bevy_app}}} m=OPEN f=NONE leash=Surface(name=Task=8)/@0x6035bec sb=Rect(0, 0 - 1280, 2856) eb=Rect(0, 0 - 1280, 2856) d=0 taskParent=-1},
+05-03 09:56:25.529  2265  2265 D nativeloader: Load /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk!/lib/x86_64/libsmartrobot_bevy.so using ns clns-7 from class loader (caller=/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk!classes3.dex): ok
+05-03 09:56:25.540  2265  2265 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
+05-03 09:56:25.554  2265  2265 D CompatChangeReporter: Compat change id reported: 309578419; UID 10148; state: ENABLED
+05-03 09:56:25.560  2265  2265 W trobot.bevy_app: Accessing hidden method Landroid/view/View;->computeFitSystemWindows(Landroid/graphics/Rect;Landroid/graphics/Rect;)Z (unsupported, reflection, allowed)
+05-03 09:56:25.560  2265  2265 W trobot.bevy_app: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (unsupported, reflection, allowed)
+05-03 09:56:25.561  2265  2265 I GameActivity: Looking for library libsmartrobot_bevy.so
+05-03 09:56:25.561  2265  2265 I GameActivity: Found library libsmartrobot_bevy.so. Loading...
+05-03 09:56:25.563  2265  2265 D CompatChangeReporter: Compat change id reported: 312399441; UID 10148; state: ENABLED
+05-03 09:56:25.567  2265  2265 D GameActivity: GameActivity_register
+05-03 09:56:25.567  2265  2265 V GameActivity: Registering com/google/androidgamesdk/GameActivity's 22 native methods...
+05-03 09:56:25.567  2265  2265 V threaded_app: Creating: 0x76de59b671b0
+05-03 09:56:25.567  2265  2265 V threaded_app: Callbacks set: 0x76de59b67200
+05-03 09:56:25.567  2265  2265 V threaded_app: Launching android_app_entry in a thread
+05-03 09:56:25.567  2265  2285 V threaded_app: android_app_entry called
+05-03 09:56:25.567  2265  2285 V threaded_app: android_app = 0x76de09b79050
+05-03 09:56:25.567  2265  2285 V threaded_app: config = 0x76de39c00a70
+05-03 09:56:25.567  2265  2285 V threaded_app: activity = 0x76de59b671b0
+05-03 09:56:25.567  2265  2285 V threaded_app: assetmanager = 0x76de59b63330
+05-03 09:56:25.567  2265  2285 V threaded_app: Config: mcc=310 mnc=260 lang=en cnt=US orien=1 touch=3 dens=480 keys=2 nav=1 keysHid=1 navHid=0 sdk=35 size=2 long=2 modetype=1 modenight=1
+05-03 09:56:25.582  2265  2285 E platform: Failed to open rendernode: No such file or directory
+05-03 09:56:25.584  2265  2265 V GameActivity: onStart_native
+05-03 09:56:25.584  2265  2265 V threaded_app: Start: 0x76de59b671b0
+05-03 09:56:25.591  2265  2285 D vulkan  : searching for layers in '/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/lib/x86_64'
+05-03 09:56:25.591  2265  2285 D vulkan  : searching for layers in '/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk!/lib/x86_64'
+05-03 09:56:25.605  2265  2285 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+05-03 09:56:25.605  2265  2285 I EGL_emulation: Opening libGLESv2_emulation.so
+05-03 09:56:25.697  2265  2285 I event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_render-0.16.0/srcAdapterInfo { name: "NVIDIA GeForce MX570 A", vendor: 4318, device: 9642, device_type: DiscreteGpu, driver: "NVIDIA", driver_info: "570.133.07", backend: Vulkan }
+05-03 09:56:25.929  2265  2285 I OboeAudio: openStreamInternal() OUTPUT -------- OboeVersion1.8.1 --------
+05-03 09:56:25.931  2265  2285 I AAudio  : AAudioStreamBuilder_openStream() called ----------------------------------------
+05-03 09:56:25.931  2265  2285 I AudioStreamBuilder: rate   =  44100, channels  = 2, channelMask = 0x80000003, format   = 5, sharing = SH, dir = OUTPUT
+05-03 09:56:25.931  2265  2285 I AudioStreamBuilder: device =      0, sessionId = -1, perfMode = 10, callback: ON with frames = 0
+05-03 09:56:25.931  2265  2285 I AudioStreamBuilder: usage  =      1, contentType = 2, inputPreset = 6, allowedCapturePolicy = 0
+05-03 09:56:25.931  2265  2285 I AudioStreamBuilder: privacy sensitive = false, opPackageName = (null), attributionTag = (null)
+05-03 09:56:25.931  2265  2285 D AudioStreamBuilder: build() MMAP not used because AAUDIO_PERFORMANCE_MODE_LOW_LATENCY not requested.
+05-03 09:56:25.931  2265  2285 D trobot.bevy_app: PlayerBase::PlayerBase()
+05-03 09:56:25.932  2265  2285 D AudioStreamTrack: open(), request notificationFrames = 0, frameCount = 0
+05-03 09:56:25.934  2265  2285 D AAudioStream: setState(s#1) from 0 to 2
+05-03 09:56:25.935  2265  2285 I AAudio  : AAudioStreamBuilder_openStream() returns 0 = AAUDIO_OK for s#1 ----------------
+05-03 09:56:25.935  2265  2285 D AAudio  : AAudioStream_requestStart(s#1) called --------------
+05-03 09:56:25.935  2265  2285 D AAudioStream: setState(s#1) from 2 to 3
+05-03 09:56:25.936  2265  2285 D AAudio  : AAudioStream_requestStart(s#1) returned 0 ---------
+05-03 09:56:25.936  2265  2281 D AudioStreamLegacy: onAudioDeviceUpdate(deviceId = 2)
+05-03 09:56:25.937  2265  2285 E event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_gilrs-0.16.0/src/Failed to start Gilrs. Gilrs does not support current platform.
+05-03 09:56:25.960  2265  2285 I event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_render-0.16.0/srcGPU preprocessing is fully supported on this device.
+05-03 09:56:25.982  2265  2298 D AAudioStream: setState(s#1) from 3 to 4
+05-03 09:56:25.987  2265  2285 I event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_winit-0.16.0/src/Creating new window App (0v1)
+05-03 09:56:25.987  2265  2285 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_winit-0.16.0/src/Display information:  Window physical resolution: 1280x720  Window logical resolution: 1280x720  Monitor name: Android Device  Scale factor: 3  Refresh rate (Hz): 0.000
+05-03 09:56:25.987  2265  2285 E event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfCannot get the native window, it's null and will always be null before Event::Resumed and after Event::Suspended. Make sure you only call this function between those events.
+05-03 09:56:26.013  2265  2285 V threaded_app: activityState=10
+05-03 09:56:26.013  2265  2285 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: forward onStart notification to application
+05-03 09:56:26.015  2265  2265 V threaded_app: Resume: 0x76de59b671b0
+05-03 09:56:26.015  2265  2285 V threaded_app: activityState=11
+05-03 09:56:26.015  2265  2285 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfApp Resumed - is running
+05-03 09:56:26.018  2265  2265 W HWUI    : Unknown dataspace 0
+05-03 09:56:26.026  2265  2265 V threaded_app: WindowInsetsChanged: 0x76de59b671b0
+05-03 09:56:26.026   568  1010 D CoreBackPreview: Window{2b30add u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@dae7d23, mPriority=0, mIsAnimationCallback=false}
+05-03 09:56:26.036  2265  2265 V threaded_app: ContentRectChanged: 0x76de59b671b0 -- (0 0) (1280 2856)
+05-03 09:56:26.036  2265  2265 V GameActivity: onSurfaceCreated_native
+05-03 09:56:26.036  2265  2265 V threaded_app: NativeWindowCreated: 0x76de59b671b0 -- 0x76dd19b81540
+05-03 09:56:26.036  2265  2265 V threaded_app: android_app_set_window called
+05-03 09:56:26.041  2265  2282 W HWUI    : Failed to choose config with EGL_SWAP_BEHAVIOR_PRESERVED, retrying without...
+05-03 09:56:26.041  2265  2282 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+05-03 09:56:26.130     0     0 I servicemanager: Caller(pid=2265,uid=10148,sid=u:r:untrusted_app:s0:c148,c256,c512,c768) Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest. No alternative instances declared in VINTF.
+05-03 09:56:26.099  2265  2282 I Gralloc4: mapper 4.x is not supported
+05-03 09:56:26.158  2265  2271 I trobot.bevy_app: Compiler allocated 5174KB to compile void android.view.ViewRootImpl.performTraversals()
+05-03 09:56:26.196  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::fullscreen_vertex_shader with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.197  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::fullscreen_vertex_shader with defs: {}
+05-03 09:56:26.198  2265  2285 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: handle Android InsetsChanged notification
+05-03 09:56:26.198  2265  2285 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: find a way to notify application of content rect change
+05-03 09:56:26.199  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::fullscreen_vertex_shader with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.200  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.209  2265  2285 V threaded_app: APP_CMD_INIT_WINDOW
+05-03 09:56:26.209  2265  2285 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_winit-0.16.0/src/Display information:  Window physical resolution: 3840x2160  Window logical resolution: 1280x720  Monitor name: Android Device  Scale factor: 3  Refresh rate (Hz): 0.000
+05-03 09:56:26.209  2265  2265 V threaded_app: NativeWindowResized: 0x76de59b671b0 -- 0x76dd19b81540 ( 1280 x 2856 )
+05-03 09:56:26.210  2265  2265 V threaded_app: NativeWindowRedrawNeeded: 0x76de59b671b0 -- 0x76dd19b81540
+05-03 09:56:26.230  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.238  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_preprocess_types with defs: {}
+05-03 09:56:26.240  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_preprocess_types with defs: {"INDEXED": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.241  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"INDEXED": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.245  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_types with defs: {}
+05-03 09:56:26.245  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::view with defs: {}
+05-03 09:56:26.246  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_view_types with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 09:56:26.247  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::globals with defs: {}
+05-03 09:56:26.247  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_view_bindings with defs: {}
+05-03 09:56:26.249  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::maths with defs: {}
+05-03 09:56:26.249  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::prepass_bindings with defs: {}
+05-03 09:56:26.251  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::view_transformations with defs: {}
+05-03 09:56:26.251  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::occlusion_culling with defs: {}
+05-03 09:56:26.256  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_preprocess_types with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "INDIRECT": Bool(true), "FRUSTUM_CULLING": Bool(true), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.256  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_types with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "INDIRECT": Bool(true), "FRUSTUM_CULLING": Bool(true), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.258  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::view with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "INDIRECT": Bool(true), "FRUSTUM_CULLING": Bool(true), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.260  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_view_types with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "INDIRECT": Bool(true), "FRUSTUM_CULLING": Bool(true), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.261  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::globals with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "INDIRECT": Bool(true), "FRUSTUM_CULLING": Bool(true), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.261  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_view_bindings with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "INDIRECT": Bool(true), "FRUSTUM_CULLING": Bool(true), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.264  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::maths with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "INDIRECT": Bool(true), "FRUSTUM_CULLING": Bool(true), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.268  2265  2286 I RustStdoutStderr: s_glBindAttribLocation: bind attrib 0 name position
+05-03 09:56:26.268  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "INDIRECT": Bool(true), "FRUSTUM_CULLING": Bool(true), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.269  2265  2286 I RustStdoutStderr: s_glBindAttribLocation: bind attrib 1 name color
+05-03 09:56:26.272  2265  2286 I RustStdoutStderr: s_glBindAttribLocation: bind attrib 0 name position
+05-03 09:56:26.272  2265  2286 I RustStdoutStderr: s_glBindAttribLocation: bind attrib 1 name color
+05-03 09:56:26.276  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"EARLY_PHASE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "OCCLUSION_CULLING": Bool(true)}
+05-03 09:56:26.280  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.283  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"LATE_PHASE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "OCCLUSION_CULLING": Bool(true), "INDEXED": Bool(true)}
+05-03 09:56:26.284  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::types with defs: {}
+05-03 09:56:26.285  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::bindings with defs: {}
+05-03 09:56:26.285  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::bruneton_functions with defs: {}
+05-03 09:56:26.287  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::functions with defs: {}
+05-03 09:56:26.289  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::types with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.290  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::bindings with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.295  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::bruneton_functions with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.297  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::functions with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.303  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.317  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.324  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.331  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"MAX_DIRECTIONAL_LIGHTS": UInt(10), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.332   568   589 W ziparchive: Unable to open '/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.dm': No such file or directory
+05-03 09:56:26.334   568   589 I ActivityTaskManager: Displayed dev.smartrobot.bevy_app/.MainActivity for user 0: +1s129ms
+05-03 09:56:26.337  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"LATE_PHASE": Bool(true), "OCCLUSION_CULLING": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.340  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"EARLY_PHASE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "INDEXED": Bool(true), "OCCLUSION_CULLING": Bool(true)}
+05-03 09:56:26.349  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "MULTISAMPLE": Bool(true)}
+05-03 09:56:26.360  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
+05-03 09:56:26.365  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::forward_io with defs: {}
+05-03 09:56:26.365  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_bindings with defs: {}
+05-03 09:56:26.365  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::morph with defs: {}
+05-03 09:56:26.366  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_functions with defs: {}
+05-03 09:56:26.367  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::skinning with defs: {}
+05-03 09:56:26.368  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::forward_io with defs: {"SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_UVS": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "BINDLESS": Bool(true), "DEBAND_DITHER": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS_A": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true)}
+05-03 09:56:26.369  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_bindings with defs: {"SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_UVS": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "BINDLESS": Bool(true), "DEBAND_DITHER": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS_A": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true)}
+05-03 09:56:26.372  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_view_bindings with defs: {"SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_UVS": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "BINDLESS": Bool(true), "DEBAND_DITHER": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS_A": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true)}
+05-03 09:56:26.374  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::prepass_bindings with defs: {"SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_UVS": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "BINDLESS": Bool(true), "DEBAND_DITHER": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS_A": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true)}
+05-03 09:56:26.374  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::view_transformations with defs: {"SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_UVS": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "BINDLESS": Bool(true), "DEBAND_DITHER": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS_A": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true)}
+05-03 09:56:26.377  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_functions with defs: {"SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_UVS": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "BINDLESS": Bool(true), "DEBAND_DITHER": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS_A": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true)}
+05-03 09:56:26.379  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_UVS": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "BINDLESS": Bool(true), "DEBAND_DITHER": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS_A": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true)}
+05-03 09:56:26.381  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::prepass_io with defs: {}
+05-03 09:56:26.382  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::meshlet_visibility_buffer_resolve with defs: {}
+05-03 09:56:26.382  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_types with defs: {}
+05-03 09:56:26.386  2265  2265 V threaded_app: WindowFocusChanged: 0x76de59b671b0 -- 1
+05-03 09:56:26.386  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::lighting with defs: {}
+05-03 09:56:26.386  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::color_operations with defs: {}
+05-03 09:56:26.386  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::utils with defs: {}
+05-03 09:56:26.388  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::clustered_forward with defs: {}
+05-03 09:56:26.391  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::shadow_sampling with defs: {}
+05-03 09:56:26.392  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::shadows with defs: {}
+05-03 09:56:26.392   568   680 I ImeTracker: dev.smartrobot.bevy_app:d0589723: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+05-03 09:56:26.392   568   680 I ImeTracker: dev.smartrobot.bevy_app:d0589723: onCancelled at PHASE_SERVER_SHOULD_HIDE
+05-03 09:56:26.393  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::ambient with defs: {}
+05-03 09:56:26.393  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::light_probe with defs: {}
+05-03 09:56:26.394  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::irradiance_volume with defs: {}
+05-03 09:56:26.396  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::environment_map with defs: {}
+05-03 09:56:26.396  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::prepass_utils with defs: {}
+05-03 09:56:26.396  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::tonemapping_lut_bindings with defs: {}
+05-03 09:56:26.398  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::tonemapping with defs: {}
+05-03 09:56:26.399  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::transmission with defs: {}
+05-03 09:56:26.400  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::fog with defs: {}
+05-03 09:56:26.404  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_functions with defs: {}
+05-03 09:56:26.405  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::decal::forward with defs: {}
+05-03 09:56:26.405  2265  2265 V threaded_app: WindowInsetsChanged: 0x76de59b671b0
+05-03 09:56:26.406  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_bindings with defs: {}
+05-03 09:56:26.406  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::bindless with defs: {}
+05-03 09:56:26.406  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::parallax_mapping with defs: {}
+05-03 09:56:26.406  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::ssao_utils with defs: {}
+05-03 09:56:26.407  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::lightmap with defs: {}
+05-03 09:56:26.409  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_fragment with defs: {}
+05-03 09:56:26.409  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::decal::clustered with defs: {}
+05-03 09:56:26.409  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_deferred_types with defs: {}
+05-03 09:56:26.410  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::rgb9e5 with defs: {}
+05-03 09:56:26.410  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_prepass_functions with defs: {}
+05-03 09:56:26.411  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_deferred_functions with defs: {}
+05-03 09:56:26.411  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::oit with defs: {}
+05-03 09:56:26.414  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::pbr_types with defs: {"IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_NORMALS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "DEBAND_DITHER": Bool(true), "VERTEX_UVS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "BINDLESS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 09:56:26.420  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::lighting with defs: {"IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_NORMALS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "DEBAND_DITHER": Bool(true), "VERTEX_UVS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "BINDLESS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 09:56:26.424  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::clustered_forward with defs: {"IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_NORMALS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "DEBAND_DITHER": Bool(true), "VERTEX_UVS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "BINDLESS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 09:56:26.429  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::utils with defs: {"IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_NORMALS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "DEBAND_DITHER": Bool(true), "VERTEX_UVS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "BINDLESS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 09:56:26.429  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::shadow_sampling with defs: {"IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_NORMALS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "DEBAND_DITHER": Bool(true), "VERTEX_UVS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "BINDLESS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 09:56:26.434  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::color_operations with defs: {"IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_NORMALS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "DEBAND_DITHER": Bool(true), "VERTEX_UVS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "BINDLESS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 09:56:26.434  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::shadows with defs: {"IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_NORMALS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "DEBAND_DITHER": Bool(true), "VERTEX_UVS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "BINDLESS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 09:56:26.436  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::ambient with defs: {"IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_NORMALS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "DEBAND_DITHER": Bool(true), "VERTEX_UVS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "BINDLESS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 09:56:26.439  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::tonemapping_lut_bindings with defs: {"IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_NORMALS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "DEBAND_DITHER": Bool(true), "VERTEX_UVS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "BINDLESS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 09:56:26.439  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::tonemapping with defs: {"IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_NORMALS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "DEBAND_DITHER": Bool(true), "VERTEX_UVS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "BINDLESS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 09:56:26.441  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::pbr_functions with defs: {"IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_NORMALS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "DEBAND_DITHER": Bool(true), "VERTEX_UVS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "BINDLESS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 09:56:26.445  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::pbr_bindings with defs: {"IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_NORMALS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "DEBAND_DITHER": Bool(true), "VERTEX_UVS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "BINDLESS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 09:56:26.446  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::bindless with defs: {"IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_NORMALS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "DEBAND_DITHER": Bool(true), "VERTEX_UVS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "BINDLESS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 09:56:26.446  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::pbr_fragment with defs: {"IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_NORMALS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "DEBAND_DITHER": Bool(true), "VERTEX_UVS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "BINDLESS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 09:56:26.450  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::decal::clustered with defs: {"IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_NORMALS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "DEBAND_DITHER": Bool(true), "VERTEX_UVS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "BINDLESS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 09:56:26.451  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_POSITIONS": Bool(true), "VERTEX_NORMALS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "DEBAND_DITHER": Bool(true), "VERTEX_UVS": Bool(true), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "MAX_CASCADES_PER_LIGHT": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "BINDLESS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 09:56:26.457  2265  2286 I RustStdoutStderr:
+05-03 09:56:26.457  2265  2286 I RustStdoutStderr: thread 'Async Compute Task Pool (0)' panicked at /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga-24.0.0/src/span.rs:74:29:
+05-03 09:56:26.457  2265  2286 I RustStdoutStderr: byte index 96489672 is out of bounds of ``
+05-03 09:56:26.457  2265  2286 I RustStdoutStderr: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+05-03 09:56:26.458  2265  2288 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 2288 (Async Compute T), pid 2265 (trobot.bevy_app)
+05-03 09:56:26.483  2311  2311 E crash_dump64: failed to get the guest state header for thread 2265: Bad address
+05-03 09:56:26.503  2311  2311 I crash_dump64: performing dump of process 2265 (target tid = 2288)
+05-03 09:56:26.726     0     0 I logd    : logdr: UID=10148 GID=10148 PID=2311 n tail=500 logMask=8 pid=2265 start=0ns deadline=0ns
+05-03 09:56:26.731     0     0 I logd    : logdr: UID=10148 GID=10148 PID=2311 n tail=500 logMask=1 pid=2265 start=0ns deadline=0ns
+05-03 09:56:26.700  2311  2311 F DEBUG   : Cmdline: dev.smartrobot.bevy_app
+05-03 09:56:26.700  2311  2311 F DEBUG   : pid: 2265, tid: 2288, name: Async Compute T  >>> dev.smartrobot.bevy_app <<<
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #01 pc 00000000020e22e9  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #02 pc 00000000020e22d1  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #03 pc 00000000020d2c9d  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #04 pc 00000000020d2ab4  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #05 pc 00000000020d2749  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #06 pc 00000000020d0ee8  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #07 pc 00000000020d23dc  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #08 pc 00000000020f632f  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #09 pc 00000000020fdbc1  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #10 pc 00000000020fd829  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #11 pc 0000000001be7658  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #12 pc 0000000001c53e7f  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #13 pc 0000000001aeafad  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #14 pc 0000000001af2ad7  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #15 pc 0000000001af39a2  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #16 pc 0000000001af416e  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #17 pc 0000000001a7c95f  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #18 pc 0000000001a7d378  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #19 pc 0000000001996f15  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #20 pc 00000000019ae23b  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #21 pc 000000000194f52f  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #22 pc 0000000002046d01  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #23 pc 00000000020454fe  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #24 pc 0000000002043b3c  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #25 pc 00000000020450b3  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #26 pc 0000000002045277  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #27 pc 0000000002044fca  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #28 pc 00000000020459d7  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #29 pc 00000000020d465a  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.712   568  1010 D CoreBackPreview: Window{720942 u0 Splash Screen dev.smartrobot.bevy_app EXITING}: Setting back callback null
+05-03 09:56:26.712   568   633 W InputManager-JNI: Input channel object '720942 Splash Screen dev.smartrobot.bevy_app (client)' was disposed without first being removed with the input manager!
+05-03 09:56:26.716   568  2318 W ActivityTaskManager:   Force finishing activity dev.smartrobot.bevy_app/.MainActivity
+05-03 09:56:26.725  2265  2265 V threaded_app: Pause: 0x76de59b671b0
+05-03 09:56:26.733   372   372 I Zygote  : Process 2265 exited due to signal 6 (Aborted)
+05-03 09:56:26.734   568  1611 I WindowManager: WIN DEATH: Window{2b30add u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}
+05-03 09:56:26.734   568  1611 W InputManager-JNI: Input channel object '2b30add dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity (client)' was disposed without first being removed with the input manager!
+05-03 09:56:26.734   568  1017 I ActivityManager: Process dev.smartrobot.bevy_app (pid 2265) has died: fg  TOP
+05-03 09:56:26.735   568  1635 I ImeTracker: dev.smartrobot.bevy_app:557a8a65: onRequestHide at ORIGIN_SERVER reason HIDE_REMOVE_CLIENT fromUser false
+05-03 09:56:26.735   568  1635 I ImeTracker: dev.smartrobot.bevy_app:557a8a65: onCancelled at PHASE_SERVER_SHOULD_HIDE
+05-03 09:56:26.738   568   592 W ActivityManager: setHasOverlayUi called on unknown pid: 2265
+05-03 09:56:26.757   568   603 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_10148/pid_2265
+05-03 09:56:26.776   568   593 W ActivityTaskManager: Unable to send transaction to client proc dev.smartrobot.bevy_app: no app thread
+05-03 09:56:26.956   568   589 V WindowManager:         {WCT{RemoteToken{3e0c24a Task{ddf6265 #8 type=standard A=10148:dev.smartrobot.bevy_app}}} m=CLOSE f=NONE leash=Surface(name=Task=8)/@0x6035bec sb=Rect(0, 0 - 1280, 2856) eb=Rect(0, 0 - 1280, 2856) d=0 taskParent=-1},
+05-03 09:56:26.972   568   593 W ActivityTaskManager: Unable to send transaction to client proc dev.smartrobot.bevy_app: no app thread
+05-03 09:56:27.034   917   929 W ndroid.systemui: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk' with 1 weak references
+05-03 09:56:27.263   568  1668 W WindowManager: Exception thrown during dispatchAppVisibility Window{2b30add u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity EXITING}
+05-03 09:56:27.264   568  1668 W Process : Unable to open /proc/2265/status
 ```
 </details>
 
@@ -2155,1027 +2174,751 @@ adb -e logcat | grep -e smartrobot -e 4063
 <summary>Output adb -d logcat</summary>
 
 ```text
-adb -d logcat | grep -e smartrobot -e 27815
+adb -d logcat | grep -e smartrobot -e 29974
 
-05-02 12:51:46.475 11075 11182 I WindowManager: Destroying surface Surface(name=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_22189)/@0x109cf60 called by com.android.server.w
-05-02 12:51:46.482   642   642 I Layer   : id=12519 removeFromCurrentState dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_22189#0 (100)
-05-02 12:51:46.482   642   642 I Layer   : id=12522 removeFromCurrentState Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0 (100)
-05-02 12:51:46.482   642   642 I SurfaceFlinger: id=12519 Removed dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_22189#0 (100)
-05-02 12:51:46.483   642   642 I Layer   : id=12519 Destroyed dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_22189#0
-05-02 12:51:46.483   642   642 I Layer   : id=12522 Destroyed Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0
-05-02 12:51:46.499 11075 11182 W InputDispatcher: Letterbox_top_ActivityRecord{209ad62 u0 dev.smartrobot.bevy_app/.MainActivity t11} has FLAG_SLIPPERY. Please report this in b/157929241
-05-02 12:51:46.539 11075 11104 I ActivityManager: Killing 22189:dev.smartrobot.bevy_app/u0a16 (adj 850): remove task:remove-task
-05-02 12:51:46.539 11075 11104 D ActivityManager: [SD] user menu kill listen remove action name:dev.smartrobot.bevy_app uid:10016
-05-02 12:51:46.747 11075 13473 I WindowManager: WIN DEATH: Window{e21531b u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}
-05-02 12:51:46.747 11075 13473 W InputManager-JNI: Input channel object 'e21531b dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity (client)' was disposed without first being remov
-05-02 12:51:46.749   642   642 I Layer   : id=12518 removeFromCurrentState e21531b dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0 (97)
-05-02 12:51:46.749   642   642 I SurfaceFlinger: id=12518 Removed e21531b dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0 (97)
-05-02 12:51:46.749   642   642 I Layer   : id=12518 Destroyed e21531b dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0
-05-02 12:51:46.750 11075 12912 I ActivityTaskManager: Removing activity ActivityRecord{209ad62 u0 dev.smartrobot.bevy_app/.MainActivity t11 f}}(appDied)  from stack callers=com.android.serve
-05-02 12:51:46.751 11075 12912 W InputManager-JNI: Input channel object 'Letterbox_left_ActivityRecord{209ad62 u0 dev.smartrobot.bevy_app/.MainActivity t11} (client)' was disposed without fi
-05-02 12:51:46.752 11075 12912 W InputManager-JNI: Input channel object 'Letterbox_top_ActivityRecord{209ad62 u0 dev.smartrobot.bevy_app/.MainActivity t11} (client)' was disposed without fir
-05-02 12:51:46.752 11075 12912 W InputManager-JNI: Input channel object 'Letterbox_right_ActivityRecord{209ad62 u0 dev.smartrobot.bevy_app/.MainActivity t11} (client)' was disposed without f
-05-02 12:51:46.752 11075 12912 W InputManager-JNI: Input channel object 'Letterbox_bottom_ActivityRecord{209ad62 u0 dev.smartrobot.bevy_app/.MainActivity t11} (client)' was disposed without
-05-02 12:51:46.755 11075 11110 W UsageStatsService: Unexpected activity event reported! (dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity event : 23 instanceId : 268146660)
-05-02 12:51:46.766   642   642 I Layer   : id=12510 removeFromCurrentState ActivityRecord{209ad62 u0 dev.smartrobot.bevy_app/.MainActivity t11}#0 (97)
-05-02 12:51:46.766   642   642 I SurfaceFlinger: id=12510 Removed ActivityRecord{209ad62 u0 dev.smartrobot.bevy_app/.MainActivity t11}#0 (97)
-05-02 12:51:46.766   642   642 I Layer   : id=12510 Destroyed ActivityRecord{209ad62 u0 dev.smartrobot.bevy_app/.MainActivity t11}#0
-05-02 12:52:12.058 11075 11353 I Pageboost: start alp : dev.smartrobot.bevy_app
-05-02 12:52:12.058 11075 11356 I Pageboost: alp for : dev.smartrobot.bevy_app , 0
-05-02 12:52:12.059  2652 22917 E pageboostd: alp start : app devsmartrobotbevy_app
-05-02 12:52:12.061 11075 11353 D ActivityTaskManager: request preloading for newly launching app : dev.smartrobot.bevy_app.MainActivity
-05-02 12:52:12.063 11394 11394 D StartingSurfaceDrawer: preloadSplashScreenAppIcon dev.smartrobot.bevy_app
-05-02 12:52:12.064  2652 22917 E pageboostd: devsmartrobotbevy_app, amt 33677312 scnt 3 fcnt 0
-05-02 12:52:12.065  2652 22917 E pageboostd: devsmartrobotbevy_app, amt 0 scnt 0 fcnt 6
-05-02 12:52:12.065  2652 22917 E pageboostd: alp end : app devsmartrobotbevy_app data_amount 33677312
-05-02 12:52:12.071 11394 11450 I AppIconSolution: return the original icon because tray option is set to None for dev.smartrobot.bevy_app, isNight = true
-05-02 12:52:12.080 11075 11112 I ActivityManager: Start proc 22918:dev.smartrobot.bevy_app/u0a16 for activelaunch {dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}
-05-02 12:52:12.080 11075 11112 D ActivityManager: [SecIpm] it's a ML_TYPE_EMPTYPROCESS protected process dev.smartrobot.bevy_app
-05-02 12:52:12.113 22918 22918 E USNET   : USNET: appName: dev.smartrobot.bevy_app
-05-02 12:52:12.122 11075 13473 I ActivityManager: DSS OFF for dev.smartrobot.bevy_app
-05-02 12:52:12.126 11075 13473 D ActivityManager: attachApplicationLocked() app=ProcessRecord{570b4f6 22918:dev.smartrobot.bevy_app/u0a16} app.isolatedEntryPoint=null instr2=null
-05-02 12:52:12.134 22918 22918 D ActivityThread: handleBindApplication()++ app=dev.smartrobot.bevy_app
-05-02 12:52:12.147 11902 11977 I AppIconSolution: return the original icon because tray option is set to None for dev.smartrobot.bevy_app, isNight = true
-05-02 12:52:12.147 11902 11977 I LauncherActivityInfo: packageName: dev.smartrobot.bevy_app, useThemeIcon: true, height: 896, width: 896, density: 640
-05-02 12:52:12.147 11075 13473 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity
-05-02 12:52:12.148 11075 13473 D ActivityTaskManager: TaskLaunchParamsModifier:task=null activity=ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity display-from-option=0 displa
-05-02 12:52:12.148 11075 13473 D [secipm]: mSecIpmManager Preload dev.smartrobot.bevy_app dex files
-05-02 12:52:12.149 11075 13473 D ActivityTaskManager: TaskLaunchParamsModifier:task=null activity=ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t-1} display-from-option=0 d
-05-02 12:52:12.149 11075 12490 D PkgPredictorService-IpmAdcpController: create a new DexPreloadTask pkg:dev.smartrobot.bevy_app  path:/data/app/~~rWukgG_qx0bzTg9Hp-QDqA==/dev.smartrobot.bevy
-05-02 12:52:12.150 11075 13473 D ActivityTaskManager: TaskLaunchParamsModifier:task=Task{d20e593 #12 type=standard A=10016:dev.smartrobot.bevy_app U=0 visible=false mode=fullscreen transluce
-05-02 12:52:12.152   642   658 I SurfaceFlinger: id=12565 createSurf (0x0),-1 flag=80004, ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t12}#0
-05-02 12:52:12.154 11394 11449 D StartingSurfaceDrawer: addSplashScreen dev.smartrobot.bevy_app theme=7f100220 task=12 suggestType=1
-05-02 12:52:12.158   642   658 I SurfaceFlinger: id=12566 createSurf (0x0),-1 flag=80004, a56cce Splash Screen dev.smartrobot.bevy_app#0
-05-02 12:52:12.158 11075 11075 I Pageboost: package dev.smartrobot.bevy_app
-05-02 12:52:12.161 11075 13473 V WindowManager: Relayout Window{a56cce u0 Splash Screen dev.smartrobot.bevy_app}: viewVisibility=0 req=1440x3040 d0
-05-02 12:52:12.161   642   658 I SurfaceFlinger: id=12567 createSurf (1x1),-3 flag=40004, Splash Screen dev.smartrobot.bevy_app$_11394#0
-05-02 12:52:12.162 11075 13473 D WindowManager: makeSurface duration=1 name=Splash Screen dev.smartrobot.bevy_app$_11394
-05-02 12:52:12.166 11075 13473 D MARsPolicyManager: onPackageResumedFG pkgName = dev.smartrobot.bevy_app, userId = 0
-05-02 12:52:12.167 11075 13473 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t12}
-05-02 12:52:12.167 11075 13473 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t12}
-05-02 12:52:12.168 11075 13473 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t12}
-05-02 12:52:12.168 11075 13473 D SGM:PkgDataHelper: notifyAppCreate(), pkgName: dev.smartrobot.bevy_app, userId: 0, sendRet: true
-05-02 12:52:12.168 11075 11226 D SGM:GameManager: onLooperPrepared(), msg: MSG_APP_CREATE, pkgName: dev.smartrobot.bevy_app, userId: 0
-05-02 12:52:12.170 11075 13473 D SGM:GameManager:   sendRunningComponentFocus(), pkgName: dev.smartrobot.bevy_app, userId: 0
-05-02 12:52:12.170 11075 11226 D SGM:GameManager: onLooperPrepared(), msg: MSG_TASK_FOCUSED, pkgName: dev.smartrobot.bevy_app, userId: 0
-05-02 12:52:12.170 11075 11226 D SGM:GameManager:   handleTaskFocused(), pkgName: dev.smartrobot.bevy_app, userID:0
-05-02 12:52:12.170 11075 11226 D SGM:GameManager:   handleResume(). pkgName: dev.smartrobot.bevy_app, userId: 0, isTunableApp: null
-05-02 12:52:12.170 11075 11226 D SGM:GameManager: notifyFocusInOut(). of pkg: dev.smartrobot.bevy_app, type: 4, isMinimized: false, isTunableApp: false, userId: 0
-05-02 12:52:12.173 11075 11104 V ActivityManager: Changed top to ProcessRecord{570b4f6 22918:dev.smartrobot.bevy_app/u0a16}
-05-02 12:52:12.183 11075 12912 D WindowManager: finishDrawingWindow: Window{a56cce u0 Splash Screen dev.smartrobot.bevy_app} mDrawState=DRAW_PENDING
-05-02 12:52:12.185 11075 11105 D WindowManager: createAnimationAdapter(): container=Task{d20e593 #12 type=standard A=10016:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucen
-05-02 12:52:12.187 11075 11105 D WindowManager:         Add container=Task{d20e593 #12 type=standard A=10016:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
-05-02 12:52:12.193 11075 11105 I WindowManager: container=Task{d20e593 #12 type=standard A=10016:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
-05-02 12:52:12.193 11075 11105 I WindowManager:   taskInfo=TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.categ
-05-02 12:52:12.199 11075 11104 I GameSDK@LifeCycle: noteResumeComponent(): package name  : dev.smartrobot.bevy_app
-05-02 12:52:12.200 11075 11104 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.android.server.ssrm.fgapps.GameAppU
-05-02 12:52:12.200 11075 11104 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-02 12:52:12.200 11075 11104 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.android.server.ssrm.SortingMachine.
-05-02 12:52:12.200 11075 11104 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-02 12:52:12.200 11075 11104 D SGM:GameManager: noteResumeComponent(), received pkgName: dev.smartrobot.bevy_app, userId: 0
-05-02 12:52:12.201 11075 11226 D SGM:GameManager: onLooperPrepared(), msg: MSG_APP_RESUME, pkgName: dev.smartrobot.bevy_app, userid: 0
-05-02 12:52:12.201 11075 11226 D SGM:GameManager:   handleResume(). pkgName: dev.smartrobot.bevy_app, userId: 0, isTunableApp: null
-05-02 12:52:12.201 11075 11226 D SGM:GameManager: notifyFocusInOut(). of pkg: dev.smartrobot.bevy_app, type: 4, isMinimized: false, isTunableApp: false, userId: 0
-05-02 12:52:12.203 11075 11104 D WindowManager:         container=Task{d20e593 #12 type=standard A=10016:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
-05-02 12:52:12.204 22918 22918 V GraphicsEnvironment: ANGLE Developer option for 'dev.smartrobot.bevy_app' set to: 'default'
-05-02 12:52:12.207 22918 22918 D LoadedApk: LoadedApk::makeApplication() appContext.mOpPackageName=dev.smartrobot.bevy_app appContext.mBasePackageName=dev.smartrobot.bevy_app
-05-02 12:52:12.213   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd70030 | 0100 | RGBA_8888    |    0.0    0.0 1440.0 3040.0 |    0    0 1440 3040 | Splash Screen dev.smartrobot.bevy_app$
-05-02 12:52:12.305 22918 22918 I GameActivity: Looking for library libsmartrobot_bevy.so
-05-02 12:52:12.305 22918 22918 I GameActivity: Found library libsmartrobot_bevy.so. Loading...
-05-02 12:52:12.318 22918 22959 D vulkan  : searching for layers in '/data/app/~~rWukgG_qx0bzTg9Hp-QDqA==/dev.smartrobot.bevy_app-3I1-EGLe_pX_7g9Hkmri0Q==/lib/arm64'
-05-02 12:52:12.318 22918 22959 D vulkan  : searching for layers in '/data/app/~~rWukgG_qx0bzTg9Hp-QDqA==/dev.smartrobot.bevy_app-3I1-EGLe_pX_7g9Hkmri0Q==/base.apk!/lib/arm64-v8a'
-05-02 12:52:12.327 11075 11444 D MdnieScenarioControlService:  packageName : dev.smartrobot.bevy_app    className : dev.smartrobot.bevy_app.MainActivity
-05-02 12:52:12.409 11075 11308 W SemWifiTransportLayerUtils: getApplicationCategory - IOException dev.smartrobot.bevy_app
-05-02 12:52:12.409 11075 11308 W System.err: java.io.FileNotFoundException: https://play.google.com/store/apps/details?id=dev.smartrobot.bevy_app&hl=en
-05-02 12:52:12.677 22918 22918 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: ignored. pkg=dev.smartrobot.bevy_app parent=null callers=com.android.internal.policy.DecorView.setVisibilit
-05-02 12:52:12.688   642  2162 I SurfaceFlinger: id=12573 createSurf (0x0),-1 flag=80004, 12eb1a7 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0
-05-02 12:52:12.705 11075 12912 V WindowManager: Relayout Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: viewVisibility=0 req=1440x3040 d0
-05-02 12:52:12.705   642  2162 I SurfaceFlinger: id=12574 createSurf (1x1),-3 flag=40004, dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_22918#0
-05-02 12:52:12.706 11075 12912 D WindowManager: makeSurface duration=1 name=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_22918
-05-02 12:52:12.707 11075 12912 V WindowManager: Changing focus from null to Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} displayId=0 Callers=com.android.se
-05-02 12:52:12.707 11075 12912 D MARsPolicyManager: onPackageResumedFG pkgName = dev.smartrobot.bevy_app, userId = 0
-05-02 12:52:12.715   642  3090 I SurfaceFlinger: id=12577 createSurf (0x0),-1 flag=20004, Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0
-05-02 12:52:12.715   642  2162 I SurfaceFlinger: id=12578 createSurf (0x0),-1 flag=80004, SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#0
-05-02 12:52:12.716   642  2162 I SurfaceFlinger: id=12579 createSurf (0x0),-1 flag=40400, SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0(BLAST)#0
-05-02 12:52:12.717   642  2162 I SurfaceFlinger: id=12580 createSurf (0x0),-1 flag=20404, Background for SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#
-05-02 12:52:12.729 11075 12912 D InputDispatcher: Focus request (0): 12eb1a7 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity but waiting because NOT_VISIBLE
-05-02 12:52:12.775 22918 22968 I BufferQueueProducer: [SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#1(BLAST Consumer)1](id:598600000001,api:1,p:22918,
-05-02 12:52:12.783 22918 22968 I BufferQueueProducer: [SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#1(BLAST Consumer)1](id:598600000001,api:1,p:22918,
-05-02 12:52:12.785 11075 12912 D WindowManager: finishDrawingWindow: Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} mDrawState=DRAW_PENDING
-05-02 12:52:12.786 11075 11105 I WindowManager: Reparenting to leash, surface=Surface(name=12eb1a7 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0xcc3003e, leashParent=Surfa
-05-02 12:52:12.786   642  2162 I SurfaceFlinger: id=12581 createSurf (0x0),-1 flag=24000, Surface(name=12eb1a7 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0xcc3003e - anim
-05-02 12:52:12.787 11075 11105 D WindowManager: makeSurface duration=1 leash=Surface(name=Surface(name=12eb1a7 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0xcc3003e - anim
-05-02 12:52:12.788 11075 11101 I PkgPredictorService-SecIpmManagerServiceImpl: reportToNAP uid:10016 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity thisTime:640
-05-02 12:52:12.789 11075 11101 I ActivityTaskManager: Displayed dev.smartrobot.bevy_app/.MainActivity: +640ms
-05-02 12:52:12.789 11075 11101 I Pageboost: Launch time gathered : pid 22918 dev.smartrobot.bevy_app 640
-05-02 12:52:12.794 11075 11342 D InputDispatcher: Focus entered window (0): 12eb1a7 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity
-05-02 12:52:12.796 22918 22918 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=21, host=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity, from=android.view.Inset
-05-02 12:52:12.797 22918 22918 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=20, host=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity, from=android.view.Inset
-05-02 12:52:12.798   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd8af10 | 0100 | RGBA_8888    |    0.0    0.0 1440.0  114.0 |    0    0 1440  114 | dev.smartrobot.bevy_app/dev.smartrobot
-05-02 12:52:12.798   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd70030 | 0100 | RGBA_8888    |    0.0    0.0 1440.0 3040.0 |    0    0 1440 3040 | Splash Screen dev.smartrobot.bevy_app$
-05-02 12:52:12.800 22918 22918 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=1, host=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity, from=android.view.Insets
-05-02 12:52:12.800 11075 13473 V WindowManager: Relayout Window{a56cce u0 Splash Screen dev.smartrobot.bevy_app}: viewVisibility=8 req=1440x3040 d0
-05-02 12:52:12.800 11075 13473 I WindowManager: Reparenting to leash, surface=Surface(name=a56cce Splash Screen dev.smartrobot.bevy_app)/@0x82871fa, leashParent=Surface(name=ActivityRecord{e
-05-02 12:52:12.800 22918 22918 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=0, host=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity, from=android.view.Insets
-05-02 12:52:12.801   642  2162 I SurfaceFlinger: id=12582 createSurf (0x0),-1 flag=24000, Surface(name=a56cce Splash Screen dev.smartrobot.bevy_app)/@0x82871fa - animation-leash of window_an
-05-02 12:52:12.801 11075 13473 D WindowManager: makeSurface duration=1 leash=Surface(name=Surface(name=a56cce Splash Screen dev.smartrobot.bevy_app)/@0x82871fa - animation-leash of window_an
-05-02 12:52:12.806 11075 11489 D InsetsSourceProvider: updateVisibility: serverVisible=true, clientVisible=false, source=InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,3040][1440,3040]
-05-02 12:52:12.806 11075 11489 D InsetsSourceProvider: updateVisibility: serverVisible=true, clientVisible=false, source=InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][1440,114], mVisib
-05-02 12:52:12.807 11075 12904 I WindowManager: Cancelling animation restarting=false, leash=Surface(name=Surface(name=12eb1a7 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@
-05-02 12:52:12.807 11075 12904 I WindowManager: Reparenting to original parent: Surface(name=ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t12})/@0x70e2e9f, destroy=false,
-05-02 12:52:12.808 11075 12904 W InputManager-JNI: Input channel object 'a56cce Splash Screen dev.smartrobot.bevy_app (client)' was disposed without first being removed with the input manage
-05-02 12:52:12.813   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd8af10 | 0100 | RGBA_8888    |    0.0    0.0 1440.0  114.0 |    0    0 1440  114 | dev.smartrobot.bevy_app/dev.smartrobot
-05-02 12:52:12.818 11075 11105 I WindowManager: Reparenting to original parent: Surface(name=ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t12})/@0x70e2e9f, destroy=true, s
-05-02 12:52:12.819 11075 11105 E WindowManager: win=Window{a56cce u0 Splash Screen dev.smartrobot.bevy_app EXITING} destroySurfaces: appStopped=false win.mWindowRemovalAllowed=true win.mRemo
-05-02 12:52:12.819 11075 11105 I WindowManager: Destroying surface Surface(name=Splash Screen dev.smartrobot.bevy_app$_11394)/@0xf7ae911 called by com.android.server.wm.WindowStateAnimator.d
-05-02 12:52:12.823 11075 11489 V WindowManager: Relayout Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: viewVisibility=0 req=1440x3040 d0
-05-02 12:52:12.827   642   642 I Layer   : id=12581 removeFromCurrentState Surface(name=12eb1a7 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0xcc3003e - animation-leash of
-05-02 12:52:12.827   642   642 I Layer   : id=12567 removeFromCurrentState Splash Screen dev.smartrobot.bevy_app$_11394#0 (111)
-05-02 12:52:12.827   642   642 I Layer   : id=12566 removeFromCurrentState a56cce Splash Screen dev.smartrobot.bevy_app#0 (111)
-05-02 12:52:12.827   642   642 I Layer   : id=12582 removeFromCurrentState Surface(name=a56cce Splash Screen dev.smartrobot.bevy_app)/@0x82871fa - animation-leash of window_animation#0 (111)
-05-02 12:52:12.827   642   642 I SurfaceFlinger: id=12566 Removed a56cce Splash Screen dev.smartrobot.bevy_app#0 (111)
-05-02 12:52:12.828   642   642 I SurfaceFlinger: id=12567 Removed Splash Screen dev.smartrobot.bevy_app$_11394#0 (111)
-05-02 12:52:12.828   642   642 I SurfaceFlinger: id=12582 Removed Surface(name=a56cce Splash Screen dev.smartrobot.bevy_app)/@0x82871fa - animation-leash of window_animation#0 (111)
-05-02 12:52:12.830   642   642 I Layer   : id=12582 Destroyed Surface(name=a56cce Splash Screen dev.smartrobot.bevy_app)/@0x82871fa - animation-leash of window_animation#0
-05-02 12:52:12.830   642   642 I Layer   : id=12566 Destroyed a56cce Splash Screen dev.smartrobot.bevy_app#0
-05-02 12:52:12.830   642   642 I Layer   : id=12567 Destroyed Splash Screen dev.smartrobot.bevy_app$_11394#0
-05-02 12:52:12.833   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd8af10 | 0100 | RGBA_8888    |    0.0    0.0 1440.0  114.0 |    0    0 1440  114 | dev.smartrobot.bevy_app/dev.smartrobot
-05-02 12:52:12.835 22918 22918 I ViewRootImpl@3af6dee[MainActivity]: updateBoundsLayer: t = android.view.SurfaceControl$Transaction@1041320 sc = Surface(name=Bounds for - dev.smartrobot.bevy
-05-02 12:52:12.848 11075 13473 D WindowManager: finishDrawingWindow: Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} mDrawState=HAS_DRAWN
-05-02 12:52:12.878 11075 13473 V WindowManager: Relayout Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: viewVisibility=0 req=1440x2926 d0
-05-02 12:52:12.957 11075 11444 D MdnieScenarioControlService:  packageName : dev.smartrobot.bevy_app    className : dev.smartrobot.bevy_app.MainActivity
-05-02 12:52:13.200   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd8b270 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 3040.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:13.288 22918 22966 I BufferQueueProducer: [SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#1(BLAST Consumer)1](id:598600000001,api:1,p:22918,
-05-02 12:52:13.318 11075 11104 D SGM:GameManager: identifyForegroundApp. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0
-05-02 12:52:13.318 11075 11104 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-02 12:52:14.583 11075 11489 D MediaSessionService: dispatchVolumeKeyEvent, pkg=dev.smartrobot.bevy_app, opPkg=dev.smartrobot.bevy_app, pid=22918, uid=10016, asSystem=true, event=KeyEvent
-05-02 12:52:14.661 11075 11489 D MediaSessionService: dispatchVolumeKeyEvent, pkg=dev.smartrobot.bevy_app, opPkg=dev.smartrobot.bevy_app, pid=22918, uid=10016, asSystem=true, event=KeyEvent
-05-02 12:52:14.668   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd96550 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:16.247 11075 12912 D MediaSessionService: dispatchVolumeKeyEvent, pkg=dev.smartrobot.bevy_app, opPkg=dev.smartrobot.bevy_app, pid=22918, uid=10016, asSystem=true, event=KeyEvent
-05-02 12:52:16.500 11075 11489 D MediaSessionService: dispatchVolumeKeyEvent, pkg=dev.smartrobot.bevy_app, opPkg=dev.smartrobot.bevy_app, pid=22918, uid=10016, asSystem=true, event=KeyEvent
-05-02 12:52:16.546 11075 11489 D MediaSessionService: dispatchVolumeKeyEvent, pkg=dev.smartrobot.bevy_app, opPkg=dev.smartrobot.bevy_app, pid=22918, uid=10016, asSystem=true, event=KeyEvent
-05-02 12:52:16.598 11075 11489 D MediaSessionService: dispatchVolumeKeyEvent, pkg=dev.smartrobot.bevy_app, opPkg=dev.smartrobot.bevy_app, pid=22918, uid=10016, asSystem=true, event=KeyEvent
-05-02 12:52:16.648 11075 11342 D MediaSessionService: dispatchVolumeKeyEvent, pkg=dev.smartrobot.bevy_app, opPkg=dev.smartrobot.bevy_app, pid=22918, uid=10016, asSystem=true, event=KeyEvent
-05-02 12:52:16.679   642  2162 I SurfaceFlinger: id=12581 Removed Surface(name=12eb1a7 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0xcc3003e - animation-leash of starting_
-05-02 12:52:16.687   642   642 I Layer   : id=12581 Destroyed Surface(name=12eb1a7 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0xcc3003e - animation-leash of starting_reve
-05-02 12:52:16.700 11075 11342 D MediaSessionService: dispatchVolumeKeyEvent, pkg=dev.smartrobot.bevy_app, opPkg=dev.smartrobot.bevy_app, pid=22918, uid=10016, asSystem=true, event=KeyEvent
-05-02 12:52:16.711 11075 11342 D MediaSessionService: dispatchVolumeKeyEvent, pkg=dev.smartrobot.bevy_app, opPkg=dev.smartrobot.bevy_app, pid=22918, uid=10016, asSystem=true, event=KeyEvent
-05-02 12:52:18.169 22918 23068 D ProfileInstaller: Installing profile for dev.smartrobot.bevy_app
-05-02 12:52:18.229 11075 16140 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.android.server.ssrm.SortingMachine.
-05-02 12:52:18.229 11075 16140 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-02 12:52:18.391 11075 13473 D MediaSessionService: dispatchVolumeKeyEvent, pkg=dev.smartrobot.bevy_app, opPkg=dev.smartrobot.bevy_app, pid=22918, uid=10016, asSystem=true, event=KeyEvent
-05-02 12:52:18.395 11075 13473 D MediaSessionService: dispatchVolumeKeyEvent, pkg=dev.smartrobot.bevy_app, opPkg=dev.smartrobot.bevy_app, pid=22918, uid=10016, asSystem=true, event=KeyEvent
-05-02 12:52:18.492 11075 11342 D MediaSessionService: dispatchVolumeKeyEvent, pkg=dev.smartrobot.bevy_app, opPkg=dev.smartrobot.bevy_app, pid=22918, uid=10016, asSystem=true, event=KeyEvent
-05-02 12:52:18.497 11075 11342 D MediaSessionService: dispatchVolumeKeyEvent, pkg=dev.smartrobot.bevy_app, opPkg=dev.smartrobot.bevy_app, pid=22918, uid=10016, asSystem=true, event=KeyEvent
-05-02 12:52:18.966 11075 13473 D MediaSessionService: dispatchVolumeKeyEvent, pkg=dev.smartrobot.bevy_app, opPkg=dev.smartrobot.bevy_app, pid=22918, uid=10016, asSystem=true, event=KeyEvent
-05-02 12:52:19.136 11075 13473 D MediaSessionService: dispatchVolumeKeyEvent, pkg=dev.smartrobot.bevy_app, opPkg=dev.smartrobot.bevy_app, pid=22918, uid=10016, asSystem=true, event=KeyEvent
-05-02 12:52:22.021   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd85cf0 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:24.966 11075 11102 D WindowManager: requestTransientBars: swipeTarget=Window{f94bfc8 u0 NavigationBar0}, controlTarget=Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.be
-05-02 12:52:24.990   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd85cf0 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:25.023   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd9be30 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:26.099 11075 16140 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.android.server.ssrm.SortingMachine.
-05-02 12:52:26.099 11075 16140 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-02 12:52:27.246   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd9be30 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:30.954 11075 11102 D WindowManager: requestTransientBars: swipeTarget=Window{f94bfc8 u0 NavigationBar0}, controlTarget=Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.be
-05-02 12:52:31.002   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd9be30 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:33.242   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd96550 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:34.704 11075 11102 D WindowManager: requestTransientBars: swipeTarget=Window{f94bfc8 u0 NavigationBar0}, controlTarget=Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.be
-05-02 12:52:34.744   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd85cf0 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:36.983   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd96550 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:37.902 11075 11102 D WindowManager: requestTransientBars: swipeTarget=Window{f94bfc8 u0 NavigationBar0}, controlTarget=Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.be
-05-02 12:52:37.950   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd9be30 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:40.190   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd96550 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:40.933 11075 11102 D WindowManager: requestTransientBars: swipeTarget=Window{f94bfc8 u0 NavigationBar0}, controlTarget=Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.be
-05-02 12:52:40.973   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd85cf0 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:43.213   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd9be30 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:45.035 11075 11102 D WindowManager: requestTransientBars: swipeTarget=Window{f94bfc8 u0 NavigationBar0}, controlTarget=Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.be
-05-02 12:52:45.082   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd85cf0 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:47.321   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd9be30 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:48.374 11075 11102 D WindowManager: requestTransientBars: swipeTarget=Window{258a9 u0 StatusBar}, controlTarget=Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.
-05-02 12:52:48.423   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd9be30 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:49.441 11902 11902 I RecentsView: onGestureAnimationStart, runningTaskInfo : TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.
-05-02 12:52:49.446 11902 11902 I RecentsView: showCurrentTask : TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.
-05-02 12:52:49.452 11075 11801 I InputDispatcher: Monitor swipe-up (server) is stealing touch from [12eb1a7 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity (server), ]
-05-02 12:52:49.452 11902 11902 I RecentsView: onGestureAnimationStart, runningTaskInfo : TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.
-05-02 12:52:49.453 11902 11902 I RecentsView: showCurrentTask : TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.
-05-02 12:52:49.453 11075 11801 D WindowManager: Moved rootTask=Task{5311c4d #1 type=home ?? U=0 visible=false mode=fullscreen translucent=true sz=1} behind rootTask=Task{d20e593 #12 type=sta
-05-02 12:52:49.458 11075 11801 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t12}
-05-02 12:52:49.486 11902 17009 I AppIconSolution: return the original icon because tray option is set to None for dev.smartrobot.bevy_app, isNight = true
-05-02 12:52:49.486 11902 17009 I LauncherActivityInfo: packageName: dev.smartrobot.bevy_app, useThemeIcon: true, height: 896, width: 896, density: 560
-05-02 12:52:49.495 11075 11801 V WindowManager: Changing focus from Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} to null displayId=0 Callers=com.android.se
-05-02 12:52:49.495 11075 11801 D MARsPolicyManager: onPackageResumedFG pkgName = dev.smartrobot.bevy_app, userId = 0
-05-02 12:52:49.506 11075 11801 D InputDispatcher: Focus left window (0): 12eb1a7 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity
-05-02 12:52:49.532   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd9be30 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    7  125 1433 3021 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:49.606 11075 11444 D MdnieScenarioControlService:  packageName : dev.smartrobot.bevy_app    className : dev.smartrobot.bevy_app.MainActivity
-05-02 12:52:49.880   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd96550 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |   43  179 1397 2929 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:50.451   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd96550 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2924.0 |  287  583 1152 2339 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 12:52:51.250 11075 13590 D WindowManager: onAnimationFinished(): targetRootTask=Task{5311c4d #1 type=home ?? U=0 visible=false mode=fullscreen translucent=false sz=1} targetActivity=Ac
-05-02 12:52:51.262 11075 13590 V WindowManager: Setting visibility of Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: false, caller=com.android.server.wm.Win
-05-02 12:52:51.271 11075 11104 D SGM:GameManager: notePauseComponent(), received pkgName: dev.smartrobot.bevy_app, userId: 0
-05-02 12:52:51.282 22918 22918 I SurfaceView@f112719: remove() com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f112719 V.E...... ........ 0,0-1440,2926} Surface(name=SurfaceVi
-05-02 12:52:51.282   642   795 I SurfaceFlinger: id=12577 Removed Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0 (102)
-05-02 12:52:51.292   642   642 I Layer   : id=12579 removeFromCurrentState SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0(BLAST)#0 (102)
-05-02 12:52:51.293   642   642 I Layer   : id=12580 removeFromCurrentState Background for SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#0 (102)
-05-02 12:52:51.293   642   642 I Layer   : id=12578 removeFromCurrentState SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#0 (102)
-05-02 12:52:51.293   642   642 I SurfaceFlinger: id=12579 Removed SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0(BLAST)#0 (102)
-05-02 12:52:51.293   642   642 I SurfaceFlinger: id=12580 Removed Background for SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#0 (102)
-05-02 12:52:51.293   642   642 I SurfaceFlinger: id=12578 Removed SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#0 (102)
-05-02 12:52:51.293   642   642 I Layer   : id=12578 Destroyed SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#0
-05-02 12:52:51.293   642   642 I Layer   : id=12580 Destroyed Background for SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#0
-05-02 12:52:51.293   642   642 I Layer   : id=12579 Destroyed SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0(BLAST)#0
-05-02 12:52:51.295 11075 11098 V WindowManager: Relayout Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: viewVisibility=8 req=1440x2926 d0
-05-02 12:52:51.305 11075 11550 E WindowManager: win=Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} destroySurfaces: appStopped=true win.mWindowRemovalAllowed
-05-02 12:52:51.305 11075 11550 I WindowManager: Destroying surface Surface(name=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_22918)/@0x103943b called by com.android.server.w
-05-02 12:52:51.308   642   642 I Layer   : id=12574 removeFromCurrentState dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_22918#0 (100)
-05-02 12:52:51.308   642   642 I Layer   : id=12577 removeFromCurrentState Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0 (100)
-05-02 12:52:51.325   642   642 I SurfaceFlinger: id=12574 Removed dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_22918#0 (100)
-05-02 12:52:51.326   642   642 I Layer   : id=12574 Destroyed dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_22918#0
-05-02 12:52:51.326   642   642 I Layer   : id=12577 Destroyed Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0
-05-02 12:52:51.326 11075 13590 W InputDispatcher: Letterbox_top_ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t12} has FLAG_SLIPPERY. Please report this in b/157929241
-05-02 12:52:52.387 11075 11104 I ActivityManager: Killing 22918:dev.smartrobot.bevy_app/u0a16 (adj 850): remove task:remove-task
-05-02 12:52:52.388 11075 11104 D ActivityManager: [SD] user menu kill listen remove action name:dev.smartrobot.bevy_app uid:10016
-05-02 12:52:52.654 11075 13584 I WindowManager: WIN DEATH: Window{12eb1a7 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}
-05-02 12:52:52.655 11075 13584 W InputManager-JNI: Input channel object '12eb1a7 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity (client)' was disposed without first being remov
-05-02 12:52:52.659 11075 11098 I ActivityTaskManager: Removing activity ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t12 f}}(appDied)  from stack callers=com.android.serve
-05-02 12:52:52.661   642   642 I Layer   : id=12573 removeFromCurrentState 12eb1a7 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0 (98)
-05-02 12:52:52.661   642   642 I SurfaceFlinger: id=12573 Removed 12eb1a7 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0 (98)
-05-02 12:52:52.661 11075 11098 W InputManager-JNI: Input channel object 'Letterbox_left_ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t12} (client)' was disposed without fi
-05-02 12:52:52.662   642   642 I Layer   : id=12573 Destroyed 12eb1a7 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0
-05-02 12:52:52.662 11075 11098 W InputManager-JNI: Input channel object 'Letterbox_top_ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t12} (client)' was disposed without fir
-05-02 12:52:52.663 11075 11098 W InputManager-JNI: Input channel object 'Letterbox_right_ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t12} (client)' was disposed without f
-05-02 12:52:52.663 11075 11098 W InputManager-JNI: Input channel object 'Letterbox_bottom_ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t12} (client)' was disposed without
-05-02 12:52:52.671 11075 11110 W UsageStatsService: Unexpected activity event reported! (dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity event : 23 instanceId : 11977165)
-05-02 12:52:52.678   642   642 I Layer   : id=12565 removeFromCurrentState ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t12}#0 (97)
-05-02 12:52:52.678   642   642 I Layer   : id=12565 removeFromCurrentState ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t12}#0 (97)
-05-02 12:52:52.678   642   642 I SurfaceFlinger: id=12565 Removed ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t12}#0 (97)
-05-02 12:52:52.680   642   642 I Layer   : id=12565 Destroyed ActivityRecord{e6b2a82 u0 dev.smartrobot.bevy_app/.MainActivity t12}#0
-05-02 13:03:05.640 17052 17052 I Finsky  : [2] PackageAddedOrRemovedEventJob.a(62): Received an install/uninstall event for package dev.smartrobot.bevy_app with replacing being true
-05-02 13:03:05.653 17052 17052 I Finsky  : [2] PackageAddedOrRemovedEventJob.a(62): Received an install/uninstall event for package dev.smartrobot.bevy_app with replacing being true
-05-02 13:09:18.452 11075 12482 D PkgPredictorService-IpmNapPreloadController: app:0_&_com.android.settings die, remove from <launchTime:2025-05-02 12:52:12 hour:12 day:6 previous:[dev.smartr
-05-02 13:23:18.915 11075 12482 D PkgPredictorService-IpmNapPreloadController: app:0_&_com.netflix.mediaclient die, remove from <launchTime:2025-05-02 12:52:12 hour:12 day:6 previous:[dev.sma
-05-02 14:16:16.401 16098 16118 I GOS:GameServiceReceiver:  PkgInstallStarted for dev.smartrobot.bevy_app UserID : 0
-05-02 14:16:16.410 17052 17052 I Finsky  : [2] arit.b(85): VerifyApps: Install-time verification requested for package dev.smartrobot.bevy_app, PackageManager id = 5, Verifier id = 65a77bb8-
-05-02 14:16:16.475 16098 27197 I GOS:GameIntentService: onPackageChanged(). extras: Bundle[{changeType=2, userId=0, type=15, packageName=dev.smartrobot.bevy_app}]
-05-02 14:16:16.475 16098 27197 I GOS:GameIntentService: onPackageChanged(). changeType(INSTALL_STARTED), pkgName(dev.smartrobot.bevy_app), UserHandle(0), userId(0), Installed(true)
-05-02 14:16:16.651 17052 27199 I Finsky  : [207] VerifyAppsInstallTask.mh(52): VerifyApps: Anti-malware verification task started for package=dev.smartrobot.bevy_app
-05-02 14:16:17.029 17052 17098 I Finsky  : [113] asam.a(65): VerifyApps: Starting APK Analysis scan for dev.smartrobot.bevy_app.
-05-02 14:16:17.030 17052 17098 I Finsky  : [113] aria.b(182): Scanning package dev.smartrobot.bevy_app contents with client side protections. File: [zFErS3GcMJi1Avk5sje7OxwO5WZ8Iw3YU2gOp7Sc_
-05-02 14:16:17.031 17052 17098 I Finsky  : [113] asam.a(222): VerifyApps: APK Analysis scan finished for dev.smartrobot.bevy_app. Verdict: SAFE
-05-02 14:16:17.707 17052 27253 I Finsky  : [210] arqa.h(68): VerifyApps: Verification package=dev.smartrobot.bevy_app, id=5, response=0, upload_requested=false
-05-02 14:16:17.713 17052 27253 I Finsky  : [210] arps.c(284): VerifyApps: PAM result saving to datastore delayed for package: dev.smartrobot.bevy_app
-05-02 14:16:17.721 17052 27199 I Finsky  : [207] VerifyRequiredSplitTypesInstallTask.mh(49): VerifyApps: Starting required split types check for dev.smartrobot.bevy_app.
-05-02 14:16:17.725 17052 27199 I Finsky  : [207] VerifyRequiredSplitTypesInstallTask.mh(592): VerifyApps: Required split types check successful for dev.smartrobot.bevy_app.
-05-02 14:16:17.740 17052 27199 I Finsky  : [207] VerifyV31SignatureInstallTask.f(146): VerifyApps V31SignatureVerification: Successful verification for the package: dev.smartrobot.bevy_app u
-05-02 14:16:17.754 11075 11143 I PackageManager:           pkg{dev.smartrobot.bevy_app}
-05-02 14:16:17.764 17052 17052 I Finsky  : [2] VerifyInstallTask.mg(75): VerifyApps: Install-time verification complete: id=5, package_name=dev.smartrobot.bevy_app
-05-02 14:16:17.809 11075 11111 I ActivityManager: Force stopping dev.smartrobot.bevy_app appid=10016 user=-1: installPackageLI
-05-02 14:16:17.814 11075 11143 I PackageManager: Update package dev.smartrobot.bevy_app code path from /data/app/~~rWukgG_qx0bzTg9Hp-QDqA==/dev.smartrobot.bevy_app-3I1-EGLe_pX_7g9Hkmri0Q== t
-05-02 14:16:18.101 11075 11143 I MultiUserInstallPolicy: applyInstallPolicyPackageInternalLPw : dev.smartrobot.bevy_app
-05-02 14:16:18.104 11075 11143 I ActivityManager: Force stopping dev.smartrobot.bevy_app appid=10016 user=0: pkg removed
-05-02 14:16:18.128 11075 11154 D OverlayManager: reconcileSettingsForPackage pkgName=dev.smartrobot.bevy_app userId=0
-05-02 14:16:18.128 11075 11154 I OverlayManager: updateOverlaysForTarget() called with: targetPackage = [dev.smartrobot.bevy_app], userId = [0], flags = [2], skipUpdateState = [false]
-05-02 14:16:18.129 12768 12768 I MediaProvider: Invalidating LocalCallingIdentity cache for package dev.smartrobot.bevy_app. Reason: package android.intent.action.PACKAGE_REMOVED
-05-02 14:16:18.129 11075 11110 I SGM:GameManager: PkgUpdateReceiver, onPackageRemoved : dev.smartrobot.bevy_app userHandle : UserHandle{0} userID : 0
-05-02 14:16:18.130 11075 11227 D SGM:GosNotifyThread: notifyPackageChangedToGos(), before send intent to GOS. type:15, changeType: 1, pkgName:dev.smartrobot.bevy_app, userHandleId:0
-05-02 14:16:18.137 11075 11110 D MetaDataCollector: onReceive: done pkgName=dev.smartrobot.bevy_app
-05-02 14:16:18.140 11355 11355 I VvmPkgInstalledRcvr: packageName: dev.smartrobot.bevy_app, systemDialer: com.samsung.android.dialer
-05-02 14:16:18.141 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REMOVED dat=package:dev.smartrobot.bevy_app flg=0x4000
-05-02 14:16:18.142 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REMOVED dat=package:dev.smartrobot.bevy_app flg=0x4000
-05-02 14:16:18.142 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REMOVED dat=package:dev.smartrobot.bevy_app flg=0x4000
-05-02 14:16:18.142 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REMOVED dat=package:dev.smartrobot.bevy_app flg=0x4000
-05-02 14:16:18.143 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REMOVED dat=package:dev.smartrobot.bevy_app flg=0x4000
-05-02 14:16:18.143 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REMOVED dat=package:dev.smartrobot.bevy_app flg=0x4000
-05-02 14:16:18.143 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REMOVED dat=package:dev.smartrobot.bevy_app flg=0x4000
-05-02 14:16:18.143 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REMOVED dat=package:dev.smartrobot.bevy_app flg=0x4000
-05-02 14:16:18.143 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REMOVED dat=package:dev.smartrobot.bevy_app flg=0x4000
-05-02 14:16:18.144 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REMOVED dat=package:dev.smartrobot.bevy_app flg=0x4000
-05-02 14:16:18.145 12496 12536 I PackageInfoManager_FLP: action : ACTION_PACKAGE_REMOVED, packageName = dev.smartrobot.bevy_app
-05-02 14:16:18.145 11394 11394 D TileServices: mUninstallReceiver onReceive = Intent { act=android.intent.action.PACKAGE_REMOVED dat=package:dev.smartrobot.bevy_app flg=0x4000010 (has extras
-05-02 14:16:18.150 11394 11394 D FaceWidgetMusicViewModel: onPackageRemoved() pkg = dev.smartrobot.bevy_app, r = true
-05-02 14:16:18.150 11394 11394 D FaceWidgetMetadataParser: removePackage() key = dev.smartrobot.bevy_app
-05-02 14:16:18.163 11075 11075 D SdpManagerImpl.receiver: On android.intent.action.PACKAGE_REMOVED : DATA = package:dev.smartrobot.bevy_app, UID = 10016, UserId = 0, Is replacing? true
-05-02 14:16:18.196 17052 17052 I Finsky  : [2] mzu.f(7): AIM: AppInfoCacheUpdater -> invalidating apps: [dev.smartrobot.bevy_app]
-05-02 14:16:18.200 17052 17092 I Finsky  : [108] nbr.a(47): AIM: AppInfoManager-Perf > OnDeviceAppInfo > cacheHitCount=0, cacheMissCount=1. Missed  in cache (limit 10) : [dev.smartrobot.bevy
-05-02 14:16:18.217 11075 11154 D OverlayManager: reconcileSettingsForPackage pkgName=dev.smartrobot.bevy_app userId=0
-05-02 14:16:18.217 11075 11154 I OverlayManager: updateOverlaysForTarget() called with: targetPackage = [dev.smartrobot.bevy_app], userId = [0], flags = [0], skipUpdateState = [false]
-05-02 14:16:18.217 11075 11154 I SWT_ThemeManager: dev.smartrobot.bevy_app doesn't have metadata
-05-02 14:16:18.218 12768 12768 I MediaProvider: Invalidating LocalCallingIdentity cache for package dev.smartrobot.bevy_app. Reason: package android.intent.action.PACKAGE_ADDED
-05-02 14:16:18.219 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:dev.smartrobot.bevy_app flg=0x400001
-05-02 14:16:18.220 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:dev.smartrobot.bevy_app flg=0x400001
-05-02 14:16:18.220 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:dev.smartrobot.bevy_app flg=0x400001
-05-02 14:16:18.220 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:dev.smartrobot.bevy_app flg=0x400001
-05-02 14:16:18.220 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:dev.smartrobot.bevy_app flg=0x400001
-05-02 14:16:18.221 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:dev.smartrobot.bevy_app flg=0x400001
-05-02 14:16:18.221 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:dev.smartrobot.bevy_app flg=0x400001
-05-02 14:16:18.221 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:dev.smartrobot.bevy_app flg=0x400001
-05-02 14:16:18.221 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_ADDED dat=package:dev.smartrobot.bevy_app flg=0x400001
-05-02 14:16:18.222 12496 12536 I PackageInfoManager_FLP: action : ACTION_PACKAGE_ADDED, packageName = dev.smartrobot.bevy_app
-05-02 14:16:18.223 11075 11101 D CompanionDeviceManagerService: onPackageModified(packageName = dev.smartrobot.bevy_app)
-05-02 14:16:18.227 13201 13201 I [AirCmd]_RemoteActionManager: onPackageChangeDetected : dev.smartrobot.bevy_app
-05-02 14:16:18.237 11394 11394 D FaceWidgetMetadataParser: updatePackage() dev.smartrobot.bevy_app true
-05-02 14:16:18.237 11394 11394 D FaceWidgetMetadataParser: removePackage() key = dev.smartrobot.bevy_app
-05-02 14:16:18.238 11355 11355 I VvmPkgInstalledRcvr: packageName: dev.smartrobot.bevy_app, systemDialer: com.samsung.android.dialer
-05-02 14:16:18.254 17052 17088 I AppIconSolution: return the original icon because tray option is set to None for dev.smartrobot.bevy_app, isNight = true
-05-02 14:16:18.258 16098 27273 I GOS:GameIntentService: onHandleIntent. GameIntentService. type: 15, pkgName: dev.smartrobot.bevy_app
-05-02 14:16:18.316 11355 11355 D ImsResolver: maybeAddedImsService, packageName: dev.smartrobot.bevy_app
-05-02 14:16:18.344 16098 27273 I GOS:GameIntentService: onPackageChanged(). extras: Bundle[{changeType=1, userId=0, pkgName=dev.smartrobot.bevy_app, type=15, packageName=dev.smartrobot.bevy_
-05-02 14:16:18.344 16098 27273 I GOS:GameIntentService: onPackageChanged(). changeType(REMOVED), pkgName(dev.smartrobot.bevy_app), UserHandle(0), userId(0), Installed(true)
-05-02 14:16:18.416 17052 17098 I AppIconSolution: return the original icon because tray option is set to None for dev.smartrobot.bevy_app, isNight = true
-05-02 14:16:18.472 11075 11075 I Telecom : CarModeTracker: Package dev.smartrobot.bevy_app is not tracked.: SSH.oR@AN0
-05-02 14:16:18.473 11075 11356 I Pageboost: remove app @ runtime : dev.smartrobot.bevy_app
-05-02 14:16:18.489 26238 26238 I Routine@Core[3.5.02.25]: PackageChangedHandler: Should not remove data true dev.smartrobot.bevy_app
-05-02 14:16:18.489 11075 11075 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.samsung.android.game.SemGameManager
-05-02 14:16:18.489 11075 11075 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-02 14:16:18.489 11075 11075 D SGM:SemGameManager: isGamePackage(), pkgName=dev.smartrobot.bevy_app, ret=false
-05-02 14:16:18.491 11075 11308 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.samsung.android.game.SemGameManager
-05-02 14:16:18.491 11075 11308 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-02 14:16:18.491 11075 11308 D SGM:SemGameManager: isGamePackage(), pkgName=dev.smartrobot.bevy_app, ret=false
-05-02 14:16:18.508 11075 11136 E VerityUtils: Failed to measure fs-verity, errno 1: /data/app/~~D_wON2FItWZgp1NajLqWSQ==/dev.smartrobot.bevy_app-h4SNB86nC70Nqw_f_nl6Zw==/base.apk
-05-02 14:16:18.545 11075 11075 I Telecom:SamsungCommonPolicyPackageBroadcastReceiver: action : android.intent.action.PACKAGE_ADDED / packageName : dev.smartrobot.bevy_app
-05-02 14:16:18.552 17052 17052 I Finsky  : [2] mzu.f(7): AIM: AppInfoCacheUpdater -> invalidating apps: [dev.smartrobot.bevy_app]
-05-02 14:16:18.558 11075 11356 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.samsung.android.game.SemGameManager
-05-02 14:16:18.558 11075 11356 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-02 14:16:18.558 11075 11356 D SGM:SemGameManager: isGamePackage(), pkgName=dev.smartrobot.bevy_app, ret=false
-05-02 14:16:18.558 11075 11356 I Pageboost: appinfo : dev.smartrobot.bevy_app 0 0 0 0
-05-02 14:16:18.561 11075 11356 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.samsung.android.game.SemGameManager
-05-02 14:16:18.561 11075 11356 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-02 14:16:18.561 11075 11356 D SGM:SemGameManager: isGamePackage(), pkgName=dev.smartrobot.bevy_app, ret=false
-05-02 14:16:18.561 11075 11356 I Pageboost: Reset this app info : dev.smartrobot.bevy_app
-05-02 14:16:18.561 11075 11356 I Pageboost: db create : CREATE TABLE IF NOT EXISTS devsmartrobotbevy_app (FILENAME TEXT, OFFSET INTEGER, SIZE INTEGER, FORVRAMDISK INTEGER, BITMAP BLOB, uniqu
-05-02 14:16:18.562 11075 11356 I Pageboost: add app to global @ runtime: dev.smartrobot.bevy_app
-05-02 14:16:18.596 26238 26238 I Routine@Core[3.5.02.25]: MetadataLoaderImpl: collectInBackground - packageName:dev.smartrobot.bevy_app
-05-02 14:16:18.597 26238 26238 I Routine@Core[3.5.02.25]: MetadataSyncBacklog: add: null + dev.smartrobot.bevy_app
-05-02 14:16:18.599 11075 11308 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.samsung.android.game.SemGameManager
-05-02 14:16:18.599 11075 11308 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-02 14:16:18.599 11075 11308 D SGM:SemGameManager: isGamePackage(), pkgName=dev.smartrobot.bevy_app, ret=false
-05-02 14:16:18.658 26238 26238 I Routine@Core[3.5.02.25]: MetadataLoaderImpl: collectInBackground - packageName:dev.smartrobot.bevy_app
-05-02 14:16:18.658 26238 26238 I Routine@Core[3.5.02.25]: MetadataSyncBacklog: add: dev.smartrobot.bevy_app + dev.smartrobot.bevy_app
-05-02 14:16:18.672 17052 17132 I Finsky  : [119] nbr.a(47): AIM: AppInfoManager-Perf > OnDeviceAppInfo > cacheHitCount=0, cacheMissCount=1. Missed  in cache (limit 10) : [dev.smartrobot.bevy
-05-02 14:16:18.708 11075 11136 E VerityUtils: Failed to measure fs-verity, errno 1: /data/app/~~D_wON2FItWZgp1NajLqWSQ==/dev.smartrobot.bevy_app-h4SNB86nC70Nqw_f_nl6Zw==/base.apk
-05-02 14:16:18.747 26238 26238 I Routine@Core[3.5.02.25]: MetadataLoaderJobService: onStartJob: collectPackageInBG - dev.smartrobot.bevy_app
-05-02 14:16:18.754 26238 26238 I Routine@Core[3.5.02.25]: MetadataLoaderJobService: packageName : dev.smartrobot.bevy_app, forced : true
-05-02 14:16:18.763 17052 17092 I AppIconSolution: return the original icon because tray option is set to None for dev.smartrobot.bevy_app, isNight = true
-05-02 14:16:18.774 26238 27374 I Routine@Core[3.5.02.25]: MetadataLoadManager: collect: dev.smartrobot.bevy_app
-05-02 14:16:18.774 26238 27374 I Routine@Core[3.5.02.25]: MetadataLoadManager: collectWithCollectors - dev.smartrobot.bevy_app
-05-02 14:16:18.804 27287 27287 I ResourceOverlayService_0: onStartCommand: Package changed intent. Data = package:dev.smartrobot.bevy_app
-05-02 14:16:18.806 27287 27287 I ResourceOverlayService_0: onStartCommand: Package changed intent. Data = package:dev.smartrobot.bevy_app
-05-02 14:16:18.806 27287 27287 E ResourceOverlayService_0: requestPendingAction sending bundle Bundle[{changed_package=dev.smartrobot.bevy_app, pending_action=com.samsung.android.localeoverl
-05-02 14:16:18.808 27287 27376 I LocaleOverlayManager_0: handleMessage false msg { when=-1ms what=1 obj=Bundle[{changed_package=dev.smartrobot.bevy_app, pending_action=com.samsung.android.lo
-05-02 14:16:18.808 27287 27376 I LocaleOverlayManager_0: handleMessage false msg { when=0 what=3 obj=Bundle[{changed_package=dev.smartrobot.bevy_app, is_package_added=false, pending_action=c
-05-02 14:16:18.808 27287 27376 I LocaleOverlayManager_0: handleMessage: MESSAGE_PARSE_SINGLE_PACKAGE. PackageName = [dev.smartrobot.bevy_app], Added = [false]
-05-02 14:16:18.848 26238 26238 I Routine@Core[3.5.02.25]: MetadataLoaderJobService: metadataLoadingFinished: collectPackageInBG - dev.smartrobot.bevy_app
-05-02 14:16:18.907 27287 27287 E ResourceOverlayService_0: requestPendingAction sending bundle Bundle[{changed_package=dev.smartrobot.bevy_app, pending_action=com.samsung.android.localeoverl
-05-02 14:16:18.908 27287 27376 I LocaleOverlayManager_0: handleMessage false msg { when=-1ms what=1 obj=Bundle[{changed_package=dev.smartrobot.bevy_app, pending_action=com.samsung.android.lo
-05-02 14:16:18.909 27287 27376 I LocaleOverlayManager_0: handleMessage false msg { when=0 what=3 obj=Bundle[{changed_package=dev.smartrobot.bevy_app, is_package_added=true, pending_action=co
-05-02 14:16:18.909 27287 27376 I LocaleOverlayManager_0: handleMessage: MESSAGE_PARSE_SINGLE_PACKAGE. PackageName = [dev.smartrobot.bevy_app], Added = [true]
-05-02 14:16:18.915 27287 27376 I LocaleOverlayManager_0: hasZippedOverlaysPackage: dev.smartrobot.bevy_app -- false
-05-02 14:16:18.915 27287 27376 I LocaleOverlayManager_0: Package is not supported for Locale Overlays: dev.smartrobot.bevy_app
-05-02 14:16:18.915 27287 27376 I LocaleOverlayManager_0: cleanLocaleOverlayForDisable: com.samsung.android.localeoverlaymanager.OverlayManager@e37043a, packageName : dev.smartrobot.bevy_app
-05-02 14:16:18.927 11075 11308 W SemWifiTransportLayerUtils: getApplicationCategory - IOException dev.smartrobot.bevy_app
-05-02 14:16:18.927 11075 11308 W System.err: java.io.FileNotFoundException: https://play.google.com/store/apps/details?id=dev.smartrobot.bevy_app&hl=en
-05-02 14:16:19.046  9147 27352 W SQLiteLog: (28) double-quoted string literal: "dev.smartrobot.bevy_app"
-05-02 14:16:19.078 17052 17052 I Finsky  : [2] PackageAddedOrRemovedEventJob.a(62): Received an install/uninstall event for package dev.smartrobot.bevy_app with replacing being true
-05-02 14:16:19.080 17052 17052 I Finsky  : [2] PackageAddedOrRemovedEventJob.a(62): Received an install/uninstall event for package dev.smartrobot.bevy_app with replacing being true
-05-02 14:16:19.113 11075 11110 I SGM:GameManager: PkgUpdateReceiver, onPackageAdded : dev.smartrobot.bevy_app userHandle : UserHandle{0} userId : 0
-05-02 14:16:19.113 11075 11227 D SGM:GosNotifyThread: notifyPackageChangedToGos(), before send intent to GOS. type:15, changeType: 0, pkgName:dev.smartrobot.bevy_app, userHandleId:0
-05-02 14:16:19.133 16098 27434 I GOS:GameIntentService: onHandleIntent. GameIntentService. type: 15, pkgName: dev.smartrobot.bevy_app
-05-02 14:16:19.179 11902 11977 I PackageUpdatedTask: mAllAppsList.updatePackage dev.smartrobot.bevy_app
-05-02 14:16:19.212 11902 11977 I AppIconSolution: return the original icon because tray option is set to None for dev.smartrobot.bevy_app, isNight = true
-05-02 14:16:19.212 11902 11977 I LauncherActivityInfo: packageName: dev.smartrobot.bevy_app, useThemeIcon: true, height: 896, width: 896, density: 640
-05-02 14:16:19.252 16098 27434 I GOS:GameIntentService: onPackageChanged(). extras: Bundle[{changeType=0, userId=0, pkgName=dev.smartrobot.bevy_app, type=15, packageName=dev.smartrobot.bevy_
-05-02 14:16:19.253 16098 27434 I GOS:GameIntentService: onPackageChanged(). changeType(INSTALLED), pkgName(dev.smartrobot.bevy_app), UserHandle(0), userId(0), Installed(true)
-05-02 14:16:19.314 11902 11977 I PackageUpdatedTask: modified, appInfo : AppInfo(id=426 type=APP hidden=0 container=all_apps screen=0 rank=4 rankOfList=-1 user=UserHandle{0} title=Smart Robo
-05-02 14:16:19.493 11075 11110 D MetaDataCollector: onReceive: done pkgName=dev.smartrobot.bevy_app
-05-02 14:16:19.505 11075 11110 I SGM:GameManager: PkgUpdateReceiver, onPackageReplaced : dev.smartrobot.bevy_app userID : UserHandle{0}
-05-02 14:16:19.505 11075 11110 D MetaDataCollector: onReceive: done pkgName=dev.smartrobot.bevy_app
-05-02 14:16:19.505 11075 11227 D SGM:GosNotifyThread: notifyPackageChangedToGos(), before send intent to GOS. type:15, changeType: 8, pkgName:dev.smartrobot.bevy_app, userHandleId:0
-05-02 14:16:19.521 16098 27474 I GOS:GameIntentService: onHandleIntent. GameIntentService. type: 15, pkgName: dev.smartrobot.bevy_app
-05-02 14:16:19.586 16098 27474 I GOS:GameIntentService: onPackageChanged(). extras: Bundle[{changeType=8, userId=0, pkgName=dev.smartrobot.bevy_app, type=15, packageName=dev.smartrobot.bevy_
-05-02 14:16:19.586 16098 27474 I GOS:GameIntentService: onPackageChanged(). changeType(REPLACED), pkgName(dev.smartrobot.bevy_app), UserHandle(0), userId(0), Installed(true)
-05-02 14:16:19.685 11075 11554 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REPLACED dat=package:dev.smartrobot.bevy_app flg=0x400
-05-02 14:16:19.688 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REPLACED dat=package:dev.smartrobot.bevy_app flg=0x400
-05-02 14:16:19.688 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REPLACED dat=package:dev.smartrobot.bevy_app flg=0x400
-05-02 14:16:19.688 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REPLACED dat=package:dev.smartrobot.bevy_app flg=0x400
-05-02 14:16:19.688 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REPLACED dat=package:dev.smartrobot.bevy_app flg=0x400
-05-02 14:16:19.688 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REPLACED dat=package:dev.smartrobot.bevy_app flg=0x400
-05-02 14:16:19.689 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REPLACED dat=package:dev.smartrobot.bevy_app flg=0x400
-05-02 14:16:19.689 11075 11111 W BroadcastQueue: Background execution not allowed: receiving Intent { act=android.intent.action.PACKAGE_REPLACED dat=package:dev.smartrobot.bevy_app flg=0x400
-05-02 14:16:20.183 27530 27530 I FILP/PackageIntentReceiver: pkgName : dev.smartrobot.bevy_app
-05-02 14:16:20.251 27530 27568 I FILP/c  : removeFromFS : dev.smartrobot.bevy_app, cursor size : 0
-05-02 14:16:20.254 27530 27568 I FILP/c  : Delete DB result : dev.smartrobot.bevy_app, 0
-05-02 14:16:20.460 27530 27530 I FILP/PackageIntentReceiver: pkgName : dev.smartrobot.bevy_app
-05-02 14:17:14.321 11075 11353 I Pageboost: start alp : dev.smartrobot.bevy_app
-05-02 14:17:14.321 11075 11356 I Pageboost: alp for : dev.smartrobot.bevy_app , 0
-05-02 14:17:14.322  2652 27814 E pageboostd: alp start : app devsmartrobotbevy_app
-05-02 14:17:14.323 11075 11353 D ActivityTaskManager: request preloading for newly launching app : dev.smartrobot.bevy_app.MainActivity
-05-02 14:17:14.324 11394 11394 D StartingSurfaceDrawer: preloadSplashScreenAppIcon dev.smartrobot.bevy_app
-05-02 14:17:14.327  2652 27814 E pageboostd: devsmartrobotbevy_app, amt 0 scnt 0 fcnt 0
-05-02 14:17:14.327  2652 27814 E pageboostd: devsmartrobotbevy_app, amt 0 scnt 0 fcnt 0
-05-02 14:17:14.327  2652 27814 E pageboostd: alp end : app devsmartrobotbevy_app data_amount 0
-05-02 14:17:14.330 11394 11450 I AppIconSolution: return the original icon because tray option is set to None for dev.smartrobot.bevy_app, isNight = true
-05-02 14:17:14.335 10941 10941 D Zygote  : Forked child process 27815
-05-02 14:17:14.340 11075 11112 I ActivityManager: Start proc 27815:dev.smartrobot.bevy_app/u0a16 for activelaunch {dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}
-05-02 14:17:14.340 11075 11112 D ActivityManager: [SecIpm] it's a ML_TYPE_EMPTYPROCESS protected process dev.smartrobot.bevy_app
-05-02 14:17:14.348 27815 27815 I trobot.bevy_ap: Late-enabling -Xcheck:jni
-05-02 14:17:14.363 11902 11977 I AppIconSolution: return the original icon because tray option is set to None for dev.smartrobot.bevy_app, isNight = true
-05-02 14:17:14.364 11902 11977 I LauncherActivityInfo: packageName: dev.smartrobot.bevy_app, useThemeIcon: true, height: 896, width: 896, density: 640
-05-02 14:17:14.365 11075 12849 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity
-05-02 14:17:14.367 11075 12849 D ActivityTaskManager: TaskLaunchParamsModifier:task=null activity=ActivityRecord{dfb62ee u0 dev.smartrobot.bevy_app/.MainActivity display-from-option=0 displa
-05-02 14:17:14.367 11075 12849 D [secipm]: mSecIpmManager Preload dev.smartrobot.bevy_app dex files
-05-02 14:17:14.367 11075 12849 D ActivityTaskManager: TaskLaunchParamsModifier:task=null activity=ActivityRecord{dfb62ee u0 dev.smartrobot.bevy_app/.MainActivity t-1} display-from-option=0 d
-05-02 14:17:14.368 11075 12490 D PkgPredictorService-IpmAdcpController: create a new DexPreloadTask pkg:dev.smartrobot.bevy_app  path:/data/app/~~D_wON2FItWZgp1NajLqWSQ==/dev.smartrobot.bevy
-05-02 14:17:14.370 11075 12849 D ActivityTaskManager: TaskLaunchParamsModifier:task=Task{e41d38f #13 type=standard A=10016:dev.smartrobot.bevy_app U=0 visible=false mode=fullscreen transluce
-05-02 14:17:14.371   642  2162 I SurfaceFlinger: id=12647 createSurf (0x0),-1 flag=80004, ActivityRecord{dfb62ee u0 dev.smartrobot.bevy_app/.MainActivity t13}#0
-05-02 14:17:14.372 31920 31926 I adbd    : jdwp connection from 27815
-05-02 14:17:14.374 27815 27815 E USNET   : USNET: appName: dev.smartrobot.bevy_app
-05-02 14:17:14.375 27815 27815 D ProcessState: Binder ioctl to enable oneway spam detection failed: Invalid argument
-05-02 14:17:14.375 11394 11449 D StartingSurfaceDrawer: addSplashScreen dev.smartrobot.bevy_app theme=7f100220 task=13 suggestType=1
-05-02 14:17:14.379 27815 27815 D ActivityThread: setConscryptValidator
-05-02 14:17:14.380   642  2162 I SurfaceFlinger: id=12648 createSurf (0x0),-1 flag=80004, fbebffa Splash Screen dev.smartrobot.bevy_app#0
-05-02 14:17:14.380 27815 27815 D ActivityThread: setConscryptValidator - put
-05-02 14:17:14.383 11075 11075 I Pageboost: package dev.smartrobot.bevy_app
-05-02 14:17:14.384 11075 11342 D MARsPolicyManager: onPackageResumedFG pkgName = dev.smartrobot.bevy_app, userId = 0
-05-02 14:17:14.384 11075 11356 I Pageboost: Record App IO : dev.smartrobot.bevy_app pid 27815
-05-02 14:17:14.385 11075 11490 V WindowManager: Relayout Window{fbebffa u0 Splash Screen dev.smartrobot.bevy_app}: viewVisibility=0 req=1440x3040 d0
-05-02 14:17:14.386   642  2162 I SurfaceFlinger: id=12649 createSurf (1x1),-3 flag=40004, Splash Screen dev.smartrobot.bevy_app$_11394#0
-05-02 14:17:14.386 11075 11490 D WindowManager: makeSurface duration=1 name=Splash Screen dev.smartrobot.bevy_app$_11394
-05-02 14:17:14.387 11075 11490 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{dfb62ee u0 dev.smartrobot.bevy_app/.MainActivity t13}
-05-02 14:17:14.389 11075 11356 I Pageboost: 64 bit checked : true for 27815
-05-02 14:17:14.389 11075 11356 I Pageboost: IoRecord pid : 27815, started correctly
-05-02 14:17:14.389 11075 12904 I ActivityManager: DSS OFF for dev.smartrobot.bevy_app
-05-02 14:17:14.394 11075 11490 D WindowManager: finishDrawingWindow: Window{fbebffa u0 Splash Screen dev.smartrobot.bevy_app} mDrawState=DRAW_PENDING
-05-02 14:17:14.396 11075 11105 D WindowManager: createAnimationAdapter(): container=Task{e41d38f #13 type=standard A=10016:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucen
-05-02 14:17:14.397 11075 11105 D WindowManager:         Add container=Task{e41d38f #13 type=standard A=10016:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
-05-02 14:17:14.400 11075 11105 I WindowManager: container=Task{e41d38f #13 type=standard A=10016:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
-05-02 14:17:14.400 11075 11105 I WindowManager:   taskInfo=TaskInfo{userId=0 taskId=13 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.categ
-05-02 14:17:14.402 11075 12904 I DexController: getTaskHasActivityIsWaitingToRun: r=ActivityRecord{dfb62ee u0 dev.smartrobot.bevy_app/.MainActivity t13}, app=ProcessRecord{878f733 27815:dev.
-05-02 14:17:14.402 11075 12904 D ActivityManager: attachApplicationLocked() app=ProcessRecord{878f733 27815:dev.smartrobot.bevy_app/u0a16} app.isolatedEntryPoint=null instr2=null
-05-02 14:17:14.403 11075 12904 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{dfb62ee u0 dev.smartrobot.bevy_app/.MainActivity t13}
-05-02 14:17:14.404 11075 12904 D SGM:PkgDataHelper: notifyAppCreate(), pkgName: dev.smartrobot.bevy_app, userId: 0, sendRet: true
-05-02 14:17:14.404 11075 11226 D SGM:GameManager: onLooperPrepared(), msg: MSG_APP_CREATE, pkgName: dev.smartrobot.bevy_app, userId: 0
-05-02 14:17:14.407 11075 12904 D SGM:GameManager:   sendRunningComponentFocus(), pkgName: dev.smartrobot.bevy_app, userId: 0
-05-02 14:17:14.407 11075 11226 D SGM:GameManager: onLooperPrepared(), msg: MSG_TASK_FOCUSED, pkgName: dev.smartrobot.bevy_app, userId: 0
-05-02 14:17:14.407 11075 11226 D SGM:GameManager:   handleTaskFocused(), pkgName: dev.smartrobot.bevy_app, userID:0
-05-02 14:17:14.408 11075 11226 D SGM:GameManager:   handleResume(). pkgName: dev.smartrobot.bevy_app, userId: 0, isTunableApp: null
-05-02 14:17:14.408 11075 11226 D SGM:GameManager: notifyFocusInOut(). of pkg: dev.smartrobot.bevy_app, type: 4, isMinimized: false, isTunableApp: false, userId: 0
-05-02 14:17:14.409 11075 11225 V ActivityManager: Changed top to ProcessRecord{878f733 27815:dev.smartrobot.bevy_app/u0a16}
-05-02 14:17:14.414 11075 11104 D WindowManager:         container=Task{e41d38f #13 type=standard A=10016:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
-05-02 14:17:14.416 27815 27815 D ActivityThread: handleBindApplication()++ app=dev.smartrobot.bevy_app
-05-02 14:17:14.419 27815 27815 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10016; state: ENABLED
-05-02 14:17:14.419 11075 11102 D SSRM:LoadDetectMonitor: PID = 27815, UID = 10016
-05-02 14:17:14.432   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd8e630 | 0100 | RGBA_8888    |    0.0    0.0 1440.0 3040.0 |    0    0 1440 3040 | Splash Screen dev.smartrobot.bevy_app$
-05-02 14:17:14.433 11075 11104 I GameSDK@LifeCycle: noteResumeComponent(): package name  : dev.smartrobot.bevy_app
-05-02 14:17:14.435 11075 11104 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.samsung.android.game.SemGameManager
-05-02 14:17:14.435 11075 11104 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-02 14:17:14.435 11075 11104 D SGM:SemGameManager: isGamePackage(), pkgName=dev.smartrobot.bevy_app, ret=false
-05-02 14:17:14.435 11075 11104 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.android.server.ssrm.fgapps.GameAppU
-05-02 14:17:14.435 11075 11104 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-02 14:17:14.436 11075 11104 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.android.server.ssrm.SortingMachine.
-05-02 14:17:14.436 11075 11104 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-02 14:17:14.436 11075 11104 D SGM:GameManager: noteResumeComponent(), received pkgName: dev.smartrobot.bevy_app, userId: 0
-05-02 14:17:14.436 11075 11226 D SGM:GameManager: onLooperPrepared(), msg: MSG_APP_RESUME, pkgName: dev.smartrobot.bevy_app, userid: 0
-05-02 14:17:14.436 11075 11226 D SGM:GameManager:   handleResume(). pkgName: dev.smartrobot.bevy_app, userId: 0, isTunableApp: null
-05-02 14:17:14.436 11075 11226 D SGM:GameManager: notifyFocusInOut(). of pkg: dev.smartrobot.bevy_app, type: 4, isMinimized: false, isTunableApp: false, userId: 0
-05-02 14:17:14.477 27815 27815 V GraphicsEnvironment: ANGLE Developer option for 'dev.smartrobot.bevy_app' set to: 'default'
-05-02 14:17:14.477 27815 27815 V GraphicsEnvironment: App is not on the allowlist for updatable production driver.
-05-02 14:17:14.479 27815 27815 D LoadedApk: LoadedApk::makeApplication() appContext.mOpPackageName=dev.smartrobot.bevy_app appContext.mBasePackageName=dev.smartrobot.bevy_app
-05-02 14:17:14.479 27815 27815 D NetworkSecurityConfig: No Network Security Config specified, using platform default
-05-02 14:17:14.493 27815 27815 D NetworkSecurityConfig: No Network Security Config specified, using platform default
-05-02 14:17:14.506 27815 27815 D ActivityThread: handleBindApplication() --
-05-02 14:17:14.511 27815 27847 D OpenGLRenderer: RenderThread::requireGlContext()
-05-02 14:17:14.514 27815 27847 I libEGL  : EGL_ANDROID_blob_cache_path advertised, but unable to get eglSetBlobCachePathANDROID
-05-02 14:17:14.518 27815 27847 D OpenGLRenderer: RenderThread::setGrContext()
-05-02 14:17:14.546 27815 27815 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
-05-02 14:17:14.549 11075 11444 D MdnieScenarioControlService:  packageName : dev.smartrobot.bevy_app    className : dev.smartrobot.bevy_app.MainActivity
-05-02 14:17:14.565 27815 27815 I DecorView: [INFO] isPopOver=false, config=true
-05-02 14:17:14.565 27815 27815 I DecorView: updateCaptionType >> DecorView@e10288c[], isFloating=false, isApplication=true, hasWindowControllerCallback=true, hasWindowDecorCaption=false
-05-02 14:17:14.565 27815 27815 D DecorView: setCaptionType = 0, this = DecorView@e10288c[]
-05-02 14:17:14.568 27815 27815 I DecorView: getCurrentDensityDpi: from real metrics. densityDpi=560 msg=resources_loaded
-05-02 14:17:14.574 27815 27815 W trobot.bevy_ap: Accessing hidden method Landroid/view/View;->computeFitSystemWindows(Landroid/graphics/Rect;Landroid/graphics/Rect;)Z (unsupported, reflectio
-05-02 14:17:14.575 27815 27815 W trobot.bevy_ap: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (unsupported, reflection, allowed)
-05-02 14:17:14.576 27815 27815 I GameActivity: Looking for library libsmartrobot_bevy.so
-05-02 14:17:14.577 27815 27815 I GameActivity: Found library libsmartrobot_bevy.so. Loading...
-05-02 14:17:14.578 27815 27815 D GameActivity: GameActivity_register
-05-02 14:17:14.578 27815 27815 V GameActivity: Registering com/google/androidgamesdk/GameActivity's 22 native methods...
-05-02 14:17:14.579 27815 27815 V threaded_app: Creating: 0x70bd03b690
-05-02 14:17:14.579 27815 27815 V threaded_app: Callbacks set: 0x70bd03b6e0
-05-02 14:17:14.579 27815 27815 V threaded_app: Launching android_app_entry in a thread
-05-02 14:17:14.579 27815 27857 V threaded_app: android_app_entry called
-05-02 14:17:14.579 27815 27857 V threaded_app: android_app = 0x709d043c10
-05-02 14:17:14.579 27815 27857 V threaded_app: config = 0x700d0644c0
-05-02 14:17:14.579 27815 27857 V threaded_app: activity = 0x70bd03b690
-05-02 14:17:14.579 27815 27857 V threaded_app: assetmanager = 0x70bd03b370
-05-02 14:17:14.579 27815 27857 V threaded_app: Config: mcc=0 mnc=0 lang=en cnt=US orien=1 touch=3 dens=560 keys=1 nav=1 keysHid=3 navHid=0 sdk=31 size=2 long=2 modetype=1 modenight=2
-05-02 14:17:14.585   528   528 E audit   : type=1400 audit(1746206234.581:17972): avc:  denied  { read } for  pid=27815 comm="android_main" name="cpu.cfs_quota_us" dev="cgroup" ino=9 scontex
-05-02 14:17:14.585   528   528 E audit   : type=1300 audit(1746206234.581:17972): arch=c00000b7 syscall=56 success=no exit=-13 a0=ffffff9c a1=6f44a448b8 a2=80000 a3=0 items=0 ppid=10941 pid=
-05-02 14:17:14.585   528   528 E audit   : type=1327 audit(1746206234.581:17972): proctitle="dev.smartrobot.bevy_app"
-05-02 14:17:14.585   528   528 E audit   : type=1400 audit(1746206234.581:17973): avc:  denied  { read } for  pid=27815 comm="android_main" name="cpu.cfs_period_us" dev="cgroup" ino=10 scont
-05-02 14:17:14.592 27815 27857 D vulkan  : searching for layers in '/data/app/~~D_wON2FItWZgp1NajLqWSQ==/dev.smartrobot.bevy_app-h4SNB86nC70Nqw_f_nl6Zw==/lib/arm64'
-05-02 14:17:14.593 27815 27857 D vulkan  : searching for layers in '/data/app/~~D_wON2FItWZgp1NajLqWSQ==/dev.smartrobot.bevy_app-h4SNB86nC70Nqw_f_nl6Zw==/base.apk!/lib/arm64-v8a'
-05-02 14:17:14.623 11075 11308 W SemWifiTransportLayerUtils: getApplicationCategory - IOException dev.smartrobot.bevy_app
-05-02 14:17:14.623 11075 11308 W System.err: java.io.FileNotFoundException: https://play.google.com/store/apps/details?id=dev.smartrobot.bevy_app&hl=en
-05-02 14:17:14.629 27815 27815 V GameActivity: onStart_native
-05-02 14:17:14.629 27815 27815 V threaded_app: Start: 0x70bd03b690
-05-02 14:17:14.638 27815 27857 I event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_render-0.16.0/srcAdapterInfo { name: "Mali-G76", vendor: 5045, device: 191371673
-05-02 14:17:14.841 27815 27857 I OboeAudio: openStreamInternal() OUTPUT -------- OboeVersion1.8.1 --------
-05-02 14:17:14.842 27815 27857 I AAudio  : AAudioStreamBuilder_openStream() called ----------------------------------------
-05-02 14:17:14.842 27815 27857 I AudioStreamBuilder: rate   =  44100, channels  = 2, format   = 5, sharing = SH, dir = OUTPUT
-05-02 14:17:14.842 27815 27857 I AudioStreamBuilder: device =      0, sessionId = -1, perfMode = 10, callback: ON with frames = 0
-05-02 14:17:14.842 27815 27857 I AudioStreamBuilder: usage  =      1, contentType = 2, inputPreset = 6, allowedCapturePolicy = 0
-05-02 14:17:14.842 27815 27857 I AudioStreamBuilder: privacy sensitive = false
-05-02 14:17:14.842 27815 27857 I AudioStreamBuilder: opPackageName = (null)
-05-02 14:17:14.842 27815 27857 I AudioStreamBuilder: attributionTag = (null)
-05-02 14:17:14.842 27815 27857 D AudioStreamBuilder: build() MMAP not used because AAUDIO_PERFORMANCE_MODE_LOW_LATENCY not requested.
-05-02 14:17:14.842 27815 27857 D trobot.bevy_ap: PlayerBase::PlayerBase()
-05-02 14:17:14.842 27815 27857 D AudioStreamTrack: open(), request notificationFrames = 0, frameCount = 0
-05-02 14:17:14.846 27815 27857 D AudioTrack: setVolume(1.000000, 1.000000) pid : 27815
-05-02 14:17:14.846 27815 27857 D AAudioStream: setState(s#1) from 0 to 2
-05-02 14:17:14.846 27815 27857 I AAudio  : AAudioStreamBuilder_openStream() returns 0 = AAUDIO_OK for s#1 ----------------
-05-02 14:17:14.846 27815 27857 D AAudio  : AAudioStream_requestStart(s#1) called --------------
-05-02 14:17:14.846 27815 27857 D AAudioStream: setState(s#1) from 2 to 3
-05-02 14:17:14.847 27815 27857 D AAudio  : AAudioStream_requestStart(s#1) returned 0 ---------
-05-02 14:17:14.848 11075 11075 D AudioPlayerStateMonitor: Found a new active media playback. AudioPlaybackConfiguration piid:1877599 deviceId:3 type:AAudio u/pid:10016/27815 state:started at
-05-02 14:17:14.848 27815 27857 E event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_gilrs-0.16.0/src/Failed to start Gilrs. Gilrs does not support current platform.
-05-02 14:17:14.848 27815 27840 D AudioStreamLegacy: onAudioDeviceUpdate(deviceId = 3)
-05-02 14:17:14.885 27815 27857 I event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_render-0.16.0/srcGPU preprocessing is not supported on this device. Falling back
-05-02 14:17:14.912 27815 27857 I event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_winit-0.16.0/src/Creating new window App (0v1)
-05-02 14:17:14.912 27815 27857 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_winit-0.16.0/src/Display information:  Window physical resolution: 1280x720  Win
-05-02 14:17:14.912 27815 27857 E event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfCannot get the native window, it's null and will always be null
-05-02 14:17:14.917 27815 27877 D AAudioStream: setState(s#1) from 3 to 4
-05-02 14:17:14.948 27815 27857 V threaded_app: activityState=10
-05-02 14:17:14.948 27815 27857 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: forward onStart notification to application
-05-02 14:17:14.950 27815 27815 V threaded_app: Resume: 0x70bd03b690
-05-02 14:17:14.951 27815 27857 V threaded_app: activityState=11
-05-02 14:17:14.951 27815 27857 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfApp Resumed - is running
-05-02 14:17:14.952 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: ignored. pkg=dev.smartrobot.bevy_app parent=null callers=com.android.internal.policy.DecorView.setVisibilit
-05-02 14:17:14.952 27815 27815 I MSHandlerLifeCycle: removeMultiSplitHandler: no exist. decor=DecorView@e10288c[]
-05-02 14:17:14.962   642  2162 I SurfaceFlinger: id=12655 createSurf (0x0),-1 flag=80004, 9fa2cc8 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0
-05-02 14:17:14.964 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: setView = com.android.internal.policy.DecorView@e10288c TM=true
-05-02 14:17:14.965 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:14.965 27815 27815 I MSHandlerLifeCycle: removeMultiSplitHandler: no exist. decor=DecorView@e10288c[MainActivity]
-05-02 14:17:14.971 27815 27815 I SurfaceView@f112719: onWindowVisibilityChanged(0) true com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f112719 V.E...... ......I. 0,0-0,0} of
-05-02 14:17:14.974 27815 27815 V threaded_app: WindowInsetsChanged: 0x70bd03b690
-05-02 14:17:14.976 11075 12904 V WindowManager: Relayout Window{9fa2cc8 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: viewVisibility=0 req=1440x3040 d0
-05-02 14:17:14.976   642   658 I SurfaceFlinger: id=12656 createSurf (1x1),-3 flag=40004, dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_27815#0
-05-02 14:17:14.977 11075 12904 D WindowManager: makeSurface duration=1 name=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_27815
-05-02 14:17:14.978 11075 12904 V WindowManager: Changing focus from null to Window{9fa2cc8 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} displayId=0 Callers=com.android.se
-05-02 14:17:14.978 11075 12904 D MARsPolicyManager: onPackageResumedFG pkgName = dev.smartrobot.bevy_app, userId = 0
-05-02 14:17:14.980 11075 12904 V WindowManager: Relayout hash=9fa2cc8, pid=27815: mAttrs={(0,0)(fillxfill) sim={adjust=resize forwardNavigation} ty=BASE_APPLICATION fmt=TRANSLUCENT wanim=0x1
-05-02 14:17:14.982 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: Relayout returned: old=(0,0,1440,3040) new=(0,0,1440,3040) req=(1440,3040)0 dur=6 res=0x7 s={true 486623795648} ch=true f
-05-02 14:17:14.984 27815 27815 I SurfaceView@f112719: windowStopped(false) true com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f112719 V.E...... ......ID 0,0-1440,3040} of Vi
-05-02 14:17:14.984 27815 27815 V threaded_app: ContentRectChanged: 0x70bd03b690 -- (0 0) (1440 3040)
-05-02 14:17:14.984 27815 27847 D hw-ProcessState: Binder ioctl to enable oneway spam detection failed: Invalid argument
-05-02 14:17:14.985 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: [DP] dp(1) 1 android.view.ViewRootImpl.reportNextDraw:11420 android.view.ViewRootImpl.performTraversals:4193 android.view
-05-02 14:17:14.985 27815 27847 D OpenGLRenderer: eglCreateWindowSurface
-05-02 14:17:14.985   642  2162 I SurfaceFlinger: id=12659 createSurf (0x0),-1 flag=20004, Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0
-05-02 14:17:14.986   642   658 I SurfaceFlinger: id=12660 createSurf (0x0),-1 flag=80004, SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#0
-05-02 14:17:14.986   642   658 I SurfaceFlinger: id=12661 createSurf (0x0),-1 flag=40400, SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0(BLAST)#0
-05-02 14:17:14.986   642   658 I SurfaceFlinger: id=12662 createSurf (0x0),-1 flag=20404, Background for SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#
-05-02 14:17:14.986 27815 27815 I SurfaceView@f112719: pST: sr = Rect(0, 0 - 1440, 3040) sw = 1440 sh = 3040
-05-02 14:17:14.986 27815 27815 I SurfaceView@f112719: onSSPAndSRT: pl = 0 pt = 0 sx = 1.0 sy = 1.0
-05-02 14:17:14.987 27815 27815 I SurfaceView@f112719: pST: mTmpTransaction.apply, mTmpTransaction = android.view.SurfaceControl$Transaction@3203487
-05-02 14:17:14.987 27815 27815 I SurfaceView@f112719: updateSurface: mVisible = true mSurface.isValid() = true
-05-02 14:17:14.987 27815 27815 I SurfaceView@f112719: updateSurface: mSurfaceCreated = false surfaceChanged = true visibleChanged = true
-05-02 14:17:14.987 27815 27815 I SurfaceView@f112719: surfaceCreated 1 #8 com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f112719 V.E...... ......ID 0,0-1440,3040}
-05-02 14:17:14.987 27815 27815 V GameActivity: onSurfaceCreated_native
-05-02 14:17:14.987 27815 27815 V threaded_app: NativeWindowCreated: 0x70bd03b690 -- 0x714d09b7c0
-05-02 14:17:14.987 27815 27815 V threaded_app: android_app_set_window called
-05-02 14:17:14.998 11075 12904 D InputDispatcher: Focus request (0): 9fa2cc8 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity but waiting because NOT_VISIBLE
-05-02 14:17:15.014 27815 27865 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_core_pipeline-0.1Downsample depth is not supported on this platform.
-05-02 14:17:15.028 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::fullscreen_vertex_shader wi
-05-02 14:17:15.029 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::fullscreen_ver
-05-02 14:17:15.030 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::fullscreen_vertex_shader wi
-05-02 14:17:15.030 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS
-05-02 14:17:15.031 27815 27857 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: handle Android InsetsChanged notification
-05-02 14:17:15.031 27815 27857 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: find a way to notify application of content rect change
-05-02 14:17:15.032 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::forward_io with defs: {}
-05-02 14:17:15.032 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_types with defs: {}
-05-02 14:17:15.032 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_bindings with defs:
-05-02 14:17:15.033 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::morph with defs: {}
-05-02 14:17:15.034 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::maths with defs: {}
-05-02 14:17:15.034 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::view with defs: {}
-05-02 14:17:15.037 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_view_types with def
-05-02 14:17:15.037 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::globals with defs: {}
-05-02 14:17:15.038 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_view_bindings with
-05-02 14:17:15.038 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::prepass_bindings with de
-05-02 14:17:15.040 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::view_transformations wit
-05-02 14:17:15.041 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_functions with defs
-05-02 14:17:15.042 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::skinning with defs: {}
-05-02 14:17:15.044 27815 27857 V threaded_app: APP_CMD_INIT_WINDOW
-05-02 14:17:15.044 27815 27857 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_winit-0.16.0/src/Display information:  Window physical resolution: 4480x2520  Wi
-05-02 14:17:15.044 27815 27815 I SurfaceView@f112719: surfaceChanged (1440,3040) 1 #8 com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f112719 V.E...... ......ID 0,0-1440,3040}
-05-02 14:17:15.044 27815 27815 V threaded_app: NativeWindowResized: 0x70bd03b690 -- 0x714d09b7c0 ( 1440 x 3040 )
-05-02 14:17:15.044 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: [DP] dp(2) 1 android.view.SurfaceView.updateSurface:1375 android.view.SurfaceView.lambda$new$1$SurfaceView:254 android.vi
-05-02 14:17:15.044 27815 27815 V threaded_app: NativeWindowRedrawNeeded: 0x70bd03b690 -- 0x714d09b7c0
-05-02 14:17:15.045 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: [DP] pdf(1) 1 android.view.SurfaceView.notifyDrawFinished:599 android.view.SurfaceView.performDrawFinished:586 android.vi
-05-02 14:17:15.045 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::forward_io with defs: {"VERTEX_UVS":
-05-02 14:17:15.049 27815 27885 I SurfaceView@f112719: uSP: rtp = Rect(0, 0 - 1440, 3040) rtsw = 1440 rtsh = 3040
-05-02 14:17:15.050 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::maths with defs: {"VERTEX_UVS": Bo
-05-02 14:17:15.050 27815 27885 I SurfaceView@f112719: onSSPAndSRT: pl = 0 pt = 0 sx = 1.0 sy = 1.0
-05-02 14:17:15.050 27815 27885 I SurfaceView@f112719: aOrMT: uB = true t = android.view.SurfaceControl$Transaction@c21afb4 fN = 1 android.view.SurfaceView.access$500:124 android.view.Surface
-05-02 14:17:15.050 27815 27847 I Gralloc4: mapper 4.x is not supported
-05-02 14:17:15.050 27815 27885 I SurfaceView@f112719: aOrMT: vR.mWNT, vR = ViewRootImpl@210b8ab[MainActivity]
-05-02 14:17:15.051 27815 27885 I ViewRootImpl@210b8ab[MainActivity]: mWNT: t = android.view.SurfaceControl$Transaction@c21afb4 fN = 1 android.view.SurfaceView.applyOrMergeTransaction:1628 an
-05-02 14:17:15.051 27815 27885 I ViewRootImpl@210b8ab[MainActivity]: mWNT: merge t to BBQ
-05-02 14:17:15.051 27815 27847 W Gralloc3: mapper 3.x is not supported
-05-02 14:17:15.052 27815 27847 I gralloc : Arm Module v1.0
-05-02 14:17:15.053 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_types with defs: {"VERTEX_UVS":
-05-02 14:17:15.053 27815 27847 W Gralloc4: allocator 4.x is not supported
-05-02 14:17:15.053 27815 27847 W Gralloc3: allocator 3.x is not supported
-05-02 14:17:15.053 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_bindings with defs: {"VERTEX_UVS
-05-02 14:17:15.057 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::view with defs: {"VERTEX_UVS": Boo
-05-02 14:17:15.059 27815 27863 I BufferQueueProducer: [SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#1(BLAST Consumer)1](id:6ca700000001,api:1,p:27815,
-05-02 14:17:15.059 27815 27863 D trobot.bevy_ap: FrameBooster: InterpolationGui: UID 10016 detected as using Vulkan
-05-02 14:17:15.060 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_view_types with defs: {"VERTEX_U
-05-02 14:17:15.061 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::globals with defs: {"VERTEX_UVS":
-05-02 14:17:15.061 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_view_bindings with defs: {"VERTE
-05-02 14:17:15.064 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::prepass_bindings with defs: {"VERTEX_
-05-02 14:17:15.064 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::view_transformations with defs: {"VER
-05-02 14:17:15.067 27815 27863 I BufferQueueProducer: [SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#1(BLAST Consumer)1](id:6ca700000001,api:1,p:27815,
-05-02 14:17:15.067 27815 27863 D trobot.bevy_ap: FrameBooster: InterpolationGui: UID 10016 detected as using Vulkan
-05-02 14:17:15.067 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_functions with defs: {"VERTEX_UV
-05-02 14:17:15.070 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"VERTEX_UVS": Bool(true), "SCREEN_
-05-02 14:17:15.070 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: [DP] pdf(0) 1 android.view.ViewRootImpl.lambda$addFrameCompleteCallbackIfNeeded$3$ViewRootImpl:4995 android.view.ViewRoot
-05-02 14:17:15.070 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: [DP] rdf()
-05-02 14:17:15.070 27815 27815 D ViewRootImpl@210b8ab[MainActivity]: reportDrawFinished (fn: -1)
-05-02 14:17:15.071 11075 12904 D WindowManager: finishDrawingWindow: Window{9fa2cc8 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} mDrawState=DRAW_PENDING
-05-02 14:17:15.072 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::prepass_io with defs: {}
-05-02 14:17:15.073 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::meshlet_visibility_buffe
-05-02 14:17:15.073 11075 11105 I WindowManager: Reparenting to leash, surface=Surface(name=9fa2cc8 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0xa7d1ae3, leashParent=Surfa
-05-02 14:17:15.073   642  3090 I SurfaceFlinger: id=12663 createSurf (0x0),-1 flag=24000, Surface(name=9fa2cc8 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0xa7d1ae3 - anim
-05-02 14:17:15.073 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_types with defs: {}
-05-02 14:17:15.074 11075 11105 D WindowManager: makeSurface duration=0 leash=Surface(name=Surface(name=9fa2cc8 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0xa7d1ae3 - anim
-05-02 14:17:15.075 11075 11101 I PkgPredictorService-SecIpmManagerServiceImpl: reportToNAP uid:10016 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity thisTime:709
-05-02 14:17:15.076 11075 11101 I ActivityTaskManager: Displayed dev.smartrobot.bevy_app/.MainActivity: +709ms
-05-02 14:17:15.076 11075 11101 I Pageboost: Launch time gathered : pid 27815 dev.smartrobot.bevy_app 709
-05-02 14:17:15.077 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::lighting with defs: {}
-05-02 14:17:15.078 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::color_operations with
-05-02 14:17:15.078 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::utils with defs: {}
-05-02 14:17:15.080 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::clustered_forward with d
-05-02 14:17:15.081 11075 12849 D InputDispatcher: Focus entered window (0): 9fa2cc8 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity
-05-02 14:17:15.081 11075 11490 V WindowManager: Relayout Window{fbebffa u0 Splash Screen dev.smartrobot.bevy_app}: viewVisibility=8 req=1440x3040 d0
-05-02 14:17:15.082 11075 11490 I WindowManager: Reparenting to leash, surface=Surface(name=fbebffa Splash Screen dev.smartrobot.bevy_app)/@0x25a82d3, leashParent=Surface(name=ActivityRecord{
-05-02 14:17:15.082 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: MSG_WINDOW_FOCUS_CHANGED 1 1
-05-02 14:17:15.082   642  3090 I SurfaceFlinger: id=12664 createSurf (0x0),-1 flag=24000, Surface(name=fbebffa Splash Screen dev.smartrobot.bevy_app)/@0x25a82d3 - animation-leash of window_a
-05-02 14:17:15.083 11075 11490 D WindowManager: makeSurface duration=1 leash=Surface(name=Surface(name=fbebffa Splash Screen dev.smartrobot.bevy_app)/@0x25a82d3 - animation-leash of window_a
-05-02 14:17:15.083 27815 27815 V threaded_app: WindowFocusChanged: 0x70bd03b690 -- 1
-05-02 14:17:15.084 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::shadow_sampling with def
-05-02 14:17:15.084 27815 27815 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=21, host=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity, from=android.view.Inset
-05-02 14:17:15.085 27815 27815 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=20, host=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity, from=android.view.Inset
-05-02 14:17:15.085 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::shadows with defs: {}
-05-02 14:17:15.086 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::ambient with defs: {}
-05-02 14:17:15.086   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd98dd0 | 0100 | RGBA_8888    |    0.0    0.0 1440.0  114.0 |    0    0 1440  114 | dev.smartrobot.bevy_app/dev.smartrobot
-05-02 14:17:15.086   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd8e630 | 0100 | RGBA_8888    |    0.0    0.0 1440.0 3040.0 |    0    0 1440 3040 | Splash Screen dev.smartrobot.bevy_app$
-05-02 14:17:15.086 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::light_probe with defs: {
-05-02 14:17:15.087 11075 11490 I WindowManager: Cancelling animation restarting=false, leash=Surface(name=Surface(name=9fa2cc8 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@
-05-02 14:17:15.087 11075 11490 I WindowManager: Reparenting to original parent: Surface(name=ActivityRecord{dfb62ee u0 dev.smartrobot.bevy_app/.MainActivity t13})/@0x407cce0, destroy=false,
-05-02 14:17:15.087 27815 27815 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=1, host=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity, from=android.view.Insets
-05-02 14:17:15.087 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::irradiance_volume with d
-05-02 14:17:15.087 27815 27815 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=0, host=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity, from=android.view.Insets
-05-02 14:17:15.088 11075 11490 W InputManager-JNI: Input channel object 'fbebffa Splash Screen dev.smartrobot.bevy_app (client)' was disposed without first being removed with the input manag
-05-02 14:17:15.089 27815 27815 D InputMethodManager: startInputInner - Id : 0
-05-02 14:17:15.089 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::environment_map with def
-05-02 14:17:15.089 27815 27815 I InputMethodManager: startInputInner - mService.startInputOrWindowGainedFocus
-05-02 14:17:15.089 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::prepass_utils with defs:
-05-02 14:17:15.089 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::tonemapping_lu
-05-02 14:17:15.090 11075 13845 V InputMethodManagerService: Creating new session for client ClientState{1fe937d uid=10016 pid=27815 displayId=0}
-05-02 14:17:15.091 11075 11342 D InsetsSourceProvider: updateVisibility: serverVisible=true, clientVisible=false, source=InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,3040][1440,3040]
-05-02 14:17:15.091 11075 11342 D InsetsSourceProvider: updateVisibility: serverVisible=true, clientVisible=false, source=InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][1440,114], mVisib
-05-02 14:17:15.092 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::tonemapping wi
-05-02 14:17:15.093 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::transmission with defs:
-05-02 14:17:15.094 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::fog with defs: {}
-05-02 14:17:15.096   642   642 I Layer   : id=12663 removeFromCurrentState Surface(name=9fa2cc8 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0xa7d1ae3 - animation-leash of
-05-02 14:17:15.096 27815 27815 D InputMethodManager: startInputInner - Id : 0
-05-02 14:17:15.097 31748 31748 I HBD     : HoneyBoardService [IMI] onStartInput - caller pid : 27815 , caller uid : 10016
-05-02 14:17:15.098   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd98dd0 | 0100 | RGBA_8888    |    0.0    0.0 1440.0  114.0 |    0    0 1440  114 | dev.smartrobot.bevy_app/dev.smartrobot
-05-02 14:17:15.099 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_functions with defs:
-05-02 14:17:15.100 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::decal::forward with defs
-05-02 14:17:15.100 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_bindings with defs:
-05-02 14:17:15.101 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::bindless with defs: {
-05-02 14:17:15.102 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::parallax_mapping with de
-05-02 14:17:15.102 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::ssao_utils with defs: {}
-05-02 14:17:15.102 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::lightmap with defs: {}
-05-02 14:17:15.103 27815 27841 I ViewRootImpl@210b8ab[MainActivity]: Resizing android.view.ViewRootImpl@fe7414c: frame=[0,114][1440,3040] reportDraw=true forceLayout=true backDropFrame=Rect(
-05-02 14:17:15.104 11075 11105 I WindowManager: Reparenting to original parent: Surface(name=ActivityRecord{dfb62ee u0 dev.smartrobot.bevy_app/.MainActivity t13})/@0x407cce0, destroy=true, s
-05-02 14:17:15.105 11075 11105 E WindowManager: win=Window{fbebffa u0 Splash Screen dev.smartrobot.bevy_app EXITING} destroySurfaces: appStopped=false win.mWindowRemovalAllowed=true win.mRem
-05-02 14:17:15.105 11075 11105 I WindowManager: Destroying surface Surface(name=Splash Screen dev.smartrobot.bevy_app$_11394)/@0xa58cb6c called by com.android.server.wm.WindowStateAnimator.d
-05-02 14:17:15.107 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_fragment with defs:
-05-02 14:17:15.108 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::decal::clustered with de
-05-02 14:17:15.109 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_deferred_types with
-05-02 14:17:15.109 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::rgb9e5 with defs: {}
-05-02 14:17:15.110 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_prepass_functions wi
-05-02 14:17:15.110 27815 27815 V threaded_app: WindowInsetsChanged: 0x70bd03b690
-05-02 14:17:15.111 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_deferred_functions w
-05-02 14:17:15.112 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::oit with defs:
-05-02 14:17:15.113   642   642 I Layer   : id=12649 removeFromCurrentState Splash Screen dev.smartrobot.bevy_app$_11394#0 (107)
-05-02 14:17:15.113   642   642 I Layer   : id=12664 removeFromCurrentState Surface(name=fbebffa Splash Screen dev.smartrobot.bevy_app)/@0x25a82d3 - animation-leash of window_animation#0 (107
-05-02 14:17:15.113   642   642 I Layer   : id=12648 removeFromCurrentState fbebffa Splash Screen dev.smartrobot.bevy_app#0 (107)
-05-02 14:17:15.113   642   642 I Layer   : id=12648 removeFromCurrentState fbebffa Splash Screen dev.smartrobot.bevy_app#0 (107)
-05-02 14:17:15.113   642   642 I SurfaceFlinger: id=12648 Removed fbebffa Splash Screen dev.smartrobot.bevy_app#0 (107)
-05-02 14:17:15.113   642   642 I SurfaceFlinger: id=12649 Removed Splash Screen dev.smartrobot.bevy_app$_11394#0 (107)
-05-02 14:17:15.113   642   642 I SurfaceFlinger: id=12664 Removed Surface(name=fbebffa Splash Screen dev.smartrobot.bevy_app)/@0x25a82d3 - animation-leash of window_animation#0 (107)
-05-02 14:17:15.113 11075 12849 V WindowManager: Relayout Window{9fa2cc8 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: viewVisibility=0 req=1440x3040 d0
-05-02 14:17:15.113   642   642 I Layer   : id=12664 Destroyed Surface(name=fbebffa Splash Screen dev.smartrobot.bevy_app)/@0x25a82d3 - animation-leash of window_animation#0
-05-02 14:17:15.114   642   642 I Layer   : id=12648 Destroyed fbebffa Splash Screen dev.smartrobot.bevy_app#0
-05-02 14:17:15.114   642   642 I Layer   : id=12649 Destroyed Splash Screen dev.smartrobot.bevy_app$_11394#0
-05-02 14:17:15.116   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd98dd0 | 0100 | RGBA_8888    |    0.0    0.0 1440.0  114.0 |    0    0 1440  114 | dev.smartrobot.bevy_app/dev.smartrobot
-05-02 14:17:15.116 11075 12849 V WindowManager: Relayout hash=9fa2cc8, pid=27815: mAttrs={(0,0)(fillxfill) sim={adjust=resize} ty=BASE_APPLICATION fmt=TRANSLUCENT wanim=0x1030303
-05-02 14:17:15.119 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::pbr_types with defs: {"VERTEX_UVS": B
-05-02 14:17:15.122 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: Relayout returned: old=(0,0,1440,3040) new=(0,114,1440,3040) req=(1440,3040)0 dur=8 res=0x81 s={true 486623795648} ch=fal
-05-02 14:17:15.123 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: [DP] dp(1) 1 android.view.ViewRootImpl.reportNextDraw:11420 android.view.ViewRootImpl.performTraversals:3698 android.view
-05-02 14:17:15.124 27815 27815 V threaded_app: WindowInsetsChanged: 0x70bd03b690
-05-02 14:17:15.124 27815 27847 D OpenGLRenderer: setSurface() destroyed EGLSurface
-05-02 14:17:15.124 27815 27847 D OpenGLRenderer: destroyEglSurface
-05-02 14:17:15.124 27815 27847 D OpenGLRenderer: eglCreateWindowSurface
-05-02 14:17:15.125 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: updateBoundsLayer: t = android.view.SurfaceControl$Transaction@8242595 sc = Surface(name=Bounds for - dev.smartrobot.bevy
-05-02 14:17:15.125 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: mWNT: t = android.view.SurfaceControl$Transaction@8242595 fN = 2 android.view.ViewRootImpl.prepareSurfaces:2778 android.v
-05-02 14:17:15.125 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: mWNT: merge t to BBQ
-05-02 14:17:15.126 27815 27815 I SurfaceView@f112719: pST: sr = Rect(0, 0 - 1440, 2926) sw = 1440 sh = 2926
-05-02 14:17:15.126 27815 27815 I SurfaceView@f112719: onSSPAndSRT: pl = 0 pt = 0 sx = 1.0 sy = 1.0
-05-02 14:17:15.126 27815 27815 I SurfaceView@f112719: pST: mTmpTransaction.apply, mTmpTransaction = android.view.SurfaceControl$Transaction@3203487
-05-02 14:17:15.126 27815 27815 I SurfaceView@f112719: updateSurface: mVisible = true mSurface.isValid() = true
-05-02 14:17:15.126 27815 27815 I SurfaceView@f112719: updateSurface: mSurfaceCreated = true surfaceChanged = false visibleChanged = false
-05-02 14:17:15.127 27815 27815 I SurfaceView@f112719: surfaceChanged (1440,2926) 1 #5 com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f112719 V.E...... ......ID 0,0-1440,2926}
-05-02 14:17:15.127 27815 27815 V threaded_app: NativeWindowResized: 0x70bd03b690 -- 0x714d09b7c0 ( 1440 x 2926 )
-05-02 14:17:15.127 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: [DP] dp(2) 1 android.view.SurfaceView.updateSurface:1375 android.view.SurfaceView.setFrame:675 android.view.View.layout:2
-05-02 14:17:15.127 27815 27815 V threaded_app: NativeWindowRedrawNeeded: 0x70bd03b690 -- 0x714d09b7c0
-05-02 14:17:15.127 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: [DP] pdf(1) 1 android.view.SurfaceView.notifyDrawFinished:599 android.view.SurfaceView.performDrawFinished:586 android.vi
-05-02 14:17:15.127 27815 27815 V threaded_app: ContentRectChanged: 0x70bd03b690 -- (0 0) (1440 2926)
-05-02 14:17:15.128 27815 27884 I SurfaceView@f112719: uSP: rtp = Rect(0, 0 - 1440, 2926) rtsw = 1440 rtsh = 2926
-05-02 14:17:15.128 27815 27884 I SurfaceView@f112719: onSSPAndSRT: pl = 0 pt = 0 sx = 1.0 sy = 1.0
-05-02 14:17:15.128 27815 27884 I SurfaceView@f112719: aOrMT: uB = true t = android.view.SurfaceControl$Transaction@b95229b fN = 2 android.view.SurfaceView.access$500:124 android.view.Surface
-05-02 14:17:15.128 27815 27884 I SurfaceView@f112719: aOrMT: vR.mWNT, vR = ViewRootImpl@210b8ab[MainActivity]
-05-02 14:17:15.128 27815 27884 I ViewRootImpl@210b8ab[MainActivity]: mWNT: t = android.view.SurfaceControl$Transaction@b95229b fN = 2 android.view.SurfaceView.applyOrMergeTransaction:1628 an
-05-02 14:17:15.128 27815 27884 I ViewRootImpl@210b8ab[MainActivity]: mWNT: merge t to BBQ
-05-02 14:17:15.132 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: [DP] pdf(0) 1 android.view.ViewRootImpl.lambda$addFrameCompleteCallbackIfNeeded$3$ViewRootImpl:4995 android.view.ViewRoot
-05-02 14:17:15.132 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: [DP] rdf()
-05-02 14:17:15.132 27815 27815 D ViewRootImpl@210b8ab[MainActivity]: reportDrawFinished (fn: 2)
-05-02 14:17:15.134 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::lighting with defs: {"VERTEX_UVS": Bo
-05-02 14:17:15.134 11075 12849 D WindowManager: finishDrawingWindow: Window{9fa2cc8 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} mDrawState=HAS_DRAWN
-05-02 14:17:15.135 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: handleResized, msg = 5 frames=ClientWindowFrames{frame=[0,114][1440,3040] display=[0,114][1440,3040] backdrop=[0,0][1440,
-05-02 14:17:15.135 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: handleResized: set mNeedReportNextDraw = true
-05-02 14:17:15.140 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::clustered_forward with defs: {"VERTEX
-05-02 14:17:15.152 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::utils with defs: {"VERTEX_UVS": Bool(
-05-02 14:17:15.153 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::shadow_sampling with defs: {"VERTEX_U
-05-02 14:17:15.161 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::color_operations with defs: {"VERT
-05-02 14:17:15.161 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::shadows with defs: {"VERTEX_UVS": Boo
-05-02 14:17:15.164 11075 11489 V WindowManager: Relayout Window{9fa2cc8 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: viewVisibility=0 req=1440x2926 d0
-05-02 14:17:15.165 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::ambient with defs: {"VERTEX_UVS": Boo
-05-02 14:17:15.166 11075 11489 V WindowManager: Relayout hash=9fa2cc8, pid=27815: mAttrs={(0,0)(fillxfill) sim={adjust=resize} ty=BASE_APPLICATION fmt=TRANSLUCENT wanim=0x1030303
-05-02 14:17:15.168 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: Relayout returned: old=(0,114,1440,3040) new=(0,114,1440,3040) req=(1440,2926)0 dur=3 res=0x1 s={true 486623795648} ch=fa
-05-02 14:17:15.168 27815 27847 D OpenGLRenderer: setSurface() destroyed EGLSurface
-05-02 14:17:15.169 27815 27847 D OpenGLRenderer: destroyEglSurface
-05-02 14:17:15.169 27815 27847 D OpenGLRenderer: eglCreateWindowSurface
-05-02 14:17:15.171 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::tonemapping_lut_bindings wi
-05-02 14:17:15.171 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::tonemapping with defs: {"VE
-05-02 14:17:15.175 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::pbr_functions with defs: {"VERTEX_UVS
-05-02 14:17:15.182 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::pbr_bindings with defs: {"VERTEX_UVS"
-05-02 14:17:15.182 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::pbr_fragment with defs: {"VERTEX_UVS"
-05-02 14:17:15.189 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::decal::clustered with defs: {"VERTEX_
-05-02 14:17:15.191 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"VERTEX_UVS": Bool(true), "DEBAND_
-05-02 14:17:15.206 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS
-05-02 14:17:15.221 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::types with d
-05-02 14:17:15.221 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::bindings wit
-05-02 14:17:15.222 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::bruneton_fun
-05-02 14:17:15.225 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::functions wi
-05-02 14:17:15.226 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::types with defs: {"MAX_DI
-05-02 14:17:15.227 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::bindings with defs: {"MAX
-05-02 14:17:15.235 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::bruneton_functions with d
-05-02 14:17:15.236 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::functions with defs: {"MA
-05-02 14:17:15.242 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"MAX_DIRECTIONAL_LIGHTS": UInt(10)
-05-02 14:17:15.250 11075 11444 D MdnieScenarioControlService:  packageName : dev.smartrobot.bevy_app    className : dev.smartrobot.bevy_app.MainActivity
-05-02 14:17:15.288 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"MAX_DIRECTIONAL_LIGHTS": UInt(10)
-05-02 14:17:15.326 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS
-05-02 14:17:15.369 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::tonemapping_lut_bindings wi
-05-02 14:17:15.369 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::tonemapping with defs: {"TO
-05-02 14:17:15.373 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE":
-05-02 14:17:15.429 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS
-05-02 14:17:15.432 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS
-05-02 14:17:15.444 27815 27861 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS
-05-02 14:17:15.449 27815 27862 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"MAX_DIRECTIONAL_LIGHTS": UInt(10)
-05-02 14:17:15.473 27815 27857 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: handle Android InsetsChanged notification
-05-02 14:17:15.486   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd9be30 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 3040.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 14:17:15.530 27815 27857 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: handle Android InsetsChanged notification
-05-02 14:17:15.572 27815 27864 I BufferQueueProducer: [SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#1(BLAST Consumer)1](id:6ca700000001,api:1,p:27815,
-05-02 14:17:15.572 27815 27864 D trobot.bevy_ap: FrameBooster: InterpolationGui: UID 10016 detected as using Vulkan
-05-02 14:17:15.603 11075 11104 D SGM:GameManager: identifyForegroundApp. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0
-05-02 14:17:15.603 11075 11104 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-02 14:17:15.654 27815 27857 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: find a way to notify application of content rect change
-05-02 14:17:19.398 11075 11356 I Pageboost: IoRecord pid : 27815
-05-02 14:17:19.401 11075 11356 I Pageboost: IoRecord pid : 27815, result_size : 22700
-05-02 14:17:19.404 11075 11356 I Pageboost: db create : CREATE TABLE IF NOT EXISTS devsmartrobotbevy_app (FILENAME TEXT, OFFSET INTEGER, SIZE INTEGER, FORVRAMDISK INTEGER, BITMAP BLOB, uniqu
-05-02 14:17:19.412 11075 11356 I Pageboost: db create : CREATE TABLE IF NOT EXISTS devsmartrobotbevy_app (FILENAME TEXT, OFFSET INTEGER, SIZE INTEGER, FORVRAMDISK INTEGER, BITMAP BLOB, uniqu
-05-02 14:17:19.420 11075 11356 I Pageboost: db update :dev.smartrobot.bevy_app ret 1
-05-02 14:17:19.558 11075 11356 I Pageboost: memUsage collected : 156751 25097 1480 for dev.smartrobot.bevy_app 27815
-05-02 14:17:20.451 27815 27958 D ProfileInstaller: Installing profile for dev.smartrobot.bevy_app
-05-02 14:17:20.467 11075 16140 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.android.server.ssrm.SortingMachine.
-05-02 14:17:20.467 11075 16140 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-02 14:17:21.724 11075 11217 I InputDispatcher: Delivering touch to (27815): action: 0x0, f=0x0, d=0, '9fa2cc8', t=1 +(0,-114)
-05-02 14:17:21.726 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: ViewPostIme pointer 0
-05-02 14:17:21.726 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:21.737 27815 27864 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srSpawning pointer Touch(0)
-05-02 14:17:21.745 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:21.762 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:21.778 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:21.795 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:21.798 11075 11217 I InputDispatcher: Delivering touch to (27815): action: 0x1, f=0x0, d=0, '9fa2cc8', t=1 +(0,-114)
-05-02 14:17:21.798 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:21.799 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: ViewPostIme pointer 1
-05-02 14:17:21.799 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:21.806 27815 27866 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srDespawning pointer Touch(0)
-05-02 14:17:21.820 27815 27863 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srUnable to get location for pointer Touch(0) during pointer out
-05-02 14:17:23.421 11075 11217 I InputDispatcher: Delivering touch to (27815): action: 0x0, f=0x0, d=0, '9fa2cc8', t=1 +(0,-114)
-05-02 14:17:23.423 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: ViewPostIme pointer 0
-05-02 14:17:23.423 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:23.432 27815 27865 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srSpawning pointer Touch(0)
-05-02 14:17:23.449 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:23.466 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:23.482 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:23.499 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:23.515 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:23.536 11075 11217 I InputDispatcher: Delivering touch to (27815): action: 0x1, f=0x0, d=0, '9fa2cc8', t=1 +(0,-114)
-05-02 14:17:23.536 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:23.536 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: ViewPostIme pointer 1
-05-02 14:17:23.536 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:23.552 27815 27866 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srDespawning pointer Touch(0)
-05-02 14:17:23.565 27815 27864 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srUnable to get location for pointer Touch(0) during pointer out
-05-02 14:17:24.101 11075 16140 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.android.server.ssrm.SortingMachine.
-05-02 14:17:24.101 11075 16140 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-02 14:17:26.961 11075 11217 I InputDispatcher: Delivering touch to (27815): action: 0x0, f=0x0, d=0, '9fa2cc8', t=1 +(0,-114)
-05-02 14:17:26.962 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: ViewPostIme pointer 0
-05-02 14:17:26.962 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:26.965 27815 27865 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srSpawning pointer Touch(0)
-05-02 14:17:27.091 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.107 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.124 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.141 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.157 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.174 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.191 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.208 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.224 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.241 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.257 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.274 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.291 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.308 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.324 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.343 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.358 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.370 11075 11102 D WindowManager: requestTransientBars: swipeTarget=Window{f94bfc8 u0 NavigationBar0}, controlTarget=Window{9fa2cc8 u0 dev.smartrobot.bevy_app/dev.smartrobot.be
-05-02 14:17:27.374 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.391 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.396   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd83590 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 14:17:27.408 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.410   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd81f10 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 14:17:27.424 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.441 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.458 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.475 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.492 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.508 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.525 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.542 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.558 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.575 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.592 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.609 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.625 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.642 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.659 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.676 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.692 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.709 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.726 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.742 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.759 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.776 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.793 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.809 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.826 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.842 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.859 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.876 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.893 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.943 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.959 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.971 11075 11217 I InputDispatcher: Delivering touch to (27815): action: 0x1, f=0x0, d=0, '9fa2cc8', t=1 +(0,-114)
-05-02 14:17:27.971 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.972 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: ViewPostIme pointer 1
-05-02 14:17:27.972 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:27.983 27815 27866 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srDespawning pointer Touch(0)
-05-02 14:17:27.999 27815 27865 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srUnable to get location for pointer Touch(0) during pointer out
-05-02 14:17:28.924 11075 11217 I InputDispatcher: Delivering touch to (27815): action: 0x0, f=0x0, d=0, '9fa2cc8', t=1 +(0,-114)
-05-02 14:17:28.924 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: ViewPostIme pointer 0
-05-02 14:17:28.924 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:28.931 27815 27864 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srSpawning pointer Touch(0)
-05-02 14:17:28.961 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:28.995 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:29.011 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:29.028 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:29.038 11902 11902 I RecentsView: onGestureAnimationStart, runningTaskInfo : TaskInfo{userId=0 taskId=13 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.
-05-02 14:17:29.040 11902 11902 I RecentsView: showCurrentTask : TaskInfo{userId=0 taskId=13 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.
-05-02 14:17:29.044 11075 12912 I InputDispatcher: Delivering touch to (27815): action: 0x3, f=0x0, d=0, '9fa2cc8', t=1 +(0,-114)
-05-02 14:17:29.044 11075 12912 I InputDispatcher: Monitor swipe-up (server) is stealing touch from [9fa2cc8 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity (server), ]
-05-02 14:17:29.044 11902 11902 I RecentsView: onGestureAnimationStart, runningTaskInfo : TaskInfo{userId=0 taskId=13 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.
-05-02 14:17:29.044 11902 11902 I RecentsView: showCurrentTask : TaskInfo{userId=0 taskId=13 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.
-05-02 14:17:29.044 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:29.046 11075 12912 D WindowManager: Moved rootTask=Task{5311c4d #1 type=home ?? U=0 visible=false mode=fullscreen translucent=true sz=1} behind rootTask=Task{e41d38f #13 type=sta
-05-02 14:17:29.049 11075 12912 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{dfb62ee u0 dev.smartrobot.bevy_app/.MainActivity t13}
-05-02 14:17:29.069 27815 27866 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srDespawning pointer Touch(0)
-05-02 14:17:29.072 11902 17009 I AppIconSolution: return the original icon because tray option is set to None for dev.smartrobot.bevy_app, isNight = true
-05-02 14:17:29.073 11902 17009 I LauncherActivityInfo: packageName: dev.smartrobot.bevy_app, useThemeIcon: true, height: 896, width: 896, density: 560
-05-02 14:17:29.078 11075 12912 D InputDispatcher: Focus left window (0): 9fa2cc8 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity
-05-02 14:17:29.079 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: MSG_WINDOW_FOCUS_CHANGED 0 1
-05-02 14:17:29.079 27815 27815 V threaded_app: WindowFocusChanged: 0x70bd03b690 -- 0
-05-02 14:17:29.087 11075 12912 V WindowManager: Changing focus from Window{9fa2cc8 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} to null displayId=0 Callers=com.android.se
-05-02 14:17:29.087 11075 12912 D MARsPolicyManager: onPackageResumedFG pkgName = dev.smartrobot.bevy_app, userId = 0
-05-02 14:17:29.118   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd83590 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |   13  133 1427 3007 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 14:17:29.194 11075 11444 D MdnieScenarioControlService:  packageName : dev.smartrobot.bevy_app    className : dev.smartrobot.bevy_app.MainActivity
-05-02 14:17:29.198 27815 27815 V threaded_app: WindowInsetsChanged: 0x70bd03b690
-05-02 14:17:29.199 27815 27857 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: handle Android InsetsChanged notification
-05-02 14:17:29.202   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd81f10 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |   41  175 1399 2935 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 14:17:29.872   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd81f10 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2924.0 |  287  583 1152 2339 | SurfaceView - dev.smartrobot.bevy_ap[.
-05-02 14:17:30.692 11075 12912 D WindowManager: onAnimationFinished(): targetRootTask=Task{5311c4d #1 type=home ?? U=0 visible=false mode=fullscreen translucent=false sz=1} targetActivity=Ac
-05-02 14:17:30.711 11075 12912 V WindowManager: Setting visibility of Window{9fa2cc8 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: false, caller=com.android.server.wm.Win
-05-02 14:17:30.724 27815 27815 V threaded_app: Pause: 0x70bd03b690
-05-02 14:17:30.724 27815 27857 V threaded_app: activityState=13
-05-02 14:17:30.724 27815 27857 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfApp Paused - stopped running
-05-02 14:17:30.724 11075 11104 D SGM:GameManager: notePauseComponent(), received pkgName: dev.smartrobot.bevy_app, userId: 0
-05-02 14:17:30.724 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: handleAppVisibility mAppVisible=true visible=false
-05-02 14:17:30.726 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: stopped(true) old=false
-05-02 14:17:30.727 27815 27847 I SurfaceView@f112719: 107746689 wPL, frameNr = 0
-05-02 14:17:30.727 27815 27847 I SurfaceView@f112719: aOrMT: uB = true t = android.view.SurfaceControl$Transaction@d58a626 fN = 0 android.view.SurfaceView.access$500:124 android.view.Surface
-05-02 14:17:30.727 27815 27847 I SurfaceView@f112719: aOrMT: vR.mWNT, vR = ViewRootImpl@210b8ab[MainActivity]
-05-02 14:17:30.727 27815 27847 I ViewRootImpl@210b8ab[MainActivity]: mWNT: t = android.view.SurfaceControl$Transaction@d58a626 fN = 0 android.view.SurfaceView.applyOrMergeTransaction:1628 an
-05-02 14:17:30.727 27815 27847 I ViewRootImpl@210b8ab[MainActivity]: mWNT: merge t to BBQ
-05-02 14:17:30.728 27815 27815 I SurfaceView@f112719: windowStopped(true) false com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f112719 V.E...... ........ 0,0-1440,2926} of Vi
-05-02 14:17:30.729 27815 27815 I SurfaceView@f112719: pST: mTmpTransaction.apply, mTmpTransaction = android.view.SurfaceControl$Transaction@3203487
-05-02 14:17:30.730 27815 27815 I SurfaceView@f112719: surfaceDestroyed callback.size 1 #1 com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f112719 V.E...... ........ 0,0-1440,2
-05-02 14:17:30.730 27815 27815 V threaded_app: NativeWindowDestroyed: 0x70bd03b690 -- 0x714d09b7c0
-05-02 14:17:30.730 27815 27815 V threaded_app: android_app_set_window called
-05-02 14:17:30.730 27815 27857 V threaded_app: APP_CMD_TERM_WINDOW
-05-02 14:17:30.740 27815 27857 V threaded_app: APP_CMD_TERM_WINDOW
-05-02 14:17:30.740 27815 27815 I SurfaceView@f112719: updateSurface: mVisible = false mSurface.isValid() = true
-05-02 14:17:30.741 27815 27815 I SurfaceView@f112719: remove() com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f112719 V.E...... ........ 0,0-1440,2926} Surface(name=SurfaceVi
-05-02 14:17:30.742   642   795 I SurfaceFlinger: id=12659 Removed Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0 (103)
-05-02 14:17:30.743 27815 27815 V threaded_app: Stop: 0x70bd03b690
-05-02 14:17:30.744 27815 27857 V threaded_app: activityState=14
-05-02 14:17:30.744 27815 27857 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: forward onStop notification to application
-05-02 14:17:30.747 27815 27815 V threaded_app: SaveInstanceState: 0x70bd03b690
-05-02 14:17:30.747 27815 27857 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: forward saveState notification to application
-05-02 14:17:30.747 27815 27857 V threaded_app: APP_CMD_SAVE_STATE
-05-02 14:17:30.748   642   642 I Layer   : id=12661 removeFromCurrentState SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0(BLAST)#0 (103)
-05-02 14:17:30.748   642   642 I Layer   : id=12662 removeFromCurrentState Background for SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#0 (103)
-05-02 14:17:30.749   642   642 I Layer   : id=12660 removeFromCurrentState SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#0 (103)
-05-02 14:17:30.749 27815 27815 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false
-05-02 14:17:30.749 27815 27815 I MSHandlerLifeCycle: removeMultiSplitHandler: no exist. decor=DecorView@e10288c[MainActivity]
-05-02 14:17:30.749   642   642 I SurfaceFlinger: id=12661 Removed SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0(BLAST)#0 (103)
-05-02 14:17:30.749   642   642 I SurfaceFlinger: id=12662 Removed Background for SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#0 (103)
-05-02 14:17:30.749   642   642 I SurfaceFlinger: id=12660 Removed SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#0 (103)
-05-02 14:17:30.749   642   642 I Layer   : id=12660 Destroyed SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#0
-05-02 14:17:30.749   642   642 I Layer   : id=12662 Destroyed Background for SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0#0
-05-02 14:17:30.750   642   642 I Layer   : id=12661 Destroyed SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f112719@0(BLAST)#0
-05-02 14:17:30.752 27815 27815 I SurfaceView@f112719: onWindowVisibilityChanged(8) false com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f112719 V.E...... ........ 0,0-1440,29
-05-02 14:17:30.752 27815 27815 D SurfaceView@f112719: updateSurface: surface is not valid
-05-02 14:17:30.754 27815 27847 D OpenGLRenderer: setSurface called with nullptr
-05-02 14:17:30.754 27815 27847 D OpenGLRenderer: setSurface() destroyed EGLSurface
-05-02 14:17:30.754 27815 27847 D OpenGLRenderer: destroyEglSurface
-05-02 14:17:30.756 11075 12849 V WindowManager: Relayout Window{9fa2cc8 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: viewVisibility=8 req=1440x2926 d0
-05-02 14:17:30.759 11075 12849 V WindowManager: Relayout hash=9fa2cc8, pid=27815: mAttrs={(0,0)(fillxfill) sim={adjust=resize} ty=BASE_APPLICATION fmt=TRANSLUCENT wanim=0x1030303
-05-02 14:17:30.760   642  3090 I SurfaceFlinger: id=12663 Removed Surface(name=9fa2cc8 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0xa7d1ae3 - animation-leash of starting_
-05-02 14:17:30.761 27815 27815 I ViewRootImpl@210b8ab[MainActivity]: Relayout returned: old=(0,114,1440,3040) new=(0,114,1440,3040) req=(1440,2926)8 dur=5 res=0x5 s={false 0} ch=false fn=-1
-05-02 14:17:30.761 27815 27815 D SurfaceView@f112719: updateSurface: surface is not valid
-05-02 14:17:30.762 27815 27815 D InputTransport: Input channel destroyed: 'ClientS', fd=119
-05-02 14:17:30.763 11075 12849 E WindowManager: win=Window{9fa2cc8 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} destroySurfaces: appStopped=true win.mWindowRemovalAllowed
-05-02 14:17:30.763 11075 12849 I WindowManager: Destroying surface Surface(name=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_27815)/@0x2c4be05 called by com.android.server.wm.WindowStateAnimator.destroySurface:987 com.android.server.wm.WindowStateAnimator.destroySurfaceLocked:518 com.android.server.wm.WindowState.destroySurfaceUnchecked:4229 com.android.server.wm.WindowState.destroySurface:4203 com.android.server.wm.ActivityRecord.destroySurfaces:5848 com.android.server.wm.ActivityRecord.destroySurfaces:5829 com.android.server.wm.ActivityRecord.notifyAppStopped:5893 com.android.server.wm.ActivityRecord.activityStopped:6519
-05-02 14:17:30.765   642   642 I Layer   : id=12656 removeFromCurrentState dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_27815#0 (101)
-05-02 14:17:30.765   642   642 I Layer   : id=12659 removeFromCurrentState Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0 (101)
-05-02 14:17:30.765   642   642 I Layer   : id=12663 Destroyed Surface(name=9fa2cc8 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0xa7d1ae3 - animation-leash of starting_reveal#0
-05-02 14:17:30.781   642   642 I SurfaceFlinger: id=12656 Removed dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_27815#0 (99)
-05-02 14:17:30.782   642   642 I Layer   : id=12656 Destroyed dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_27815#0
-05-02 14:17:30.782   642   642 I Layer   : id=12659 Destroyed Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0
-05-02 14:17:30.782 27815 27815 V threaded_app: TrimMemory: 0x70bd03b690 20
-05-02 14:17:30.782 11075 12904 W InputDispatcher: Letterbox_top_ActivityRecord{dfb62ee u0 dev.smartrobot.bevy_app/.MainActivity t13} has FLAG_SLIPPERY. Please report this in b/157929241
-05-02 14:17:33.547 27815 27815 V threaded_app: Destroy: 0x70bd03b690
-05-02 14:17:33.547 27815 27857 V threaded_app: APP_CMD_DESTROY
-05-02 14:17:33.547 27815 27857 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: forward onDestroy notification to application
-05-02 14:17:33.551 11075 11104 I ActivityManager: Killing 27815:dev.smartrobot.bevy_app/u0a16 (adj 905): remove task:remove-task
-05-02 14:17:33.552 11075 11104 D ActivityManager: [SD] user menu kill listen remove action name:dev.smartrobot.bevy_app uid:10016
-05-02 14:17:33.559 11075 11113 I libprocessgroup: Successfully killed process cgroup uid 10016 pid 27815 in 5ms
-05-02 14:17:33.848 11075 13588 I WindowManager: WIN DEATH: Window{9fa2cc8 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}
-05-02 14:17:33.849 11075 13588 W InputManager-JNI: Input channel object '9fa2cc8 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity (client)' was disposed without first being removed with the input manager!
-05-02 14:17:33.850 10941 10941 I Zygote  : Process 27815 exited due to signal 9 (Killed)
-05-02 14:17:33.850 10942 10942 I AudioFlinger: removeDlbCodecCallback pid:27815 type:-1
-05-02 14:17:33.854 11075 12904 I ActivityTaskManager: Removing activity ActivityRecord{dfb62ee u0 dev.smartrobot.bevy_app/.MainActivity t13 f}}(appDied)  from stack callers=com.android.server.wm.ActivityRecord.handleAppDied:4267 com.android.server.wm.WindowProcessController.handleAppDied:1287 com.android.server.wm.ActivityTaskManagerService$LocalService.handleAppDied:7078 com.android.server.am.ActivityManagerService.handleAppDiedLocked:3647 com.android.server.am.ActivityManagerService.appDiedLocked:3837
-05-02 14:17:33.854   642   642 I Layer   : id=12655 removeFromCurrentState 9fa2cc8 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0 (97)
-05-02 14:17:33.854   642   642 I SurfaceFlinger: id=12655 Removed 9fa2cc8 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0 (97)
-05-02 14:17:33.855   642   642 I Layer   : id=12655 Destroyed 9fa2cc8 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0
-05-02 14:17:33.857 11075 12904 W InputManager-JNI: Input channel object 'Letterbox_left_ActivityRecord{dfb62ee u0 dev.smartrobot.bevy_app/.MainActivity t13} (client)' was disposed without first being removed with the input manager!
-05-02 14:17:33.858 11075 12904 W InputManager-JNI: Input channel object 'Letterbox_top_ActivityRecord{dfb62ee u0 dev.smartrobot.bevy_app/.MainActivity t13} (client)' was disposed without first being removed with the input manager!
-05-02 14:17:33.858 11075 12904 W InputManager-JNI: Input channel object 'Letterbox_right_ActivityRecord{dfb62ee u0 dev.smartrobot.bevy_app/.MainActivity t13} (client)' was disposed without first being removed with the input manager!
-05-02 14:17:33.858 11075 12904 W InputManager-JNI: Input channel object 'Letterbox_bottom_ActivityRecord{dfb62ee u0 dev.smartrobot.bevy_app/.MainActivity t13} (client)' was disposed without first being removed with the input manager!
-05-02 14:17:33.866 11075 11104 W ActivityManager: setHasOverlayUi called on unknown pid: 27815
+05-03 10:12:19.470 26231 26496 I Pageboost: start alp : dev.smartrobot.bevy_app
+05-03 10:12:19.471 26231 26500 I Pageboost: alp for : dev.smartrobot.bevy_app , 0
+05-03 10:12:19.471  2652 29964 E pageboostd: alp start : app devsmartrobotbevy_app
+05-03 10:12:19.476  2652 29964 E pageboostd: devsmartrobotbevy_app, amt 0 scnt 0 fcnt 0
+05-03 10:12:19.476  2652 29964 E pageboostd: devsmartrobotbevy_app, amt 0 scnt 0 fcnt 0
+05-03 10:12:19.476  2652 29964 E pageboostd: alp end : app devsmartrobotbevy_app data_amount 0
+05-03 10:12:19.541 27039 27141 I AppIconSolution: return the original icon because tray option is set to None for dev.smartrobot.bevy_app, isNight = true
+05-03 10:12:19.541 27039 27141 I LauncherActivityInfo: packageName: dev.smartrobot.bevy_app, useThemeIcon: true, height: 896, width: 896, density: 640
+05-03 10:12:19.542 26231 27048 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity bnds=[1128,370][1389,784]} from uid 10114
+05-03 10:12:19.544 26231 27048 D ActivityTaskManager: TaskLaunchParamsModifier:task=null activity=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity display-from-option=0 display-id=0 display-windowing-mode=1 suggested-display-area=DefaultTaskDisplayArea@189868026
+05-03 10:12:19.544 26231 27048 D [secipm]: mSecIpmManager Preload dev.smartrobot.bevy_app dex files
+05-03 10:12:19.544 26231 27048 D ActivityTaskManager: TaskLaunchParamsModifier:task=null activity=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t-1} display-from-option=0 display-id=0 display-windowing-mode=1 suggested-display-area=DefaultTaskDisplayArea@189868026 inherit-from-source=fullscreen activity-options-fullscreen=Rect(0, 0 - 0, 0) non-freeform-display display-area=DefaultTaskDisplayArea@189868026 maximized-bounds
+05-03 10:12:19.544 26231 27706 D PkgPredictorService-IpmAdcpController: create a new DexPreloadTask pkg:dev.smartrobot.bevy_app  path:/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==
+05-03 10:12:19.545 26231 27048 D ActivityTaskManager: TaskLaunchParamsModifier:task=Task{f433d55 #12 type=standard A=10728:dev.smartrobot.bevy_app U=0 visible=false mode=fullscreen translucent=true sz=0} activity=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t-1} display-from-option=0 display-id=0 display-windowing-mode=1 suggested-display-area=DefaultTaskDisplayArea@189868026 inherit-from-source=fullscreen activity-options-fullscreen=Rect(0, 0 - 0, 0) non-freeform-display display-area=DefaultTaskDisplayArea@189868026 maximized-bounds
+05-03 10:12:19.547   642  3090 I SurfaceFlinger: id=12925 createSurf (0x0),-1 flag=80004, ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}#0
+05-03 10:12:19.548 26526 26635 D StartingSurfaceDrawer: addSplashScreen dev.smartrobot.bevy_app theme=7f100220 task=12 suggestType=1
+05-03 10:12:19.552 26231 26231 I Pageboost: package dev.smartrobot.bevy_app
+05-03 10:12:19.552 26231 26500 I Pageboost: Record App IO : dev.smartrobot.bevy_app pid 0
+05-03 10:12:19.555   642  3090 I SurfaceFlinger: id=12926 createSurf (0x0),-1 flag=80004, fcf25c5 Splash Screen dev.smartrobot.bevy_app#0
+05-03 10:12:19.558 26231 27048 D MARsPolicyManager: onPackageResumedFG pkgName = dev.smartrobot.bevy_app, userId = 0
+05-03 10:12:19.566 26004 26004 D Zygote  : Forked child process 29974
+05-03 10:12:19.567 26231 26257 I ActivityManager: Start proc 29974:dev.smartrobot.bevy_app/u0a728 for pre-top-activity {dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}
+05-03 10:12:19.567 26231 26257 D ActivityManager: [SecIpm] it's a ML_TYPE_EMPTYPROCESS protected process dev.smartrobot.bevy_app
+05-03 10:12:19.571 26231 28023 V WindowManager: Relayout Window{fcf25c5 u0 Splash Screen dev.smartrobot.bevy_app}: viewVisibility=0 req=1440x3040 d0
+05-03 10:12:19.571   642  3090 I SurfaceFlinger: id=12927 createSurf (1x1),-3 flag=40004, Splash Screen dev.smartrobot.bevy_app$_26526#0
+05-03 10:12:19.572 26231 28023 D WindowManager: makeSurface duration=1 name=Splash Screen dev.smartrobot.bevy_app$_26526
+05-03 10:12:19.573 26231 28023 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}
+05-03 10:12:19.575 26231 27048 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}
+05-03 10:12:19.577 29974 29974 I trobot.bevy_ap: Late-enabling -Xcheck:jni
+05-03 10:12:19.580 26231 27048 D WindowManager: finishDrawingWindow: Window{fcf25c5 u0 Splash Screen dev.smartrobot.bevy_app} mDrawState=DRAW_PENDING
+05-03 10:12:19.584 26231 26250 D WindowManager: createAnimationAdapter(): container=Task{f433d55 #12 type=standard A=10728:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
+05-03 10:12:19.585 26231 26250 D WindowManager:         Add container=Task{f433d55 #12 type=standard A=10728:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
+05-03 10:12:19.590 26231 26250 I WindowManager: container=Task{f433d55 #12 type=standard A=10728:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
+05-03 10:12:19.590 26231 26250 I WindowManager:   taskInfo=TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} topActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} numActivities=1 lastActiveTime=990779295 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true token=WCT{RemoteToken{b436a07 Task{f433d55 #12 type=standard A=10728:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}}} topActivityType=1 pictureInPictureParams=PictureInPictureParams( aspectRatio=null sourceRectHint=null hasSetActions=false isAutoPipEnabled=false isSeamlessResizeEnabled=true) displayCutoutSafeInsets=Rect(0, 113 - 0, 0) topActivityInfo=ActivityInfo{e6c7734 dev.smartrobot.bevy_app.MainActivity} launchCookies=[android.os.BinderProxy@6b8c95d] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=true topActivityInSizeCompat=false locusId= null topLaunchHome=false launchSplitWindowingMode=0 isPairTask=false pairedTaskIds=[] pairWindowingMode=0 pairDockSide=0 isAnimatingByRecent=false originallySupportedSplitScreen=true isAnimatingFreeformToFullscreen=false topActivityInFixedAspectRatio=false isTopTransparentActivity=true}
+05-03 10:12:19.592 26231 26249 D WindowManager:         container=Task{f433d55 #12 type=standard A=10728:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
+05-03 10:12:19.600 25967 25972 I adbd    : jdwp connection from 29974
+05-03 10:12:19.601 29974 29974 E USNET   : USNET: appName: dev.smartrobot.bevy_app
+05-03 10:12:19.602 29974 29974 D ProcessState: Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-03 10:12:19.606 29974 29974 D ActivityThread: setConscryptValidator
+05-03 10:12:19.607 29974 29974 D ActivityThread: setConscryptValidator - put
+05-03 10:12:19.608   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd7fe70 | 0100 | RGBA_8888    |    0.0    0.0 1440.0 3040.0 |    0    0 1440 3040 | Splash Screen dev.smartrobot.bevy_app$_26526#0
+05-03 10:12:19.611 26231 27048 I ActivityManager: DSS OFF for dev.smartrobot.bevy_app
+05-03 10:12:19.613 26231 27048 I DexController: getTaskHasActivityIsWaitingToRun: r=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}, app=ProcessRecord{d35164b 29974:dev.smartrobot.bevy_app/u0a728}
+05-03 10:12:19.613 26231 27048 D ActivityManager: attachApplicationLocked() app=ProcessRecord{d35164b 29974:dev.smartrobot.bevy_app/u0a728} app.isolatedEntryPoint=null instr2=null
+05-03 10:12:19.614 26231 27048 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}
+05-03 10:12:19.614 26231 27048 D SGM:PkgDataHelper: notifyAppCreate(), pkgName: dev.smartrobot.bevy_app, userId: 0, sendRet: true
+05-03 10:12:19.614 26231 26371 D SGM:GameManager: onLooperPrepared(), msg: MSG_APP_CREATE, pkgName: dev.smartrobot.bevy_app, userId: 0
+05-03 10:12:19.615 26231 27048 D SGM:GameManager:   sendRunningComponentFocus(), pkgName: dev.smartrobot.bevy_app, userId: 0
+05-03 10:12:19.615 26231 26371 D SGM:GameManager: onLooperPrepared(), msg: MSG_TASK_FOCUSED, pkgName: dev.smartrobot.bevy_app, userId: 0
+05-03 10:12:19.615 26231 26371 D SGM:GameManager:   handleTaskFocused(), pkgName: dev.smartrobot.bevy_app, userID:0
+05-03 10:12:19.615 26231 26371 D SGM:GameManager:   handleResume(). pkgName: dev.smartrobot.bevy_app, userId: 0, isTunableApp: null
+05-03 10:12:19.615 26231 26371 D SGM:GameManager: notifyFocusInOut(). of pkg: dev.smartrobot.bevy_app, type: 4, isMinimized: false, isTunableApp: false, userId: 0
+05-03 10:12:19.616 26231 26370 V ActivityManager: Changed top to ProcessRecord{d35164b 29974:dev.smartrobot.bevy_app/u0a728}
+05-03 10:12:19.618 26231 26247 D SSRM:LoadDetectMonitor: PID = 29974, UID = 10728
+05-03 10:12:19.624 29974 29974 D ActivityThread: handleBindApplication()++ app=dev.smartrobot.bevy_app
+05-03 10:12:19.626 29974 29974 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10728; state: ENABLED
+05-03 10:12:19.639 26231 26249 I GameSDK@LifeCycle: noteResumeComponent(): package name  : dev.smartrobot.bevy_app
+05-03 10:12:19.639 26231 26249 D SGM:GameManager: noteResumeComponent(), received pkgName: dev.smartrobot.bevy_app, userId: 0
+05-03 10:12:19.640 26231 26371 D SGM:GameManager: onLooperPrepared(), msg: MSG_APP_RESUME, pkgName: dev.smartrobot.bevy_app, userid: 0
+05-03 10:12:19.640 26231 26371 D SGM:GameManager:   handleResume(). pkgName: dev.smartrobot.bevy_app, userId: 0, isTunableApp: null
+05-03 10:12:19.640 26231 26371 D SGM:GameManager: notifyFocusInOut(). of pkg: dev.smartrobot.bevy_app, type: 4, isMinimized: false, isTunableApp: false, userId: 0
+05-03 10:12:19.640 26231 26249 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.android.server.ssrm.fgapps.GameAppUtils.isGame(GameAppUtils.java:84)
+05-03 10:12:19.640 26231 26249 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
+05-03 10:12:19.640 26231 26249 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.android.server.ssrm.SortingMachine.isGame(SortingMachine.java:162)
+05-03 10:12:19.640 26231 26249 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
+05-03 10:12:19.641 26231 26249 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.samsung.android.game.SemGameManager.isGamePackage(SemGameManager.java:104)
+05-03 10:12:19.641 26231 26249 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
+05-03 10:12:19.641 26231 26249 D SGM:SemGameManager: isGamePackage(), pkgName=dev.smartrobot.bevy_app, ret=false
+05-03 10:12:19.654 26231 26500 I Pageboost: 64 bit checked : true for 29974
+05-03 10:12:19.654 26231 26500 I Pageboost: IoRecord pid : 29974, started correctly
+05-03 10:12:19.683 29974 29974 V GraphicsEnvironment: ANGLE Developer option for 'dev.smartrobot.bevy_app' set to: 'default'
+05-03 10:12:19.683 29974 29974 V GraphicsEnvironment: App is not on the allowlist for updatable production driver.
+05-03 10:12:19.685 29974 29974 D LoadedApk: LoadedApk::makeApplication() appContext.mOpPackageName=dev.smartrobot.bevy_app appContext.mBasePackageName=dev.smartrobot.bevy_app
+05-03 10:12:19.685 29974 29974 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+05-03 10:12:19.696 29974 29974 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+05-03 10:12:19.710 29974 29974 D ActivityThread: handleBindApplication() --
+05-03 10:12:19.716 29974 30004 D OpenGLRenderer: RenderThread::requireGlContext()
+05-03 10:12:19.721 29974 30004 I libEGL  : EGL_ANDROID_blob_cache_path advertised, but unable to get eglSetBlobCachePathANDROID
+05-03 10:12:19.724 29974 30004 D OpenGLRenderer: RenderThread::setGrContext()
+05-03 10:12:19.750 26231 26560 D MdnieScenarioControlService:  packageName : dev.smartrobot.bevy_app    className : dev.smartrobot.bevy_app.MainActivity
+05-03 10:12:19.752 29974 29974 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
+05-03 10:12:19.772 29974 29974 I DecorView: [INFO] isPopOver=false, config=true
+05-03 10:12:19.772 29974 29974 I DecorView: updateCaptionType >> DecorView@9d5c6ee[], isFloating=false, isApplication=true, hasWindowControllerCallback=true, hasWindowDecorCaption=false
+05-03 10:12:19.772 29974 29974 D DecorView: setCaptionType = 0, this = DecorView@9d5c6ee[]
+05-03 10:12:19.775 29974 29974 I DecorView: getCurrentDensityDpi: from real metrics. densityDpi=560 msg=resources_loaded
+05-03 10:12:19.781 29974 29974 W trobot.bevy_ap: Accessing hidden method Landroid/view/View;->computeFitSystemWindows(Landroid/graphics/Rect;Landroid/graphics/Rect;)Z (unsupported, reflection, allowed)
+05-03 10:12:19.782 29974 29974 W trobot.bevy_ap: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (unsupported, reflection, allowed)
+05-03 10:12:19.784 29974 29974 I GameActivity: Looking for library libsmartrobot_bevy.so
+05-03 10:12:19.784 29974 29974 I GameActivity: Found library libsmartrobot_bevy.so. Loading...
+05-03 10:12:19.790 29974 29974 D GameActivity: GameActivity_register
+05-03 10:12:19.791 29974 29974 V GameActivity: Registering com/google/androidgamesdk/GameActivity's 22 native methods...
+05-03 10:12:19.791 29974 29974 V threaded_app: Creating: 0x7446f4f1f0
+05-03 10:12:19.791 29974 29974 V threaded_app: Callbacks set: 0x7446f4f240
+05-03 10:12:19.791 29974 29974 V threaded_app: Launching android_app_entry in a thread
+05-03 10:12:19.791 29974 30018 V threaded_app: android_app_entry called
+05-03 10:12:19.791 29974 30018 V threaded_app: android_app = 0x7426f5a190
+05-03 10:12:19.791 29974 30018 V threaded_app: config = 0x7396f7a970
+05-03 10:12:19.791 29974 30018 V threaded_app: activity = 0x7446f4f1f0
+05-03 10:12:19.791 29974 30018 V threaded_app: assetmanager = 0x7446f4c950
+05-03 10:12:19.791 29974 30018 V threaded_app: Config: mcc=0 mnc=0 lang=en cnt=US orien=1 touch=3 dens=560 keys=1 nav=1 keysHid=3 navHid=0 sdk=31 size=2 long=2 modetype=1 modenight=2
+05-03 10:12:19.796   528   528 E audit   : type=1400 audit(1746277939.789:19255): avc:  denied  { read } for  pid=29974 comm="android_main" name="cpu.cfs_quota_us" dev="cgroup" ino=9 scontext=u:r:untrusted_app:s0:c216,c258,c512,c768 tcontext=u:object_r:cgroup:s0 tclass=file permissive=0 SEPF_SM-N975F_12_0001 audit_filtered
+05-03 10:12:19.796   528   528 E audit   : type=1300 audit(1746277939.789:19255): arch=c00000b7 syscall=56 success=no exit=-13 a0=ffffff9c a1=732e1798b8 a2=80000 a3=0 items=0 ppid=26004 pid=29974 auid=4294967295 uid=10728 gid=10728 euid=10728 suid=10728 fsuid=10728 egid=10728 sgid=10728 fsgid=10728 tty=(none) ses=4294967295 comm="android_main" exe="/system/bin/app_process64" subj=u:r:untrusted_app:s0:c216,c258,c512,c768 key=(null)
+05-03 10:12:19.796   528   528 E audit   : type=1327 audit(1746277939.789:19255): proctitle="dev.smartrobot.bevy_app"
+05-03 10:12:19.796   528   528 E audit   : type=1400 audit(1746277939.789:19256): avc:  denied  { read } for  pid=29974 comm="android_main" name="cpu.cfs_period_us" dev="cgroup" ino=10 scontext=u:r:untrusted_app:s0:c216,c258,c512,c768 tcontext=u:object_r:cgroup:s0 tclass=file permissive=0 SEPF_SM-N975F_12_0001 audit_filtered
+05-03 10:12:19.796   528   528 E audit   : type=1300 audit(1746277939.789:19256): arch=c00000b7 syscall=56 success=no exit=-13 a0=ffffff9c a1=732e1798b8 a2=80000 a3=0 items=0 ppid=26004 pid=29974 auid=4294967295 uid=10728 gid=10728 euid=10728 suid=10728 fsuid=10728 egid=10728 sgid=10728 fsgid=10728 tty=(none) ses=4294967295 comm="android_main" exe="/system/bin/app_process64" subj=u:r:untrusted_app:s0:c216,c258,c512,c768 key=(null)
+05-03 10:12:19.802 29974 30018 D vulkan  : searching for layers in '/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/lib/arm64'
+05-03 10:12:19.802 29974 30018 D vulkan  : searching for layers in '/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/base.apk!/lib/arm64-v8a'
+05-03 10:12:19.822 26231 26454 W SemWifiTransportLayerUtils: getApplicationCategory - IOException dev.smartrobot.bevy_app
+05-03 10:12:19.822 26231 26454 W System.err: java.io.FileNotFoundException: https://play.google.com/store/apps/details?id=dev.smartrobot.bevy_app&hl=en
+05-03 10:12:19.851 29974 29974 V GameActivity: onStart_native
+05-03 10:12:19.851 29974 29974 V threaded_app: Start: 0x7446f4f1f0
+05-03 10:12:19.864 29974 30018 I event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_render-0.16.0/srcAdapterInfo { name: "Mali-G76", vendor: 5045, device: 1913716736, device_type: IntegratedGpu, driver: "Mali-G76", driver_info: "v1.r32p1-01bet2-mbs2v39_0.131801e953429f661ecce1d5e1d2b3ef", backend: Vulkan }
+05-03 10:12:20.051 29974 30018 I OboeAudio: openStreamInternal() OUTPUT -------- OboeVersion1.8.1 --------
+05-03 10:12:20.052 29974 30018 I AAudio  : AAudioStreamBuilder_openStream() called ----------------------------------------
+05-03 10:12:20.052 29974 30018 I AudioStreamBuilder: rate   =  44100, channels  = 2, format   = 5, sharing = SH, dir = OUTPUT
+05-03 10:12:20.052 29974 30018 I AudioStreamBuilder: device =      0, sessionId = -1, perfMode = 10, callback: ON with frames = 0
+05-03 10:12:20.052 29974 30018 I AudioStreamBuilder: usage  =      1, contentType = 2, inputPreset = 6, allowedCapturePolicy = 0
+05-03 10:12:20.052 29974 30018 I AudioStreamBuilder: privacy sensitive = false
+05-03 10:12:20.052 29974 30018 I AudioStreamBuilder: opPackageName = (null)
+05-03 10:12:20.052 29974 30018 I AudioStreamBuilder: attributionTag = (null)
+05-03 10:12:20.052 29974 30018 D AudioStreamBuilder: build() MMAP not used because AAUDIO_PERFORMANCE_MODE_LOW_LATENCY not requested.
+05-03 10:12:20.052 29974 30018 D trobot.bevy_ap: PlayerBase::PlayerBase()
+05-03 10:12:20.053 29974 30018 D AudioStreamTrack: open(), request notificationFrames = 0, frameCount = 0
+05-03 10:12:20.057 29974 30018 D AudioTrack: setVolume(1.000000, 1.000000) pid : 29974
+05-03 10:12:20.057 29974 30018 D AAudioStream: setState(s#1) from 0 to 2
+05-03 10:12:20.058 29974 30018 I AAudio  : AAudioStreamBuilder_openStream() returns 0 = AAUDIO_OK for s#1 ----------------
+05-03 10:12:20.058 29974 30018 D AAudio  : AAudioStream_requestStart(s#1) called --------------
+05-03 10:12:20.058 29974 30018 D AAudioStream: setState(s#1) from 2 to 3
+05-03 10:12:20.059 29974 29998 D AudioStreamLegacy: onAudioDeviceUpdate(deviceId = 3)
+05-03 10:12:20.059 29974 30018 D AAudio  : AAudioStream_requestStart(s#1) returned 0 ---------
+05-03 10:12:20.059 26231 26231 D AudioPlayerStateMonitor: Found a new active media playback. AudioPlaybackConfiguration piid:2242847 deviceId:3 type:AAudio u/pid:10728/29974 state:started attr:AudioAttributes: usage=USAGE_MEDIA content=CONTENT_TYPE_UNKNOWN flags=0x0 tags= bundle=null sessionId:-1
+05-03 10:12:20.061 29974 30018 E event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_gilrs-0.16.0/src/Failed to start Gilrs. Gilrs does not support current platform.
+05-03 10:12:20.100 29974 30018 I event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_render-0.16.0/srcGPU preprocessing is not supported on this device. Falling back to CPU preprocessing.
+05-03 10:12:20.128 29974 30049 D AAudioStream: setState(s#1) from 3 to 4
+05-03 10:12:20.130 29974 30018 I event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_winit-0.16.0/src/Creating new window App (0v1)
+05-03 10:12:20.130 29974 30018 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_winit-0.16.0/src/Display information:  Window physical resolution: 1280x720  Window logical resolution: 1280x720  Monitor name: Android Device  Scale factor: 3.5  Refresh rate (Hz): 0.000
+05-03 10:12:20.130 29974 30018 E event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfCannot get the native window, it's null and will always be null before Event::Resumed and after Event::Suspended. Make sure you only call this function between those events.
+05-03 10:12:20.167 29974 30018 V threaded_app: activityState=10
+05-03 10:12:20.167 29974 30018 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: forward onStart notification to application
+05-03 10:12:20.170 29974 29974 V threaded_app: Resume: 0x7446f4f1f0
+05-03 10:12:20.170 29974 30018 V threaded_app: activityState=11
+05-03 10:12:20.170 29974 30018 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfApp Resumed - is running
+05-03 10:12:20.172 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: ignored. pkg=dev.smartrobot.bevy_app parent=null callers=com.android.internal.policy.DecorView.setVisibility:4294 android.app.ActivityThread.handleResumeActivity:5301 android.app.servertransaction.ResumeActivityItem.execute:54 android.app.servertransaction.ActivityTransactionItem.execute:45 android.app.servertransaction.TransactionExecutor.executeLifecycleState:176
+05-03 10:12:20.172 29974 29974 I MSHandlerLifeCycle: removeMultiSplitHandler: no exist. decor=DecorView@9d5c6ee[]
+05-03 10:12:20.184   642  3090 I SurfaceFlinger: id=12933 createSurf (0x0),-1 flag=80004, 8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0
+05-03 10:12:20.186 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: setView = com.android.internal.policy.DecorView@9d5c6ee TM=true
+05-03 10:12:20.188 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:20.188 29974 29974 I MSHandlerLifeCycle: removeMultiSplitHandler: no exist. decor=DecorView@9d5c6ee[MainActivity]
+05-03 10:12:20.195 29974 29974 I SurfaceView@f0c4b33: onWindowVisibilityChanged(0) true com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f0c4b33 V.E...... ......I. 0,0-0,0} of ViewRootImpl@320ff7b[MainActivity]
+05-03 10:12:20.198 29974 29974 V threaded_app: WindowInsetsChanged: 0x7446f4f1f0
+05-03 10:12:20.199 26231 28072 V WindowManager: Relayout Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: viewVisibility=0 req=1440x3040 d0
+05-03 10:12:20.199   642  3090 I SurfaceFlinger: id=12934 createSurf (1x1),-3 flag=40004, dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974#0
+05-03 10:12:20.200 26231 28072 D WindowManager: makeSurface duration=1 name=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974
+05-03 10:12:20.201 26231 28072 V WindowManager: Changing focus from null to Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} displayId=0 Callers=com.android.server.wm.RootWindowContainer.updateFocusedWindowLocked:583 com.android.server.wm.WindowManagerService.updateFocusedWindowLocked:6505 com.android.server.wm.WindowManagerService.relayoutWindow:2770 com.android.server.wm.Session.relayout:242
+05-03 10:12:20.201 26231 28072 D MARsPolicyManager: onPackageResumedFG pkgName = dev.smartrobot.bevy_app, userId = 0
+05-03 10:12:20.203 26231 28072 V WindowManager: Relayout hash=8af2056, pid=29974: mAttrs={(0,0)(fillxfill) sim={adjust=resize forwardNavigation} ty=BASE_APPLICATION fmt=TRANSLUCENT wanim=0x1030303
+05-03 10:12:20.206   642  2162 W ServiceManager: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10728 pid=29974
+05-03 10:12:20.207   642  2162 W ServiceManager: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10728 pid=29974
+05-03 10:12:20.208 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: Relayout returned: old=(0,0,1440,3040) new=(0,0,1440,3040) req=(1440,3040)0 dur=6 res=0x7 s={true 501823046144} ch=true fn=-1
+05-03 10:12:20.210 29974 29974 I SurfaceView@f0c4b33: windowStopped(false) true com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f0c4b33 V.E...... ......ID 0,0-1440,3040} of ViewRootImpl@320ff7b[MainActivity]
+05-03 10:12:20.210 29974 29974 V threaded_app: ContentRectChanged: 0x7446f4f1f0 -- (0 0) (1440 3040)
+05-03 10:12:20.210 29974 30004 D hw-ProcessState: Binder ioctl to enable oneway spam detection failed: Invalid argument
+05-03 10:12:20.211 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: [DP] dp(1) 1 android.view.ViewRootImpl.reportNextDraw:11420 android.view.ViewRootImpl.performTraversals:4193 android.view.ViewRootImpl.doTraversal:2919
+05-03 10:12:20.211 29974 30004 D OpenGLRenderer: eglCreateWindowSurface
+05-03 10:12:20.211   642  3090 I SurfaceFlinger: id=12937 createSurf (0x0),-1 flag=20004, Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0
+05-03 10:12:20.212   642  2162 I SurfaceFlinger: id=12938 createSurf (0x0),-1 flag=80004, SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#0
+05-03 10:12:20.212   642  2162 I SurfaceFlinger: id=12939 createSurf (0x0),-1 flag=40400, SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0(BLAST)#0
+05-03 10:12:20.212   642  2162 I SurfaceFlinger: id=12940 createSurf (0x0),-1 flag=20404, Background for SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#0
+05-03 10:12:20.212 29974 29974 I SurfaceView@f0c4b33: pST: sr = Rect(0, 0 - 1440, 3040) sw = 1440 sh = 3040
+05-03 10:12:20.212 29974 29974 I SurfaceView@f0c4b33: onSSPAndSRT: pl = 0 pt = 0 sx = 1.0 sy = 1.0
+05-03 10:12:20.213 29974 29974 I SurfaceView@f0c4b33: pST: mTmpTransaction.apply, mTmpTransaction = android.view.SurfaceControl$Transaction@1361857
+05-03 10:12:20.213 29974 29974 I SurfaceView@f0c4b33: updateSurface: mVisible = true mSurface.isValid() = true
+05-03 10:12:20.213 29974 29974 I SurfaceView@f0c4b33: updateSurface: mSurfaceCreated = false surfaceChanged = true visibleChanged = true
+05-03 10:12:20.213 29974 29974 I SurfaceView@f0c4b33: surfaceCreated 1 #8 com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f0c4b33 V.E...... ......ID 0,0-1440,3040}
+05-03 10:12:20.213 29974 29974 V GameActivity: onSurfaceCreated_native
+05-03 10:12:20.213 29974 29974 V threaded_app: NativeWindowCreated: 0x7446f4f1f0 -- 0x74d6fb9be0
+05-03 10:12:20.213 29974 29974 V threaded_app: android_app_set_window called
+05-03 10:12:20.224 26231 28023 D InputDispatcher: Focus request (0): 8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity but waiting because NOT_VISIBLE
+05-03 10:12:20.228 29974 30029 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_core_pipeline-0.1Downsample depth is not supported on this platform.
+05-03 10:12:20.245 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::fullscreen_vertex_shader with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.246 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::fullscreen_vertex_shader with defs: {}
+05-03 10:12:20.246 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::fullscreen_vertex_shader with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.247 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.249 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::forward_io with defs: {}
+05-03 10:12:20.249 29974 30018 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: handle Android InsetsChanged notification
+05-03 10:12:20.249 29974 30018 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: find a way to notify application of content rect change
+05-03 10:12:20.249 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_types with defs: {}
+05-03 10:12:20.249 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_bindings with defs: {}
+05-03 10:12:20.250 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::morph with defs: {}
+05-03 10:12:20.251 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::maths with defs: {}
+05-03 10:12:20.251 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::view with defs: {}
+05-03 10:12:20.252 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_view_types with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 10:12:20.252 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::globals with defs: {}
+05-03 10:12:20.253 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_view_bindings with defs: {}
+05-03 10:12:20.253 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::prepass_bindings with defs: {}
+05-03 10:12:20.255 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::view_transformations with defs: {}
+05-03 10:12:20.256 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::mesh_functions with defs: {}
+05-03 10:12:20.257 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::skinning with defs: {}
+05-03 10:12:20.258 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::forward_io with defs: {"VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "DEBAND_DITHER": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_POSITIONS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_UVS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.262 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::maths with defs: {"VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "DEBAND_DITHER": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_POSITIONS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_UVS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.265 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_types with defs: {"VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "DEBAND_DITHER": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_POSITIONS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_UVS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.265 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_bindings with defs: {"VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "DEBAND_DITHER": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_POSITIONS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_UVS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.269 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::view with defs: {"VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "DEBAND_DITHER": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_POSITIONS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_UVS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.271 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_view_types with defs: {"VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "DEBAND_DITHER": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_POSITIONS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_UVS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.272 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::globals with defs: {"VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "DEBAND_DITHER": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_POSITIONS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_UVS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.272 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_view_bindings with defs: {"VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "DEBAND_DITHER": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_POSITIONS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_UVS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.273 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::prepass_bindings with defs: {"VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "DEBAND_DITHER": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_POSITIONS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_UVS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.274 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::view_transformations with defs: {"VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "DEBAND_DITHER": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_POSITIONS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_UVS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.276 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::mesh_functions with defs: {"VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "DEBAND_DITHER": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_POSITIONS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_UVS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.276 29974 30018 V threaded_app: APP_CMD_INIT_WINDOW
+05-03 10:12:20.276 29974 30018 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_winit-0.16.0/src/Display information:  Window physical resolution: 4480x2520  Window logical resolution: 1280x720  Monitor name: Android Device  Scale factor: 3.5  Refresh rate (Hz): 0.000
+05-03 10:12:20.277 29974 29974 I SurfaceView@f0c4b33: surfaceChanged (1440,3040) 1 #8 com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f0c4b33 V.E...... ......ID 0,0-1440,3040}
+05-03 10:12:20.277 29974 29974 V threaded_app: NativeWindowResized: 0x7446f4f1f0 -- 0x74d6fb9be0 ( 1440 x 3040 )
+05-03 10:12:20.277 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: [DP] dp(2) 1 android.view.SurfaceView.updateSurface:1375 android.view.SurfaceView.lambda$new$1$SurfaceView:254 android.view.SurfaceView$$ExternalSyntheticLambda2.onPreDraw:2
+05-03 10:12:20.277 29974 29974 V threaded_app: NativeWindowRedrawNeeded: 0x7446f4f1f0 -- 0x74d6fb9be0
+05-03 10:12:20.277 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: [DP] pdf(1) 1 android.view.SurfaceView.notifyDrawFinished:599 android.view.SurfaceView.performDrawFinished:586 android.view.SurfaceView.$r8$lambda$st27mCkd9jfJkTrN_P3qIGKX6NY:0
+05-03 10:12:20.279 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "DEBAND_DITHER": Bool(true), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "VERTEX_NORMALS": Bool(true), "MESH_PIPELINE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VERTEX_POSITIONS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "VERTEX_UVS": Bool(true), "VERTEX_UVS_A": Bool(true), "TONEMAP_IN_SHADER": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.281 29974 30087 I SurfaceView@f0c4b33: uSP: rtp = Rect(0, 0 - 1440, 3040) rtsw = 1440 rtsh = 3040
+05-03 10:12:20.281 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::prepass_io with defs: {}
+05-03 10:12:20.281 29974 30087 I SurfaceView@f0c4b33: onSSPAndSRT: pl = 0 pt = 0 sx = 1.0 sy = 1.0
+05-03 10:12:20.281 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::meshlet_visibility_buffer_resolve with defs: {}
+05-03 10:12:20.281 29974 30087 I SurfaceView@f0c4b33: aOrMT: uB = true t = android.view.SurfaceControl$Transaction@9bd0f44 fN = 1 android.view.SurfaceView.access$500:124 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionChanged:1728 android.graphics.RenderNode$CompositePositionUpdateListener.positionChanged:319
+05-03 10:12:20.281 29974 30087 I SurfaceView@f0c4b33: aOrMT: vR.mWNT, vR = ViewRootImpl@320ff7b[MainActivity]
+05-03 10:12:20.281 29974 30087 I ViewRootImpl@320ff7b[MainActivity]: mWNT: t = android.view.SurfaceControl$Transaction@9bd0f44 fN = 1 android.view.SurfaceView.applyOrMergeTransaction:1628 android.view.SurfaceView.access$500:124 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionChanged:1728
+05-03 10:12:20.281 29974 30087 I ViewRootImpl@320ff7b[MainActivity]: mWNT: merge t to BBQ
+05-03 10:12:20.282 29974 30004 I Gralloc4: mapper 4.x is not supported
+05-03 10:12:20.282 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_types with defs: {}
+05-03 10:12:20.284 29974 30004 W Gralloc3: mapper 3.x is not supported
+05-03 10:12:20.285 29974 30004 I gralloc : Arm Module v1.0
+05-03 10:12:20.286 29974 30004 W Gralloc4: allocator 4.x is not supported
+05-03 10:12:20.286 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::lighting with defs: {}
+05-03 10:12:20.286 29974 30029 I BufferQueueProducer: [SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#1(BLAST Consumer)1](id:751600000001,api:1,p:29974,c:29974) FrameBooster: VULKAN surface was catched
+05-03 10:12:20.286 29974 30029 D trobot.bevy_ap: FrameBooster: InterpolationGui: UID 10728 detected as using Vulkan
+05-03 10:12:20.287 29974 30004 W Gralloc3: allocator 3.x is not supported
+05-03 10:12:20.287 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::color_operations with defs: {}
+05-03 10:12:20.287 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::utils with defs: {}
+05-03 10:12:20.289 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::clustered_forward with defs: {}
+05-03 10:12:20.292 29974 30029 I BufferQueueProducer: [SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#1(BLAST Consumer)1](id:751600000001,api:1,p:29974,c:29974) FrameBooster: VULKAN surface was catched
+05-03 10:12:20.292 29974 30029 D trobot.bevy_ap: FrameBooster: InterpolationGui: UID 10728 detected as using Vulkan
+05-03 10:12:20.293 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::shadow_sampling with defs: {}
+05-03 10:12:20.294 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::shadows with defs: {}
+05-03 10:12:20.295 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::ambient with defs: {}
+05-03 10:12:20.296 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::light_probe with defs: {}
+05-03 10:12:20.297 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::irradiance_volume with defs: {}
+05-03 10:12:20.299 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::environment_map with defs: {}
+05-03 10:12:20.299 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::prepass_utils with defs: {}
+05-03 10:12:20.300 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::tonemapping_lut_bindings with defs: {}
+05-03 10:12:20.302 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::tonemapping with defs: {}
+05-03 10:12:20.303 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::transmission with defs: {}
+05-03 10:12:20.304 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::fog with defs: {}
+05-03 10:12:20.305 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: [DP] pdf(0) 1 android.view.ViewRootImpl.lambda$addFrameCompleteCallbackIfNeeded$3$ViewRootImpl:4995 android.view.ViewRootImpl$$ExternalSyntheticLambda16.run:6 android.os.Handler.handleCallback:938
+05-03 10:12:20.305 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: [DP] rdf()
+05-03 10:12:20.305 29974 29974 D ViewRootImpl@320ff7b[MainActivity]: reportDrawFinished (fn: -1)
+05-03 10:12:20.306 26231 28023 D WindowManager: finishDrawingWindow: Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} mDrawState=DRAW_PENDING
+05-03 10:12:20.307 26231 26250 I WindowManager: Reparenting to leash, surface=Surface(name=8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0x562e6a9, leashParent=Surface(name=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12})/@0xd19e42e
+05-03 10:12:20.308   642  3090 I SurfaceFlinger: id=12941 createSurf (0x0),-1 flag=24000, Surface(name=8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal#0
+05-03 10:12:20.308 26231 26250 D WindowManager: makeSurface duration=1 leash=Surface(name=Surface(name=8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal)/@0x1205bcf
+05-03 10:12:20.309 26231 26246 I PkgPredictorService-SecIpmManagerServiceImpl: reportToNAP uid:10728 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity thisTime:766
+05-03 10:12:20.310 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_functions with defs: {}
+05-03 10:12:20.310 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::decal::forward with defs: {}
+05-03 10:12:20.311 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_bindings with defs: {}
+05-03 10:12:20.311 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::bindless with defs: {}
+05-03 10:12:20.312 26231 27706 D PkgPredictorService-IpmAdcpController: dev.smartrobot.bevy_app become forground, dex profile begin
+05-03 10:12:20.312 26231 26246 I ActivityTaskManager: Displayed dev.smartrobot.bevy_app/.MainActivity: +766ms
+05-03 10:12:20.312 26231 26246 I Pageboost: Launch time gathered : pid 29974 dev.smartrobot.bevy_app 766
+05-03 10:12:20.312 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::parallax_mapping with defs: {}
+05-03 10:12:20.312 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::ssao_utils with defs: {}
+05-03 10:12:20.313 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::lightmap with defs: {}
+05-03 10:12:20.318 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_fragment with defs: {}
+05-03 10:12:20.319 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::decal::clustered with defs: {}
+05-03 10:12:20.320 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_deferred_types with defs: {}
+05-03 10:12:20.320 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::rgb9e5 with defs: {}
+05-03 10:12:20.321 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_prepass_functions with defs: {}
+05-03 10:12:20.322 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_deferred_functions with defs: {}
+05-03 10:12:20.322 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::oit with defs: {}
+05-03 10:12:20.323 26231 27048 D InputDispatcher: Focus entered window (0): 8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity
+05-03 10:12:20.324 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: MSG_WINDOW_FOCUS_CHANGED 1 1
+05-03 10:12:20.324 29974 29974 V threaded_app: WindowFocusChanged: 0x7446f4f1f0 -- 1
+05-03 10:12:20.324 29974 29974 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=21, host=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity, from=android.view.InsetsSourceConsumer.hide:242 android.view.InsetsController.collectSourceControls:1215 android.view.InsetsController.controlAnimationUnchecked:1077 android.view.InsetsController.applyAnimation:1456 android.view.InsetsController.applyAnimation:1437 android.view.InsetsController.hide:1006 android.view.InsetsController.hide:981 dev.smartrobot.bevy_app.MainActivity.hideSystemUi:26 dev.smartrobot.bevy_app.MainActivity.onWindowFocusChanged:19 androidx.appcompat.view.WindowCallbackWrapper.onWindowFocusChanged:125
+05-03 10:12:20.324 29974 29974 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=20, host=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity, from=android.view.InsetsSourceConsumer.hide:242 android.view.InsetsController.collectSourceControls:1215 android.view.InsetsController.controlAnimationUnchecked:1077 android.view.InsetsController.applyAnimation:1456 android.view.InsetsController.applyAnimation:1437 android.view.InsetsController.hide:1006 android.view.InsetsController.hide:981 dev.smartrobot.bevy_app.MainActivity.hideSystemUi:26 dev.smartrobot.bevy_app.MainActivity.onWindowFocusChanged:19 androidx.appcompat.view.WindowCallbackWrapper.onWindowFocusChanged:125
+05-03 10:12:20.325 26231 27048 V WindowManager: Relayout Window{fcf25c5 u0 Splash Screen dev.smartrobot.bevy_app}: viewVisibility=8 req=1440x3040 d0
+05-03 10:12:20.325 26231 27048 I WindowManager: Reparenting to leash, surface=Surface(name=fcf25c5 Splash Screen dev.smartrobot.bevy_app)/@0x37e10d5, leashParent=Surface(name=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12})/@0xd19e42e
+05-03 10:12:20.326   642  3090 I SurfaceFlinger: id=12942 createSurf (0x0),-1 flag=24000, Surface(name=fcf25c5 Splash Screen dev.smartrobot.bevy_app)/@0x37e10d5 - animation-leash of window_animation#0
+05-03 10:12:20.326   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd90370 | 0100 | RGBA_8888    |    0.0    0.0 1440.0  114.0 |    0    0 1440  114 | dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974#0
+05-03 10:12:20.326   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd7fe70 | 0100 | RGBA_8888    |    0.0    0.0 1440.0 3040.0 |    0    0 1440 3040 | Splash Screen dev.smartrobot.bevy_app$_26526#0
+05-03 10:12:20.326 26231 27048 D WindowManager: makeSurface duration=1 leash=Surface(name=Surface(name=fcf25c5 Splash Screen dev.smartrobot.bevy_app)/@0x37e10d5 - animation-leash of window_animation)/@0x97b1fdb
+05-03 10:12:20.326 29974 29974 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=1, host=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity, from=android.view.InsetsSourceConsumer.hide:242 android.view.InsetsSourceConsumer.hide:246 android.view.InsetsController.hideDirectly:1473 android.view.InsetsController.controlAnimationUnchecked:1139 android.view.InsetsController.applyAnimation:1456 android.view.InsetsController.applyAnimation:1437 android.view.InsetsController.hide:1006 android.view.InsetsController.hide:981 dev.smartrobot.bevy_app.MainActivity.hideSystemUi:26 dev.smartrobot.bevy_app.MainActivity.onWindowFocusChanged:19
+05-03 10:12:20.327 29974 29974 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=0, host=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity, from=android.view.InsetsSourceConsumer.hide:242 android.view.InsetsSourceConsumer.hide:246 android.view.InsetsController.hideDirectly:1473 android.view.InsetsController.controlAnimationUnchecked:1139 android.view.InsetsController.applyAnimation:1456 android.view.InsetsController.applyAnimation:1437 android.view.InsetsController.hide:1006 android.view.InsetsController.hide:981 dev.smartrobot.bevy_app.MainActivity.hideSystemUi:26 dev.smartrobot.bevy_app.MainActivity.onWindowFocusChanged:19
+05-03 10:12:20.327 26231 28571 D InsetsSourceProvider: updateVisibility: serverVisible=true, clientVisible=false, source=InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,3040][1440,3040], mVisible=false, mWindowFrame=[0,2872][1440,3040]}, controlTarget=Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}, from=com.android.server.wm.InsetsSourceProvider.setClientVisible:428 com.android.server.wm.InsetsSourceProvider.updateClientVisibility:413 com.android.server.wm.InsetsStateController.onInsetsModified:508 com.android.server.wm.InsetsPolicy.onInsetsModified:469 com.android.server.wm.Session.insetsModified:704 android.view.IWindowSession$Stub.onTransact:1256 com.android.server.wm.Session.onTransact:176 android.os.Binder.execTransactInternal:1220 android.os.Binder.execTransact:1179 <bottom of call stack>
+05-03 10:12:20.328 26231 28571 D InsetsSourceProvider: updateVisibility: serverVisible=true, clientVisible=false, source=InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][1440,114], mVisible=false, mWindowFrame=[0,0][0,0]}, controlTarget=Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}, from=com.android.server.wm.InsetsSourceProvider.setClientVisible:428 com.android.server.wm.InsetsSourceProvider.updateClientVisibility:413 com.android.server.wm.InsetsStateController.onInsetsModified:508 com.android.server.wm.InsetsPolicy.onInsetsModified:469 com.android.server.wm.Session.insetsModified:704 android.view.IWindowSession$Stub.onTransact:1256 com.android.server.wm.Session.onTransact:176 android.os.Binder.execTransactInternal:1220 android.os.Binder.execTransact:1179 <bottom of call stack>
+05-03 10:12:20.330 29974 29974 D InputMethodManager: startInputInner - Id : 0
+05-03 10:12:20.330 29974 29974 I InputMethodManager: startInputInner - mService.startInputOrWindowGainedFocus
+05-03 10:12:20.330 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::pbr_types with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_UVS_A": Bool(true)}
+05-03 10:12:20.336 29974 29997 I ViewRootImpl@320ff7b[MainActivity]: Resizing android.view.ViewRootImpl@65bb4f: frame=[0,114][1440,3040] reportDraw=false forceLayout=false backDropFrame=Rect(0, 0 - 1440, 2926)
+05-03 10:12:20.336 26231 28796 I WindowManager: Cancelling animation restarting=false, leash=Surface(name=Surface(name=8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal)/@0x1205bcf
+05-03 10:12:20.336 26231 28796 I WindowManager: Reparenting to original parent: Surface(name=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12})/@0xd19e42e, destroy=false, surface=Surface(name=8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0x562e6a9
+05-03 10:12:20.336 26231 28796 W InputManager-JNI: Input channel object 'fcf25c5 Splash Screen dev.smartrobot.bevy_app (client)' was disposed without first being removed with the input manager!
+05-03 10:12:20.338   642   642 I Layer   : id=12941 removeFromCurrentState Surface(name=8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal#0 (111)
+05-03 10:12:20.339 26231 27048 V InputMethodManagerService: Creating new session for client ClientState{d7edaf uid=10728 pid=29974 displayId=0}
+05-03 10:12:20.341 29974 29974 V threaded_app: WindowInsetsChanged: 0x7446f4f1f0
+05-03 10:12:20.342   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd90370 | 0100 | RGBA_8888    |    0.0    0.0 1440.0  114.0 |    0  114 1440  228 | dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974#0
+05-03 10:12:20.345 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::lighting with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_UVS_A": Bool(true)}
+05-03 10:12:20.345 26231 26250 I WindowManager: Reparenting to original parent: Surface(name=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12})/@0xd19e42e, destroy=true, surface=Surface(name=fcf25c5 Splash Screen dev.smartrobot.bevy_app)/@0x37e10d5
+05-03 10:12:20.345 26231 26250 E WindowManager: win=Window{fcf25c5 u0 Splash Screen dev.smartrobot.bevy_app EXITING} destroySurfaces: appStopped=false win.mWindowRemovalAllowed=true win.mRemoveOnExit=true win.mViewVisibility=8 caller=com.android.server.wm.ActivityRecord.destroySurfaces:5848 com.android.server.wm.ActivityRecord.destroySurfaces:5829 com.android.server.wm.WindowState.onExitAnimationDone:5968 com.android.server.wm.WindowStateAnimator.onAnimationFinished:242 com.android.server.wm.WindowState.onAnimationFinished:6221 com.android.server.wm.WindowContainer$$ExternalSyntheticLambda0.onAnimationFinished:2 com.android.server.wm.SurfaceAnimator.lambda$getFinishedCallback$0$SurfaceAnimator:113
+05-03 10:12:20.345 24309 24309 I HBD     : HoneyBoardService [IMI] onStartInput - caller pid : 29974 , caller uid : 10728
+05-03 10:12:20.345 26231 26250 I WindowManager: Destroying surface Surface(name=Splash Screen dev.smartrobot.bevy_app$_26526)/@0x7bfb5cb called by com.android.server.wm.WindowStateAnimator.destroySurface:987 com.android.server.wm.WindowStateAnimator.destroySurfaceLocked:518 com.android.server.wm.WindowState.destroySurfaceUnchecked:4229 com.android.server.wm.WindowState.destroySurface:4203 com.android.server.wm.ActivityRecord.destroySurfaces:5848 com.android.server.wm.ActivityRecord.destroySurfaces:5829 com.android.server.wm.WindowState.onExitAnimationDone:5968 com.android.server.wm.WindowStateAnimator.onAnimationFinished:242
+05-03 10:12:20.350 26231 27048 V WindowManager: Relayout Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: viewVisibility=0 req=1440x3040 d0
+05-03 10:12:20.353 26231 27048 V WindowManager: Relayout hash=8af2056, pid=29974: mAttrs={(0,0)(fillxfill) sim={adjust=resize} ty=BASE_APPLICATION fmt=TRANSLUCENT wanim=0x1030303
+05-03 10:12:20.355   642   642 I Layer   : id=12927 removeFromCurrentState Splash Screen dev.smartrobot.bevy_app$_26526#0 (112)
+05-03 10:12:20.355   642   642 I Layer   : id=12926 removeFromCurrentState fcf25c5 Splash Screen dev.smartrobot.bevy_app#0 (112)
+05-03 10:12:20.355   642   642 I Layer   : id=12942 removeFromCurrentState Surface(name=fcf25c5 Splash Screen dev.smartrobot.bevy_app)/@0x37e10d5 - animation-leash of window_animation#0 (112)
+05-03 10:12:20.356   642   642 I SurfaceFlinger: id=12926 Removed fcf25c5 Splash Screen dev.smartrobot.bevy_app#0 (112)
+05-03 10:12:20.356   642   642 I SurfaceFlinger: id=12927 Removed Splash Screen dev.smartrobot.bevy_app$_26526#0 (112)
+05-03 10:12:20.356   642   642 I SurfaceFlinger: id=12942 Removed Surface(name=fcf25c5 Splash Screen dev.smartrobot.bevy_app)/@0x37e10d5 - animation-leash of window_animation#0 (112)
+05-03 10:12:20.356 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: Relayout returned: old=(0,0,1440,3040) new=(0,114,1440,3040) req=(1440,3040)0 dur=11 res=0x1 s={true 501823046144} ch=false fn=2
+05-03 10:12:20.356   642   642 I Layer   : id=12942 Destroyed Surface(name=fcf25c5 Splash Screen dev.smartrobot.bevy_app)/@0x37e10d5 - animation-leash of window_animation#0
+05-03 10:12:20.356   642   642 I Layer   : id=12926 Destroyed fcf25c5 Splash Screen dev.smartrobot.bevy_app#0
+05-03 10:12:20.357   642   642 I Layer   : id=12927 Destroyed Splash Screen dev.smartrobot.bevy_app$_26526#0
+05-03 10:12:20.357 29974 29974 V threaded_app: WindowInsetsChanged: 0x7446f4f1f0
+05-03 10:12:20.357 29974 30004 D OpenGLRenderer: setSurface() destroyed EGLSurface
+05-03 10:12:20.358 29974 30004 D OpenGLRenderer: destroyEglSurface
+05-03 10:12:20.358 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: updateBoundsLayer: t = android.view.SurfaceControl$Transaction@6416fe5 sc = Surface(name=Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0)/@0xa129aba frame = 2
+05-03 10:12:20.359 29974 30004 D OpenGLRenderer: eglCreateWindowSurface
+05-03 10:12:20.359 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: mWNT: t = android.view.SurfaceControl$Transaction@6416fe5 fN = 2 android.view.ViewRootImpl.prepareSurfaces:2778 android.view.ViewRootImpl.performTraversals:4024 android.view.ViewRootImpl.doTraversal:2919
+05-03 10:12:20.359 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: mWNT: merge t to BBQ
+05-03 10:12:20.360   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd90370 | 0100 | RGBA_8888    |    0.0    0.0 1440.0  114.0 |    0  114 1440  228 | dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974#0
+05-03 10:12:20.360 29974 29974 I SurfaceView@f0c4b33: pST: sr = Rect(0, 0 - 1440, 2926) sw = 1440 sh = 2926
+05-03 10:12:20.360 29974 29974 I SurfaceView@f0c4b33: onSSPAndSRT: pl = 0 pt = 0 sx = 1.0 sy = 1.0
+05-03 10:12:20.360 29974 29974 I SurfaceView@f0c4b33: pST: mTmpTransaction.apply, mTmpTransaction = android.view.SurfaceControl$Transaction@1361857
+05-03 10:12:20.361 29974 29974 I SurfaceView@f0c4b33: updateSurface: mVisible = true mSurface.isValid() = true
+05-03 10:12:20.361 29974 29974 I SurfaceView@f0c4b33: updateSurface: mSurfaceCreated = true surfaceChanged = false visibleChanged = false
+05-03 10:12:20.361 29974 29974 I SurfaceView@f0c4b33: surfaceChanged (1440,2926) 1 #5 com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f0c4b33 V.E...... ......ID 0,0-1440,2926}
+05-03 10:12:20.361 29974 29974 V threaded_app: NativeWindowResized: 0x7446f4f1f0 -- 0x74d6fb9be0 ( 1440 x 2926 )
+05-03 10:12:20.361 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: [DP] dp(1) 1 android.view.SurfaceView.updateSurface:1375 android.view.SurfaceView.setFrame:675 android.view.View.layout:24458
+05-03 10:12:20.361 29974 29974 V threaded_app: NativeWindowRedrawNeeded: 0x7446f4f1f0 -- 0x74d6fb9be0
+05-03 10:12:20.362 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: [DP] pdf(0) 1 android.view.SurfaceView.notifyDrawFinished:599 android.view.SurfaceView.performDrawFinished:586 android.view.SurfaceView.$r8$lambda$st27mCkd9jfJkTrN_P3qIGKX6NY:0
+05-03 10:12:20.362 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: [DP] rdf()
+05-03 10:12:20.362 29974 29974 D ViewRootImpl@320ff7b[MainActivity]: reportDrawFinished (fn: 2)
+05-03 10:12:20.362 26231 28571 D WindowManager: finishDrawingWindow: Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} mDrawState=HAS_DRAWN
+05-03 10:12:20.363 29974 29974 V threaded_app: ContentRectChanged: 0x7446f4f1f0 -- (0 0) (1440 2926)
+05-03 10:12:20.364 29974 30087 I SurfaceView@f0c4b33: uSP: rtp = Rect(0, 0 - 1440, 2926) rtsw = 1440 rtsh = 2926
+05-03 10:12:20.364 29974 30087 I SurfaceView@f0c4b33: onSSPAndSRT: pl = 0 pt = 0 sx = 1.0 sy = 1.0
+05-03 10:12:20.364 29974 30087 I SurfaceView@f0c4b33: aOrMT: uB = true t = android.view.SurfaceControl$Transaction@aecbd6b fN = 2 android.view.SurfaceView.access$500:124 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionChanged:1728 android.graphics.RenderNode$CompositePositionUpdateListener.positionChanged:319
+05-03 10:12:20.364 29974 30087 I SurfaceView@f0c4b33: aOrMT: vR.mWNT, vR = ViewRootImpl@320ff7b[MainActivity]
+05-03 10:12:20.364 29974 30087 I ViewRootImpl@320ff7b[MainActivity]: mWNT: t = android.view.SurfaceControl$Transaction@aecbd6b fN = 2 android.view.SurfaceView.applyOrMergeTransaction:1628 android.view.SurfaceView.access$500:124 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionChanged:1728
+05-03 10:12:20.364 29974 30087 I ViewRootImpl@320ff7b[MainActivity]: mWNT: merge t to BBQ
+05-03 10:12:20.366 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: handleResized, msg = 4 frames=ClientWindowFrames{frame=[0,114][1440,3040] display=[0,114][1440,3040] backdrop=[0,0][1440,2926]} forceNextWindowRelayout=false displayId=0 frameChanged=false backdropFrameChanged=true configChanged=false displayChanged=false mNextDrawUseBlastSync=false mergedConfiguration={mGlobalConfig={1.1 ?mcc?mnc [en_US] ldltr sw411dp w411dp h836dp 560dpi nrml long hdr widecg port night finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 1440, 3040) mAppBounds=Rect(0, 113 - 1440, 3040) mMaxBounds=Rect(0, 0 - 1440, 3040) mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=undefined mAlwaysOnTop=undefined mRotation=ROTATION_0 mPopOver=off mFreeformTaskPinningState=unpinned} s.38 fontWeightAdjustment=0 ff=0 bf=0 bts=0 desktop/d dm/n dc/d ?dcui ?dcaf enb/d themeSeq=0} mOverrideConfig={1.1 ?mcc?mnc [en_US] ldltr sw411dp w411dp h836dp 560dpi nrml long hdr widecg port night finger -keyb/v/h -nav/h winConfig={ mBounds=Rect(0, 0 - 1440, 3040) mAppBounds=Rect(0, 113 - 1440, 3040) mMaxBounds=Rect(0, 0 - 1440, 3040) mWindowingMode=fullscreen mDisplayWindowingMode=fullscreen mActivityType=standard mAlwaysOnTop=undefined mRotation=ROTATION_0 mPopOver=off mFreeformTaskPinningState=unpinned} s.1 fontWeightAdjustment=0 ff=0 bf=0 bts=0 desktop/d dm/n dc/d ?dcui ?dcaf enb/d themeSeq=0}}
+05-03 10:12:20.367 29974 29974 D InputMethodManager: startInputInner - Id : 0
+05-03 10:12:20.377 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::clustered_forward with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_UVS_A": Bool(true)}
+05-03 10:12:20.391 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::utils with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_UVS_A": Bool(true)}
+05-03 10:12:20.393 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::shadow_sampling with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_UVS_A": Bool(true)}
+05-03 10:12:20.400 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_render::color_operations with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_UVS_A": Bool(true)}
+05-03 10:12:20.401 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::shadows with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_UVS_A": Bool(true)}
+05-03 10:12:20.405 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::ambient with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_UVS_A": Bool(true)}
+05-03 10:12:20.411 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::tonemapping_lut_bindings with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_UVS_A": Bool(true)}
+05-03 10:12:20.411 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::tonemapping with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_UVS_A": Bool(true)}
+05-03 10:12:20.415 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::pbr_functions with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_UVS_A": Bool(true)}
+05-03 10:12:20.422 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::pbr_bindings with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_UVS_A": Bool(true)}
+05-03 10:12:20.423 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::pbr_fragment with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_UVS_A": Bool(true)}
+05-03 10:12:20.430 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::decal::clustered with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_UVS_A": Bool(true)}
+05-03 10:12:20.432 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_UVS_A": Bool(true)}
+05-03 10:12:20.445 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.467 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"ANTI_ALIAS": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.486 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::types with defs: {}
+05-03 10:12:20.487 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::bindings with defs: {}
+05-03 10:12:20.487 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::bruneton_functions with defs: {}
+05-03 10:12:20.490 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::functions with defs: {}
+05-03 10:12:20.491 26231 26560 D MdnieScenarioControlService:  packageName : dev.smartrobot.bevy_app    className : dev.smartrobot.bevy_app.MainActivity
+05-03 10:12:20.492 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::types with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "MAX_CASCADES_PER_LIGHT": UInt(4)}
+05-03 10:12:20.492 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::bindings with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "MAX_CASCADES_PER_LIGHT": UInt(4)}
+05-03 10:12:20.495 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::bruneton_functions with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "MAX_CASCADES_PER_LIGHT": UInt(4)}
+05-03 10:12:20.501 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::functions with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "MAX_CASCADES_PER_LIGHT": UInt(4)}
+05-03 10:12:20.507 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "MAX_CASCADES_PER_LIGHT": UInt(4)}
+05-03 10:12:20.528 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 10:12:20.575 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "MAX_CASCADES_PER_LIGHT": UInt(4)}
+05-03 10:12:20.613 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10)}
+05-03 10:12:20.656 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::tonemapping_lut_bindings with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(3), "DEBAND_DITHER": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "TONEMAPPING_PASS": Bool(true)}
+05-03 10:12:20.657 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::tonemapping with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(3), "DEBAND_DITHER": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "TONEMAPPING_PASS": Bool(true)}
+05-03 10:12:20.660 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(4), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(3), "DEBAND_DITHER": Bool(true), "TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "TONEMAPPING_PASS": Bool(true)}
+05-03 10:12:20.670 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.673 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
+05-03 10:12:20.712 29974 30018 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: handle Android InsetsChanged notification
+05-03 10:12:20.714 29974 30034 I BufferQueueProducer: [SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#1(BLAST Consumer)1](id:751600000001,api:1,p:29974,c:29974) FrameBooster: VULKAN surface was catched
+05-03 10:12:20.714 29974 30034 D trobot.bevy_ap: FrameBooster: InterpolationGui: UID 10728 detected as using Vulkan
+05-03 10:12:20.728   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd99eb0 | 0102 | RGBA_8888    |    0.0    0.0 4480.0 2520.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
+05-03 10:12:20.850 26231 26249 D SGM:GameManager: identifyForegroundApp. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0
+05-03 10:12:20.850 26231 26249 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
+05-03 10:12:20.877 29974 30018 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: handle Android InsetsChanged notification
+05-03 10:12:20.928 29974 30034 I BufferQueueProducer: [SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#1(BLAST Consumer)1](id:751600000001,api:1,p:29974,c:29974) FrameBooster: VULKAN surface was catched
+05-03 10:12:20.928 29974 30034 D trobot.bevy_ap: FrameBooster: InterpolationGui: UID 10728 detected as using Vulkan
+05-03 10:12:21.003 29974 30018 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: find a way to notify application of content rect change
+05-03 10:12:22.332 26231 27691 D PkgPredictorService-IpmNapPreloadController: app:0_&_com.android.settings die, remove from <launchTime:2025-05-03 10:12:19 hour:10 day:7 previous:[dev.smartrobot.bevy_app, dev.smartrobot.bevy_app, com.android.settings] running:dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity apkVersion:1.0 userId:0 screenOrientation:0 wifi:3 bt:0 predictTime:11 launching Time:766 predicted:false prediction:[0_&_com.android.settings, 0_&_com.netflix.mediaclient, 0_&_com.whatsapp] preloaded:false preloading:[0_&_com.android.settings, 0_&_com.netflix.mediaclient]>
+05-03 10:12:23.807 26231 26362 I InputDispatcher: Delivering touch to (29974): action: 0x0, f=0x0, d=0, '8af2056', t=1 +(0,-114)
+05-03 10:12:23.810 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: ViewPostIme pointer 0
+05-03 10:12:23.810 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:23.823 29974 30032 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srSpawning pointer Touch(0)
+05-03 10:12:23.845 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:23.862 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:23.878 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:23.895 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:23.898 26231 26362 I InputDispatcher: Delivering touch to (29974): action: 0x1, f=0x0, d=0, '8af2056', t=1 +(0,-114)
+05-03 10:12:23.898 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: ViewPostIme pointer 1
+05-03 10:12:23.898 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:23.906 29974 30034 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srDespawning pointer Touch(0)
+05-03 10:12:23.920 29974 30032 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srUnable to get location for pointer Touch(0) during pointer out
+05-03 10:12:24.656 26231 26500 I Pageboost: IoRecord pid : 29974
+05-03 10:12:24.660 26231 26500 I Pageboost: IoRecord pid : 29974, result_size : 10508
+05-03 10:12:24.662 26231 26500 I Pageboost: db create : CREATE TABLE IF NOT EXISTS devsmartrobotbevy_app (FILENAME TEXT, OFFSET INTEGER, SIZE INTEGER, FORVRAMDISK INTEGER, BITMAP BLOB, unique (FILENAME, OFFSET) );
+05-03 10:12:24.671 26231 26500 I Pageboost: db create : CREATE TABLE IF NOT EXISTS devsmartrobotbevy_app (FILENAME TEXT, OFFSET INTEGER, SIZE INTEGER, FORVRAMDISK INTEGER, BITMAP BLOB, unique (FILENAME, OFFSET) );
+05-03 10:12:24.681 26231 26500 I Pageboost: db update :dev.smartrobot.bevy_app ret 1
+05-03 10:12:24.782 26231 26500 I Pageboost: memUsage collected : 159923 33463 1656 for dev.smartrobot.bevy_app 29974
+05-03 10:12:25.650 26231 31038 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.android.server.ssrm.SortingMachine.isGame(SortingMachine.java:162)
+05-03 10:12:25.650 26231 31038 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
+05-03 10:12:25.869 26231 26362 I InputDispatcher: Delivering touch to (29974): action: 0x0, f=0x0, d=0, '8af2056', t=1 +(0,-114)
+05-03 10:12:25.870 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: ViewPostIme pointer 0
+05-03 10:12:25.870 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:25.872 29974 30034 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srSpawning pointer Touch(0)
+05-03 10:12:25.898 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:25.948 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:25.965 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:25.982 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:25.998 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.015 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.032 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.048 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.066 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.071 29974 30542 D ProfileInstaller: Installing profile for dev.smartrobot.bevy_app
+05-03 10:12:26.082 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.098 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.115 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.131 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.148 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.165 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.182 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.199 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.215 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.232 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.249 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.265 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.282 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.298 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.316 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.332 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.341 26231 27706 I Process : Sending signal. PID: 29974 SIG: 10
+05-03 10:12:26.342 29974 29984 I trobot.bevy_ap: Thread[5,tid=29984,WaitingInMainSignalCatcherLoop,Thread*=0x74c6f4f200,peer=0x13240268,"Signal Catcher"]: reacting to signal 10
+05-03 10:12:26.342 29974 29984 I trobot.bevy_ap:
+05-03 10:12:26.342 29974 29984 I trobot.bevy_ap: SIGUSR1 forcing GC (no HPROF) and profile save
+05-03 10:12:26.349 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.356 29974 29984 I trobot.bevy_ap: Explicit concurrent copying GC freed 1452(115KB) AllocSpace objects, 0(0B) LOS objects, 66% free, 3038KB/9182KB, paused 45us,20us total 14.442ms
+05-03 10:12:26.366 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.382 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.399 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.416 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.433 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.449 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.466 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.483 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.499 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.516 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.532 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.550 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.566 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.583 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.599 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.615 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.632 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.649 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.666 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.683 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.700 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.717 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.733 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.750 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.766 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.783 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.799 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.817 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.833 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.850 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.866 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.933 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.951 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.966 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.979 26231 26362 I InputDispatcher: Delivering touch to (29974): action: 0x1, f=0x0, d=0, '8af2056', t=1 +(0,-114)
+05-03 10:12:26.980 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:26.980 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: ViewPostIme pointer 1
+05-03 10:12:26.980 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:27.002 29974 30032 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srDespawning pointer Touch(0)
+05-03 10:12:27.015 29974 30034 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srUnable to get location for pointer Touch(0) during pointer out
+05-03 10:12:28.131 26231 26362 I InputDispatcher: Delivering touch to (29974): action: 0x0, f=0x0, d=0, '8af2056', t=1 +(0,-114)
+05-03 10:12:28.131 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: ViewPostIme pointer 0
+05-03 10:12:28.132 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.141 29974 30034 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srSpawning pointer Touch(0)
+05-03 10:12:28.185 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.219 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.236 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.269 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.303 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.319 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.324 29974 29974 D [secipm]: mSecIpmManager setProfileLength dev.smartrobot.bevy_app profile:3386
+05-03 10:12:28.325 26231 27687 D PkgPredictorService-IpmAdcpController:  prepare a new task for pkg:dev.smartrobot.bevy_app dex2oat
+05-03 10:12:28.325 26231 30557 I PkgPredictorService-IpmAdcpController:  start a thread to run dex2oat task for pkg:dev.smartrobot.bevy_app
+05-03 10:12:28.330 26231 30557 I PackageDexOptimizer: Running dexopt (dexoptNeeded=1) on: /data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/base.apk pkg=dev.smartrobot.bevy_app isa=arm64 dexoptFlags=boot_complete,debuggable,public,enable_hidden_api_checks targetFilter=verify oatDir=/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/oat classLoaderContext=PCL[]{} async=false
+05-03 10:12:28.335 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.343   794 19390 V installd: DexInv: --- BEGIN '/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/base.apk' ---
+05-03 10:12:28.344   794 19390 V installd: Running /apex/com.android.art/bin/dex2oat32 in=base.apk out=/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/oat/arm64/base.odex
+05-03 10:12:28.353 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.378 30561 30561 I dex2oat32: /apex/com.android.art/bin/dex2oat32 --input-vdex-fd=-1 --output-vdex-fd=10 --classpath-dir=/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA== --class-loader-context=PCL[]{} --compiler-filter=verify --compilation-reason=adcp --max-image-block-size=524288 --resolve-startup-const-strings=true --debuggable --generate-mini-debug-info -j6
+05-03 10:12:28.386 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.402 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.419 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.436 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.452 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.470 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.485 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.502 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.519 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.535 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.552 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.570 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.586 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.602 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.619 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.636 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.652 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.669 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.686 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.703 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.719 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.736 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.754 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.769 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.786 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.803 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.820 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.837 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.853 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.870 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.886 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.905 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.920 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.936 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.954 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.970 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:28.987 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.004 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.020 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.024 26231 26362 I InputDispatcher: Delivering touch to (29974): action: 0x1, f=0x0, d=0, '8af2056', t=1 +(0,-114)
+05-03 10:12:29.024 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.024 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: ViewPostIme pointer 1
+05-03 10:12:29.024 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.042 29974 30032 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srDespawning pointer Touch(0)
+05-03 10:12:29.051 29974 30034 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srUnable to get location for pointer Touch(0) during pointer out
+05-03 10:12:29.304   794 19390 V installd: DexInv: --- END '/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/base.apk' (success) ---
+05-03 10:12:29.459 26231 26362 I InputDispatcher: Delivering touch to (29974): action: 0x0, f=0x0, d=0, '8af2056', t=1 +(0,-114)
+05-03 10:12:29.459 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: ViewPostIme pointer 0
+05-03 10:12:29.460 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.469 29974 30029 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srSpawning pointer Touch(0)
+05-03 10:12:29.555 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.571 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.588 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.621 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.638 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.655 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.671 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.688 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.704 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.721 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.738 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.755 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.771 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.788 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.804 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.823 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.829   642   658 I SurfaceFlinger: id=12941 Removed Surface(name=8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal#0 (103)
+05-03 10:12:29.838   642   642 I Layer   : id=12941 Destroyed Surface(name=8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal#0
+05-03 10:12:29.839 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.854 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.872 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.888 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.905 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.922 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.938 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.943 26231 26247 D WindowManager: requestTransientBars: swipeTarget=Window{6a3640c u0 NavigationBar0}, controlTarget=Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}, canShowTransient=true, restorePositionTypes=0x0, from=com.android.server.wm.DisplayPolicy.access$100:227 com.android.server.wm.DisplayPolicy$1.onSwipeFromBottom:581
+05-03 10:12:29.955 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.972 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.976   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd889f0 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
+05-03 10:12:29.989 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:29.991   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd8e630 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
+05-03 10:12:30.005 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.022 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.039 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.055 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.072 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.088 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.105 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.122 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.138 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.156 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.172 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.189 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.206 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.222 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.238 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.255 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.272 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.289 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.306 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.339 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.355 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.373 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.389 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.394 26231 26362 I InputDispatcher: Delivering touch to (29974): action: 0x1, f=0x0, d=0, '8af2056', t=1 +(0,-114)
+05-03 10:12:30.394 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.394 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: ViewPostIme pointer 1
+05-03 10:12:30.394 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.413 29974 30030 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srDespawning pointer Touch(0)
+05-03 10:12:30.425 29974 30032 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srUnable to get location for pointer Touch(0) during pointer out
+05-03 10:12:30.827 26231 26362 I InputDispatcher: Delivering touch to (29974): action: 0x0, f=0x0, d=0, '8af2056', t=1 +(0,-114)
+05-03 10:12:30.828 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: ViewPostIme pointer 0
+05-03 10:12:30.828 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.830 29974 30029 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srSpawning pointer Touch(0)
+05-03 10:12:30.873 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.890 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.906 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.923 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.956 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:30.974 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:31.006 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:31.023 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:31.040 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:31.057 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:31.074 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:31.091 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:31.107 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:31.108 27039 27039 I RecentsView: onGestureAnimationStart, runningTaskInfo : TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} topActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} numActivities=1 lastActiveTime=990790576 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true token=WCT{android.window.IWindowContainerToken$Stub$Proxy@4198b8} topActivityType=1 pictureInPictureParams=PictureInPictureParams( aspectRatio=null sourceRectHint=null hasSetActions=false isAutoPipEnabled=false isSeamlessResizeEnabled=true) displayCutoutSafeInsets=Rect(0, 113 - 0, 0) topActivityInfo=ActivityInfo{ec64691 dev.smartrobot.bevy_app.MainActivity} launchCookies=[com.android.launcher3.util.ObjectWrapper@91269f6] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true topActivityInSizeCompat=false locusId= null topLaunchHome=false launchSplitWindowingMode=0 isPairTask=false pairedTaskIds=[] pairWindowingMode=0 pairDockSide=0 isAnimatingByRecent=false originallySupportedSplitScreen=true isAnimatingFreeformToFullscreen=false topActivityInFixedAspectRatio=false isTopTransparentActivity=true}
+05-03 10:12:31.113 27039 27039 I RecentsView: showCurrentTask : TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} topActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} numActivities=1 lastActiveTime=990790576 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true token=WCT{android.window.IWindowContainerToken$Stub$Proxy@4198b8} topActivityType=1 pictureInPictureParams=PictureInPictureParams( aspectRatio=null sourceRectHint=null hasSetActions=false isAutoPipEnabled=false isSeamlessResizeEnabled=true) displayCutoutSafeInsets=Rect(0, 113 - 0, 0) topActivityInfo=ActivityInfo{ec64691 dev.smartrobot.bevy_app.MainActivity} launchCookies=[com.android.launcher3.util.ObjectWrapper@91269f6] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true topActivityInSizeCompat=false locusId= null topLaunchHome=false launchSplitWindowingMode=0 isPairTask=false pairedTaskIds=[] pairWindowingMode=0 pairDockSide=0 isAnimatingByRecent=false originallySupportedSplitScreen=true isAnimatingFreeformToFullscreen=false topActivityInFixedAspectRatio=false isTopTransparentActivity=true}
+05-03 10:12:31.121 26231 26329 I InputDispatcher: Delivering touch to (29974): action: 0x3, f=0x0, d=0, '8af2056', t=1 +(0,-114)
+05-03 10:12:31.121 26231 26329 I InputDispatcher: Monitor swipe-up (server) is stealing touch from [8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity (server), ]
+05-03 10:12:31.122 27039 27039 I RecentsView: onGestureAnimationStart, runningTaskInfo : TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} topActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} numActivities=1 lastActiveTime=990790576 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true token=WCT{android.window.IWindowContainerToken$Stub$Proxy@4198b8} topActivityType=1 pictureInPictureParams=PictureInPictureParams( aspectRatio=null sourceRectHint=null hasSetActions=false isAutoPipEnabled=false isSeamlessResizeEnabled=true) displayCutoutSafeInsets=Rect(0, 113 - 0, 0) topActivityInfo=ActivityInfo{ec64691 dev.smartrobot.bevy_app.MainActivity} launchCookies=[com.android.launcher3.util.ObjectWrapper@91269f6] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true topActivityInSizeCompat=false locusId= null topLaunchHome=false launchSplitWindowingMode=0 isPairTask=false pairedTaskIds=[] pairWindowingMode=0 pairDockSide=0 isAnimatingByRecent=false originallySupportedSplitScreen=true isAnimatingFreeformToFullscreen=false topActivityInFixedAspectRatio=false isTopTransparentActivity=true}
+05-03 10:12:31.122 26231 26329 D WindowManager: Moved rootTask=Task{8b43d42 #1 type=home ?? U=0 visible=false mode=fullscreen translucent=true sz=1} behind rootTask=Task{f433d55 #12 type=standard A=10728:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
+05-03 10:12:31.122 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:31.122 27039 27039 I RecentsView: showCurrentTask : TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} topActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} numActivities=1 lastActiveTime=990790576 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true token=WCT{android.window.IWindowContainerToken$Stub$Proxy@4198b8} topActivityType=1 pictureInPictureParams=PictureInPictureParams( aspectRatio=null sourceRectHint=null hasSetActions=false isAutoPipEnabled=false isSeamlessResizeEnabled=true) displayCutoutSafeInsets=Rect(0, 113 - 0, 0) topActivityInfo=ActivityInfo{ec64691 dev.smartrobot.bevy_app.MainActivity} launchCookies=[com.android.launcher3.util.ObjectWrapper@91269f6] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true topActivityInSizeCompat=false locusId= null topLaunchHome=false launchSplitWindowingMode=0 isPairTask=false pairedTaskIds=[] pairWindowingMode=0 pairDockSide=0 isAnimatingByRecent=false originallySupportedSplitScreen=true isAnimatingFreeformToFullscreen=false topActivityInFixedAspectRatio=false isTopTransparentActivity=true}
+05-03 10:12:31.125 26231 26329 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}
+05-03 10:12:31.160 27039 28533 I AppIconSolution: return the original icon because tray option is set to None for dev.smartrobot.bevy_app, isNight = true
+05-03 10:12:31.160 27039 28533 I LauncherActivityInfo: packageName: dev.smartrobot.bevy_app, useThemeIcon: true, height: 896, width: 896, density: 560
+05-03 10:12:31.163 29974 30032 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srDespawning pointer Touch(0)
+05-03 10:12:31.171 26231 28571 V WindowManager: Changing focus from Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} to null displayId=0 Callers=com.android.server.wm.RootWindowContainer.updateFocusedWindowLocked:583 com.android.server.wm.WindowManagerService.updateFocusedWindowLocked:6505 com.android.server.wm.WindowManagerService.relayoutWindow:2770 com.android.server.wm.Session.relayout:242
+05-03 10:12:31.171 26231 28571 D MARsPolicyManager: onPackageResumedFG pkgName = dev.smartrobot.bevy_app, userId = 0
+05-03 10:12:31.174 26231 28571 D InputDispatcher: Focus left window (0): 8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity
+05-03 10:12:31.175 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: MSG_WINDOW_FOCUS_CHANGED 0 1
+05-03 10:12:31.175 29974 29974 V threaded_app: WindowFocusChanged: 0x7446f4f1f0 -- 0
+05-03 10:12:31.197   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd889f0 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    6  123 1434 3024 | SurfaceView - dev.smartrobot.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
+05-03 10:12:31.281 26231 26560 D MdnieScenarioControlService:  packageName : dev.smartrobot.bevy_app    className : dev.smartrobot.bevy_app.MainActivity
+05-03 10:12:31.760 29974 29974 V threaded_app: WindowInsetsChanged: 0x7446f4f1f0
+05-03 10:12:31.760 29974 30018 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: handle Android InsetsChanged notification
+05-03 10:12:31.768   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd9d150 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |   55  196 1385 2900 | SurfaceView - dev.smartrobot.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
+05-03 10:12:32.134   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd9d150 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2924.0 |  287  583 1152 2339 | SurfaceView - dev.smartrobot.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
+05-03 10:12:32.950 26231 28072 D WindowManager: onAnimationFinished(): targetRootTask=Task{8b43d42 #1 type=home ?? U=0 visible=false mode=fullscreen translucent=false sz=1} targetActivity=ActivityRecord{b9ddbef u0 com.sec.android.app.launcher/.activities.LauncherActivity t8} mRestoreTargetBehindRootTask=Task{f433d55 #12 type=standard A=10728:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
+05-03 10:12:32.964 26231 28072 V WindowManager: Setting visibility of Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: false, caller=com.android.server.wm.WindowContainer.sendAppVisibilityToClients:1110 com.android.server.wm.WindowToken.setClientVisible:448 com.android.server.wm.ActivityRecord.setClientVisible:6991 com.android.server.wm.ActivityRecord.onAnimationFinished:7878 com.android.server.wm.ActivityRecord.postApplyAnimation:5579
+05-03 10:12:32.969 29974 29974 V threaded_app: Pause: 0x7446f4f1f0
+05-03 10:12:32.969 29974 30018 V threaded_app: activityState=13
+05-03 10:12:32.969 29974 30018 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfApp Paused - stopped running
+05-03 10:12:32.970 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: handleAppVisibility mAppVisible=true visible=false
+05-03 10:12:32.973 26231 26249 D SGM:GameManager: notePauseComponent(), received pkgName: dev.smartrobot.bevy_app, userId: 0
+05-03 10:12:32.977 29974 29974 I SurfaceView@f0c4b33: onWindowVisibilityChanged(8) false com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f0c4b33 V.E...... ........ 0,0-1440,2926} of ViewRootImpl@320ff7b[MainActivity]
+05-03 10:12:32.978 29974 29974 I SurfaceView@f0c4b33: pST: mTmpTransaction.apply, mTmpTransaction = android.view.SurfaceControl$Transaction@1361857
+05-03 10:12:32.978 29974 29974 I SurfaceView@f0c4b33: surfaceDestroyed callback.size 1 #2 com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f0c4b33 V.E...... ........ 0,0-1440,2926}
+05-03 10:12:32.978 29974 29974 V threaded_app: NativeWindowDestroyed: 0x7446f4f1f0 -- 0x74d6fb9be0
+05-03 10:12:32.978 29974 29974 V threaded_app: android_app_set_window called
+05-03 10:12:32.978 29974 30018 V threaded_app: APP_CMD_TERM_WINDOW
+05-03 10:12:32.989 29974 30018 V threaded_app: APP_CMD_TERM_WINDOW
+05-03 10:12:32.989 29974 29974 I SurfaceView@f0c4b33: updateSurface: mVisible = false mSurface.isValid() = true
+05-03 10:12:32.990 29974 29974 I SurfaceView@f0c4b33: tryReleaseSurfaces: set mRtReleaseSurfaces = true
+05-03 10:12:32.991 29974 30004 I SurfaceView@f0c4b33: 215734107 wPL, frameNr = 0
+05-03 10:12:32.992 29974 30004 I SurfaceView@f0c4b33: remove() from RT android.view.SurfaceView$SurfaceViewPositionUpdateListener@cdbd75b Surface(name=SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0)/@0x9a9bf8
+05-03 10:12:32.992 29974 30004 I SurfaceView@f0c4b33: remove() com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f0c4b33 V.E...... ........ 0,0-1440,2926} Surface(name=SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0)/@0x9a9bf8
+05-03 10:12:32.993 29974 30004 I SurfaceView@f0c4b33: aOrMT: uB = true t = android.view.SurfaceControl$Transaction@6f68e37 fN = 0 android.view.SurfaceView.access$500:124 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionLost:1785 android.graphics.RenderNode$CompositePositionUpdateListener.positionLost:326
+05-03 10:12:32.994 29974 30004 I SurfaceView@f0c4b33: aOrMT: vR.mWNT, vR = ViewRootImpl@320ff7b[MainActivity]
+05-03 10:12:32.994 29974 30004 I ViewRootImpl@320ff7b[MainActivity]: mWNT: t = android.view.SurfaceControl$Transaction@6f68e37 fN = 0 android.view.SurfaceView.applyOrMergeTransaction:1628 android.view.SurfaceView.access$500:124 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionLost:1785
+05-03 10:12:32.994 29974 30004 I ViewRootImpl@320ff7b[MainActivity]: mWNT: merge t to BBQ
+05-03 10:12:32.995 29974 30004 D OpenGLRenderer: setSurface called with nullptr
+05-03 10:12:32.995 29974 30004 D OpenGLRenderer: setSurface() destroyed EGLSurface
+05-03 10:12:32.995 29974 30004 D OpenGLRenderer: destroyEglSurface
+05-03 10:12:33.000 26231 27273 V WindowManager: Relayout Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: viewVisibility=8 req=1440x2926 d0
+05-03 10:12:33.003 26231 27273 V WindowManager: Relayout hash=8af2056, pid=29974: mAttrs={(0,0)(fillxfill) sim={adjust=resize} ty=BASE_APPLICATION fmt=TRANSLUCENT wanim=0x1030303
+05-03 10:12:33.005   642   658 I SurfaceFlinger: id=12937 Removed Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0 (104)
+05-03 10:12:33.006 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: Relayout returned: old=(0,114,1440,3040) new=(0,114,1440,3040) req=(1440,2926)8 dur=7 res=0x5 s={false 0} ch=true fn=4
+05-03 10:12:33.006 29974 29974 I SurfaceView@f0c4b33: windowStopped(true) false com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f0c4b33 V.E...... ........ 0,0-1440,2926} of ViewRootImpl@320ff7b[MainActivity]
+05-03 10:12:33.006 29974 29974 D SurfaceView@f0c4b33: updateSurface: surface is not valid
+05-03 10:12:33.007 29974 29974 D SurfaceView@f0c4b33: updateSurface: surface is not valid
+05-03 10:12:33.007 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: stopped(true) old=false
+05-03 10:12:33.008 29974 29974 V threaded_app: Stop: 0x7446f4f1f0
+05-03 10:12:33.009 29974 30018 V threaded_app: activityState=14
+05-03 10:12:33.009 29974 30018 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: forward onStop notification to application
+05-03 10:12:33.009   642   642 I Layer   : id=12939 removeFromCurrentState SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0(BLAST)#0 (104)
+05-03 10:12:33.009 29974 29974 V threaded_app: SaveInstanceState: 0x7446f4f1f0
+05-03 10:12:33.009 29974 30018 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: forward saveState notification to application
+05-03 10:12:33.009   642   642 I Layer   : id=12940 removeFromCurrentState Background for SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#0 (104)
+05-03 10:12:33.010 29974 30018 V threaded_app: APP_CMD_SAVE_STATE
+05-03 10:12:33.010   642   642 I Layer   : id=12938 removeFromCurrentState SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#0 (104)
+05-03 10:12:33.010   642   642 I SurfaceFlinger: id=12939 Removed SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0(BLAST)#0 (104)
+05-03 10:12:33.010   642   642 I SurfaceFlinger: id=12940 Removed Background for SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#0 (104)
+05-03 10:12:33.010   642   642 I SurfaceFlinger: id=12938 Removed SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#0 (104)
+05-03 10:12:33.010 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
+05-03 10:12:33.010 29974 29974 I MSHandlerLifeCycle: removeMultiSplitHandler: no exist. decor=DecorView@9d5c6ee[MainActivity]
+05-03 10:12:33.010   642   642 I Layer   : id=12938 Destroyed SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#0
+05-03 10:12:33.010   642   642 I Layer   : id=12940 Destroyed Background for SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#0
+05-03 10:12:33.011   642   642 I Layer   : id=12939 Destroyed SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0(BLAST)#0
+05-03 10:12:33.014 29974 29974 D InputTransport: Input channel destroyed: 'ClientS', fd=116
+05-03 10:12:33.034 29974 29974 D SurfaceView@f0c4b33: updateSurface: surface is not valid
+05-03 10:12:33.035 29974 29974 V threaded_app: TrimMemory: 0x7446f4f1f0 20
+05-03 10:12:33.037 26231 26329 E WindowManager: win=Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} destroySurfaces: appStopped=true win.mWindowRemovalAllowed=false win.mRemoveOnExit=false win.mViewVisibility=8 caller=com.android.server.wm.ActivityRecord.destroySurfaces:5848 com.android.server.wm.ActivityRecord.destroySurfaces:5829 com.android.server.wm.ActivityRecord.notifyAppStopped:5893 com.android.server.wm.ActivityRecord.activityStopped:6519 com.android.server.wm.ActivityClientController.activityStopped:253 android.app.IActivityClientController$Stub.onTransact:596 com.android.server.wm.ActivityClientController.onTransact:129
+05-03 10:12:33.037 26231 26329 I WindowManager: Destroying surface Surface(name=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974)/@0xdd4e983 called by com.android.server.wm.WindowStateAnimator.destroySurface:987 com.android.server.wm.WindowStateAnimator.destroySurfaceLocked:518 com.android.server.wm.WindowState.destroySurfaceUnchecked:4229 com.android.server.wm.WindowState.destroySurface:4203 com.android.server.wm.ActivityRecord.destroySurfaces:5848 com.android.server.wm.ActivityRecord.destroySurfaces:5829 com.android.server.wm.ActivityRecord.notifyAppStopped:5893 com.android.server.wm.ActivityRecord.activityStopped:6519
+05-03 10:12:33.043   642   642 I Layer   : id=12934 removeFromCurrentState dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974#0 (102)
+05-03 10:12:33.043   642   642 I Layer   : id=12937 removeFromCurrentState Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0 (102)
+05-03 10:12:33.043   642   642 I SurfaceFlinger: id=12934 Removed dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974#0 (102)
+05-03 10:12:33.043   642   642 I Layer   : id=12934 Destroyed dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974#0
+05-03 10:12:33.043   642   642 I Layer   : id=12937 Destroyed Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0
+05-03 10:12:33.060 26231 28072 W InputDispatcher: Letterbox_top_ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12} has FLAG_SLIPPERY. Please report this in b/157929241
+05-03 10:12:35.756 29974 29974 V threaded_app: Destroy: 0x7446f4f1f0
+05-03 10:12:35.756 29974 30018 V threaded_app: APP_CMD_DESTROY
+05-03 10:12:35.756 29974 30018 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: forward onDestroy notification to application
+05-03 10:12:35.760 26231 26249 I ActivityManager: Killing 29974:dev.smartrobot.bevy_app/u0a728 (adj 850): remove task:remove-task
+05-03 10:12:35.760 26231 26249 D ActivityManager: [SD] user menu kill listen remove action name:dev.smartrobot.bevy_app uid:10728
+05-03 10:12:35.769 26231 26258 I libprocessgroup: Successfully killed process cgroup uid 10728 pid 29974 in 8ms
+05-03 10:12:36.065 26008 26072 I AudioFlinger: removeDlbCodecCallback pid:29974 type:-1
+05-03 10:12:36.065 26231 28087 I WindowManager: WIN DEATH: Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}
+05-03 10:12:36.065 26231 28087 W InputManager-JNI: Input channel object '8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity (client)' was disposed without first being removed with the input manager!
+05-03 10:12:36.067 26004 26004 I Zygote  : Process 29974 exited due to signal 9 (Killed)
+05-03 10:12:36.071 26231 28082 I ActivityTaskManager: Removing activity ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12 f}}(appDied)  from stack callers=com.android.server.wm.ActivityRecord.handleAppDied:4267 com.android.server.wm.WindowProcessController.handleAppDied:1287 com.android.server.wm.ActivityTaskManagerService$LocalService.handleAppDied:7078 com.android.server.am.ActivityManagerService.handleAppDiedLocked:3647 com.android.server.am.ActivityManagerService.appDiedLocked:3837
+05-03 10:12:36.073 26231 28082 W InputManager-JNI: Input channel object 'Letterbox_left_ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12} (client)' was disposed without first being removed with the input manager!
+05-03 10:12:36.073 26231 28082 W InputManager-JNI: Input channel object 'Letterbox_top_ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12} (client)' was disposed without first being removed with the input manager!
+05-03 10:12:36.074 26231 28082 W InputManager-JNI: Input channel object 'Letterbox_right_ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12} (client)' was disposed without first being removed with the input manager!
+05-03 10:12:36.074 26231 28082 W InputManager-JNI: Input channel object 'Letterbox_bottom_ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12} (client)' was disposed without first being removed with the input manager!
+05-03 10:12:36.080   642   642 I Layer   : id=12933 removeFromCurrentState 8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0 (100)
+05-03 10:12:36.080   642   642 I Layer   : id=12925 removeFromCurrentState ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}#0 (100)
+05-03 10:12:36.080   642   642 I SurfaceFlinger: id=12925 Removed ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}#0 (100)
+05-03 10:12:36.080 26231 26249 W ActivityManager: setHasOverlayUi called on unknown pid: 29974
+05-03 10:12:36.080   642   642 I SurfaceFlinger: id=12933 Removed 8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0 (100)
+05-03 10:12:36.081   642   642 I Layer   : id=12933 Destroyed 8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0
+05-03 10:12:36.081   642   642 I Layer   : id=12925 Destroyed ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}#0
+05-03 10:12:36.082 26231 26255 W UsageStatsService: Unexpected activity event reported! (dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity event : 23 instanceId : 80321809)
 ```
 
 </details>
