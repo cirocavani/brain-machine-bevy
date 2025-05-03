@@ -8,7 +8,7 @@ bevy = "0.16.0"
 log = "0.4.27"
 
 [features]
-default = ["bevy-dev", "log-max"]
+dev = ["bevy-dev", "log-max"]
 bevy-dev = ["bevy/dynamic_linking"]
 log-max = ["log/max_level_debug", "log/release_max_level_warn"]
 

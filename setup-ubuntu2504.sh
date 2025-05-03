@@ -4,14 +4,18 @@
 
 set -eu
 
+sudo apt update
+
+sudo apt install -y \
+--no-install-recommends \
+ca-certificates \
+curl \
+gpg
+
 
 echo
 echo "Install Rust Toolchain"
 echo
-
-sudo apt update
-
-sudo apt install -y ca-certificates curl
 
 curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | \
 sh -s -- --default-toolchain stable -y
@@ -25,7 +29,7 @@ echo
 
 # https://github.com/cargo-bins/cargo-binstall
 
-curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | \
+curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | \
 bash
 
 
@@ -33,7 +37,10 @@ echo
 echo "Install Compiler (clang / lld)"
 echo
 
-sudo apt install -y --no-install-recommends clang lld
+sudo apt install -y \
+--no-install-recommends \
+clang \
+lld
 
 # Debina 12
 #
@@ -135,7 +142,7 @@ echo
 echo "Google Chrome"
 echo
 
-curl -LO --proto '=https' --tlsv1.2 -sSf https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+curl --proto '=https' --tlsv1.2 -sSfLO https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 

@@ -26,6 +26,19 @@ Ubuntu 25.04 Plucky with NVIDIA GPU:
 [`setup-ubuntu2504.sh`](./setup-ubuntu2504.sh)
 
 
+### Basic Utilities
+
+```sh
+sudo apt update
+
+sudo apt install -y \
+--no-install-recommends \
+ca-certificates \
+curl \
+gpg
+```
+
+
 ### Build Dependencies
 
 <https://github.com/bevyengine/bevy/blob/main/docs/linux_dependencies.md#ubuntu>
@@ -51,10 +64,6 @@ vulkan-tools
 ### Rust
 
 ```sh
-sudo apt update
-
-sudo apt install -y ca-certificates curl
-
 curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | \
 sh -s -- --default-toolchain stable -y
 
@@ -70,7 +79,8 @@ cargo version
 
 # https://github.com/cargo-bins/cargo-binstall
 
-curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | \
+bash
 
 cargo binstall -V
 
@@ -81,7 +91,10 @@ cargo binstall -V
 ### Compiler clang / lld
 
 ```sh
-sudo apt install -y --no-install-recommends clang lld
+sudo apt install -y \
+--no-install-recommends \
+clang \
+lld
 
 
 clang --version
@@ -90,6 +103,26 @@ clang --version
 # Target: x86_64-pc-linux-gnu
 # Thread model: posix
 # InstalledDir: /usr/lib/llvm-20/bin
+
+
+# Debina 12 (Raspberry Pi OS)
+
+sudo apt install -y \
+--no-install-recommends \
+clang-19 \
+lld-19
+
+update-alternatives --install /usr/bin/clang clang /usr/bin/clang-19 100
+update-alternatives --install /usr/bin/lld lld /usr/bin/lld-19 100
+update-alternatives --install /usr/bin/cc cc /usr/bin/clang-19 100
+
+
+clang --version
+
+# Debian clang version 19.1.4 (1~deb12u1)
+# Target: aarch64-unknown-linux-gnu
+# Thread model: posix
+# InstalledDir: /usr/lib/llvm-19/bin
 ```
 
 
@@ -221,7 +254,10 @@ GPU1:
 ### Docker ARM64
 
 ```sh
-sudo apt install -y --no-install-recommends qemu-user-static binfmt-support
+sudo apt install -y \
+--no-install-recommends \
+qemu-user-static \
+binfmt-support
 
 
 docker run --rm --platform linux/arm64 debian:12 uname -mo
@@ -496,7 +532,7 @@ simple-http-server --version
 > - Chrome can default to NVIDIA discrete GPU with environment variable configuration
 
 ```sh
-curl -LO --proto '=https' --tlsv1.2 -sSf https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+curl --proto '=https' --tlsv1.2 -sSfLO https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 
@@ -677,12 +713,12 @@ make build-wasm
 make build-web
 
 # run Web App server
-make serve-app
+make serve-web
 
 # run Web App browser
 # (open a Chrome window without 'chrome' with a second Dev Tools window)
 # (assumes NVIDIA Discrete GPU)
-make open-app
+make open-web
 ```
 
 

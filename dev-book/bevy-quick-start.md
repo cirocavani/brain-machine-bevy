@@ -22,6 +22,17 @@ Targets:
 ## Quick Start Project
 
 ```sh
+# Basic Utilities
+
+sudo apt install -y \
+--no-install-recommends \
+ca-certificates \
+curl \
+gpg \
+unzip \
+sed
+
+
 # GPU Vulkan
 
 
@@ -117,12 +128,11 @@ vulkaninfo --summary
 #         driverUUID         = 6c6c766d-7069-7065-5555-494400000000
 
 
-# Rust
+# Rust Toolchain
 
 
-sudo apt install -y --no-install-recommends curl ca-certificates
-
-curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain stable -y
+curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | \
+sh -s -- --default-toolchain stable -y
 
 . "$HOME/.cargo/env"
 
@@ -171,11 +181,12 @@ cargo add bevy log
 
 echo '
 [features]
-default = ["bevy-dev", "log-max"]
+dev = ["bevy-dev", "log-max"]
 bevy-dev = ["bevy/dynamic_linking"]
 log-max = ["log/max_level_debug", "log/release_max_level_warn"]
 ' \
 >> Cargo.toml
+
 
 
 # Compile with Performance Optimizations
@@ -183,8 +194,7 @@ log-max = ["log/max_level_debug", "log/release_max_level_warn"]
 # https://bevyengine.org/learn/quick-start/getting-started/setup/#compile-with-performance-optimizations
 
 
-echo '
-# Enable a small amount of optimization in the dev profile.
+echo '# Enable a small amount of optimization in the dev profile.
 [profile.dev]
 opt-level = 1
 
@@ -220,6 +230,7 @@ opt-level = "s"
 >> Cargo.toml
 
 
+
 # Alternative Linkers
 
 # https://bevyengine.org/learn/quick-start/getting-started/setup/#compile-with-performance-optimizations
@@ -227,7 +238,11 @@ opt-level = "s"
 
 # - Ubuntu 25.04 x86_64
 
-sudo apt install -y --no-install-recommends clang lld
+sudo apt install -y \
+--no-install-recommends \
+clang \
+lld
+
 
 clang --version
 
@@ -238,11 +253,15 @@ clang --version
 
 # - Raspberry Pi OS (Debian 12)
 
-sudo apt install -y --no-install-recommends clang-19 lld-19
+sudo apt install -y \
+--no-install-recommends \
+clang-19 \
+lld-19
 
 sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-19 100
 sudo update-alternatives --install /usr/bin/lld lld /usr/bin/lld-19 100
 # sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang-19 100
+
 
 clang --version
 
@@ -251,9 +270,10 @@ clang --version
 # Thread model: posix
 # InstalledDir: /usr/lib/llvm-19/bin
 
+
 # - Cargo Config
 
-mkdir .cargo/
+mkdir -p .cargo/
 
 echo '[target.x86_64-unknown-linux-gnu]
 linker = "clang"
@@ -266,7 +286,8 @@ rustflags = ["-C", "link-arg=-fuse-ld=lld"]
 > .cargo/config.toml
 
 
-# Quick Start Code
+
+# Quick Start Example Code
 
 
 echo 'use bevy::prelude::*;
@@ -324,7 +345,7 @@ fn main() {
 > src/main.rs
 
 
-cargo run --features bevy/wayland
+cargo run --features dev,bevy/wayland
 
 # -> [Output Dev]
 ```
@@ -361,7 +382,7 @@ Targets:
 - Debian 12 ARM64 (aarch64) -> Raspberry Pi
 
 ```sh
-# Docker
+# Docker Install
 
 # https://docs.docker.com/engine/install/ubuntu/
 
@@ -430,7 +451,7 @@ docker run \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
 smartrobot-bevy-devel:ubuntu-amd64 \
-cargo run --features bevy/wayland
+cargo run --features dev,bevy/wayland
 
 # -> [Output ubuntu-amd64 (Docker)]
 
@@ -449,7 +470,11 @@ ls -alh target/x86_64-unknown-linux-gnu/debug/smartrobot-bevy
 # Docker Host (Ubuntu 25.04 AMD64) running ARM64 container
 # docker run --platform linux/arm64
 
-sudo apt install -y --no-install-recommends qemu-user-static binfmt-support
+sudo apt install -y \
+--no-install-recommends \
+qemu-user-static \
+binfmt-support
+
 
 # (Optional - initial empty container)
 # WARNING: files are created with owner id 0 (root) on project folder
@@ -492,7 +517,7 @@ docker run \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
 smartrobot-bevy-devel:debian-arm64 \
-cargo run --features bevy/wayland
+cargo run --features dev,bevy/wayland
 
 # -> [Output debian-arm64 (Docker)]
 
@@ -590,7 +615,7 @@ NVIDIA Container Toolkit
 <https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/index.html>
 
 ```sh
-# Using Docker Development Ubuntu 25.04 AMD64 Image
+# -> Using Docker Development Ubuntu 25.04 AMD64 Image
 
 
 # NVIDIA Container Toolkit
@@ -607,6 +632,8 @@ sudo apt update
 
 sudo apt install -y --no-install-recommends nvidia-driver-570
 sudo apt install -y --no-install-recommends nvidia-container-toolkit
+
+# reboot to load driver
 
 
 docker run \
@@ -628,7 +655,7 @@ docker run \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
 smartrobot-bevy-devel:ubuntu-amd64 \
-cargo run --features bevy/wayland
+cargo run --features dev,bevy/wayland
 
 # -> [Output ubuntu-amd64 (NVIDIA)]
 ```
@@ -675,7 +702,7 @@ hello Zayna Nieves!
 ```sh
 # Raspbery Pi OS -> Debian 12 ARM64
 
-cargo run
+cargo run --features dev,bevy/x11
 ```
 
 <details>
@@ -732,7 +759,8 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```sh
 # https://github.com/cargo-bins/cargo-binstall
 
-curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | \
+bash
 
 cargo binstall -V
 
@@ -759,15 +787,15 @@ ls -alh target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
 # -rwxrwxr-x 2 cavani cavani 31M Apr 29 14:11 target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
 
 
-rm -rf web-app/
+rm -rf web/
 
 wasm-bindgen \
 --out-name smartrobot_bevy \
---out-dir web-app \
+--out-dir web/ \
 --target web \
 target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
 
-ls -alh web-app
+ls -alh web/p
 
 # total 28M
 # drwxrwxr-x  2 cavani cavani 4.0K Apr 29 14:26 ./
@@ -788,7 +816,7 @@ echo '<!doctype html>
     init()
   </script>
 </html>' \
-> web-app/index.html
+> web/index.html
 
 
 cargo binstall -y simple-http-server
@@ -798,7 +826,7 @@ simple-http-server --version
 # Simple HTTP(s) Server 0.6.12
 
 
-simple-http-server -i web-app/
+simple-http-server -i web/
 
 # -> [Output http-server]
 
@@ -808,7 +836,7 @@ simple-http-server -i web-app/
 # (Ubuntu Snap Firefox does not use NVIDIA discrete CPU by default)
 # (Chrome can default to NVIDIA discrete GPU with environment variable configuration)
 
-curl -LO --proto '=https' --tlsv1.2 -sSf https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+curl --proto '=https' --tlsv1.2 -sSfLO https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 
 sudo dpkg -i google-chrome-stable_current_amd64.deb
 
@@ -856,7 +884,7 @@ google-chrome chrome://gpu/
           Upload: disabled, CSRF Token:
           Auth: disabled, Compression: disabled
          https: disabled, Cert: , Cert-Password:
-          Root: /home/cavani/Workspace/smartrobot-bevy/web-app,
+          Root: /home/cavani/Workspace/smartrobot-bevy/web,
     TryFile404:
        Address: http://0.0.0.0:8000
     ======== [2025-04-20 10:34:14] ========
@@ -1029,7 +1057,7 @@ export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
 # SHA-256 7ec965280a073311c339e571cd5de778b9975026cfcbe79f2b1cdcb1e15317ee
 
 
-curl -LO --proto '=https' --tlsv1.2 -sSf https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip
+curl --proto '=https' --tlsv1.2 -sSfLO https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip
 
 echo '7ec965280a073311c339e571cd5de778b9975026cfcbe79f2b1cdcb1e15317ee commandlinetools-linux-13114758_latest.zip' \
 > checksum
@@ -1380,7 +1408,7 @@ fn handle_lifetime(
 
 mkdir -p assets/sounds/
 
-curl -o assets/sounds/Windless\ Slopes.ogg  --proto '=https' --tlsv1.2 -sSfL \
+curl --proto '=https' --tlsv1.2 -sSfL -o assets/sounds/Windless\ Slopes.ogg \
 https://raw.githubusercontent.com/bevyengine/bevy/v0.16.0/assets/sounds/Windless%20Slopes.ogg
 
 
@@ -1467,7 +1495,7 @@ ls -alh android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libsmartrobot_bevy.so
 #
 
 
-curl -LO --proto '=https' --tlsv1.2 -sSf https://services.gradle.org/distributions/gradle-8.14-bin.zip
+curl --proto '=https' --tlsv1.2 -sSfLO https://services.gradle.org/distributions/gradle-8.14-bin.zip
 
 mkdir -p $HOME/.gradle/wrapper/dists/gradle-8.14-bin/38aieal9i53h9rfe7vjup95b9/
 
@@ -1552,7 +1580,7 @@ echo '// Intentionally blank -- this is a dummy code!
 
 mkdir -p app/src/main/res/mipmap-mdpi/
 
-curl -o app/src/main/res/mipmap-mdpi/ic_launcher.png --proto '=https' --tlsv1.2 -sSfL \
+curl --proto '=https' --tlsv1.2 -sSfL -o app/src/main/res/mipmap-mdpi/ic_launcher.png \
 https://raw.githubusercontent.com/bevyengine/bevy/v0.16.0/assets/android-res/mipmap-mdpi/ic_launcher.png
 
 

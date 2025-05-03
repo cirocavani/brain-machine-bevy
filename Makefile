@@ -52,7 +52,7 @@ docker-run-ubuntu-amd64:
 	-v ${HOME}/.cargo/registry:/home/user/.cargo/registry \
 	-v ${HOME}/.cargo/git:/home/user/.cargo/git \
 	smartrobot-bevy-devel:ubuntu-amd64 \
-	cargo run --features bevy/wayland
+	cargo run --features dev,bevy/wayland
 
 .PHONY: docker-run-ubuntu-amd64-nvidia
 docker-run-ubuntu-amd64-nvidia:
@@ -75,7 +75,7 @@ docker-run-ubuntu-amd64-nvidia:
 	-v ${HOME}/.cargo/registry:/home/user/.cargo/registry \
 	-v ${HOME}/.cargo/git:/home/user/.cargo/git \
 	smartrobot-bevy-devel:ubuntu-amd64 \
-	cargo run --features bevy/wayland
+	cargo run --features dev,bevy/wayland
 
 
 .PHONY: docker-ubuntu-amd64
@@ -109,7 +109,7 @@ docker-run-debian-arm64:
 	-v ${HOME}/.cargo/registry:/home/user/.cargo/registry \
 	-v ${HOME}/.cargo/git:/home/user/.cargo/git \
 	smartrobot-bevy-devel:debian-arm64 \
-	cargo run --features bevy/wayland
+	cargo run --features dev,bevy/wayland
 
 .PHONY: docker-debian-arm64
 docker-debian-arm64: docker-build-debian-arm64 docker-run-debian-arm64
@@ -122,29 +122,28 @@ build-wasm:
 	cargo build \
 	--profile wasm-release \
 	--target wasm32-unknown-unknown \
-	--no-default-features \
 	--features log-max
 
 .PHONY: build-web
 build-web: build-wasm
-	rm -f web-app/smartrobot_bevy*;
+	rm -f web/smartrobot_bevy*;
 	wasm-bindgen \
 	--out-name smartrobot_bevy \
-	--out-dir web-app \
+	--out-dir web/ \
 	--target web \
 	target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
 
-.PHONY: serve-app
-serve-app:
-	simple-http-server -i web-app/
+.PHONY: serve-web
+serve-web:
+	simple-http-server -i web/
 
-.PHONY: open-app
-open-app: export __NV_PRIME_RENDER_OFFLOAD=1
-open-app: export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
-open-app: export __GLX_VENDOR_LIBRARY_NAME=nvidia
-open-app: export __VK_LAYER_NV_optimus=NVIDIA_only
-open-app: export VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json
-open-app: 
+.PHONY: open-web
+open-web: export __NV_PRIME_RENDER_OFFLOAD=1
+open-web: export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+open-web: export __GLX_VENDOR_LIBRARY_NAME=nvidia
+open-web: export __VK_LAYER_NV_optimus=NVIDIA_only
+open-web: export VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json
+open-web: 
 	google-chrome \
 	--no-default-browser-check \
 	--no-first-run \
