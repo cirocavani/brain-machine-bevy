@@ -33,8 +33,8 @@ unzip \
 sed
 
 
-# GPU Vulkan
 
+# GPU Vulkan
 
 # sudo apt install -y --no-install-recommends nvidia-driver-570
 
@@ -128,6 +128,7 @@ vulkaninfo --summary
 #         driverUUID         = 6c6c766d-7069-7065-5555-494400000000
 
 
+
 # Rust Toolchain
 
 
@@ -140,6 +141,17 @@ sh -s -- --default-toolchain stable -y
 cargo version
 
 # cargo 1.86.0 (adf9b6ad1 2025-02-28)
+
+
+# https://github.com/cargo-bins/cargo-binstall
+
+curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | \
+bash
+
+cargo binstall -V
+
+# 1.12.3
+
 
 
 # Project Setup
@@ -757,16 +769,6 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 
 
 ```sh
-# https://github.com/cargo-bins/cargo-binstall
-
-curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | \
-bash
-
-cargo binstall -V
-
-# 1.12.3
-
-
 rustup target add wasm32-unknown-unknown
 
 cargo binstall -y wasm-bindgen-cli
