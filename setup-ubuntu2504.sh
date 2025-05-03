@@ -101,7 +101,10 @@ echo
 echo "Install QEMU (Docker uses to run ARM64 on AMD64)"
 echo
 
-sudo apt install -y --no-install-recommends qemu-user-static binfmt-support
+sudo apt install -y \
+--no-install-recommends \
+qemu-user-static \
+binfmt-support
 
 
 echo

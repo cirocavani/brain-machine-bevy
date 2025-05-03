@@ -633,7 +633,7 @@ sudo apt update
 sudo apt install -y --no-install-recommends nvidia-driver-570
 sudo apt install -y --no-install-recommends nvidia-container-toolkit
 
-# reboot to load driver
+# reboot after driver installation
 
 
 docker run \

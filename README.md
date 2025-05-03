@@ -153,7 +153,10 @@ sudo usermod -aG docker $USER
 newgrp docker
 
 
-docker run --rm ubuntu:25.04 uname -mo
+docker run \
+--rm \
+ubuntu:25.04 \
+uname -mo
 
 # x86_64 GNU/Linux
 
@@ -260,7 +263,11 @@ qemu-user-static \
 binfmt-support
 
 
-docker run --rm --platform linux/arm64 debian:12 uname -mo
+docker run \
+--rm \
+--platform linux/arm64 \
+debian:12 \
+uname -mo
 
 # aarch64 GNU/Linux
 
@@ -356,12 +363,18 @@ sudo apt update
 sudo apt install -y --no-install-recommends nvidia-driver-570
 sudo apt install -y --no-install-recommends nvidia-container-toolkit
 
-# reboot
+# reboot after driver installation
 
 
-docker run --rm --runtime nvidia --gpus all ubuntu:25.04 nvidia-smi
+docker run \
+--rm \
+--runtime nvidia \
+--gpus all \
+ubuntu:25.04 \
+nvidia-smi
 
 # -> [Output nvidia-smi]
+
 
 docker run --rm \
 --runtime nvidia \
