@@ -779,7 +779,6 @@ wasm-bindgen --version
 cargo build \
 --profile wasm-release \
 --target wasm32-unknown-unknown \
---no-default-features \
 --features log-max
 
 ls -alh target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
@@ -1403,7 +1402,7 @@ fn handle_lifetime(
         }
     }
 }' \
->> src/lib.rs
+> src/lib.rs
 
 
 mkdir -p assets/sounds/
@@ -1450,7 +1449,6 @@ cargo ndk \
 build \
 --lib \
 --profile dev \
---no-default-features \
 --features log-max
 
 file -b android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libsmartrobot_bevy.so
@@ -1475,7 +1473,6 @@ cargo ndk \
 build \
 --lib \
 --profile mobile-release \
---no-default-features \
 --features log-max
 
 file -b android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libsmartrobot_bevy.so
@@ -1794,6 +1791,7 @@ find . -type f
 
 ./gradlew --warning-mode all clean build
 
+
 ls -alh ./app/build/outputs/apk/debug/app-debug.apk
 
 # -rw-rw-r-- 1 cavani cavani 78M May  2 12:04 ./app/build/outputs/apk/debug/app-debug.apk
@@ -1812,10 +1810,10 @@ ls -alh ./app/build/outputs/apk/release/app-release-unsigned.apk
 
 unzip -l ./app/build/outputs/apk/release/app-release-unsigned.apk | grep lib
 
-# 1330832  1981-01-01 01:01   lib/arm64-v8a/libc++_shared.so
-# 0134408  1981-01-01 01:01   lib/arm64-v8a/libsmartrobot_bevy.so
-# 1275840  1981-01-01 01:01   lib/x86_64/libc++_shared.so
-# 7441392  1981-01-01 01:01   lib/x86_64/libsmartrobot_bevy.so
+#   1330832  1981-01-01 01:01   lib/arm64-v8a/libc++_shared.so
+#  30134408  1981-01-01 01:01   lib/arm64-v8a/libsmartrobot_bevy.so
+#   1275840  1981-01-01 01:01   lib/x86_64/libc++_shared.so
+#  37441392  1981-01-01 01:01   lib/x86_64/libsmartrobot_bevy.so
 
 
 adb -e install ./app/build/outputs/apk/debug/app-debug.apk
