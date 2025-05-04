@@ -4,6 +4,11 @@
 
 set -eu
 
+
+echo
+echo "Install basic utilities"
+echo
+
 sudo apt update
 
 sudo apt install -y \
@@ -11,7 +16,10 @@ sudo apt install -y \
 ca-certificates \
 curl \
 gpg \
-unzip
+unzip \
+mesa-vulkan-drivers \
+mesa-utils \
+vulkan-tools
 
 
 echo
@@ -66,10 +74,7 @@ libudev-dev \
 libx11-dev \
 libxkbcommon-x11-0 \
 libwayland-dev \
-libxkbcommon-dev \
-mesa-vulkan-drivers \
-mesa-utils \
-vulkan-tools
+libxkbcommon-dev
 
 
 echo

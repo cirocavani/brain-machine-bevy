@@ -47,8 +47,105 @@ sudo apt install -y \
 ca-certificates \
 curl \
 gpg \
-unzip
+unzip \
+mesa-vulkan-drivers \
+mesa-utils \
+vulkan-tools
+
+vulkaninfo --summary
+
+# -> [Output vulkaninfo]
 ```
+
+<details>
+<summary>Output vulkaninfo.</summary>
+
+```text
+==========
+VULKANINFO
+==========
+
+Vulkan Instance Version: 1.4.304
+
+
+Instance Extensions: count = 25
+-------------------------------
+VK_EXT_acquire_drm_display             : extension revision 1
+VK_EXT_acquire_xlib_display            : extension revision 1
+VK_EXT_debug_report                    : extension revision 10
+VK_EXT_debug_utils                     : extension revision 2
+VK_EXT_direct_mode_display             : extension revision 1
+VK_EXT_display_surface_counter         : extension revision 1
+VK_EXT_headless_surface                : extension revision 1
+VK_EXT_surface_maintenance1            : extension revision 1
+VK_EXT_swapchain_colorspace            : extension revision 5
+VK_KHR_device_group_creation           : extension revision 1
+VK_KHR_display                         : extension revision 23
+VK_KHR_external_fence_capabilities     : extension revision 1
+VK_KHR_external_memory_capabilities    : extension revision 1
+VK_KHR_external_semaphore_capabilities : extension revision 1
+VK_KHR_get_display_properties2         : extension revision 1
+VK_KHR_get_physical_device_properties2 : extension revision 2
+VK_KHR_get_surface_capabilities2       : extension revision 1
+VK_KHR_portability_enumeration         : extension revision 1
+VK_KHR_surface                         : extension revision 25
+VK_KHR_surface_protected_capabilities  : extension revision 1
+VK_KHR_wayland_surface                 : extension revision 6
+VK_KHR_xcb_surface                     : extension revision 6
+VK_KHR_xlib_surface                    : extension revision 6
+VK_LUNARG_direct_driver_loading        : extension revision 1
+VK_NV_display_stereo                   : extension revision 1
+
+Instance Layers: count = 4
+--------------------------
+VK_LAYER_INTEL_nullhw       INTEL NULL HW                1.1.73   version 1
+VK_LAYER_MESA_device_select Linux device selection layer 1.4.303  version 1
+VK_LAYER_MESA_overlay       Mesa Overlay layer           1.4.303  version 1
+VK_LAYER_NV_optimus         NVIDIA Optimus layer         1.4.303  version 1
+
+Devices:
+========
+GPU0:
+        apiVersion         = 1.4.305
+        driverVersion      = 25.0.3
+        vendorID           = 0x8086
+        deviceID           = 0xa7ac
+        deviceType         = PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU
+        deviceName         = Intel(R) Graphics (RPL-U)
+        driverID           = DRIVER_ID_INTEL_OPEN_SOURCE_MESA
+        driverName         = Intel open-source Mesa driver
+        driverInfo         = Mesa 25.0.3-1ubuntu2
+        conformanceVersion = 1.4.0.0
+        deviceUUID         = 8680aca7-0400-0000-0002-000000000000
+        driverUUID         = b7bfe4ab-94df-c0d4-616d-43a427c11fca
+GPU1:
+        apiVersion         = 1.4.303
+        driverVersion      = 570.133.7.0
+        vendorID           = 0x10de
+        deviceID           = 0x25aa
+        deviceType         = PHYSICAL_DEVICE_TYPE_DISCRETE_GPU
+        deviceName         = NVIDIA GeForce MX570 A
+        driverID           = DRIVER_ID_NVIDIA_PROPRIETARY
+        driverName         = NVIDIA
+        driverInfo         = 570.133.07
+        conformanceVersion = 1.4.1.0
+        deviceUUID         = ffacb06a-ba56-5cc1-58da-90cadf3cc4e0
+        driverUUID         = a312329b-a338-5885-bebf-8b95ca9ae741
+GPU2:
+        apiVersion         = 1.4.305
+        driverVersion      = 0.0.1
+        vendorID           = 0x10005
+        deviceID           = 0x0000
+        deviceType         = PHYSICAL_DEVICE_TYPE_CPU
+        deviceName         = llvmpipe (LLVM 19.1.7, 256 bits)
+        driverID           = DRIVER_ID_MESA_LLVMPIPE
+        driverName         = llvmpipe
+        driverInfo         = Mesa 25.0.3-1ubuntu2 (LLVM 19.1.7)
+        conformanceVersion = 1.3.1.1
+        deviceUUID         = 6d657361-3235-2e30-2e33-2d3175627500
+        driverUUID         = 6c6c766d-7069-7065-5555-494400000000
+```
+</details>
 
 
 ### Build Dependencies
@@ -56,8 +153,6 @@ unzip
 <https://github.com/bevyengine/bevy/blob/main/docs/linux_dependencies.md#ubuntu>
 
 ```sh
-sudo apt update
-
 sudo apt install -y \
 --no-install-recommends \
 pkg-config \
@@ -66,10 +161,7 @@ libudev-dev \
 libx11-dev \
 libxkbcommon-x11-0 \
 libwayland-dev \
-libxkbcommon-dev \
-mesa-vulkan-drivers \
-mesa-utils \
-vulkan-tools
+libxkbcommon-dev
 ```
 
 
