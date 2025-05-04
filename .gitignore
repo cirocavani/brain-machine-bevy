@@ -4,3 +4,6 @@
 
 *.deb
 *.zip
+
+/dist
+/smartrobot-bevy-web*

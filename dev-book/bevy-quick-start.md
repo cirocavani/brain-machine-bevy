@@ -796,7 +796,7 @@ wasm-bindgen \
 --target web \
 target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
 
-ls -alh web/p
+ls -alh web/
 
 # total 28M
 # drwxrwxr-x  2 cavani cavani 4.0K Apr 29 14:26 ./
@@ -2922,3 +2922,225 @@ adb -d logcat | grep -e smartrobot -e 29974
 ```
 
 </details>
+
+
+## CI
+
+Workflows:
+
+- Commit:
+    - format check, lint, test
+- Release:
+    - Linux x86_64 binary -> smartrobot-bevy-linux-x86_64
+    - Linux aarch64 binary -> smartrobot-bevy-linux-aarch64
+    - WASM package (site) -> smartrobot-bevy-web.zip
+    - APK release -> smartrobot-bevy.apk
+- Deploy
+    - Web Package -> GitHub Pages
+
+
+### Release Assets
+
+```sh
+rm -rf dist/v0.0.1/
+
+mkdir -p dist/v0.0.1/
+
+
+
+# Linux x86_64 binary release
+
+
+docker run \
+--rm \
+-it \
+--platform linux/amd64 \
+-v $PWD:/home/user/project \
+-v $HOME/.cargo/registry:/home/user/.cargo/registry \
+-v $HOME/.cargo/git:/home/user/.cargo/git \
+smartrobot-bevy-devel:ubuntu-amd64 \
+cargo build \
+--profile release-lto \
+--target x86_64-unknown-linux-gnu \
+--features log-max,bevy/wayland
+
+ls -alh target/x86_64-unknown-linux-gnu/release-lto/smartrobot-bevy
+
+# -rwxr-xr-x 2 cavani cavani 44M May  4 12:48 target/x86_64-unknown-linux-gnu/release-lto/smartrobot-bevy*
+
+file -b target/x86_64-unknown-linux-gnu/release-lto/smartrobot-bevy
+
+# ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=7237a657dfe72c8ab4d4ebc13cc09b86234b7714, stripped
+
+docker run --rm --platform linux/amd64 \
+-v $PWD:/home/user/project \
+smartrobot-bevy-devel:ubuntu-amd64 \
+ldd target/x86_64-unknown-linux-gnu/release-lto/smartrobot-bevy
+
+# linux-vdso.so.1 (0x000074f6c4186000)
+# libwayland-client.so.0 => /lib/x86_64-linux-gnu/libwayland-client.so.0 (0x000074f6c4169000)
+# libudev.so.1 => /lib/x86_64-linux-gnu/libudev.so.1 (0x000074f6c411b000)
+# libasound.so.2 => /lib/x86_64-linux-gnu/libasound.so.2 (0x000074f6c3ff3000)
+# libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000074f6c3fc6000)
+# libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x000074f6c1309000)
+# libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000074f6c10e9000)
+# libffi.so.8 => /lib/x86_64-linux-gnu/libffi.so.8 (0x000074f6c3fb7000)
+# libcap.so.2 => /lib/x86_64-linux-gnu/libcap.so.2 (0x000074f6c3fa9000)
+# /lib64/ld-linux-x86-64.so.2 (0x000074f6c4188000)
+
+
+cp target/x86_64-unknown-linux-gnu/release-lto/smartrobot-bevy \
+dist/v0.0.1/smartrobot-bevy-linux-x86_64
+
+
+
+# Linux aarch64 binary release
+
+
+docker run \
+--rm \
+-it \
+--platform linux/arm64 \
+-v $PWD:/home/user/project \
+-v $HOME/.cargo/registry:/home/user/.cargo/registry \
+-v $HOME/.cargo/git:/home/user/.cargo/git \
+smartrobot-bevy-devel:debian-arm64 \
+cargo build \
+--profile release-lto \
+--target aarch64-unknown-linux-gnu \
+--features log-max,bevy/wayland
+
+
+ls -alh target/aarch64-unknown-linux-gnu/release-lto/smartrobot-bevy
+
+# -rwxr-xr-x 2 cavani cavani 38M May  4 12:38 target/aarch64-unknown-linux-gnu/release-lto/smartrobot-bevy*
+
+file -b target/aarch64-unknown-linux-gnu/release-lto/smartrobot-bevy
+
+# ELF 64-bit LSB pie executable, ARM aarch64, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-aarch64.so.1, for GNU/Linux 3.7.0, BuildID[sha1]=613d5badacc2a2fb492d0df3676f5bcc99baa191, stripped
+
+docker run --rm --platform linux/arm64 \
+-v $PWD:/home/user/project \
+smartrobot-bevy-devel:debian-arm64 \
+ldd target/aarch64-unknown-linux-gnu/release-lto/smartrobot-bevy
+
+
+# linux-vdso.so.1 (0x00007c236fdd4000)
+# libwayland-client.so.0 => /lib/aarch64-linux-gnu/libwayland-client.so.0 (0x00007c236fda0000)
+# libudev.so.1 => /lib/aarch64-linux-gnu/libudev.so.1 (0x00007c236ed60000)
+# libasound.so.2 => /lib/aarch64-linux-gnu/libasound.so.2 (0x00007c236ec40000)
+# libgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x00007c23663c0000)
+# libm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x00007c2366320000)
+# libc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x00007c2366170000)
+# libffi.so.8 => /lib/aarch64-linux-gnu/libffi.so.8 (0x00007c236ec10000)
+# libpthread.so.0 => /lib/aarch64-linux-gnu/libpthread.so.0 (0x00007c2366140000)
+# /lib/ld-linux-aarch64.so.1 (0x00007c236edb0000)
+
+
+cp target/aarch64-unknown-linux-gnu/release-lto/smartrobot-bevy \
+dist/v0.0.1/smartrobot-bevy-linux-aarch64
+
+
+
+# WASM package (site)
+
+
+rm -rf smartrobot-bevy-web/
+
+mkdir -p smartrobot-bevy-web/
+
+cp web/index.html smartrobot-bevy-web/
+
+cargo build \
+--profile wasm-release \
+--target wasm32-unknown-unknown \
+--features log-max
+
+ls -alh target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
+
+# -rwxrwxr-x 2 cavani cavani 25M May  4 11:44 target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
+
+wasm-bindgen \
+--out-name smartrobot_bevy \
+--out-dir smartrobot-bevy-web/ \
+--target web \
+target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
+
+ls -alh smartrobot-bevy-web/
+
+# total 23M
+# drwxrwxr-x  2 cavani cavani 4.0K May  4 11:52 ./
+# drwxrwxr-x 13 cavani cavani 4.0K May  4 11:52 ../
+# -rw-rw-r--  1 cavani cavani  212 May  4 11:52 index.html
+# -rw-rw-r--  1 cavani cavani 1.8K May  4 11:52 smartrobot_bevy.d.ts
+# -rw-rw-r--  1 cavani cavani 105K May  4 11:52 smartrobot_bevy.js
+# -rw-rw-r--  1 cavani cavani  23M May  4 11:52 smartrobot_bevy_bg.wasm
+# -rw-rw-r--  1 cavani cavani  830 May  4 11:52 smartrobot_bevy_bg.wasm.d.ts
+
+zip -r smartrobot-bevy-web.zip smartrobot-bevy-web/
+
+ls -alh smartrobot-bevy-web.zip
+
+# -rw-rw-r-- 1 cavani cavani 6.5M May  4 11:55 smartrobot-bevy-web.zip
+
+
+mv smartrobot-bevy-web.zip dist/v0.0.1/
+
+
+
+# APK release
+
+
+source android-env.sh
+
+rm -rf android/app/src/main/jniLibs/
+
+cargo ndk \
+-t arm64-v8a \
+-t x86_64 \
+-o android/app/src/main/jniLibs \
+build \
+--lib \
+--profile mobile-release \
+--features log-max
+
+ls -alh android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libsmartrobot_bevy.so
+
+# -rwxrwxr-x 1 cavani cavani 29M May  4 12:14 android/app/src/main/jniLibs/arm64-v8a/libsmartrobot_bevy.so*
+# -rwxrwxr-x 1 cavani cavani 36M May  4 12:14 android/app/src/main/jniLibs/x86_64/libsmartrobot_bevy.so*
+
+file -b android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libsmartrobot_bevy.so
+
+# ELF 64-bit LSB shared object, ARM aarch64, version 1 (SYSV), dynamically linked, stripped
+# ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, stripped
+
+
+cd android/
+
+./gradlew --warning-mode all clean build
+
+cd ..
+
+ls -alh android/app/build/outputs/apk/release/app-release-unsigned.apk
+
+# -rw-rw-r-- 1 cavani cavani 78M May  4 12:18 android/app/build/outputs/apk/release/app-release-unsigned.apk
+
+
+cp android/app/build/outputs/apk/release/app-release-unsigned.apk \
+dist/v0.0.1/smartrobot-bevy.apk
+
+
+
+# Release Assets
+
+
+ls -alh dist/v0.0.1/
+
+# total 165M
+# drwxrwxr-x 2 cavani cavani 4.0K May  4 12:41 ./
+# drwxrwxr-x 3 cavani cavani 4.0K May  4 11:53 ../
+# -rwxr-xr-x 1 cavani cavani  38M May  4 12:41 smartrobot-bevy-linux-aarch64*
+# -rwxrwxr-x 1 cavani cavani  44M May  4 12:51 smartrobot-bevy-linux-x86_64*
+# -rw-rw-r-- 1 cavani cavani 6.5M May  4 11:55 smartrobot-bevy-web.zip
+# -rw-rw-r-- 1 cavani cavani  78M May  4 12:18 smartrobot-bevy.apk
+```
