@@ -191,7 +191,10 @@ install-apk-device:
 	. android-env.sh && \
 	adb -d install android/app/build/outputs/apk/debug/app-debug.apk
 
-.PHONY: open-android-emulator
+# WARNING
+# - `-gpu host` dows not work at the moment (app closes after opening window)
+# - `-gpu swiftshader_indirect` renders 3D scene but input does not work (camera movement, button)
+ .PHONY: open-android-emulator
 open-android-emulator: export __NV_PRIME_RENDER_OFFLOAD=1
 open-android-emulator: export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
 open-android-emulator: export __GLX_VENDOR_LIBRARY_NAME=nvidia
@@ -199,7 +202,7 @@ open-android-emulator: export __VK_LAYER_NV_optimus=NVIDIA_only
 open-android-emulator: export VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json
 open-android-emulator:
 	. android-env.sh && \
-	emulator -avd Pixel_9_Pro_API_35 -netdelay none -netspeed full
+	emulator -avd Pixel_9_Pro_API_35 -gpu host -netdelay none -netspeed full
 
 .PHONY: android-device
 android-device: build-android-lib build-android-apk install-apk-device

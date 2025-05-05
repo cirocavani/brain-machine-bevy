@@ -94,7 +94,7 @@ cd android/
 
 cd ..
 
-cp android/app/build/outputs/apk/release/app-release-unsigned.apk \
+cp android/app/build/outputs/apk/debug/app-debug.apk \
 dist/v0.0.1/smartrobot-bevy.apk
 
 

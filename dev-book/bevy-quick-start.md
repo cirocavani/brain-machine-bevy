@@ -1146,13 +1146,17 @@ emulator -list-avds
 # Pixel_9_Pro_API_35
 
 
+# WARNING
+# - `-gpu host` dows not work at the moment (app closes after opening window)
+# - `-gpu swiftshader_indirect` renders 3D scene but input does not work (camera movement, button)
+ 
 export __NV_PRIME_RENDER_OFFLOAD=1
 export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
 export __GLX_VENDOR_LIBRARY_NAME=nvidia
 export __VK_LAYER_NV_optimus=NVIDIA_only
 export VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/nvidia_icd.json
 
-emulator -avd Pixel_9_Pro_API_35 -netdelay none -netspeed full
+emulator -avd Pixel_9_Pro_API_35 -gpu host -netdelay none -netspeed full
 
 # [open emulator window running Android UI]
 
@@ -2934,7 +2938,7 @@ Workflows:
     - Linux x86_64 binary -> smartrobot-bevy-linux-x86_64
     - Linux aarch64 binary -> smartrobot-bevy-linux-aarch64
     - WASM package (site) -> smartrobot-bevy-web.zip
-    - APK release -> smartrobot-bevy.apk
+    - APK package (android) -> smartrobot-bevy.apk
 - Deploy
     - Web Package -> GitHub Pages
 
@@ -3121,12 +3125,12 @@ cd android/
 
 cd ..
 
-ls -alh android/app/build/outputs/apk/release/app-release-unsigned.apk
+ls -alh android/app/build/outputs/apk/debug/app-debug.apk
 
-# -rw-rw-r-- 1 cavani cavani 78M May  4 12:18 android/app/build/outputs/apk/release/app-release-unsigned.apk
+# -rw-rw-r-- 1 cavani cavani 80M May  4 13:11 android/app/build/outputs/apk/debug/app-debug.apk
 
 
-cp android/app/build/outputs/apk/release/app-release-unsigned.apk \
+cp android/app/build/outputs/apk/debug/app-debug.apk \
 dist/v0.0.1/smartrobot-bevy.apk
 
 
@@ -3142,5 +3146,5 @@ ls -alh dist/v0.0.1/
 # -rwxr-xr-x 1 cavani cavani  38M May  4 12:41 smartrobot-bevy-linux-aarch64*
 # -rwxrwxr-x 1 cavani cavani  44M May  4 12:51 smartrobot-bevy-linux-x86_64*
 # -rw-rw-r-- 1 cavani cavani 6.5M May  4 11:55 smartrobot-bevy-web.zip
-# -rw-rw-r-- 1 cavani cavani  78M May  4 12:18 smartrobot-bevy.apk
+# -rw-rw-r-- 1 cavani cavani  88M May  4 13:11 smartrobot-bevy.apk
 ```
