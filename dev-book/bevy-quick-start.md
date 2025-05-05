@@ -3081,7 +3081,7 @@ ls -alh smartrobot-bevy-web/
 # -rw-rw-r--  1 cavani cavani  23M May  4 11:52 smartrobot_bevy_bg.wasm
 # -rw-rw-r--  1 cavani cavani  830 May  4 11:52 smartrobot_bevy_bg.wasm.d.ts
 
-zip -r smartrobot-bevy-web.zip smartrobot-bevy-web/
+zip -mr smartrobot-bevy-web.zip smartrobot-bevy-web/
 
 ls -alh smartrobot-bevy-web.zip
 

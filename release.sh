@@ -67,7 +67,7 @@ wasm-bindgen \
 --target web \
 target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
 
-zip -r smartrobot-bevy-web.zip smartrobot-bevy-web/
+zip -mr smartrobot-bevy-web.zip smartrobot-bevy-web/
 
 mv smartrobot-bevy-web.zip dist/v0.0.1/
 
