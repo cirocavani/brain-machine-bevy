@@ -30,7 +30,7 @@ Development Host:
 
 > WARNING: use setup script with caution
 
-[`setup-ubuntu2504.sh`](./setup-ubuntu2504.sh)
+[`setup-ubuntu.sh`](./setup-ubuntu.sh)
 
 [`setup-wasm.sh`](./setup-wasm.sh)
 
