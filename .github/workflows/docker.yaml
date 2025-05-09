@@ -1,0 +1,88 @@
+name: Development Docker Images
+
+# https://docs.github.com/en/actions/managing-workflow-runs/manually-running-a-workflow
+on:
+  workflow_dispatch:
+
+
+# https://docs.github.com/en/actions/use-cases-and-examples/publishing-packages/publishing-docker-images
+# https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry
+jobs:
+  docker-devel:
+
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+
+    # https://github.com/actions/runner-images
+    # https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2404-Readme.md
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # https://github.com/actions/checkout
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # https://github.com/docker/login-action
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # https://github.com/docker/setup-qemu-action
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      # https://github.com/docker/setup-buildx-action
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          platforms: linux/amd64,linux/arm64
+
+      # https://github.com/docker/build-push-action
+
+      - name: Ubuntu ADM64 Build and push
+        id: docker-ubuntu-amd64
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/ubuntu/Dockerfile
+          platforms: linux/amd64
+          tags: ghcr.io/cirocavani/smartrobot-bevy/smartrobot-bevy-devel:ubuntu-amd64
+          push: true
+  
+      - name: Debian ARM64 Build and push
+        id: docker-debian-arm64
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/debian/Dockerfile
+          platforms: linux/arm64
+          tags: ghcr.io/cirocavani/smartrobot-bevy/smartrobot-bevy-devel:debian-arm64
+          push: true
+
+      # https://github.com/actions/attest-build-provenance
+
+      - name: Docker Ubuntu AMD64 artifact attestation
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: ghcr.io/cirocavani/smartrobot-bevy/smartrobot-bevy-devel:ubuntu-amd64
+          subject-digest: ${{ steps.docker-ubuntu-amd64.outputs.digest }}
+          push-to-registry: true
+
+      - name: Docker Debian ARM64 artifact attestation
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: ghcr.io/cirocavani/smartrobot-bevy/smartrobot-bevy-devel:debian-arm64
+          subject-digest: ${{ steps.docker-debian-arm64.outputs.digest }}
+          push-to-registry: true
