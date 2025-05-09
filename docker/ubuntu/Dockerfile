@@ -5,6 +5,12 @@ ARG GROUP_ID=1000
 ENV DEBIAN_FRONTEND=noninteractive \
     PATH="/home/user/.cargo/bin:${PATH}"
 
+# https://askubuntu.com/questions/1513927/ubuntu-24-04-docker-images-now-includes-user-ubuntu-with-uid-gid-1000
+# https://bugs.launchpad.net/cloud-images/+bug/2005129
+RUN touch /var/mail/ubuntu && \
+    chown ubuntu /var/mail/ubuntu && \
+    userdel -r ubuntu
+
 RUN apt update && \
     apt install -y --no-install-recommends \
     ca-certificates \
