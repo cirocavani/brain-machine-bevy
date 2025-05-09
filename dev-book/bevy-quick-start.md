@@ -446,7 +446,7 @@ docker build \
 --platform linux/amd64 \
 --build-arg USER_ID=`id -u` \
 --build-arg GROUP_ID=`id -g` \
--t smartrobot-bevy-devel:ubuntu-amd64 \
+-t smartrobot-bevy-ubuntu:latest \
 -f docker/ubuntu/Dockerfile \
 .
 
@@ -462,7 +462,7 @@ docker run \
 -v $PWD:/home/user/project \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
-smartrobot-bevy-devel:ubuntu-amd64 \
+smartrobot-bevy-ubuntu:latest \
 cargo run --features dev,bevy/wayland
 
 # -> [Output ubuntu-amd64 (Docker)]
@@ -512,7 +512,7 @@ docker build \
 --platform linux/arm64 \
 --build-arg USER_ID=`id -u` \
 --build-arg GROUP_ID=`id -g` \
--t smartrobot-bevy-devel:debian-arm64 \
+-t smartrobot-bevy-debian:latest \
 -f docker/debian/Dockerfile \
 .
 
@@ -528,7 +528,7 @@ docker run \
 -v $PWD:/home/user/project \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
-smartrobot-bevy-devel:debian-arm64 \
+smartrobot-bevy-debian:latest \
 cargo run --features dev,bevy/wayland
 
 # -> [Output debian-arm64 (Docker)]
@@ -666,7 +666,7 @@ docker run \
 -v $PWD:/home/user/project \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
-smartrobot-bevy-devel:ubuntu-amd64 \
+smartrobot-bevy-ubuntu:latest \
 cargo run --features dev,bevy/wayland
 
 # -> [Output ubuntu-amd64 (NVIDIA)]
@@ -2962,7 +2962,7 @@ docker run \
 -v $PWD:/home/user/project \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
-smartrobot-bevy-devel:ubuntu-amd64 \
+smartrobot-bevy-ubuntu:latest \
 cargo build \
 --profile release-lto \
 --target x86_64-unknown-linux-gnu \
@@ -2978,7 +2978,7 @@ file -b target/x86_64-unknown-linux-gnu/release-lto/smartrobot-bevy
 
 docker run --rm --platform linux/amd64 \
 -v $PWD:/home/user/project \
-smartrobot-bevy-devel:ubuntu-amd64 \
+smartrobot-bevy-ubuntu:latest \
 ldd target/x86_64-unknown-linux-gnu/release-lto/smartrobot-bevy
 
 # linux-vdso.so.1 (0x000074f6c4186000)
@@ -3008,7 +3008,7 @@ docker run \
 -v $PWD:/home/user/project \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
-smartrobot-bevy-devel:debian-arm64 \
+smartrobot-bevy-debian:latest \
 cargo build \
 --profile release-lto \
 --target aarch64-unknown-linux-gnu \
@@ -3025,7 +3025,7 @@ file -b target/aarch64-unknown-linux-gnu/release-lto/smartrobot-bevy
 
 docker run --rm --platform linux/arm64 \
 -v $PWD:/home/user/project \
-smartrobot-bevy-devel:debian-arm64 \
+smartrobot-bevy-debian:latest \
 ldd target/aarch64-unknown-linux-gnu/release-lto/smartrobot-bevy
 
 

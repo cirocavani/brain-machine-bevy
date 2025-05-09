@@ -17,7 +17,7 @@ docker run \
 -v $PWD:/home/user/project \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
-smartrobot-bevy-devel:ubuntu-amd64 \
+smartrobot-bevy-ubuntu:latest \
 cargo build \
 --profile release-lto \
 --target x86_64-unknown-linux-gnu \
@@ -37,7 +37,7 @@ docker run \
 -v $PWD:/home/user/project \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
-smartrobot-bevy-devel:debian-arm64 \
+smartrobot-bevy-debian:latest \
 cargo build \
 --profile release-lto \
 --target aarch64-unknown-linux-gnu \

@@ -896,10 +896,10 @@ make clean
 ```sh
 # Ubuntu 25.04 x86_64 (development)
 
-# Build Docker Image `smartrobot-bevy-devel:ubuntu-amd64`
+# Build Docker Image `smartrobot-bevy-ubuntu`
 make docker-build-ubuntu-amd64
 
-# Execute `cargo run` in a container based on `smartrobot-bevy-devel:ubuntu-amd64`
+# Execute `cargo run` in a container based on `smartrobot-bevy-ubuntu`
 # (open a window using Wayland)
 make docker-run-ubuntu-amd64
 make docker-run-ubuntu-amd64-nvidia
@@ -912,10 +912,10 @@ make docker-ubuntu-amd64-nvidia
 
 # Debian 12 ARM64 (emulator) - Raspberry Pi
 
-# Build Docker Image `smartrobot-bevy-devel:debian-arm64`
+# Build Docker Image `smartrobot-bevy-debian`
 make docker-build-debian-arm64
 
-# Execute `cargo run` in a container based on `smartrobot-bevy-devel:debian-arm64`
+# Execute `cargo run` in a container based on `smartrobot-bevy-debian`
 # (open a window using Wayland)
 make docker-run-debian-arm64
 
