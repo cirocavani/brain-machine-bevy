@@ -16,13 +16,31 @@ format:
 	cargo fmt --all -- --emit files
 
 .PHONY: build
-build: ARGS=--all-features
 build:
-	cargo build $(ARGS)
+	cargo build --features dev,wayland
+
+.PHONY: release-arm64
+release-arm64:
+	cargo build \
+	--profile release-lto \
+	--target aarch64-unknown-linux-gnu \
+	--features log-max,wayland
+
+.PHONY: release-amd64
+release-amd64:
+	cargo build \
+	--profile release-lto \
+	--target x86_64-unknown-linux-gnu \
+	--features log-max,wayland
 
 .PHONY: clean
 clean:
 	cargo clean
+
+.PHONY: upgrade
+upgrade:
+	cargo upgrade --compatible --verbose
+	cargo update --verbose
 
 
 # Docker (local)
@@ -52,7 +70,7 @@ docker-run-ubuntu-amd64:
 	-v ${HOME}/.cargo/registry:/home/user/.cargo/registry \
 	-v ${HOME}/.cargo/git:/home/user/.cargo/git \
 	smartrobot-bevy-ubuntu:latest \
-	cargo run --features dev,bevy/wayland
+	cargo run --features dev,wayland
 
 .PHONY: docker-run-ubuntu-amd64-nvidia
 docker-run-ubuntu-amd64-nvidia:
@@ -75,14 +93,31 @@ docker-run-ubuntu-amd64-nvidia:
 	-v ${HOME}/.cargo/registry:/home/user/.cargo/registry \
 	-v ${HOME}/.cargo/git:/home/user/.cargo/git \
 	smartrobot-bevy-ubuntu:latest \
-	cargo run --features dev,bevy/wayland
-
+	cargo run --features dev,wayland
 
 .PHONY: docker-ubuntu-amd64
 docker-ubuntu-amd64: docker-build-ubuntu-amd64 docker-run-ubuntu-amd64
 
 .PHONY: docker-ubuntu-amd64-nvidia
 docker-ubuntu-amd64-nvidia: docker-build-ubuntu-amd64 docker-run-ubuntu-amd64-nvidia
+
+
+.PHONY: docker-shell-ubuntu-amd64
+docker-shell-ubuntu-amd64:
+	docker run \
+	--rm \
+	-it \
+	--platform linux/amd64 \
+	-e WAYLAND_DISPLAY=${WAYLAND_DISPLAY} \
+	-e XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR} \
+	-v ${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}:${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY} \
+	-v /etc/machine-id:/etc/machine-id:ro \
+	-e CARGO_TARGET_DIR=/home/user/project/target/x86_64-unknown-linux-gnu \
+	-v ${PWD}:/home/user/project \
+	-v ${HOME}/.cargo/registry:/home/user/.cargo/registry \
+	-v ${HOME}/.cargo/git:/home/user/.cargo/git \
+	smartrobot-bevy-ubuntu:latest
+
 
 .PHONY: docker-build-debian-arm64
 docker-build-debian-arm64:
@@ -109,10 +144,27 @@ docker-run-debian-arm64:
 	-v ${HOME}/.cargo/registry:/home/user/.cargo/registry \
 	-v ${HOME}/.cargo/git:/home/user/.cargo/git \
 	smartrobot-bevy-debian:latest \
-	cargo run --features dev,bevy/wayland
+	cargo run --features dev,wayland
 
 .PHONY: docker-debian-arm64
 docker-debian-arm64: docker-build-debian-arm64 docker-run-debian-arm64
+
+
+.PHONY: docker-shell-debian-arm64
+docker-shell-debian-arm64:
+	docker run \
+	--rm \
+	-it \
+	--platform linux/arm64 \
+	-e WAYLAND_DISPLAY=${WAYLAND_DISPLAY} \
+	-e XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR} \
+	-v ${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}:${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY} \
+	-v /etc/machine-id:/etc/machine-id:ro \
+	-e CARGO_TARGET_DIR=/home/user/project/target/aarch64-unknown-linux-gnu \
+	-v ${PWD}:/home/user/project \
+	-v ${HOME}/.cargo/registry:/home/user/.cargo/registry \
+	-v ${HOME}/.cargo/git:/home/user/.cargo/git \
+	smartrobot-bevy-debian:latest
 
 
 # WebAssembly

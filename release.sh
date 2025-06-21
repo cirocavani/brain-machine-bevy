@@ -8,7 +8,9 @@ mkdir -p dist/v0.0.1/
 
 
 
-# Linux x86_64 binary release
+echo
+echo "Linux x86_64 binary release"
+echo
 
 docker run \
 --rm \
@@ -21,14 +23,16 @@ smartrobot-bevy-ubuntu:latest \
 cargo build \
 --profile release-lto \
 --target x86_64-unknown-linux-gnu \
---features log-max,bevy/wayland
+--features log-max,wayland
 
 cp target/x86_64-unknown-linux-gnu/release-lto/smartrobot-bevy \
 dist/v0.0.1/smartrobot-bevy-linux-x86_64
 
 
 
-# Linux aarch64 binary release
+echo
+echo "Linux aarch64 binary release"
+echo
 
 docker run \
 --rm \
@@ -41,14 +45,16 @@ smartrobot-bevy-debian:latest \
 cargo build \
 --profile release-lto \
 --target aarch64-unknown-linux-gnu \
---features log-max,bevy/wayland
+--features log-max,wayland
 
 cp target/aarch64-unknown-linux-gnu/release-lto/smartrobot-bevy \
 dist/v0.0.1/smartrobot-bevy-linux-aarch64
 
 
 
-# WASM package (site)
+echo
+echo "WASM package (site)"
+echo
 
 rm -rf smartrobot-bevy-web/
 
@@ -73,7 +79,9 @@ mv smartrobot-bevy-web.zip dist/v0.0.1/
 
 
 
-# APK release
+echo
+echo "APK release"
+echo
 
 . android-env.sh
 
@@ -99,6 +107,8 @@ dist/v0.0.1/smartrobot-bevy.apk
 
 
 
-# Release Assets
+echo
+echo "Release Assets"
+echo
 
 ls -alh dist/v0.0.1/

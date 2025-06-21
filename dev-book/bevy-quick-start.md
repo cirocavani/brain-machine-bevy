@@ -145,7 +145,7 @@ cargo version
 
 # https://github.com/cargo-bins/cargo-binstall
 
-curl --proto '=https' --tlsv1.2 -sSfL https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | \
+curl --proto "=https" --tlsv1.2 -sSfL https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | \
 bash
 
 cargo binstall -V
@@ -193,6 +193,7 @@ cargo add bevy log
 
 echo '
 [features]
+wayland = ["bevy/wayland"]
 dev = ["bevy-dev", "log-max"]
 bevy-dev = ["bevy/dynamic_linking"]
 log-max = ["log/max_level_debug", "log/release_max_level_warn"]
@@ -357,7 +358,7 @@ fn main() {
 > src/main.rs
 
 
-cargo run --features dev,bevy/wayland
+cargo run --features dev,wayland
 
 # -> [Output Dev]
 ```
@@ -366,7 +367,7 @@ cargo run --features dev,bevy/wayland
 <summary>Output Dev.</summary>
 
 ```text
-cargo run --features bevy/wayland
+cargo run --features dev,wayland
     Finished `dev` profile [optimized + debuginfo] target(s) in 6m 39s
      Running `target/debug/smartrobot-bevy`
 2025-04-28T22:53:41.224703Z  INFO bevy_render::renderer: AdapterInfo { name: "NVIDIA GeForce MX570 A", vendor: 4318, device: 9642, device_type: DiscreteGpu, driver: "NVIDIA", driver_info: "570.133.07", backend: Vulkan }
@@ -463,7 +464,7 @@ docker run \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
 smartrobot-bevy-ubuntu:latest \
-cargo run --features dev,bevy/wayland
+cargo run --features dev,wayland
 
 # -> [Output ubuntu-amd64 (Docker)]
 
@@ -529,7 +530,7 @@ docker run \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
 smartrobot-bevy-debian:latest \
-cargo run --features dev,bevy/wayland
+cargo run --features dev,wayland
 
 # -> [Output debian-arm64 (Docker)]
 
@@ -547,7 +548,7 @@ ls -alh target/aarch64-unknown-linux-gnu/debug/smartrobot-bevy
 <summary>Output ubuntu-amd64 (Docker).</summary>
 
 ```text
-cargo run --features bevy/wayland
+cargo run --features dev,wayland
     Finished `dev` profile [optimized + debuginfo] target(s) in 0.61s
      Running `target/x86_64-unknown-linux-gnu/debug/smartrobot-bevy`
 2025-04-28T22:35:03.808071Z  INFO bevy_render::renderer: AdapterInfo { name: "llvmpipe (LLVM 19.1.7, 256 bits)", vendor: 65541, device: 0, device_type: Cpu, driver: "llvmpipe", driver_info: "Mesa 25.0.3-1ubuntu2 (LLVM 19.1.7)", backend: Vulkan }
@@ -584,7 +585,7 @@ hello Zayna Nieves!
 <summary>Output debian-arm64 (Docker).</summary>
 
 ```text
-cargo run --features bevy/wayland
+cargo run --features dev,wayland
     Finished `dev` profile [optimized + debuginfo] target(s) in 2.68s
      Running `target/aarch64-unknown-linux-gnu/debug/smartrobot-bevy`
 2025-04-28T22:35:33.225543Z  INFO bevy_render::renderer: AdapterInfo { name: "llvmpipe (LLVM 15.0.6, 128 bits)", vendor: 65541, device: 0, device_type: Cpu, driver: "llvmpipe", driver_info: "Mesa 22.3.6 (LLVM 15.0.6)", backend: Vulkan }
@@ -667,7 +668,7 @@ docker run \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
 smartrobot-bevy-ubuntu:latest \
-cargo run --features dev,bevy/wayland
+cargo run --features dev,wayland
 
 # -> [Output ubuntu-amd64 (NVIDIA)]
 ```
@@ -676,7 +677,7 @@ cargo run --features dev,bevy/wayland
 <summary>Output ubuntu-amd64 (NVIDIA).</summary>
 
 ```text
-cargo run --features bevy/wayland
+cargo run --features dev,wayland
     Finished `dev` profile [optimized + debuginfo] target(s) in 0.18s
      Running `target/x86_64-unknown-linux-gnu/debug/smartrobot-bevy`
 2025-04-29T13:26:28.847748Z  INFO bevy_render::renderer: AdapterInfo { name: "NVIDIA GeForce MX570 A", vendor: 4318, device: 9642, device_type: DiscreteGpu, driver: "NVIDIA", driver_info: "570.133.07", backend: Vulkan }
@@ -1423,7 +1424,7 @@ fn handle_lifetime(
 
 mkdir -p assets/sounds/
 
-curl --proto '=https' --tlsv1.2 -sSfL -o assets/sounds/Windless\ Slopes.ogg \
+curl --proto "=https" --tlsv1.2 -sSfL -o assets/sounds/Windless\ Slopes.ogg \
 https://raw.githubusercontent.com/bevyengine/bevy/v0.16.0/assets/sounds/Windless%20Slopes.ogg
 
 
@@ -1512,7 +1513,7 @@ ls -alh android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libsmartrobot_bevy.so
 #
 
 
-curl --proto '=https' --tlsv1.2 -sSfLO https://services.gradle.org/distributions/gradle-8.14-bin.zip
+curl --proto "=https" --tlsv1.2 -sSfLO https://services.gradle.org/distributions/gradle-8.14-bin.zip
 
 mkdir -p $HOME/.gradle/wrapper/dists/gradle-8.14-bin/38aieal9i53h9rfe7vjup95b9/
 
@@ -1597,7 +1598,7 @@ echo '// Intentionally blank -- this is a dummy code!
 
 mkdir -p app/src/main/res/mipmap-mdpi/
 
-curl --proto '=https' --tlsv1.2 -sSfL -o app/src/main/res/mipmap-mdpi/ic_launcher.png \
+curl --proto "=https" --tlsv1.2 -sSfL -o app/src/main/res/mipmap-mdpi/ic_launcher.png \
 https://raw.githubusercontent.com/bevyengine/bevy/v0.16.0/assets/android-res/mipmap-mdpi/ic_launcher.png
 
 
@@ -2966,7 +2967,7 @@ smartrobot-bevy-ubuntu:latest \
 cargo build \
 --profile release-lto \
 --target x86_64-unknown-linux-gnu \
---features log-max,bevy/wayland
+--features log-max,wayland
 
 ls -alh target/x86_64-unknown-linux-gnu/release-lto/smartrobot-bevy
 
@@ -3012,7 +3013,7 @@ smartrobot-bevy-debian:latest \
 cargo build \
 --profile release-lto \
 --target aarch64-unknown-linux-gnu \
---features log-max,bevy/wayland
+--features log-max,wayland
 
 
 ls -alh target/aarch64-unknown-linux-gnu/release-lto/smartrobot-bevy

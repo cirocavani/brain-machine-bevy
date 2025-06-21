@@ -4,10 +4,11 @@ version = "0.0.1"
 edition = "2024"
 
 [dependencies]
-bevy = "0.16.0"
+bevy = "0.16.1"
 log = "0.4.27"
 
 [features]
+wayland = ["bevy/wayland"]
 dev = ["bevy-dev", "log-max"]
 bevy-dev = ["bevy/dynamic_linking"]
 log-max = ["log/max_level_debug", "log/release_max_level_warn"]

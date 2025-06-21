@@ -16,6 +16,11 @@ RUN apt update && \
     ca-certificates \
     curl \
     sudo \
+    make \
+    tar \
+    xz-utils \
+    libssl-dev \
+    lldb \
     clang \
     lld \
     pkg-config \
@@ -38,8 +43,42 @@ RUN echo "user ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/010_user-nopasswd
 USER user
 WORKDIR /home/user
 
+
+# Rust Toolchain install
+
 RUN curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | \
     sh -s -- --default-toolchain stable -y
+
+RUN curl --proto "=https" --tlsv1.2 -sSfL https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | \
+    bash
+
+RUN cargo binstall -y \
+    cargo-edit \
+    cargo-sort \
+    cargo-update \
+    zellij
+
+RUN rustup target add wasm32-unknown-unknown
+
+RUN cargo binstall -y \
+    wasm-bindgen-cli \
+    simple-http-server
+
+RUN rm -rf ~/.cargo/{registry,git}
+
+
+# Helix Editor install
+
+RUN mkdir -p ~/.local/bin/ ~/.local/helix/ ~/.config/helix/
+RUN curl --proto "=https" --tlsv1.2 -sSfL https://github.com/helix-editor/helix/releases/download/25.01.1/helix-25.01.1-x86_64-linux.tar.xz | \
+    tar -xJC ~/.local/helix --strip-components=1
+RUN ln -s ~/.local/helix/hx ~/.local/bin/
+RUN ln -s ~/.local/helix/runtime ~/.config/helix/
+
+RUN rustup component add rust-analyzer
+
+RUN sudo update-alternatives --install /usr/bin/lldb-dap lldb-dap /usr/bin/lldb-dap-20 1000
+
 
 VOLUME ["/home/user/project", "/home/user/.cargo/registry", "/home/user/.cargo/git"]
 WORKDIR /home/user/project
