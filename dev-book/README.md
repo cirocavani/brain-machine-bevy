@@ -1,4 +1,4 @@
-# Smart Robot - Bevy Experimental Project (Development)
+# Brain Machine - Bevy Experimental Project (Development)
 
 
 > Bevy is a refreshingly simple data-driven game engine built in Rust.

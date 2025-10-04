@@ -1,5 +1,5 @@
 [package]
-name = "smartrobot-bevy"
+name = "brain-machine-bevy"
 version = "0.0.1"
 edition = "2024"
 
@@ -55,5 +55,5 @@ inherits = "release-lto"
 opt-level = "z"
 
 [lib]
-name = "smartrobot_bevy"
+name = "brain_machine_bevy"
 crate-type = ["lib", "cdylib"]

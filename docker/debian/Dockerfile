@@ -33,6 +33,7 @@ RUN apt update && \
 RUN update-alternatives --install /usr/bin/clang clang /usr/bin/clang-19 100
 RUN update-alternatives --install /usr/bin/lld lld /usr/bin/lld-19 100
 RUN update-alternatives --install /usr/bin/cc cc /usr/bin/clang-19 100
+RUN update-alternatives --install /usr/bin/lldb-dap lldb-dap /usr/bin/lldb-dap-19 1000
 
 RUN groupadd --gid ${GROUP_ID} user
 RUN useradd -m --uid ${USER_ID} --gid ${GROUP_ID} -G sudo user
@@ -60,7 +61,7 @@ RUN cargo binstall -y \
 RUN rustup target add wasm32-unknown-unknown
 
 RUN cargo binstall -y \
-    wasm-bindgen-cli \
+    wasm-bindgen-cli@0.2.100 \
     simple-http-server
 
 RUN rm -rf ~/.cargo/{registry,git}
@@ -69,14 +70,12 @@ RUN rm -rf ~/.cargo/{registry,git}
 # Helix Editor install
 
 RUN mkdir -p ~/.local/bin/ ~/.local/helix/ ~/.config/helix/
-RUN curl --proto "=https" --tlsv1.2 -sSfL https://github.com/helix-editor/helix/releases/download/25.01.1/helix-25.01.1-aarch64-linux.tar.xz | \
+RUN curl --proto "=https" --tlsv1.2 -sSfL https://github.com/helix-editor/helix/releases/download/25.07.1/helix-25.07.1-aarch64-linux.tar.xz | \
     tar -xJC ~/.local/helix --strip-components=1
 RUN ln -s ~/.local/helix/hx ~/.local/bin/
 RUN ln -s ~/.local/helix/runtime ~/.config/helix/
 
 RUN rustup component add rust-analyzer
-
-RUN sudo update-alternatives --install /usr/bin/lldb-dap lldb-dap /usr/bin/lldb-dap-19 1000
 
 
 VOLUME ["/home/user/project", "/home/user/.cargo/registry", "/home/user/.cargo/git"]

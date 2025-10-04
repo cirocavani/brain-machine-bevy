@@ -157,9 +157,9 @@ cargo binstall -V
 # Project Setup
 
 
-mkdir smartrobot-bevy
+mkdir brain-machine-bevy
 
-cd smartrobot-bevy
+cd brain-machine-bevy
 
 cargo init
 
@@ -369,7 +369,7 @@ cargo run --features dev,wayland
 ```text
 cargo run --features dev,wayland
     Finished `dev` profile [optimized + debuginfo] target(s) in 6m 39s
-     Running `target/debug/smartrobot-bevy`
+     Running `target/debug/brain-machine-bevy`
 2025-04-28T22:53:41.224703Z  INFO bevy_render::renderer: AdapterInfo { name: "NVIDIA GeForce MX570 A", vendor: 4318, device: 9642, device_type: DiscreteGpu, driver: "NVIDIA", driver_info: "570.133.07", backend: Vulkan }
 2025-04-28T22:53:41.520430Z  INFO bevy_render::batching::gpu_preprocessing: GPU preprocessing is fully supported on this device.
 2025-04-28T22:53:41.572693Z  INFO bevy_winit::system: Creating new window App (0v1)
@@ -447,7 +447,7 @@ docker build \
 --platform linux/amd64 \
 --build-arg USER_ID=`id -u` \
 --build-arg GROUP_ID=`id -g` \
--t smartrobot-bevy-ubuntu:latest \
+-t brain-machine-bevy-ubuntu:latest \
 -f docker/ubuntu/Dockerfile \
 .
 
@@ -463,19 +463,19 @@ docker run \
 -v $PWD:/home/user/project \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
-smartrobot-bevy-ubuntu:latest \
+brain-machine-bevy-ubuntu:latest \
 cargo run --features dev,wayland
 
 # -> [Output ubuntu-amd64 (Docker)]
 
 
-file -b target/x86_64-unknown-linux-gnu/debug/smartrobot-bevy
+file -b target/x86_64-unknown-linux-gnu/debug/brain-machine-bevy
 
 # ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=3a524fd5a08f8a44d1449f0ef95d6841a629eee3, with debug_info, not stripped
 
-ls -alh target/x86_64-unknown-linux-gnu/debug/smartrobot-bevy
+ls -alh target/x86_64-unknown-linux-gnu/debug/brain-machine-bevy
 
-# -rwxr-xr-x 2 cavani cavani 4.2M Apr 28 12:58 target/x86_64-unknown-linux-gnu/debug/smartrobot-bevy
+# -rwxr-xr-x 2 cavani cavani 4.2M Apr 28 12:58 target/x86_64-unknown-linux-gnu/debug/brain-machine-bevy
 
 
 # Debian 12 ARM64 -> Raspberry Pi
@@ -513,7 +513,7 @@ docker build \
 --platform linux/arm64 \
 --build-arg USER_ID=`id -u` \
 --build-arg GROUP_ID=`id -g` \
--t smartrobot-bevy-debian:latest \
+-t brain-machine-bevy-debian:latest \
 -f docker/debian/Dockerfile \
 .
 
@@ -529,19 +529,19 @@ docker run \
 -v $PWD:/home/user/project \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
-smartrobot-bevy-debian:latest \
+brain-machine-bevy-debian:latest \
 cargo run --features dev,wayland
 
 # -> [Output debian-arm64 (Docker)]
 
 
-file -b target/aarch64-unknown-linux-gnu/debug/smartrobot-bevy
+file -b target/aarch64-unknown-linux-gnu/debug/brain-machine-bevy
 
 # ELF 64-bit LSB pie executable, ARM aarch64, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-aarch64.so.1, for GNU/Linux 3.7.0, BuildID[sha1]=5b8b35673e515c67fad059f50b4fe5b7a4109b36, with debug_info, not stripped
 
-ls -alh target/aarch64-unknown-linux-gnu/debug/smartrobot-bevy
+ls -alh target/aarch64-unknown-linux-gnu/debug/brain-machine-bevy
 
-# -rwxr-xr-x 2 cavani cavani 4.2M Apr 28 14:37 target/aarch64-unknown-linux-gnu/debug/smartrobot-bevy
+# -rwxr-xr-x 2 cavani cavani 4.2M Apr 28 14:37 target/aarch64-unknown-linux-gnu/debug/brain-machine-bevy
 ```
 
 <details>
@@ -550,7 +550,7 @@ ls -alh target/aarch64-unknown-linux-gnu/debug/smartrobot-bevy
 ```text
 cargo run --features dev,wayland
     Finished `dev` profile [optimized + debuginfo] target(s) in 0.61s
-     Running `target/x86_64-unknown-linux-gnu/debug/smartrobot-bevy`
+     Running `target/x86_64-unknown-linux-gnu/debug/brain-machine-bevy`
 2025-04-28T22:35:03.808071Z  INFO bevy_render::renderer: AdapterInfo { name: "llvmpipe (LLVM 19.1.7, 256 bits)", vendor: 65541, device: 0, device_type: Cpu, driver: "llvmpipe", driver_info: "Mesa 25.0.3-1ubuntu2 (LLVM 19.1.7)", backend: Vulkan }
 2025-04-28T22:35:03.808423Z  WARN bevy_render::renderer: The selected adapter is using a driver that only supports software rendering. This is likely to be very slow. See https://bevyengine.org/learn/errors/b0006/
 ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
@@ -587,7 +587,7 @@ hello Zayna Nieves!
 ```text
 cargo run --features dev,wayland
     Finished `dev` profile [optimized + debuginfo] target(s) in 2.68s
-     Running `target/aarch64-unknown-linux-gnu/debug/smartrobot-bevy`
+     Running `target/aarch64-unknown-linux-gnu/debug/brain-machine-bevy`
 2025-04-28T22:35:33.225543Z  INFO bevy_render::renderer: AdapterInfo { name: "llvmpipe (LLVM 15.0.6, 128 bits)", vendor: 65541, device: 0, device_type: Cpu, driver: "llvmpipe", driver_info: "Mesa 22.3.6 (LLVM 15.0.6)", backend: Vulkan }
 2025-04-28T22:35:33.229808Z  WARN bevy_render::renderer: The selected adapter is using a driver that only supports software rendering. This is likely to be very slow. See https://bevyengine.org/learn/errors/b0006/
 ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
@@ -667,7 +667,7 @@ docker run \
 -v $PWD:/home/user/project \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
-smartrobot-bevy-ubuntu:latest \
+brain-machine-bevy-ubuntu:latest \
 cargo run --features dev,wayland
 
 # -> [Output ubuntu-amd64 (NVIDIA)]
@@ -679,7 +679,7 @@ cargo run --features dev,wayland
 ```text
 cargo run --features dev,wayland
     Finished `dev` profile [optimized + debuginfo] target(s) in 0.18s
-     Running `target/x86_64-unknown-linux-gnu/debug/smartrobot-bevy`
+     Running `target/x86_64-unknown-linux-gnu/debug/brain-machine-bevy`
 2025-04-29T13:26:28.847748Z  INFO bevy_render::renderer: AdapterInfo { name: "NVIDIA GeForce MX570 A", vendor: 4318, device: 9642, device_type: DiscreteGpu, driver: "NVIDIA", driver_info: "570.133.07", backend: Vulkan }
 ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
 ALSA lib conf.c:5205:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
@@ -724,7 +724,7 @@ cargo run --features dev,bevy/x11
 ```text
 cargo run
     Finished `dev` profile [optimized + debuginfo] target(s) in 22m 55s
-     Running `target/debug/smartrobot-bevy`
+     Running `target/debug/brain-machine-bevy`
 libEGL warning: DRI3: Screen seems not DRI3 capable
 libEGL warning: DRI3: Screen seems not DRI3 capable
 2025-04-29T13:23:21.515192Z  INFO bevy_render::renderer: AdapterInfo { name: "V3D 7.1.7.0", vendor: 5348, device: 1433410611, device_type: IntegratedGpu, driver: "V3DV Mesa", driver_info: "Mesa 24.2.8-1~bpo12+rpt2", backend: Vulkan }
@@ -784,37 +784,37 @@ cargo build \
 --target wasm32-unknown-unknown \
 --features log-max
 
-ls -alh target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
+ls -alh target/wasm32-unknown-unknown/wasm-release/brain-machine-bevy.wasm
 
-# -rwxrwxr-x 2 cavani cavani 31M Apr 29 14:11 target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
+# -rwxrwxr-x 2 cavani cavani 31M Apr 29 14:11 target/wasm32-unknown-unknown/wasm-release/brain-machine-bevy.wasm
 
 
 rm -rf web/
 
 wasm-bindgen \
---out-name smartrobot_bevy \
+--out-name brain_machine_bevy \
 --out-dir web/ \
 --target web \
-target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
+target/wasm32-unknown-unknown/wasm-release/brain-machine-bevy.wasm
 
 ls -alh web/
 
 # total 28M
 # drwxrwxr-x  2 cavani cavani 4.0K Apr 29 14:26 ./
 # drwxrwxr-x 10 cavani cavani 4.0K Apr 29 14:26 ../
-# -rw-rw-r--  1 cavani cavani 2.1K Apr 29 14:26 smartrobot_bevy.d.ts
-# -rw-rw-r--  1 cavani cavani  97K Apr 29 14:26 smartrobot_bevy.js
-# -rw-rw-r--  1 cavani cavani  27M Apr 29 14:26 smartrobot_bevy_bg.wasm
-# -rw-rw-r--  1 cavani cavani 1.2K Apr 29 14:26 smartrobot_bevy_bg.wasm.d.ts
+# -rw-rw-r--  1 cavani cavani 2.1K Apr 29 14:26 brain_machine_bevy.d.ts
+# -rw-rw-r--  1 cavani cavani  97K Apr 29 14:26 brain_machine_bevy.js
+# -rw-rw-r--  1 cavani cavani  27M Apr 29 14:26 brain_machine_bevy_bg.wasm
+# -rw-rw-r--  1 cavani cavani 1.2K Apr 29 14:26 brain_machine_bevy_bg.wasm.d.ts
 
 echo '<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Smart Robot</title>
+    <title>Brain Machine</title>
   </head>
   <script type="module">
-    import init from "./smartrobot_bevy.js"
+    import init from "./brain_machine_bevy.js"
     init()
   </script>
 </html>' \
@@ -886,13 +886,13 @@ google-chrome chrome://gpu/
           Upload: disabled, CSRF Token:
           Auth: disabled, Compression: disabled
          https: disabled, Cert: , Cert-Password:
-          Root: /home/cavani/Workspace/smartrobot-bevy/web,
+          Root: /home/cavani/Workspace/brain-machine-bevy/web,
     TryFile404:
        Address: http://0.0.0.0:8000
     ======== [2025-04-20 10:34:14] ========
 [2025-04-30 10:41:41] - 127.0.0.1 - 200 - GET /
-[2025-04-30 10:41:41] - 127.0.0.1 - 200 - GET /smartrobot_bevy.js
-[2025-04-30 10:41:41] - 127.0.0.1 - 200 - GET /smartrobot_bevy_bg.wasm
+[2025-04-30 10:41:41] - 127.0.0.1 - 200 - GET /brain_machine_bevy.js
+[2025-04-30 10:41:41] - 127.0.0.1 - 200 - GET /brain_machine_bevy_bg.wasm
 [2025-04-30 10:41:41] - 127.0.0.1 - 404 - GET /favicon.ico
 [2025-04-30 10:41:55] - 127.0.0.1 - 404 - GET /.well-known/appspecific/com.chrome.devtools.json
 ```
@@ -902,19 +902,19 @@ google-chrome chrome://gpu/
 <summary>Output Chrome Console</summary>
 
 ```text
-smartrobot_bevy.js:1589 The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu
-(anonymous) @ smartrobot_bevy.js:1589
-smartrobot_bevy.js:1229 INFO /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_winit-0.16.0/src/system.rs:66 Creating new window App (0v1)
-smartrobot_bevy.js:1229 INFO /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_render-0.16.0/src/renderer/mod.rs:200 AdapterInfo { name: "ANGLE (NVIDIA Corporation, NVIDIA GeForce MX570 A/PCIe/SSE2, OpenGL 4.5.0)", vendor: 4318, device: 0, device_type: Other, driver: "", driver_info: "WebGL 2.0 (OpenGL ES 3.0 Chromium)", backend: Gl }
-smartrobot_bevy.js:1229 INFO /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_render-0.16.0/src/batching/gpu_preprocessing.rs:1126 GPU preprocessing is not supported on this device. Falling back to CPU preprocessing.
-smartrobot_bevy.js:1229 WARN /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_core_pipeline-0.16.0/src/oit/resolve/mod.rs:83 OrderIndependentTransparencyPlugin not loaded. GPU lacks support: DownlevelFlags::FRAGMENT_WRITABLE_STORAGE.
-smartrobot_bevy.js:1229 WARN /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_pbr-0.16.0/src/ssao/mod.rs:92 ScreenSpaceAmbientOcclusionPlugin not loaded. GPU lacks support: TextureFormat::R16Float does not support TextureUsages::STORAGE_BINDING.
-smartrobot_bevy.js:1229 WARN /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_pbr-0.16.0/src/atmosphere/mod.rs:170 AtmospherePlugin not loaded. GPU lacks support for compute shaders.
-smartrobot_bevy.js:1229 INFO /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_core_pipeline-0.16.0/src/dof/mod.rs:824 Disabling depth of field on this platform because depth textures aren't supported correctly
-smartrobot_bevy.js:1716 The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu
-(anonymous) @ smartrobot_bevy.js:1716
-smartrobot_bevy.js:1716 The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu
-(anonymous) @ smartrobot_bevy.js:1716
+brain_machine_bevy.js:1589 The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu
+(anonymous) @ brain_machine_bevy.js:1589
+brain_machine_bevy.js:1229 INFO /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_winit-0.16.0/src/system.rs:66 Creating new window App (0v1)
+brain_machine_bevy.js:1229 INFO /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_render-0.16.0/src/renderer/mod.rs:200 AdapterInfo { name: "ANGLE (NVIDIA Corporation, NVIDIA GeForce MX570 A/PCIe/SSE2, OpenGL 4.5.0)", vendor: 4318, device: 0, device_type: Other, driver: "", driver_info: "WebGL 2.0 (OpenGL ES 3.0 Chromium)", backend: Gl }
+brain_machine_bevy.js:1229 INFO /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_render-0.16.0/src/batching/gpu_preprocessing.rs:1126 GPU preprocessing is not supported on this device. Falling back to CPU preprocessing.
+brain_machine_bevy.js:1229 WARN /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_core_pipeline-0.16.0/src/oit/resolve/mod.rs:83 OrderIndependentTransparencyPlugin not loaded. GPU lacks support: DownlevelFlags::FRAGMENT_WRITABLE_STORAGE.
+brain_machine_bevy.js:1229 WARN /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_pbr-0.16.0/src/ssao/mod.rs:92 ScreenSpaceAmbientOcclusionPlugin not loaded. GPU lacks support: TextureFormat::R16Float does not support TextureUsages::STORAGE_BINDING.
+brain_machine_bevy.js:1229 WARN /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_pbr-0.16.0/src/atmosphere/mod.rs:170 AtmospherePlugin not loaded. GPU lacks support for compute shaders.
+brain_machine_bevy.js:1229 INFO /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_core_pipeline-0.16.0/src/dof/mod.rs:824 Disabling depth of field on this platform because depth textures aren't supported correctly
+brain_machine_bevy.js:1716 The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu
+(anonymous) @ brain_machine_bevy.js:1716
+brain_machine_bevy.js:1716 The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu
+(anonymous) @ brain_machine_bevy.js:1716
 ```
 </details>
 
@@ -1437,7 +1437,7 @@ inherits = "release-lto"
 opt-level = "z"
 
 [lib]
-name = "smartrobot_bevy"
+name = "brain_machine_bevy"
 crate-type = ["lib", "cdylib"]
 ' \
 >> Cargo.toml
@@ -1469,7 +1469,7 @@ build \
 --profile dev \
 --features log-max
 
-file -b android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libsmartrobot_bevy.so
+file -b android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libbrain_machine_bevy.so
 
 # ELF 64-bit LSB shared object, ARM aarch64, version 1 (SYSV), dynamically linked, with debug_info, not stripped
 # ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, with debug_info, not stripped
@@ -1477,10 +1477,10 @@ file -b android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libsmartrobot_bevy.so
 # ELF 64-bit LSB shared object, ARM aarch64, version 1 (SYSV), dynamically linked, stripped
 # ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, stripped
 
-ls -alh android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libsmartrobot_bevy.so
+ls -alh android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libbrain_machine_bevy.so
 
-# -rwxrwxr-x 1 cavani cavani 1.2G May  3 01:26 android/app/src/main/jniLibs/arm64-v8a/libsmartrobot_bevy.so
-# -rwxrwxr-x 1 cavani cavani 1.2G May  3 01:26 android/app/src/main/jniLibs/x86_64/libsmartrobot_bevy.so
+# -rwxrwxr-x 1 cavani cavani 1.2G May  3 01:26 android/app/src/main/jniLibs/arm64-v8a/libbrain_machine_bevy.so
+# -rwxrwxr-x 1 cavani cavani 1.2G May  3 01:26 android/app/src/main/jniLibs/x86_64/libbrain_machine_bevy.so
 
 
 # Release
@@ -1496,15 +1496,15 @@ build \
 --profile mobile-release \
 --features log-max
 
-file -b android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libsmartrobot_bevy.so
+file -b android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libbrain_machine_bevy.so
 
 # ELF 64-bit LSB shared object, ARM aarch64, version 1 (SYSV), dynamically linked, stripped
 # ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, stripped
 
-ls -alh android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libsmartrobot_bevy.so
+ls -alh android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libbrain_machine_bevy.so
 
-# -rwxrwxr-x 1 cavani cavani 29M May  2 11:01 android/app/src/main/jniLibs/arm64-v8a/libsmartrobot_bevy.so
-# -rwxrwxr-x 1 cavani cavani 36M May  2 11:01 android/app/src/main/jniLibs/x86_64/libsmartrobot_bevy.so
+# -rwxrwxr-x 1 cavani cavani 29M May  2 11:01 android/app/src/main/jniLibs/arm64-v8a/libbrain_machine_bevy.so
+# -rwxrwxr-x 1 cavani cavani 36M May  2 11:01 android/app/src/main/jniLibs/x86_64/libbrain_machine_bevy.so
 
 
 
@@ -1533,7 +1533,7 @@ cd android/
 $HOME/.gradle/wrapper/dists/gradle-8.14-bin/38aieal9i53h9rfe7vjup95b9/gradle-8.14/bin/gradle init \
 --type basic \
 --dsl groovy \
---project-name "Smart Robot" \
+--project-name "Brain Machine" \
 --no-incubating \
 --no-daemon \
 --overwrite
@@ -1545,8 +1545,8 @@ find . -type f
 # ./gradle/libs.versions.toml
 # ./gradlew.bat
 # ./gradle.properties
-# ./app/src/main/jniLibs/arm64-v8a/libsmartrobot_bevy.so
-# ./app/src/main/jniLibs/x86_64/libsmartrobot_bevy.so
+# ./app/src/main/jniLibs/arm64-v8a/libbrain_machine_bevy.so
+# ./app/src/main/jniLibs/x86_64/libbrain_machine_bevy.so
 # ./settings.gradle
 # ./build.gradle
 # ./.gitattributes
@@ -1554,9 +1554,9 @@ find . -type f
 # ./.gitignore
 
 
-mkdir -p app/src/main/java/dev/smartrobot/bevy_app/
+mkdir -p app/src/main/java/dev/brain_machine/bevy_app/
 
-echo 'package dev.smartrobot.bevy_app;
+echo 'package dev.brain_machine.bevy_app;
 
 import android.view.View;
 import android.view.WindowInsets;
@@ -1566,7 +1566,7 @@ import com.google.androidgamesdk.GameActivity;
 
 public class MainActivity extends GameActivity {
     static {
-        System.loadLibrary("smartrobot_bevy");
+        System.loadLibrary("brain_machine_bevy");
     }
 
     @Override
@@ -1586,7 +1586,7 @@ public class MainActivity extends GameActivity {
         }
     }
 }' \
-> app/src/main/java/dev/smartrobot/bevy_app/MainActivity.java
+> app/src/main/java/dev/brain_machine/bevy_app/MainActivity.java
 
 
 mkdir -p app/src/main/cpp/
@@ -1608,7 +1608,7 @@ echo '<?xml version="1.0" encoding="utf-8"?>
 
     <application
         android:icon="@mipmap/ic_launcher"
-        android:label="Smart Robot"
+        android:label="Brain Machine"
         android:roundIcon="@mipmap/ic_launcher"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="31">
@@ -1618,7 +1618,7 @@ echo '<?xml version="1.0" encoding="utf-8"?>
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="smartrobot_bevy" />
+                android:value="brain_machine_bevy" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -1643,11 +1643,11 @@ echo 'plugins {
 }
 
 android {
-    namespace = "dev.smartrobot.bevy_app"
+    namespace = "dev.brain_machine.bevy_app"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "dev.smartrobot.bevy_app"
+        applicationId = "dev.brain_machine.bevy_app"
         minSdk = 31
         targetSdk = 35
         versionCode = 1
@@ -1761,7 +1761,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Smart Robot"
+rootProject.name = "Brain Machine"
 include ":app"' \
 > settings.gradle
 
@@ -1796,9 +1796,9 @@ find . -type f
 # ./gradlew.bat
 # ./gradle.properties
 # ./app/src/main/cpp/dummy.cpp
-# ./app/src/main/jniLibs/arm64-v8a/libsmartrobot_bevy.so
-# ./app/src/main/jniLibs/x86_64/libsmartrobot_bevy.so
-# ./app/src/main/java/dev/smartrobot/bevy_app/MainActivity.java
+# ./app/src/main/jniLibs/arm64-v8a/libbrain_machine_bevy.so
+# ./app/src/main/jniLibs/x86_64/libbrain_machine_bevy.so
+# ./app/src/main/java/dev/brain_machine/bevy_app/MainActivity.java
 # ./app/src/main/AndroidManifest.xml
 # ./app/src/main/res/mipmap-mdpi/ic_launcher.png
 # ./app/build.gradle
@@ -1820,9 +1820,9 @@ ls -alh ./app/build/outputs/apk/debug/app-debug.apk
 unzip -l ./app/build/outputs/apk/debug/app-debug.apk | grep lib
 
 #   1292896  1981-01-01 01:01   lib/arm64-v8a/libc++_shared.so
-#  30133272  1981-01-01 01:01   lib/arm64-v8a/libsmartrobot_bevy.so
+#  30133272  1981-01-01 01:01   lib/arm64-v8a/libbrain_machine_bevy.so
 #   1252080  1981-01-01 01:01   lib/x86_64/libc++_shared.so
-#  37442384  1981-01-01 01:01   lib/x86_64/libsmartrobot_bevy.so
+#  37442384  1981-01-01 01:01   lib/x86_64/libbrain_machine_bevy.so
 
 
 ls -alh ./app/build/outputs/apk/release/app-release-unsigned.apk
@@ -1832,19 +1832,19 @@ ls -alh ./app/build/outputs/apk/release/app-release-unsigned.apk
 unzip -l ./app/build/outputs/apk/release/app-release-unsigned.apk | grep lib
 
 #   1292896  1981-01-01 01:01   lib/arm64-v8a/libc++_shared.so
-#  30133272  1981-01-01 01:01   lib/arm64-v8a/libsmartrobot_bevy.so
+#  30133272  1981-01-01 01:01   lib/arm64-v8a/libbrain_machine_bevy.so
 #   1252080  1981-01-01 01:01   lib/x86_64/libc++_shared.so
-#  37442384  1981-01-01 01:01   lib/x86_64/libsmartrobot_bevy.so
+#  37442384  1981-01-01 01:01   lib/x86_64/libbrain_machine_bevy.so
 
 
 adb -e install ./app/build/outputs/apk/debug/app-debug.apk
 
-adb -e logcat | grep smartrobot
+adb -e logcat | grep brain_machine
 
 # ...
-# 05-03 09:56:26.700  2311  2311 F DEBUG   : Cmdline: dev.smartrobot.bevy_app
-# 05-03 09:56:26.700  2311  2311 F DEBUG   : pid: 2265, tid: 2288, name: Async Compute T  >>> dev.smartrobot.bevy_app <<<
-# 05-03 09:56:26.700  2311  2311 F DEBUG   :       #01 pc 00000000020e22e9  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+# 05-03 09:56:26.700  2311  2311 F DEBUG   : Cmdline: dev.brain_machine.bevy_app
+# 05-03 09:56:26.700  2311  2311 F DEBUG   : pid: 2265, tid: 2288, name: Async Compute T  >>> dev.brain_machine.bevy_app <<<
+# 05-03 09:56:26.700  2311  2311 F DEBUG   :       #01 pc 00000000020e22e9  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
 # ...
 
 adb -e logcat | grep RustStdoutStderr
@@ -1858,7 +1858,7 @@ adb -e logcat | grep RustStdoutStderr
 # 05-03 09:56:26.457  2265  2286 I RustStdoutStderr: byte index 96489672 is out of bounds of ``
 # 05-03 09:56:26.457  2265  2286 I RustStdoutStderr: note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 
-adb -e logcat | grep -e smartrobot -e 2265
+adb -e logcat | grep -e brain_machine -e 2265
 
 # -> [Output adb -e logcat]
 
@@ -1873,7 +1873,7 @@ adb -d logcat | grep RustStdoutStderr
 
 # (empty)
 
-adb -d logcat | grep -e smartrobot -e 29974
+adb -d logcat | grep -e brain_machine -e 29974
 
 # -> [Output adb -d logcat]
 ```
@@ -1882,43 +1882,43 @@ adb -d logcat | grep -e smartrobot -e 29974
 <summary>Output adb -e logcat</summary>
 
 ```text
-adb -e logcat | grep -e smartrobot -e 2265
+adb -e logcat | grep -e brain_machine -e 2265
 
-05-03 09:55:28.692   568   624 V BackupManagerService: [UserID:0] restoreAtInstall pkg=dev.smartrobot.bevy_app token=1 restoreSet=0
-05-03 09:55:28.714  1147  1188 D SessionCommitReceiver: Removing PromiseIcon for package: dev.smartrobot.bevy_app, install reason: 0, alreadyAddedPromiseIcon: false
-05-03 09:55:28.720   568   891 I SdkSandboxManager: No SDKs used. Skipping SDK data reconcilation for CallingInfo{mUid=10148, mPackageName='dev.smartrobot.bevy_app, mAppProcessToken='null'}
-05-03 09:55:28.730  1147  1188 D PackageUpdatedTask: Package updated: mOp=ADD packages=[dev.smartrobot.bevy_app]
-05-03 09:55:28.744   568   883 D ShortcutService: adding package: dev.smartrobot.bevy_app userId0
-05-03 09:55:28.744   568   883 D ShortcutService: handlePackageAdded: dev.smartrobot.bevy_app user=0
-05-03 09:55:28.744   568   883 D ShortcutService: rescanPackageIfNeeded 0@dev.smartrobot.bevy_app, forceRescan=true , isNewApp=true
-05-03 09:55:28.744   568   883 D ShortcutService: Package dev.smartrobot.bevy_app has 0 manifest shortcut(s), and 0 share target(s)
-05-03 09:55:28.745   568   883 D ShortcutService: changing package: dev.smartrobot.bevy_app userId0
-05-03 09:55:28.745   568   883 D ShortcutService: handlePackageChanged: dev.smartrobot.bevy_app user=0
-05-03 09:55:28.745   568   883 D ShortcutService: rescanPackageIfNeeded 0@dev.smartrobot.bevy_app, forceRescan=true , isNewApp=true
-05-03 09:55:28.745   568   883 D ShortcutService: Package dev.smartrobot.bevy_app has 0 manifest shortcut(s), and 0 share target(s)
-05-03 09:55:28.747  1102  1102 D CarrierSvcBindHelper: onPackageAdded: dev.smartrobot.bevy_app
-05-03 09:55:28.773  1147  1188 D PackageUpdatedTask: Package updated: mOp=UPDATE packages=[dev.smartrobot.bevy_app]
-05-03 09:55:28.782  1102  1284 D ImsResolver: maybeAddedImsService, packageName: dev.smartrobot.bevy_app
-05-03 09:55:28.789  1102  1102 D CarrierSvcBindHelper: onPackageModified: dev.smartrobot.bevy_app
-05-03 09:55:28.798   924   924 I SafetyLabelChangedBroadcastReceiver: received broadcast packageName: dev.smartrobot.bevy_app, current user: UserHandle{0}, packageChangeEvent: NEW_INSTALL, intent user: UserHandle{0}
-05-03 09:55:28.802  1102  1284 D ImsResolver: maybeAddedImsService, packageName: dev.smartrobot.bevy_app
-05-03 09:56:25.218   568  1016 V SplashScreenExceptionList: SplashScreen checking exception for package dev.smartrobot.bevy_app (target sdk:35) -> false
-05-03 09:56:25.220   568  1016 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity bnds=[0,981][256,1341]} with LAUNCH_MULTIPLE from uid 10120 (BAL_ALLOW_VISIBLE_WINDOW) result code=0
-05-03 09:56:25.222   917   957 V WindowManagerShell: Transition requested (#5): android.os.BinderProxy@a2c368f TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} topActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} numActivities=1 lastActiveTime=983835 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@f0cfd1c} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{d4e7d25 dev.smartrobot.bevy_app.MainActivity} launchCookies=[android.os.BinderProxy@42abefa] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= falseisLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false topActivityEligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=1280 topActivityLetterboxHeight=2856 isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false cameraCompatTaskInfo=CameraCompatTaskInfo { cameraCompatControlState=hidden freeformCameraCompatMode=inactive}}}, pipTask = null, remoteTransition = RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@bbfacab, appThread = android.app.IApplicationThread$Stub$Proxy@e7acf08, debugName = QuickstepLaunch }, displayChange = null, flags = 0, debugId = 5 }
-05-03 09:56:25.233  1147  1147 I TopTaskTracker: onTaskMovedToFront: (moved taskInfo to front) taskId=8, baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity }
-05-03 09:56:25.234   568   864 I AppWidgetServiceImpl: Updating package stopped masked state for uid 10148 package dev.smartrobot.bevy_app isStopped false
+05-03 09:55:28.692   568   624 V BackupManagerService: [UserID:0] restoreAtInstall pkg=dev.brain_machine.bevy_app token=1 restoreSet=0
+05-03 09:55:28.714  1147  1188 D SessionCommitReceiver: Removing PromiseIcon for package: dev.brain_machine.bevy_app, install reason: 0, alreadyAddedPromiseIcon: false
+05-03 09:55:28.720   568   891 I SdkSandboxManager: No SDKs used. Skipping SDK data reconcilation for CallingInfo{mUid=10148, mPackageName='dev.brain_machine.bevy_app, mAppProcessToken='null'}
+05-03 09:55:28.730  1147  1188 D PackageUpdatedTask: Package updated: mOp=ADD packages=[dev.brain_machine.bevy_app]
+05-03 09:55:28.744   568   883 D ShortcutService: adding package: dev.brain_machine.bevy_app userId0
+05-03 09:55:28.744   568   883 D ShortcutService: handlePackageAdded: dev.brain_machine.bevy_app user=0
+05-03 09:55:28.744   568   883 D ShortcutService: rescanPackageIfNeeded 0@dev.brain_machine.bevy_app, forceRescan=true , isNewApp=true
+05-03 09:55:28.744   568   883 D ShortcutService: Package dev.brain_machine.bevy_app has 0 manifest shortcut(s), and 0 share target(s)
+05-03 09:55:28.745   568   883 D ShortcutService: changing package: dev.brain_machine.bevy_app userId0
+05-03 09:55:28.745   568   883 D ShortcutService: handlePackageChanged: dev.brain_machine.bevy_app user=0
+05-03 09:55:28.745   568   883 D ShortcutService: rescanPackageIfNeeded 0@dev.brain_machine.bevy_app, forceRescan=true , isNewApp=true
+05-03 09:55:28.745   568   883 D ShortcutService: Package dev.brain_machine.bevy_app has 0 manifest shortcut(s), and 0 share target(s)
+05-03 09:55:28.747  1102  1102 D CarrierSvcBindHelper: onPackageAdded: dev.brain_machine.bevy_app
+05-03 09:55:28.773  1147  1188 D PackageUpdatedTask: Package updated: mOp=UPDATE packages=[dev.brain_machine.bevy_app]
+05-03 09:55:28.782  1102  1284 D ImsResolver: maybeAddedImsService, packageName: dev.brain_machine.bevy_app
+05-03 09:55:28.789  1102  1102 D CarrierSvcBindHelper: onPackageModified: dev.brain_machine.bevy_app
+05-03 09:55:28.798   924   924 I SafetyLabelChangedBroadcastReceiver: received broadcast packageName: dev.brain_machine.bevy_app, current user: UserHandle{0}, packageChangeEvent: NEW_INSTALL, intent user: UserHandle{0}
+05-03 09:55:28.802  1102  1284 D ImsResolver: maybeAddedImsService, packageName: dev.brain_machine.bevy_app
+05-03 09:56:25.218   568  1016 V SplashScreenExceptionList: SplashScreen checking exception for package dev.brain_machine.bevy_app (target sdk:35) -> false
+05-03 09:56:25.220   568  1016 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.brain_machine.bevy_app/.MainActivity bnds=[0,981][256,1341]} with LAUNCH_MULTIPLE from uid 10120 (BAL_ALLOW_VISIBLE_WINDOW) result code=0
+05-03 09:56:25.222   917   957 V WindowManagerShell: Transition requested (#5): android.os.BinderProxy@a2c368f TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.brain_machine.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} topActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} numActivities=1 lastActiveTime=983835 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@f0cfd1c} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{d4e7d25 dev.brain_machine.bevy_app.MainActivity} launchCookies=[android.os.BinderProxy@42abefa] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= falseisLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false topActivityEligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=1280 topActivityLetterboxHeight=2856 isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false cameraCompatTaskInfo=CameraCompatTaskInfo { cameraCompatControlState=hidden freeformCameraCompatMode=inactive}}}, pipTask = null, remoteTransition = RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@bbfacab, appThread = android.app.IApplicationThread$Stub$Proxy@e7acf08, debugName = QuickstepLaunch }, displayChange = null, flags = 0, debugId = 5 }
+05-03 09:56:25.233  1147  1147 I TopTaskTracker: onTaskMovedToFront: (moved taskInfo to front) taskId=8, baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.brain_machine.bevy_app/.MainActivity }
+05-03 09:56:25.234   568   864 I AppWidgetServiceImpl: Updating package stopped masked state for uid 10148 package dev.brain_machine.bevy_app isStopped false
 05-03 09:56:25.250   372   372 D Zygote  : Forked child process 2265
-05-03 09:56:25.258   568   602 I ActivityManager: Start proc 2265:dev.smartrobot.bevy_app/u0a148 for next-top-activity {dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}
+05-03 09:56:25.258   568   602 I ActivityManager: Start proc 2265:dev.brain_machine.bevy_app/u0a148 for next-top-activity {dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity}
 05-03 09:56:25.260  2265  2265 I trobot.bevy_app: Late-enabling -Xcheck:jni
 05-03 09:56:25.281  2265  2265 I trobot.bevy_app: Using CollectorTypeCMC GC.
 05-03 09:56:25.282  2265  2265 W trobot.bevy_app: Unexpected CPU variant for x86: x86_64.
 05-03 09:56:25.282  2265  2265 W trobot.bevy_app: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, goldmont-without-sha-xsaves, tremont, kabylake, default
-05-03 09:56:25.286   568  1010 D CoreBackPreview: Window{720942 u0 Splash Screen dev.smartrobot.bevy_app}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@c2403cb, mPriority=0, mIsAnimationCallback=false}
+05-03 09:56:25.286   568  1010 D CoreBackPreview: Window{720942 u0 Splash Screen dev.brain_machine.bevy_app}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@c2403cb, mPriority=0, mIsAnimationCallback=false}
 05-03 09:56:25.304   450   458 I adbd    : jdwp connection from 2265
 05-03 09:56:25.310  2265  2265 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
-05-03 09:56:25.324  2265  2265 W ziparchive: Unable to open '/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.dm': No such file or directory
-05-03 09:56:25.324  2265  2265 W ziparchive: Unable to open '/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.dm': No such file or directory
-05-03 09:56:25.380  2265  2265 D nativeloader: Configuring clns-7 for other apk /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/lib/x86_64:/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/dev.smartrobot.bevy_app
+05-03 09:56:25.324  2265  2265 W ziparchive: Unable to open '/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.dm': No such file or directory
+05-03 09:56:25.324  2265  2265 W ziparchive: Unable to open '/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.dm': No such file or directory
+05-03 09:56:25.380  2265  2265 D nativeloader: Configuring clns-7 for other apk /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/lib/x86_64:/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/dev.brain_machine.bevy_app
 05-03 09:56:25.383  2265  2265 D CompatChangeReporter: Compat change id reported: 202956589; UID 10148; state: ENABLED
 05-03 09:56:25.389  2265  2265 V GraphicsEnvironment: Currently set values for:
 05-03 09:56:25.390  2265  2265 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
@@ -1926,16 +1926,16 @@ adb -e logcat | grep -e smartrobot -e 2265
 05-03 09:56:25.390  2265  2265 V GraphicsEnvironment: Global.Settings values are invalid: number of packages: 0, number of values: 0
 05-03 09:56:25.390  2265  2265 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
 05-03 09:56:25.404  2265  2265 D CompatChangeReporter: Compat change id reported: 279646685; UID 10148; state: ENABLED
-05-03 09:56:25.409   568  1010 I AppsFilter: interaction: PackageSetting{aa346f2 dev.smartrobot.bevy_app/10148} -> PackageSetting{84f2143 com.android.launcher3/10120} BLOCKED
-05-03 09:56:25.520   568   589 V WindowManager: Sent Transition (#5) createdAt=05-03 09:56:25.213 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} topActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} numActivities=1 lastActiveTime=983835 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{3e0c24a Task{ddf6265 #8 type=standard A=10148:dev.smartrobot.bevy_app}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{12175bb dev.smartrobot.bevy_app.MainActivity} launchCookies=[android.os.BinderProxy@6c04ad8] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= falseisLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false topActivityEligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=1280 topActivityLetterboxHeight=2856 isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false cameraCompatTaskInfo=CameraCompatTaskInfo { cameraCompatControlState=hidden freeformCameraCompatMode=inactive}}}, pipTask = null, remoteTransition = RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@1bdde31, appThread = android.app.IApplicationThread$Stub$Proxy@270b916, debugName = QuickstepLaunch }, displayChange = null, flags = 0, debugId = 5 }
-05-03 09:56:25.520   568   589 V WindowManager:         {WCT{RemoteToken{3e0c24a Task{ddf6265 #8 type=standard A=10148:dev.smartrobot.bevy_app}}} m=OPEN f=NONE leash=Surface(name=Task=8)/@0x6035bec sb=Rect(0, 0 - 1280, 2856) eb=Rect(0, 0 - 1280, 2856) d=0 taskParent=-1},
-05-03 09:56:25.529  2265  2265 D nativeloader: Load /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk!/lib/x86_64/libsmartrobot_bevy.so using ns clns-7 from class loader (caller=/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk!classes3.dex): ok
+05-03 09:56:25.409   568  1010 I AppsFilter: interaction: PackageSetting{aa346f2 dev.brain_machine.bevy_app/10148} -> PackageSetting{84f2143 com.android.launcher3/10120} BLOCKED
+05-03 09:56:25.520   568   589 V WindowManager: Sent Transition (#5) createdAt=05-03 09:56:25.213 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.brain_machine.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} topActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} numActivities=1 lastActiveTime=983835 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{3e0c24a Task{ddf6265 #8 type=standard A=10148:dev.brain_machine.bevy_app}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{12175bb dev.brain_machine.bevy_app.MainActivity} launchCookies=[android.os.BinderProxy@6c04ad8] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= falseisLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false topActivityEligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=1280 topActivityLetterboxHeight=2856 isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false cameraCompatTaskInfo=CameraCompatTaskInfo { cameraCompatControlState=hidden freeformCameraCompatMode=inactive}}}, pipTask = null, remoteTransition = RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@1bdde31, appThread = android.app.IApplicationThread$Stub$Proxy@270b916, debugName = QuickstepLaunch }, displayChange = null, flags = 0, debugId = 5 }
+05-03 09:56:25.520   568   589 V WindowManager:         {WCT{RemoteToken{3e0c24a Task{ddf6265 #8 type=standard A=10148:dev.brain_machine.bevy_app}}} m=OPEN f=NONE leash=Surface(name=Task=8)/@0x6035bec sb=Rect(0, 0 - 1280, 2856) eb=Rect(0, 0 - 1280, 2856) d=0 taskParent=-1},
+05-03 09:56:25.529  2265  2265 D nativeloader: Load /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk!/lib/x86_64/libbrain_machine_bevy.so using ns clns-7 from class loader (caller=/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk!classes3.dex): ok
 05-03 09:56:25.540  2265  2265 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
 05-03 09:56:25.554  2265  2265 D CompatChangeReporter: Compat change id reported: 309578419; UID 10148; state: ENABLED
 05-03 09:56:25.560  2265  2265 W trobot.bevy_app: Accessing hidden method Landroid/view/View;->computeFitSystemWindows(Landroid/graphics/Rect;Landroid/graphics/Rect;)Z (unsupported, reflection, allowed)
 05-03 09:56:25.560  2265  2265 W trobot.bevy_app: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (unsupported, reflection, allowed)
-05-03 09:56:25.561  2265  2265 I GameActivity: Looking for library libsmartrobot_bevy.so
-05-03 09:56:25.561  2265  2265 I GameActivity: Found library libsmartrobot_bevy.so. Loading...
+05-03 09:56:25.561  2265  2265 I GameActivity: Looking for library libbrain_machine_bevy.so
+05-03 09:56:25.561  2265  2265 I GameActivity: Found library libbrain_machine_bevy.so. Loading...
 05-03 09:56:25.563  2265  2265 D CompatChangeReporter: Compat change id reported: 312399441; UID 10148; state: ENABLED
 05-03 09:56:25.567  2265  2265 D GameActivity: GameActivity_register
 05-03 09:56:25.567  2265  2265 V GameActivity: Registering com/google/androidgamesdk/GameActivity's 22 native methods...
@@ -1951,8 +1951,8 @@ adb -e logcat | grep -e smartrobot -e 2265
 05-03 09:56:25.582  2265  2285 E platform: Failed to open rendernode: No such file or directory
 05-03 09:56:25.584  2265  2265 V GameActivity: onStart_native
 05-03 09:56:25.584  2265  2265 V threaded_app: Start: 0x76de59b671b0
-05-03 09:56:25.591  2265  2285 D vulkan  : searching for layers in '/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/lib/x86_64'
-05-03 09:56:25.591  2265  2285 D vulkan  : searching for layers in '/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk!/lib/x86_64'
+05-03 09:56:25.591  2265  2285 D vulkan  : searching for layers in '/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/lib/x86_64'
+05-03 09:56:25.591  2265  2285 D vulkan  : searching for layers in '/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk!/lib/x86_64'
 05-03 09:56:25.605  2265  2285 I EGL_emulation: Opening libGLESv1_CM_emulation.so
 05-03 09:56:25.605  2265  2285 I EGL_emulation: Opening libGLESv2_emulation.so
 05-03 09:56:25.697  2265  2285 I event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_render-0.16.0/srcAdapterInfo { name: "NVIDIA GeForce MX570 A", vendor: 4318, device: 9642, device_type: DiscreteGpu, driver: "NVIDIA", driver_info: "570.133.07", backend: Vulkan }
@@ -1984,7 +1984,7 @@ adb -e logcat | grep -e smartrobot -e 2265
 05-03 09:56:26.015  2265  2285 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfApp Resumed - is running
 05-03 09:56:26.018  2265  2265 W HWUI    : Unknown dataspace 0
 05-03 09:56:26.026  2265  2265 V threaded_app: WindowInsetsChanged: 0x76de59b671b0
-05-03 09:56:26.026   568  1010 D CoreBackPreview: Window{2b30add u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@dae7d23, mPriority=0, mIsAnimationCallback=false}
+05-03 09:56:26.026   568  1010 D CoreBackPreview: Window{2b30add u0 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@dae7d23, mPriority=0, mIsAnimationCallback=false}
 05-03 09:56:26.036  2265  2265 V threaded_app: ContentRectChanged: 0x76de59b671b0 -- (0 0) (1280 2856)
 05-03 09:56:26.036  2265  2265 V GameActivity: onSurfaceCreated_native
 05-03 09:56:26.036  2265  2265 V threaded_app: NativeWindowCreated: 0x76de59b671b0 -- 0x76dd19b81540
@@ -2044,8 +2044,8 @@ adb -e logcat | grep -e smartrobot -e 2265
 05-03 09:56:26.317  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"MAX_CASCADES_PER_LIGHT": UInt(4), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
 05-03 09:56:26.324  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
 05-03 09:56:26.331  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"MAX_DIRECTIONAL_LIGHTS": UInt(10), "WRITE_INDIRECT_PARAMETERS_METADATA": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
-05-03 09:56:26.332   568   589 W ziparchive: Unable to open '/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.dm': No such file or directory
-05-03 09:56:26.334   568   589 I ActivityTaskManager: Displayed dev.smartrobot.bevy_app/.MainActivity for user 0: +1s129ms
+05-03 09:56:26.332   568   589 W ziparchive: Unable to open '/data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.dm': No such file or directory
+05-03 09:56:26.334   568   589 I ActivityTaskManager: Displayed dev.brain_machine.bevy_app/.MainActivity for user 0: +1s129ms
 05-03 09:56:26.337  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"LATE_PHASE": Bool(true), "OCCLUSION_CULLING": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576)}
 05-03 09:56:26.340  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"EARLY_PHASE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "INDEXED": Bool(true), "OCCLUSION_CULLING": Bool(true)}
 05-03 09:56:26.349  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(1048576), "MULTISAMPLE": Bool(true)}
@@ -2072,8 +2072,8 @@ adb -e logcat | grep -e smartrobot -e 2265
 05-03 09:56:26.388  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::clustered_forward with defs: {}
 05-03 09:56:26.391  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::shadow_sampling with defs: {}
 05-03 09:56:26.392  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::shadows with defs: {}
-05-03 09:56:26.392   568   680 I ImeTracker: dev.smartrobot.bevy_app:d0589723: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
-05-03 09:56:26.392   568   680 I ImeTracker: dev.smartrobot.bevy_app:d0589723: onCancelled at PHASE_SERVER_SHOULD_HIDE
+05-03 09:56:26.392   568   680 I ImeTracker: dev.brain_machine.bevy_app:d0589723: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+05-03 09:56:26.392   568   680 I ImeTracker: dev.brain_machine.bevy_app:d0589723: onCancelled at PHASE_SERVER_SHOULD_HIDE
 05-03 09:56:26.393  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::ambient with defs: {}
 05-03 09:56:26.393  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::light_probe with defs: {}
 05-03 09:56:26.394  2265  2288 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::irradiance_volume with defs: {}
@@ -2123,54 +2123,54 @@ adb -e logcat | grep -e smartrobot -e 2265
 05-03 09:56:26.503  2311  2311 I crash_dump64: performing dump of process 2265 (target tid = 2288)
 05-03 09:56:26.726     0     0 I logd    : logdr: UID=10148 GID=10148 PID=2311 n tail=500 logMask=8 pid=2265 start=0ns deadline=0ns
 05-03 09:56:26.731     0     0 I logd    : logdr: UID=10148 GID=10148 PID=2311 n tail=500 logMask=1 pid=2265 start=0ns deadline=0ns
-05-03 09:56:26.700  2311  2311 F DEBUG   : Cmdline: dev.smartrobot.bevy_app
-05-03 09:56:26.700  2311  2311 F DEBUG   : pid: 2265, tid: 2288, name: Async Compute T  >>> dev.smartrobot.bevy_app <<<
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #01 pc 00000000020e22e9  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #02 pc 00000000020e22d1  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #03 pc 00000000020d2c9d  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #04 pc 00000000020d2ab4  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #05 pc 00000000020d2749  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #06 pc 00000000020d0ee8  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #07 pc 00000000020d23dc  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #08 pc 00000000020f632f  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #09 pc 00000000020fdbc1  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #10 pc 00000000020fd829  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #11 pc 0000000001be7658  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #12 pc 0000000001c53e7f  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #13 pc 0000000001aeafad  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #14 pc 0000000001af2ad7  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #15 pc 0000000001af39a2  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #16 pc 0000000001af416e  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #17 pc 0000000001a7c95f  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #18 pc 0000000001a7d378  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #19 pc 0000000001996f15  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #20 pc 00000000019ae23b  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #21 pc 000000000194f52f  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #22 pc 0000000002046d01  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #23 pc 00000000020454fe  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #24 pc 0000000002043b3c  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #25 pc 00000000020450b3  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #26 pc 0000000002045277  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #27 pc 0000000002044fca  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #28 pc 00000000020459d7  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.700  2311  2311 F DEBUG   :       #29 pc 00000000020d465a  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
-05-03 09:56:26.712   568  1010 D CoreBackPreview: Window{720942 u0 Splash Screen dev.smartrobot.bevy_app EXITING}: Setting back callback null
-05-03 09:56:26.712   568   633 W InputManager-JNI: Input channel object '720942 Splash Screen dev.smartrobot.bevy_app (client)' was disposed without first being removed with the input manager!
-05-03 09:56:26.716   568  2318 W ActivityTaskManager:   Force finishing activity dev.smartrobot.bevy_app/.MainActivity
+05-03 09:56:26.700  2311  2311 F DEBUG   : Cmdline: dev.brain_machine.bevy_app
+05-03 09:56:26.700  2311  2311 F DEBUG   : pid: 2265, tid: 2288, name: Async Compute T  >>> dev.brain_machine.bevy_app <<<
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #01 pc 00000000020e22e9  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #02 pc 00000000020e22d1  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #03 pc 00000000020d2c9d  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #04 pc 00000000020d2ab4  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #05 pc 00000000020d2749  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #06 pc 00000000020d0ee8  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #07 pc 00000000020d23dc  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #08 pc 00000000020f632f  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #09 pc 00000000020fdbc1  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #10 pc 00000000020fd829  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #11 pc 0000000001be7658  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #12 pc 0000000001c53e7f  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #13 pc 0000000001aeafad  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #14 pc 0000000001af2ad7  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #15 pc 0000000001af39a2  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #16 pc 0000000001af416e  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #17 pc 0000000001a7c95f  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #18 pc 0000000001a7d378  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #19 pc 0000000001996f15  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #20 pc 00000000019ae23b  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #21 pc 000000000194f52f  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #22 pc 0000000002046d01  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #23 pc 00000000020454fe  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #24 pc 0000000002043b3c  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #25 pc 00000000020450b3  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #26 pc 0000000002045277  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #27 pc 0000000002044fca  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #28 pc 00000000020459d7  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.700  2311  2311 F DEBUG   :       #29 pc 00000000020d465a  /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk (offset 0x28a8000)
+05-03 09:56:26.712   568  1010 D CoreBackPreview: Window{720942 u0 Splash Screen dev.brain_machine.bevy_app EXITING}: Setting back callback null
+05-03 09:56:26.712   568   633 W InputManager-JNI: Input channel object '720942 Splash Screen dev.brain_machine.bevy_app (client)' was disposed without first being removed with the input manager!
+05-03 09:56:26.716   568  2318 W ActivityTaskManager:   Force finishing activity dev.brain_machine.bevy_app/.MainActivity
 05-03 09:56:26.725  2265  2265 V threaded_app: Pause: 0x76de59b671b0
 05-03 09:56:26.733   372   372 I Zygote  : Process 2265 exited due to signal 6 (Aborted)
-05-03 09:56:26.734   568  1611 I WindowManager: WIN DEATH: Window{2b30add u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}
-05-03 09:56:26.734   568  1611 W InputManager-JNI: Input channel object '2b30add dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity (client)' was disposed without first being removed with the input manager!
-05-03 09:56:26.734   568  1017 I ActivityManager: Process dev.smartrobot.bevy_app (pid 2265) has died: fg  TOP
-05-03 09:56:26.735   568  1635 I ImeTracker: dev.smartrobot.bevy_app:557a8a65: onRequestHide at ORIGIN_SERVER reason HIDE_REMOVE_CLIENT fromUser false
-05-03 09:56:26.735   568  1635 I ImeTracker: dev.smartrobot.bevy_app:557a8a65: onCancelled at PHASE_SERVER_SHOULD_HIDE
+05-03 09:56:26.734   568  1611 I WindowManager: WIN DEATH: Window{2b30add u0 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity}
+05-03 09:56:26.734   568  1611 W InputManager-JNI: Input channel object '2b30add dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity (client)' was disposed without first being removed with the input manager!
+05-03 09:56:26.734   568  1017 I ActivityManager: Process dev.brain_machine.bevy_app (pid 2265) has died: fg  TOP
+05-03 09:56:26.735   568  1635 I ImeTracker: dev.brain_machine.bevy_app:557a8a65: onRequestHide at ORIGIN_SERVER reason HIDE_REMOVE_CLIENT fromUser false
+05-03 09:56:26.735   568  1635 I ImeTracker: dev.brain_machine.bevy_app:557a8a65: onCancelled at PHASE_SERVER_SHOULD_HIDE
 05-03 09:56:26.738   568   592 W ActivityManager: setHasOverlayUi called on unknown pid: 2265
 05-03 09:56:26.757   568   603 I libprocessgroup: Removed cgroup /sys/fs/cgroup/uid_10148/pid_2265
-05-03 09:56:26.776   568   593 W ActivityTaskManager: Unable to send transaction to client proc dev.smartrobot.bevy_app: no app thread
-05-03 09:56:26.956   568   589 V WindowManager:         {WCT{RemoteToken{3e0c24a Task{ddf6265 #8 type=standard A=10148:dev.smartrobot.bevy_app}}} m=CLOSE f=NONE leash=Surface(name=Task=8)/@0x6035bec sb=Rect(0, 0 - 1280, 2856) eb=Rect(0, 0 - 1280, 2856) d=0 taskParent=-1},
-05-03 09:56:26.972   568   593 W ActivityTaskManager: Unable to send transaction to client proc dev.smartrobot.bevy_app: no app thread
-05-03 09:56:27.034   917   929 W ndroid.systemui: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.smartrobot.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk' with 1 weak references
-05-03 09:56:27.263   568  1668 W WindowManager: Exception thrown during dispatchAppVisibility Window{2b30add u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity EXITING}
+05-03 09:56:26.776   568   593 W ActivityTaskManager: Unable to send transaction to client proc dev.brain_machine.bevy_app: no app thread
+05-03 09:56:26.956   568   589 V WindowManager:         {WCT{RemoteToken{3e0c24a Task{ddf6265 #8 type=standard A=10148:dev.brain_machine.bevy_app}}} m=CLOSE f=NONE leash=Surface(name=Task=8)/@0x6035bec sb=Rect(0, 0 - 1280, 2856) eb=Rect(0, 0 - 1280, 2856) d=0 taskParent=-1},
+05-03 09:56:26.972   568   593 W ActivityTaskManager: Unable to send transaction to client proc dev.brain_machine.bevy_app: no app thread
+05-03 09:56:27.034   917   929 W ndroid.systemui: ApkAssets: Deleting an ApkAssets object '<empty> and /data/app/~~40IqnXhHfF0mxDXDz5Demg==/dev.brain_machine.bevy_app-h38K0y_FZ5MvC__NaTpPrw==/base.apk' with 1 weak references
+05-03 09:56:27.263   568  1668 W WindowManager: Exception thrown during dispatchAppVisibility Window{2b30add u0 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity EXITING}
 05-03 09:56:27.264   568  1668 W Process : Unable to open /proc/2265/status
 ```
 </details>
@@ -2179,88 +2179,88 @@ adb -e logcat | grep -e smartrobot -e 2265
 <summary>Output adb -d logcat</summary>
 
 ```text
-adb -d logcat | grep -e smartrobot -e 29974
+adb -d logcat | grep -e brain_machine -e 29974
 
-05-03 10:12:19.470 26231 26496 I Pageboost: start alp : dev.smartrobot.bevy_app
-05-03 10:12:19.471 26231 26500 I Pageboost: alp for : dev.smartrobot.bevy_app , 0
-05-03 10:12:19.471  2652 29964 E pageboostd: alp start : app devsmartrobotbevy_app
-05-03 10:12:19.476  2652 29964 E pageboostd: devsmartrobotbevy_app, amt 0 scnt 0 fcnt 0
-05-03 10:12:19.476  2652 29964 E pageboostd: devsmartrobotbevy_app, amt 0 scnt 0 fcnt 0
-05-03 10:12:19.476  2652 29964 E pageboostd: alp end : app devsmartrobotbevy_app data_amount 0
-05-03 10:12:19.541 27039 27141 I AppIconSolution: return the original icon because tray option is set to None for dev.smartrobot.bevy_app, isNight = true
-05-03 10:12:19.541 27039 27141 I LauncherActivityInfo: packageName: dev.smartrobot.bevy_app, useThemeIcon: true, height: 896, width: 896, density: 640
-05-03 10:12:19.542 26231 27048 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity bnds=[1128,370][1389,784]} from uid 10114
-05-03 10:12:19.544 26231 27048 D ActivityTaskManager: TaskLaunchParamsModifier:task=null activity=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity display-from-option=0 display-id=0 display-windowing-mode=1 suggested-display-area=DefaultTaskDisplayArea@189868026
-05-03 10:12:19.544 26231 27048 D [secipm]: mSecIpmManager Preload dev.smartrobot.bevy_app dex files
-05-03 10:12:19.544 26231 27048 D ActivityTaskManager: TaskLaunchParamsModifier:task=null activity=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t-1} display-from-option=0 display-id=0 display-windowing-mode=1 suggested-display-area=DefaultTaskDisplayArea@189868026 inherit-from-source=fullscreen activity-options-fullscreen=Rect(0, 0 - 0, 0) non-freeform-display display-area=DefaultTaskDisplayArea@189868026 maximized-bounds
-05-03 10:12:19.544 26231 27706 D PkgPredictorService-IpmAdcpController: create a new DexPreloadTask pkg:dev.smartrobot.bevy_app  path:/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==
-05-03 10:12:19.545 26231 27048 D ActivityTaskManager: TaskLaunchParamsModifier:task=Task{f433d55 #12 type=standard A=10728:dev.smartrobot.bevy_app U=0 visible=false mode=fullscreen translucent=true sz=0} activity=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t-1} display-from-option=0 display-id=0 display-windowing-mode=1 suggested-display-area=DefaultTaskDisplayArea@189868026 inherit-from-source=fullscreen activity-options-fullscreen=Rect(0, 0 - 0, 0) non-freeform-display display-area=DefaultTaskDisplayArea@189868026 maximized-bounds
-05-03 10:12:19.547   642  3090 I SurfaceFlinger: id=12925 createSurf (0x0),-1 flag=80004, ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}#0
-05-03 10:12:19.548 26526 26635 D StartingSurfaceDrawer: addSplashScreen dev.smartrobot.bevy_app theme=7f100220 task=12 suggestType=1
-05-03 10:12:19.552 26231 26231 I Pageboost: package dev.smartrobot.bevy_app
-05-03 10:12:19.552 26231 26500 I Pageboost: Record App IO : dev.smartrobot.bevy_app pid 0
-05-03 10:12:19.555   642  3090 I SurfaceFlinger: id=12926 createSurf (0x0),-1 flag=80004, fcf25c5 Splash Screen dev.smartrobot.bevy_app#0
-05-03 10:12:19.558 26231 27048 D MARsPolicyManager: onPackageResumedFG pkgName = dev.smartrobot.bevy_app, userId = 0
+05-03 10:12:19.470 26231 26496 I Pageboost: start alp : dev.brain_machine.bevy_app
+05-03 10:12:19.471 26231 26500 I Pageboost: alp for : dev.brain_machine.bevy_app , 0
+05-03 10:12:19.471  2652 29964 E pageboostd: alp start : app devbrain_machinebevy_app
+05-03 10:12:19.476  2652 29964 E pageboostd: devbrain_machinebevy_app, amt 0 scnt 0 fcnt 0
+05-03 10:12:19.476  2652 29964 E pageboostd: devbrain_machinebevy_app, amt 0 scnt 0 fcnt 0
+05-03 10:12:19.476  2652 29964 E pageboostd: alp end : app devbrain_machinebevy_app data_amount 0
+05-03 10:12:19.541 27039 27141 I AppIconSolution: return the original icon because tray option is set to None for dev.brain_machine.bevy_app, isNight = true
+05-03 10:12:19.541 27039 27141 I LauncherActivityInfo: packageName: dev.brain_machine.bevy_app, useThemeIcon: true, height: 896, width: 896, density: 640
+05-03 10:12:19.542 26231 27048 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.brain_machine.bevy_app/.MainActivity bnds=[1128,370][1389,784]} from uid 10114
+05-03 10:12:19.544 26231 27048 D ActivityTaskManager: TaskLaunchParamsModifier:task=null activity=ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity display-from-option=0 display-id=0 display-windowing-mode=1 suggested-display-area=DefaultTaskDisplayArea@189868026
+05-03 10:12:19.544 26231 27048 D [secipm]: mSecIpmManager Preload dev.brain_machine.bevy_app dex files
+05-03 10:12:19.544 26231 27048 D ActivityTaskManager: TaskLaunchParamsModifier:task=null activity=ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t-1} display-from-option=0 display-id=0 display-windowing-mode=1 suggested-display-area=DefaultTaskDisplayArea@189868026 inherit-from-source=fullscreen activity-options-fullscreen=Rect(0, 0 - 0, 0) non-freeform-display display-area=DefaultTaskDisplayArea@189868026 maximized-bounds
+05-03 10:12:19.544 26231 27706 D PkgPredictorService-IpmAdcpController: create a new DexPreloadTask pkg:dev.brain_machine.bevy_app  path:/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.brain_machine.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==
+05-03 10:12:19.545 26231 27048 D ActivityTaskManager: TaskLaunchParamsModifier:task=Task{f433d55 #12 type=standard A=10728:dev.brain_machine.bevy_app U=0 visible=false mode=fullscreen translucent=true sz=0} activity=ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t-1} display-from-option=0 display-id=0 display-windowing-mode=1 suggested-display-area=DefaultTaskDisplayArea@189868026 inherit-from-source=fullscreen activity-options-fullscreen=Rect(0, 0 - 0, 0) non-freeform-display display-area=DefaultTaskDisplayArea@189868026 maximized-bounds
+05-03 10:12:19.547   642  3090 I SurfaceFlinger: id=12925 createSurf (0x0),-1 flag=80004, ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12}#0
+05-03 10:12:19.548 26526 26635 D StartingSurfaceDrawer: addSplashScreen dev.brain_machine.bevy_app theme=7f100220 task=12 suggestType=1
+05-03 10:12:19.552 26231 26231 I Pageboost: package dev.brain_machine.bevy_app
+05-03 10:12:19.552 26231 26500 I Pageboost: Record App IO : dev.brain_machine.bevy_app pid 0
+05-03 10:12:19.555   642  3090 I SurfaceFlinger: id=12926 createSurf (0x0),-1 flag=80004, fcf25c5 Splash Screen dev.brain_machine.bevy_app#0
+05-03 10:12:19.558 26231 27048 D MARsPolicyManager: onPackageResumedFG pkgName = dev.brain_machine.bevy_app, userId = 0
 05-03 10:12:19.566 26004 26004 D Zygote  : Forked child process 29974
-05-03 10:12:19.567 26231 26257 I ActivityManager: Start proc 29974:dev.smartrobot.bevy_app/u0a728 for pre-top-activity {dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}
-05-03 10:12:19.567 26231 26257 D ActivityManager: [SecIpm] it's a ML_TYPE_EMPTYPROCESS protected process dev.smartrobot.bevy_app
-05-03 10:12:19.571 26231 28023 V WindowManager: Relayout Window{fcf25c5 u0 Splash Screen dev.smartrobot.bevy_app}: viewVisibility=0 req=1440x3040 d0
-05-03 10:12:19.571   642  3090 I SurfaceFlinger: id=12927 createSurf (1x1),-3 flag=40004, Splash Screen dev.smartrobot.bevy_app$_26526#0
-05-03 10:12:19.572 26231 28023 D WindowManager: makeSurface duration=1 name=Splash Screen dev.smartrobot.bevy_app$_26526
-05-03 10:12:19.573 26231 28023 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}
-05-03 10:12:19.575 26231 27048 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}
+05-03 10:12:19.567 26231 26257 I ActivityManager: Start proc 29974:dev.brain_machine.bevy_app/u0a728 for pre-top-activity {dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity}
+05-03 10:12:19.567 26231 26257 D ActivityManager: [SecIpm] it's a ML_TYPE_EMPTYPROCESS protected process dev.brain_machine.bevy_app
+05-03 10:12:19.571 26231 28023 V WindowManager: Relayout Window{fcf25c5 u0 Splash Screen dev.brain_machine.bevy_app}: viewVisibility=0 req=1440x3040 d0
+05-03 10:12:19.571   642  3090 I SurfaceFlinger: id=12927 createSurf (1x1),-3 flag=40004, Splash Screen dev.brain_machine.bevy_app$_26526#0
+05-03 10:12:19.572 26231 28023 D WindowManager: makeSurface duration=1 name=Splash Screen dev.brain_machine.bevy_app$_26526
+05-03 10:12:19.573 26231 28023 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12}
+05-03 10:12:19.575 26231 27048 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12}
 05-03 10:12:19.577 29974 29974 I trobot.bevy_ap: Late-enabling -Xcheck:jni
-05-03 10:12:19.580 26231 27048 D WindowManager: finishDrawingWindow: Window{fcf25c5 u0 Splash Screen dev.smartrobot.bevy_app} mDrawState=DRAW_PENDING
-05-03 10:12:19.584 26231 26250 D WindowManager: createAnimationAdapter(): container=Task{f433d55 #12 type=standard A=10728:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
-05-03 10:12:19.585 26231 26250 D WindowManager:         Add container=Task{f433d55 #12 type=standard A=10728:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
-05-03 10:12:19.590 26231 26250 I WindowManager: container=Task{f433d55 #12 type=standard A=10728:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
-05-03 10:12:19.590 26231 26250 I WindowManager:   taskInfo=TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} topActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} numActivities=1 lastActiveTime=990779295 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true token=WCT{RemoteToken{b436a07 Task{f433d55 #12 type=standard A=10728:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}}} topActivityType=1 pictureInPictureParams=PictureInPictureParams( aspectRatio=null sourceRectHint=null hasSetActions=false isAutoPipEnabled=false isSeamlessResizeEnabled=true) displayCutoutSafeInsets=Rect(0, 113 - 0, 0) topActivityInfo=ActivityInfo{e6c7734 dev.smartrobot.bevy_app.MainActivity} launchCookies=[android.os.BinderProxy@6b8c95d] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=true topActivityInSizeCompat=false locusId= null topLaunchHome=false launchSplitWindowingMode=0 isPairTask=false pairedTaskIds=[] pairWindowingMode=0 pairDockSide=0 isAnimatingByRecent=false originallySupportedSplitScreen=true isAnimatingFreeformToFullscreen=false topActivityInFixedAspectRatio=false isTopTransparentActivity=true}
-05-03 10:12:19.592 26231 26249 D WindowManager:         container=Task{f433d55 #12 type=standard A=10728:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
+05-03 10:12:19.580 26231 27048 D WindowManager: finishDrawingWindow: Window{fcf25c5 u0 Splash Screen dev.brain_machine.bevy_app} mDrawState=DRAW_PENDING
+05-03 10:12:19.584 26231 26250 D WindowManager: createAnimationAdapter(): container=Task{f433d55 #12 type=standard A=10728:dev.brain_machine.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
+05-03 10:12:19.585 26231 26250 D WindowManager:         Add container=Task{f433d55 #12 type=standard A=10728:dev.brain_machine.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
+05-03 10:12:19.590 26231 26250 I WindowManager: container=Task{f433d55 #12 type=standard A=10728:dev.brain_machine.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
+05-03 10:12:19.590 26231 26250 I WindowManager:   taskInfo=TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.brain_machine.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} topActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} numActivities=1 lastActiveTime=990779295 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true token=WCT{RemoteToken{b436a07 Task{f433d55 #12 type=standard A=10728:dev.brain_machine.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}}} topActivityType=1 pictureInPictureParams=PictureInPictureParams( aspectRatio=null sourceRectHint=null hasSetActions=false isAutoPipEnabled=false isSeamlessResizeEnabled=true) displayCutoutSafeInsets=Rect(0, 113 - 0, 0) topActivityInfo=ActivityInfo{e6c7734 dev.brain_machine.bevy_app.MainActivity} launchCookies=[android.os.BinderProxy@6b8c95d] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=true topActivityInSizeCompat=false locusId= null topLaunchHome=false launchSplitWindowingMode=0 isPairTask=false pairedTaskIds=[] pairWindowingMode=0 pairDockSide=0 isAnimatingByRecent=false originallySupportedSplitScreen=true isAnimatingFreeformToFullscreen=false topActivityInFixedAspectRatio=false isTopTransparentActivity=true}
+05-03 10:12:19.592 26231 26249 D WindowManager:         container=Task{f433d55 #12 type=standard A=10728:dev.brain_machine.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
 05-03 10:12:19.600 25967 25972 I adbd    : jdwp connection from 29974
-05-03 10:12:19.601 29974 29974 E USNET   : USNET: appName: dev.smartrobot.bevy_app
+05-03 10:12:19.601 29974 29974 E USNET   : USNET: appName: dev.brain_machine.bevy_app
 05-03 10:12:19.602 29974 29974 D ProcessState: Binder ioctl to enable oneway spam detection failed: Invalid argument
 05-03 10:12:19.606 29974 29974 D ActivityThread: setConscryptValidator
 05-03 10:12:19.607 29974 29974 D ActivityThread: setConscryptValidator - put
-05-03 10:12:19.608   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd7fe70 | 0100 | RGBA_8888    |    0.0    0.0 1440.0 3040.0 |    0    0 1440 3040 | Splash Screen dev.smartrobot.bevy_app$_26526#0
-05-03 10:12:19.611 26231 27048 I ActivityManager: DSS OFF for dev.smartrobot.bevy_app
-05-03 10:12:19.613 26231 27048 I DexController: getTaskHasActivityIsWaitingToRun: r=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}, app=ProcessRecord{d35164b 29974:dev.smartrobot.bevy_app/u0a728}
-05-03 10:12:19.613 26231 27048 D ActivityManager: attachApplicationLocked() app=ProcessRecord{d35164b 29974:dev.smartrobot.bevy_app/u0a728} app.isolatedEntryPoint=null instr2=null
-05-03 10:12:19.614 26231 27048 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}
-05-03 10:12:19.614 26231 27048 D SGM:PkgDataHelper: notifyAppCreate(), pkgName: dev.smartrobot.bevy_app, userId: 0, sendRet: true
-05-03 10:12:19.614 26231 26371 D SGM:GameManager: onLooperPrepared(), msg: MSG_APP_CREATE, pkgName: dev.smartrobot.bevy_app, userId: 0
-05-03 10:12:19.615 26231 27048 D SGM:GameManager:   sendRunningComponentFocus(), pkgName: dev.smartrobot.bevy_app, userId: 0
-05-03 10:12:19.615 26231 26371 D SGM:GameManager: onLooperPrepared(), msg: MSG_TASK_FOCUSED, pkgName: dev.smartrobot.bevy_app, userId: 0
-05-03 10:12:19.615 26231 26371 D SGM:GameManager:   handleTaskFocused(), pkgName: dev.smartrobot.bevy_app, userID:0
-05-03 10:12:19.615 26231 26371 D SGM:GameManager:   handleResume(). pkgName: dev.smartrobot.bevy_app, userId: 0, isTunableApp: null
-05-03 10:12:19.615 26231 26371 D SGM:GameManager: notifyFocusInOut(). of pkg: dev.smartrobot.bevy_app, type: 4, isMinimized: false, isTunableApp: false, userId: 0
-05-03 10:12:19.616 26231 26370 V ActivityManager: Changed top to ProcessRecord{d35164b 29974:dev.smartrobot.bevy_app/u0a728}
+05-03 10:12:19.608   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd7fe70 | 0100 | RGBA_8888    |    0.0    0.0 1440.0 3040.0 |    0    0 1440 3040 | Splash Screen dev.brain_machine.bevy_app$_26526#0
+05-03 10:12:19.611 26231 27048 I ActivityManager: DSS OFF for dev.brain_machine.bevy_app
+05-03 10:12:19.613 26231 27048 I DexController: getTaskHasActivityIsWaitingToRun: r=ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12}, app=ProcessRecord{d35164b 29974:dev.brain_machine.bevy_app/u0a728}
+05-03 10:12:19.613 26231 27048 D ActivityManager: attachApplicationLocked() app=ProcessRecord{d35164b 29974:dev.brain_machine.bevy_app/u0a728} app.isolatedEntryPoint=null instr2=null
+05-03 10:12:19.614 26231 27048 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12}
+05-03 10:12:19.614 26231 27048 D SGM:PkgDataHelper: notifyAppCreate(), pkgName: dev.brain_machine.bevy_app, userId: 0, sendRet: true
+05-03 10:12:19.614 26231 26371 D SGM:GameManager: onLooperPrepared(), msg: MSG_APP_CREATE, pkgName: dev.brain_machine.bevy_app, userId: 0
+05-03 10:12:19.615 26231 27048 D SGM:GameManager:   sendRunningComponentFocus(), pkgName: dev.brain_machine.bevy_app, userId: 0
+05-03 10:12:19.615 26231 26371 D SGM:GameManager: onLooperPrepared(), msg: MSG_TASK_FOCUSED, pkgName: dev.brain_machine.bevy_app, userId: 0
+05-03 10:12:19.615 26231 26371 D SGM:GameManager:   handleTaskFocused(), pkgName: dev.brain_machine.bevy_app, userID:0
+05-03 10:12:19.615 26231 26371 D SGM:GameManager:   handleResume(). pkgName: dev.brain_machine.bevy_app, userId: 0, isTunableApp: null
+05-03 10:12:19.615 26231 26371 D SGM:GameManager: notifyFocusInOut(). of pkg: dev.brain_machine.bevy_app, type: 4, isMinimized: false, isTunableApp: false, userId: 0
+05-03 10:12:19.616 26231 26370 V ActivityManager: Changed top to ProcessRecord{d35164b 29974:dev.brain_machine.bevy_app/u0a728}
 05-03 10:12:19.618 26231 26247 D SSRM:LoadDetectMonitor: PID = 29974, UID = 10728
-05-03 10:12:19.624 29974 29974 D ActivityThread: handleBindApplication()++ app=dev.smartrobot.bevy_app
+05-03 10:12:19.624 29974 29974 D ActivityThread: handleBindApplication()++ app=dev.brain_machine.bevy_app
 05-03 10:12:19.626 29974 29974 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10728; state: ENABLED
-05-03 10:12:19.639 26231 26249 I GameSDK@LifeCycle: noteResumeComponent(): package name  : dev.smartrobot.bevy_app
-05-03 10:12:19.639 26231 26249 D SGM:GameManager: noteResumeComponent(), received pkgName: dev.smartrobot.bevy_app, userId: 0
-05-03 10:12:19.640 26231 26371 D SGM:GameManager: onLooperPrepared(), msg: MSG_APP_RESUME, pkgName: dev.smartrobot.bevy_app, userid: 0
-05-03 10:12:19.640 26231 26371 D SGM:GameManager:   handleResume(). pkgName: dev.smartrobot.bevy_app, userId: 0, isTunableApp: null
-05-03 10:12:19.640 26231 26371 D SGM:GameManager: notifyFocusInOut(). of pkg: dev.smartrobot.bevy_app, type: 4, isMinimized: false, isTunableApp: false, userId: 0
-05-03 10:12:19.640 26231 26249 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.android.server.ssrm.fgapps.GameAppUtils.isGame(GameAppUtils.java:84)
-05-03 10:12:19.640 26231 26249 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-03 10:12:19.640 26231 26249 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.android.server.ssrm.SortingMachine.isGame(SortingMachine.java:162)
-05-03 10:12:19.640 26231 26249 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-03 10:12:19.641 26231 26249 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.samsung.android.game.SemGameManager.isGamePackage(SemGameManager.java:104)
-05-03 10:12:19.641 26231 26249 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
-05-03 10:12:19.641 26231 26249 D SGM:SemGameManager: isGamePackage(), pkgName=dev.smartrobot.bevy_app, ret=false
+05-03 10:12:19.639 26231 26249 I GameSDK@LifeCycle: noteResumeComponent(): package name  : dev.brain_machine.bevy_app
+05-03 10:12:19.639 26231 26249 D SGM:GameManager: noteResumeComponent(), received pkgName: dev.brain_machine.bevy_app, userId: 0
+05-03 10:12:19.640 26231 26371 D SGM:GameManager: onLooperPrepared(), msg: MSG_APP_RESUME, pkgName: dev.brain_machine.bevy_app, userid: 0
+05-03 10:12:19.640 26231 26371 D SGM:GameManager:   handleResume(). pkgName: dev.brain_machine.bevy_app, userId: 0, isTunableApp: null
+05-03 10:12:19.640 26231 26371 D SGM:GameManager: notifyFocusInOut(). of pkg: dev.brain_machine.bevy_app, type: 4, isMinimized: false, isTunableApp: false, userId: 0
+05-03 10:12:19.640 26231 26249 D SGM:GameManager: identifyGamePackage. dev.brain_machine.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.android.server.ssrm.fgapps.GameAppUtils.isGame(GameAppUtils.java:84)
+05-03 10:12:19.640 26231 26249 D SGM:PkgDataHelper: getGamePkgData(). dev.brain_machine.bevy_app
+05-03 10:12:19.640 26231 26249 D SGM:GameManager: identifyGamePackage. dev.brain_machine.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.android.server.ssrm.SortingMachine.isGame(SortingMachine.java:162)
+05-03 10:12:19.640 26231 26249 D SGM:PkgDataHelper: getGamePkgData(). dev.brain_machine.bevy_app
+05-03 10:12:19.641 26231 26249 D SGM:GameManager: identifyGamePackage. dev.brain_machine.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.samsung.android.game.SemGameManager.isGamePackage(SemGameManager.java:104)
+05-03 10:12:19.641 26231 26249 D SGM:PkgDataHelper: getGamePkgData(). dev.brain_machine.bevy_app
+05-03 10:12:19.641 26231 26249 D SGM:SemGameManager: isGamePackage(), pkgName=dev.brain_machine.bevy_app, ret=false
 05-03 10:12:19.654 26231 26500 I Pageboost: 64 bit checked : true for 29974
 05-03 10:12:19.654 26231 26500 I Pageboost: IoRecord pid : 29974, started correctly
-05-03 10:12:19.683 29974 29974 V GraphicsEnvironment: ANGLE Developer option for 'dev.smartrobot.bevy_app' set to: 'default'
+05-03 10:12:19.683 29974 29974 V GraphicsEnvironment: ANGLE Developer option for 'dev.brain_machine.bevy_app' set to: 'default'
 05-03 10:12:19.683 29974 29974 V GraphicsEnvironment: App is not on the allowlist for updatable production driver.
-05-03 10:12:19.685 29974 29974 D LoadedApk: LoadedApk::makeApplication() appContext.mOpPackageName=dev.smartrobot.bevy_app appContext.mBasePackageName=dev.smartrobot.bevy_app
+05-03 10:12:19.685 29974 29974 D LoadedApk: LoadedApk::makeApplication() appContext.mOpPackageName=dev.brain_machine.bevy_app appContext.mBasePackageName=dev.brain_machine.bevy_app
 05-03 10:12:19.685 29974 29974 D NetworkSecurityConfig: No Network Security Config specified, using platform default
 05-03 10:12:19.696 29974 29974 D NetworkSecurityConfig: No Network Security Config specified, using platform default
 05-03 10:12:19.710 29974 29974 D ActivityThread: handleBindApplication() --
 05-03 10:12:19.716 29974 30004 D OpenGLRenderer: RenderThread::requireGlContext()
 05-03 10:12:19.721 29974 30004 I libEGL  : EGL_ANDROID_blob_cache_path advertised, but unable to get eglSetBlobCachePathANDROID
 05-03 10:12:19.724 29974 30004 D OpenGLRenderer: RenderThread::setGrContext()
-05-03 10:12:19.750 26231 26560 D MdnieScenarioControlService:  packageName : dev.smartrobot.bevy_app    className : dev.smartrobot.bevy_app.MainActivity
+05-03 10:12:19.750 26231 26560 D MdnieScenarioControlService:  packageName : dev.brain_machine.bevy_app    className : dev.brain_machine.bevy_app.MainActivity
 05-03 10:12:19.752 29974 29974 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
 05-03 10:12:19.772 29974 29974 I DecorView: [INFO] isPopOver=false, config=true
 05-03 10:12:19.772 29974 29974 I DecorView: updateCaptionType >> DecorView@9d5c6ee[], isFloating=false, isApplication=true, hasWindowControllerCallback=true, hasWindowDecorCaption=false
@@ -2268,8 +2268,8 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:19.775 29974 29974 I DecorView: getCurrentDensityDpi: from real metrics. densityDpi=560 msg=resources_loaded
 05-03 10:12:19.781 29974 29974 W trobot.bevy_ap: Accessing hidden method Landroid/view/View;->computeFitSystemWindows(Landroid/graphics/Rect;Landroid/graphics/Rect;)Z (unsupported, reflection, allowed)
 05-03 10:12:19.782 29974 29974 W trobot.bevy_ap: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (unsupported, reflection, allowed)
-05-03 10:12:19.784 29974 29974 I GameActivity: Looking for library libsmartrobot_bevy.so
-05-03 10:12:19.784 29974 29974 I GameActivity: Found library libsmartrobot_bevy.so. Loading...
+05-03 10:12:19.784 29974 29974 I GameActivity: Looking for library libbrain_machine_bevy.so
+05-03 10:12:19.784 29974 29974 I GameActivity: Found library libbrain_machine_bevy.so. Loading...
 05-03 10:12:19.790 29974 29974 D GameActivity: GameActivity_register
 05-03 10:12:19.791 29974 29974 V GameActivity: Registering com/google/androidgamesdk/GameActivity's 22 native methods...
 05-03 10:12:19.791 29974 29974 V threaded_app: Creating: 0x7446f4f1f0
@@ -2283,13 +2283,13 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:19.791 29974 30018 V threaded_app: Config: mcc=0 mnc=0 lang=en cnt=US orien=1 touch=3 dens=560 keys=1 nav=1 keysHid=3 navHid=0 sdk=31 size=2 long=2 modetype=1 modenight=2
 05-03 10:12:19.796   528   528 E audit   : type=1400 audit(1746277939.789:19255): avc:  denied  { read } for  pid=29974 comm="android_main" name="cpu.cfs_quota_us" dev="cgroup" ino=9 scontext=u:r:untrusted_app:s0:c216,c258,c512,c768 tcontext=u:object_r:cgroup:s0 tclass=file permissive=0 SEPF_SM-N975F_12_0001 audit_filtered
 05-03 10:12:19.796   528   528 E audit   : type=1300 audit(1746277939.789:19255): arch=c00000b7 syscall=56 success=no exit=-13 a0=ffffff9c a1=732e1798b8 a2=80000 a3=0 items=0 ppid=26004 pid=29974 auid=4294967295 uid=10728 gid=10728 euid=10728 suid=10728 fsuid=10728 egid=10728 sgid=10728 fsgid=10728 tty=(none) ses=4294967295 comm="android_main" exe="/system/bin/app_process64" subj=u:r:untrusted_app:s0:c216,c258,c512,c768 key=(null)
-05-03 10:12:19.796   528   528 E audit   : type=1327 audit(1746277939.789:19255): proctitle="dev.smartrobot.bevy_app"
+05-03 10:12:19.796   528   528 E audit   : type=1327 audit(1746277939.789:19255): proctitle="dev.brain_machine.bevy_app"
 05-03 10:12:19.796   528   528 E audit   : type=1400 audit(1746277939.789:19256): avc:  denied  { read } for  pid=29974 comm="android_main" name="cpu.cfs_period_us" dev="cgroup" ino=10 scontext=u:r:untrusted_app:s0:c216,c258,c512,c768 tcontext=u:object_r:cgroup:s0 tclass=file permissive=0 SEPF_SM-N975F_12_0001 audit_filtered
 05-03 10:12:19.796   528   528 E audit   : type=1300 audit(1746277939.789:19256): arch=c00000b7 syscall=56 success=no exit=-13 a0=ffffff9c a1=732e1798b8 a2=80000 a3=0 items=0 ppid=26004 pid=29974 auid=4294967295 uid=10728 gid=10728 euid=10728 suid=10728 fsuid=10728 egid=10728 sgid=10728 fsgid=10728 tty=(none) ses=4294967295 comm="android_main" exe="/system/bin/app_process64" subj=u:r:untrusted_app:s0:c216,c258,c512,c768 key=(null)
-05-03 10:12:19.802 29974 30018 D vulkan  : searching for layers in '/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/lib/arm64'
-05-03 10:12:19.802 29974 30018 D vulkan  : searching for layers in '/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/base.apk!/lib/arm64-v8a'
-05-03 10:12:19.822 26231 26454 W SemWifiTransportLayerUtils: getApplicationCategory - IOException dev.smartrobot.bevy_app
-05-03 10:12:19.822 26231 26454 W System.err: java.io.FileNotFoundException: https://play.google.com/store/apps/details?id=dev.smartrobot.bevy_app&hl=en
+05-03 10:12:19.802 29974 30018 D vulkan  : searching for layers in '/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.brain_machine.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/lib/arm64'
+05-03 10:12:19.802 29974 30018 D vulkan  : searching for layers in '/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.brain_machine.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/base.apk!/lib/arm64-v8a'
+05-03 10:12:19.822 26231 26454 W SemWifiTransportLayerUtils: getApplicationCategory - IOException dev.brain_machine.bevy_app
+05-03 10:12:19.822 26231 26454 W System.err: java.io.FileNotFoundException: https://play.google.com/store/apps/details?id=dev.brain_machine.bevy_app&hl=en
 05-03 10:12:19.851 29974 29974 V GameActivity: onStart_native
 05-03 10:12:19.851 29974 29974 V threaded_app: Start: 0x7446f4f1f0
 05-03 10:12:19.864 29974 30018 I event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_render-0.16.0/srcAdapterInfo { name: "Mali-G76", vendor: 5045, device: 1913716736, device_type: IntegratedGpu, driver: "Mali-G76", driver_info: "v1.r32p1-01bet2-mbs2v39_0.131801e953429f661ecce1d5e1d2b3ef", backend: Vulkan }
@@ -2323,19 +2323,19 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:20.170 29974 29974 V threaded_app: Resume: 0x7446f4f1f0
 05-03 10:12:20.170 29974 30018 V threaded_app: activityState=11
 05-03 10:12:20.170 29974 30018 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfApp Resumed - is running
-05-03 10:12:20.172 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: ignored. pkg=dev.smartrobot.bevy_app parent=null callers=com.android.internal.policy.DecorView.setVisibility:4294 android.app.ActivityThread.handleResumeActivity:5301 android.app.servertransaction.ResumeActivityItem.execute:54 android.app.servertransaction.ActivityTransactionItem.execute:45 android.app.servertransaction.TransactionExecutor.executeLifecycleState:176
+05-03 10:12:20.172 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: ignored. pkg=dev.brain_machine.bevy_app parent=null callers=com.android.internal.policy.DecorView.setVisibility:4294 android.app.ActivityThread.handleResumeActivity:5301 android.app.servertransaction.ResumeActivityItem.execute:54 android.app.servertransaction.ActivityTransactionItem.execute:45 android.app.servertransaction.TransactionExecutor.executeLifecycleState:176
 05-03 10:12:20.172 29974 29974 I MSHandlerLifeCycle: removeMultiSplitHandler: no exist. decor=DecorView@9d5c6ee[]
-05-03 10:12:20.184   642  3090 I SurfaceFlinger: id=12933 createSurf (0x0),-1 flag=80004, 8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0
+05-03 10:12:20.184   642  3090 I SurfaceFlinger: id=12933 createSurf (0x0),-1 flag=80004, 8af2056 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity#0
 05-03 10:12:20.186 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: setView = com.android.internal.policy.DecorView@9d5c6ee TM=true
 05-03 10:12:20.188 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:20.188 29974 29974 I MSHandlerLifeCycle: removeMultiSplitHandler: no exist. decor=DecorView@9d5c6ee[MainActivity]
 05-03 10:12:20.195 29974 29974 I SurfaceView@f0c4b33: onWindowVisibilityChanged(0) true com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f0c4b33 V.E...... ......I. 0,0-0,0} of ViewRootImpl@320ff7b[MainActivity]
 05-03 10:12:20.198 29974 29974 V threaded_app: WindowInsetsChanged: 0x7446f4f1f0
-05-03 10:12:20.199 26231 28072 V WindowManager: Relayout Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: viewVisibility=0 req=1440x3040 d0
-05-03 10:12:20.199   642  3090 I SurfaceFlinger: id=12934 createSurf (1x1),-3 flag=40004, dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974#0
-05-03 10:12:20.200 26231 28072 D WindowManager: makeSurface duration=1 name=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974
-05-03 10:12:20.201 26231 28072 V WindowManager: Changing focus from null to Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} displayId=0 Callers=com.android.server.wm.RootWindowContainer.updateFocusedWindowLocked:583 com.android.server.wm.WindowManagerService.updateFocusedWindowLocked:6505 com.android.server.wm.WindowManagerService.relayoutWindow:2770 com.android.server.wm.Session.relayout:242
-05-03 10:12:20.201 26231 28072 D MARsPolicyManager: onPackageResumedFG pkgName = dev.smartrobot.bevy_app, userId = 0
+05-03 10:12:20.199 26231 28072 V WindowManager: Relayout Window{8af2056 u0 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity}: viewVisibility=0 req=1440x3040 d0
+05-03 10:12:20.199   642  3090 I SurfaceFlinger: id=12934 createSurf (1x1),-3 flag=40004, dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity$_29974#0
+05-03 10:12:20.200 26231 28072 D WindowManager: makeSurface duration=1 name=dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity$_29974
+05-03 10:12:20.201 26231 28072 V WindowManager: Changing focus from null to Window{8af2056 u0 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} displayId=0 Callers=com.android.server.wm.RootWindowContainer.updateFocusedWindowLocked:583 com.android.server.wm.WindowManagerService.updateFocusedWindowLocked:6505 com.android.server.wm.WindowManagerService.relayoutWindow:2770 com.android.server.wm.Session.relayout:242
+05-03 10:12:20.201 26231 28072 D MARsPolicyManager: onPackageResumedFG pkgName = dev.brain_machine.bevy_app, userId = 0
 05-03 10:12:20.203 26231 28072 V WindowManager: Relayout hash=8af2056, pid=29974: mAttrs={(0,0)(fillxfill) sim={adjust=resize forwardNavigation} ty=BASE_APPLICATION fmt=TRANSLUCENT wanim=0x1030303
 05-03 10:12:20.206   642  2162 W ServiceManager: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10728 pid=29974
 05-03 10:12:20.207   642  2162 W ServiceManager: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10728 pid=29974
@@ -2345,10 +2345,10 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:20.210 29974 30004 D hw-ProcessState: Binder ioctl to enable oneway spam detection failed: Invalid argument
 05-03 10:12:20.211 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: [DP] dp(1) 1 android.view.ViewRootImpl.reportNextDraw:11420 android.view.ViewRootImpl.performTraversals:4193 android.view.ViewRootImpl.doTraversal:2919
 05-03 10:12:20.211 29974 30004 D OpenGLRenderer: eglCreateWindowSurface
-05-03 10:12:20.211   642  3090 I SurfaceFlinger: id=12937 createSurf (0x0),-1 flag=20004, Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0
-05-03 10:12:20.212   642  2162 I SurfaceFlinger: id=12938 createSurf (0x0),-1 flag=80004, SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#0
-05-03 10:12:20.212   642  2162 I SurfaceFlinger: id=12939 createSurf (0x0),-1 flag=40400, SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0(BLAST)#0
-05-03 10:12:20.212   642  2162 I SurfaceFlinger: id=12940 createSurf (0x0),-1 flag=20404, Background for SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#0
+05-03 10:12:20.211   642  3090 I SurfaceFlinger: id=12937 createSurf (0x0),-1 flag=20004, Bounds for - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@0#0
+05-03 10:12:20.212   642  2162 I SurfaceFlinger: id=12938 createSurf (0x0),-1 flag=80004, SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0#0
+05-03 10:12:20.212   642  2162 I SurfaceFlinger: id=12939 createSurf (0x0),-1 flag=40400, SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0(BLAST)#0
+05-03 10:12:20.212   642  2162 I SurfaceFlinger: id=12940 createSurf (0x0),-1 flag=20404, Background for SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0#0
 05-03 10:12:20.212 29974 29974 I SurfaceView@f0c4b33: pST: sr = Rect(0, 0 - 1440, 3040) sw = 1440 sh = 3040
 05-03 10:12:20.212 29974 29974 I SurfaceView@f0c4b33: onSSPAndSRT: pl = 0 pt = 0 sx = 1.0 sy = 1.0
 05-03 10:12:20.213 29974 29974 I SurfaceView@f0c4b33: pST: mTmpTransaction.apply, mTmpTransaction = android.view.SurfaceControl$Transaction@1361857
@@ -2358,7 +2358,7 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:20.213 29974 29974 V GameActivity: onSurfaceCreated_native
 05-03 10:12:20.213 29974 29974 V threaded_app: NativeWindowCreated: 0x7446f4f1f0 -- 0x74d6fb9be0
 05-03 10:12:20.213 29974 29974 V threaded_app: android_app_set_window called
-05-03 10:12:20.224 26231 28023 D InputDispatcher: Focus request (0): 8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity but waiting because NOT_VISIBLE
+05-03 10:12:20.224 26231 28023 D InputDispatcher: Focus request (0): 8af2056 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity but waiting because NOT_VISIBLE
 05-03 10:12:20.228 29974 30029 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_core_pipeline-0.1Downsample depth is not supported on this platform.
 05-03 10:12:20.245 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_core_pipeline::fullscreen_vertex_shader with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
 05-03 10:12:20.246 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::fullscreen_vertex_shader with defs: {}
@@ -2412,13 +2412,13 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:20.285 29974 30004 I gralloc : Arm Module v1.0
 05-03 10:12:20.286 29974 30004 W Gralloc4: allocator 4.x is not supported
 05-03 10:12:20.286 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::lighting with defs: {}
-05-03 10:12:20.286 29974 30029 I BufferQueueProducer: [SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#1(BLAST Consumer)1](id:751600000001,api:1,p:29974,c:29974) FrameBooster: VULKAN surface was catched
+05-03 10:12:20.286 29974 30029 I BufferQueueProducer: [SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0#1(BLAST Consumer)1](id:751600000001,api:1,p:29974,c:29974) FrameBooster: VULKAN surface was catched
 05-03 10:12:20.286 29974 30029 D trobot.bevy_ap: FrameBooster: InterpolationGui: UID 10728 detected as using Vulkan
 05-03 10:12:20.287 29974 30004 W Gralloc3: allocator 3.x is not supported
 05-03 10:12:20.287 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::color_operations with defs: {}
 05-03 10:12:20.287 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::utils with defs: {}
 05-03 10:12:20.289 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::clustered_forward with defs: {}
-05-03 10:12:20.292 29974 30029 I BufferQueueProducer: [SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#1(BLAST Consumer)1](id:751600000001,api:1,p:29974,c:29974) FrameBooster: VULKAN surface was catched
+05-03 10:12:20.292 29974 30029 I BufferQueueProducer: [SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0#1(BLAST Consumer)1](id:751600000001,api:1,p:29974,c:29974) FrameBooster: VULKAN surface was catched
 05-03 10:12:20.292 29974 30029 D trobot.bevy_ap: FrameBooster: InterpolationGui: UID 10728 detected as using Vulkan
 05-03 10:12:20.293 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::shadow_sampling with defs: {}
 05-03 10:12:20.294 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::shadows with defs: {}
@@ -2434,18 +2434,18 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:20.305 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: [DP] pdf(0) 1 android.view.ViewRootImpl.lambda$addFrameCompleteCallbackIfNeeded$3$ViewRootImpl:4995 android.view.ViewRootImpl$$ExternalSyntheticLambda16.run:6 android.os.Handler.handleCallback:938
 05-03 10:12:20.305 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: [DP] rdf()
 05-03 10:12:20.305 29974 29974 D ViewRootImpl@320ff7b[MainActivity]: reportDrawFinished (fn: -1)
-05-03 10:12:20.306 26231 28023 D WindowManager: finishDrawingWindow: Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} mDrawState=DRAW_PENDING
-05-03 10:12:20.307 26231 26250 I WindowManager: Reparenting to leash, surface=Surface(name=8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0x562e6a9, leashParent=Surface(name=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12})/@0xd19e42e
-05-03 10:12:20.308   642  3090 I SurfaceFlinger: id=12941 createSurf (0x0),-1 flag=24000, Surface(name=8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal#0
-05-03 10:12:20.308 26231 26250 D WindowManager: makeSurface duration=1 leash=Surface(name=Surface(name=8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal)/@0x1205bcf
-05-03 10:12:20.309 26231 26246 I PkgPredictorService-SecIpmManagerServiceImpl: reportToNAP uid:10728 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity thisTime:766
+05-03 10:12:20.306 26231 28023 D WindowManager: finishDrawingWindow: Window{8af2056 u0 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} mDrawState=DRAW_PENDING
+05-03 10:12:20.307 26231 26250 I WindowManager: Reparenting to leash, surface=Surface(name=8af2056 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity)/@0x562e6a9, leashParent=Surface(name=ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12})/@0xd19e42e
+05-03 10:12:20.308   642  3090 I SurfaceFlinger: id=12941 createSurf (0x0),-1 flag=24000, Surface(name=8af2056 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal#0
+05-03 10:12:20.308 26231 26250 D WindowManager: makeSurface duration=1 leash=Surface(name=Surface(name=8af2056 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal)/@0x1205bcf
+05-03 10:12:20.309 26231 26246 I PkgPredictorService-SecIpmManagerServiceImpl: reportToNAP uid:10728 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity thisTime:766
 05-03 10:12:20.310 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_functions with defs: {}
 05-03 10:12:20.310 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::decal::forward with defs: {}
 05-03 10:12:20.311 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_bindings with defs: {}
 05-03 10:12:20.311 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_render::bindless with defs: {}
-05-03 10:12:20.312 26231 27706 D PkgPredictorService-IpmAdcpController: dev.smartrobot.bevy_app become forground, dex profile begin
-05-03 10:12:20.312 26231 26246 I ActivityTaskManager: Displayed dev.smartrobot.bevy_app/.MainActivity: +766ms
-05-03 10:12:20.312 26231 26246 I Pageboost: Launch time gathered : pid 29974 dev.smartrobot.bevy_app 766
+05-03 10:12:20.312 26231 27706 D PkgPredictorService-IpmAdcpController: dev.brain_machine.bevy_app become forground, dex profile begin
+05-03 10:12:20.312 26231 26246 I ActivityTaskManager: Displayed dev.brain_machine.bevy_app/.MainActivity: +766ms
+05-03 10:12:20.312 26231 26246 I Pageboost: Launch time gathered : pid 29974 dev.brain_machine.bevy_app 766
 05-03 10:12:20.312 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::parallax_mapping with defs: {}
 05-03 10:12:20.312 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::ssao_utils with defs: {}
 05-03 10:12:20.313 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::lightmap with defs: {}
@@ -2456,57 +2456,57 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:20.321 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_prepass_functions with defs: {}
 05-03 10:12:20.322 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::pbr_deferred_functions with defs: {}
 05-03 10:12:20.322 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_core_pipeline::oit with defs: {}
-05-03 10:12:20.323 26231 27048 D InputDispatcher: Focus entered window (0): 8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity
+05-03 10:12:20.323 26231 27048 D InputDispatcher: Focus entered window (0): 8af2056 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity
 05-03 10:12:20.324 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: MSG_WINDOW_FOCUS_CHANGED 1 1
 05-03 10:12:20.324 29974 29974 V threaded_app: WindowFocusChanged: 0x7446f4f1f0 -- 1
-05-03 10:12:20.324 29974 29974 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=21, host=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity, from=android.view.InsetsSourceConsumer.hide:242 android.view.InsetsController.collectSourceControls:1215 android.view.InsetsController.controlAnimationUnchecked:1077 android.view.InsetsController.applyAnimation:1456 android.view.InsetsController.applyAnimation:1437 android.view.InsetsController.hide:1006 android.view.InsetsController.hide:981 dev.smartrobot.bevy_app.MainActivity.hideSystemUi:26 dev.smartrobot.bevy_app.MainActivity.onWindowFocusChanged:19 androidx.appcompat.view.WindowCallbackWrapper.onWindowFocusChanged:125
-05-03 10:12:20.324 29974 29974 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=20, host=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity, from=android.view.InsetsSourceConsumer.hide:242 android.view.InsetsController.collectSourceControls:1215 android.view.InsetsController.controlAnimationUnchecked:1077 android.view.InsetsController.applyAnimation:1456 android.view.InsetsController.applyAnimation:1437 android.view.InsetsController.hide:1006 android.view.InsetsController.hide:981 dev.smartrobot.bevy_app.MainActivity.hideSystemUi:26 dev.smartrobot.bevy_app.MainActivity.onWindowFocusChanged:19 androidx.appcompat.view.WindowCallbackWrapper.onWindowFocusChanged:125
-05-03 10:12:20.325 26231 27048 V WindowManager: Relayout Window{fcf25c5 u0 Splash Screen dev.smartrobot.bevy_app}: viewVisibility=8 req=1440x3040 d0
-05-03 10:12:20.325 26231 27048 I WindowManager: Reparenting to leash, surface=Surface(name=fcf25c5 Splash Screen dev.smartrobot.bevy_app)/@0x37e10d5, leashParent=Surface(name=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12})/@0xd19e42e
-05-03 10:12:20.326   642  3090 I SurfaceFlinger: id=12942 createSurf (0x0),-1 flag=24000, Surface(name=fcf25c5 Splash Screen dev.smartrobot.bevy_app)/@0x37e10d5 - animation-leash of window_animation#0
-05-03 10:12:20.326   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd90370 | 0100 | RGBA_8888    |    0.0    0.0 1440.0  114.0 |    0    0 1440  114 | dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974#0
-05-03 10:12:20.326   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd7fe70 | 0100 | RGBA_8888    |    0.0    0.0 1440.0 3040.0 |    0    0 1440 3040 | Splash Screen dev.smartrobot.bevy_app$_26526#0
-05-03 10:12:20.326 26231 27048 D WindowManager: makeSurface duration=1 leash=Surface(name=Surface(name=fcf25c5 Splash Screen dev.smartrobot.bevy_app)/@0x37e10d5 - animation-leash of window_animation)/@0x97b1fdb
-05-03 10:12:20.326 29974 29974 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=1, host=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity, from=android.view.InsetsSourceConsumer.hide:242 android.view.InsetsSourceConsumer.hide:246 android.view.InsetsController.hideDirectly:1473 android.view.InsetsController.controlAnimationUnchecked:1139 android.view.InsetsController.applyAnimation:1456 android.view.InsetsController.applyAnimation:1437 android.view.InsetsController.hide:1006 android.view.InsetsController.hide:981 dev.smartrobot.bevy_app.MainActivity.hideSystemUi:26 dev.smartrobot.bevy_app.MainActivity.onWindowFocusChanged:19
-05-03 10:12:20.327 29974 29974 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=0, host=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity, from=android.view.InsetsSourceConsumer.hide:242 android.view.InsetsSourceConsumer.hide:246 android.view.InsetsController.hideDirectly:1473 android.view.InsetsController.controlAnimationUnchecked:1139 android.view.InsetsController.applyAnimation:1456 android.view.InsetsController.applyAnimation:1437 android.view.InsetsController.hide:1006 android.view.InsetsController.hide:981 dev.smartrobot.bevy_app.MainActivity.hideSystemUi:26 dev.smartrobot.bevy_app.MainActivity.onWindowFocusChanged:19
-05-03 10:12:20.327 26231 28571 D InsetsSourceProvider: updateVisibility: serverVisible=true, clientVisible=false, source=InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,3040][1440,3040], mVisible=false, mWindowFrame=[0,2872][1440,3040]}, controlTarget=Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}, from=com.android.server.wm.InsetsSourceProvider.setClientVisible:428 com.android.server.wm.InsetsSourceProvider.updateClientVisibility:413 com.android.server.wm.InsetsStateController.onInsetsModified:508 com.android.server.wm.InsetsPolicy.onInsetsModified:469 com.android.server.wm.Session.insetsModified:704 android.view.IWindowSession$Stub.onTransact:1256 com.android.server.wm.Session.onTransact:176 android.os.Binder.execTransactInternal:1220 android.os.Binder.execTransact:1179 <bottom of call stack>
-05-03 10:12:20.328 26231 28571 D InsetsSourceProvider: updateVisibility: serverVisible=true, clientVisible=false, source=InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][1440,114], mVisible=false, mWindowFrame=[0,0][0,0]}, controlTarget=Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}, from=com.android.server.wm.InsetsSourceProvider.setClientVisible:428 com.android.server.wm.InsetsSourceProvider.updateClientVisibility:413 com.android.server.wm.InsetsStateController.onInsetsModified:508 com.android.server.wm.InsetsPolicy.onInsetsModified:469 com.android.server.wm.Session.insetsModified:704 android.view.IWindowSession$Stub.onTransact:1256 com.android.server.wm.Session.onTransact:176 android.os.Binder.execTransactInternal:1220 android.os.Binder.execTransact:1179 <bottom of call stack>
+05-03 10:12:20.324 29974 29974 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=21, host=dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity, from=android.view.InsetsSourceConsumer.hide:242 android.view.InsetsController.collectSourceControls:1215 android.view.InsetsController.controlAnimationUnchecked:1077 android.view.InsetsController.applyAnimation:1456 android.view.InsetsController.applyAnimation:1437 android.view.InsetsController.hide:1006 android.view.InsetsController.hide:981 dev.brain_machine.bevy_app.MainActivity.hideSystemUi:26 dev.brain_machine.bevy_app.MainActivity.onWindowFocusChanged:19 androidx.appcompat.view.WindowCallbackWrapper.onWindowFocusChanged:125
+05-03 10:12:20.324 29974 29974 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=20, host=dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity, from=android.view.InsetsSourceConsumer.hide:242 android.view.InsetsController.collectSourceControls:1215 android.view.InsetsController.controlAnimationUnchecked:1077 android.view.InsetsController.applyAnimation:1456 android.view.InsetsController.applyAnimation:1437 android.view.InsetsController.hide:1006 android.view.InsetsController.hide:981 dev.brain_machine.bevy_app.MainActivity.hideSystemUi:26 dev.brain_machine.bevy_app.MainActivity.onWindowFocusChanged:19 androidx.appcompat.view.WindowCallbackWrapper.onWindowFocusChanged:125
+05-03 10:12:20.325 26231 27048 V WindowManager: Relayout Window{fcf25c5 u0 Splash Screen dev.brain_machine.bevy_app}: viewVisibility=8 req=1440x3040 d0
+05-03 10:12:20.325 26231 27048 I WindowManager: Reparenting to leash, surface=Surface(name=fcf25c5 Splash Screen dev.brain_machine.bevy_app)/@0x37e10d5, leashParent=Surface(name=ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12})/@0xd19e42e
+05-03 10:12:20.326   642  3090 I SurfaceFlinger: id=12942 createSurf (0x0),-1 flag=24000, Surface(name=fcf25c5 Splash Screen dev.brain_machine.bevy_app)/@0x37e10d5 - animation-leash of window_animation#0
+05-03 10:12:20.326   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd90370 | 0100 | RGBA_8888    |    0.0    0.0 1440.0  114.0 |    0    0 1440  114 | dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity$_29974#0
+05-03 10:12:20.326   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd7fe70 | 0100 | RGBA_8888    |    0.0    0.0 1440.0 3040.0 |    0    0 1440 3040 | Splash Screen dev.brain_machine.bevy_app$_26526#0
+05-03 10:12:20.326 26231 27048 D WindowManager: makeSurface duration=1 leash=Surface(name=Surface(name=fcf25c5 Splash Screen dev.brain_machine.bevy_app)/@0x37e10d5 - animation-leash of window_animation)/@0x97b1fdb
+05-03 10:12:20.326 29974 29974 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=1, host=dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity, from=android.view.InsetsSourceConsumer.hide:242 android.view.InsetsSourceConsumer.hide:246 android.view.InsetsController.hideDirectly:1473 android.view.InsetsController.controlAnimationUnchecked:1139 android.view.InsetsController.applyAnimation:1456 android.view.InsetsController.applyAnimation:1437 android.view.InsetsController.hide:1006 android.view.InsetsController.hide:981 dev.brain_machine.bevy_app.MainActivity.hideSystemUi:26 dev.brain_machine.bevy_app.MainActivity.onWindowFocusChanged:19
+05-03 10:12:20.327 29974 29974 D InsetsSourceConsumer: setRequestedVisible: visible=false, type=0, host=dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity, from=android.view.InsetsSourceConsumer.hide:242 android.view.InsetsSourceConsumer.hide:246 android.view.InsetsController.hideDirectly:1473 android.view.InsetsController.controlAnimationUnchecked:1139 android.view.InsetsController.applyAnimation:1456 android.view.InsetsController.applyAnimation:1437 android.view.InsetsController.hide:1006 android.view.InsetsController.hide:981 dev.brain_machine.bevy_app.MainActivity.hideSystemUi:26 dev.brain_machine.bevy_app.MainActivity.onWindowFocusChanged:19
+05-03 10:12:20.327 26231 28571 D InsetsSourceProvider: updateVisibility: serverVisible=true, clientVisible=false, source=InsetsSource: {mType=ITYPE_NAVIGATION_BAR, mFrame=[0,3040][1440,3040], mVisible=false, mWindowFrame=[0,2872][1440,3040]}, controlTarget=Window{8af2056 u0 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity}, from=com.android.server.wm.InsetsSourceProvider.setClientVisible:428 com.android.server.wm.InsetsSourceProvider.updateClientVisibility:413 com.android.server.wm.InsetsStateController.onInsetsModified:508 com.android.server.wm.InsetsPolicy.onInsetsModified:469 com.android.server.wm.Session.insetsModified:704 android.view.IWindowSession$Stub.onTransact:1256 com.android.server.wm.Session.onTransact:176 android.os.Binder.execTransactInternal:1220 android.os.Binder.execTransact:1179 <bottom of call stack>
+05-03 10:12:20.328 26231 28571 D InsetsSourceProvider: updateVisibility: serverVisible=true, clientVisible=false, source=InsetsSource: {mType=ITYPE_STATUS_BAR, mFrame=[0,0][1440,114], mVisible=false, mWindowFrame=[0,0][0,0]}, controlTarget=Window{8af2056 u0 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity}, from=com.android.server.wm.InsetsSourceProvider.setClientVisible:428 com.android.server.wm.InsetsSourceProvider.updateClientVisibility:413 com.android.server.wm.InsetsStateController.onInsetsModified:508 com.android.server.wm.InsetsPolicy.onInsetsModified:469 com.android.server.wm.Session.insetsModified:704 android.view.IWindowSession$Stub.onTransact:1256 com.android.server.wm.Session.onTransact:176 android.os.Binder.execTransactInternal:1220 android.os.Binder.execTransact:1179 <bottom of call stack>
 05-03 10:12:20.330 29974 29974 D InputMethodManager: startInputInner - Id : 0
 05-03 10:12:20.330 29974 29974 I InputMethodManager: startInputInner - mService.startInputOrWindowGainedFocus
 05-03 10:12:20.330 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::pbr_types with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_UVS_A": Bool(true)}
 05-03 10:12:20.336 29974 29997 I ViewRootImpl@320ff7b[MainActivity]: Resizing android.view.ViewRootImpl@65bb4f: frame=[0,114][1440,3040] reportDraw=false forceLayout=false backDropFrame=Rect(0, 0 - 1440, 2926)
-05-03 10:12:20.336 26231 28796 I WindowManager: Cancelling animation restarting=false, leash=Surface(name=Surface(name=8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal)/@0x1205bcf
-05-03 10:12:20.336 26231 28796 I WindowManager: Reparenting to original parent: Surface(name=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12})/@0xd19e42e, destroy=false, surface=Surface(name=8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0x562e6a9
-05-03 10:12:20.336 26231 28796 W InputManager-JNI: Input channel object 'fcf25c5 Splash Screen dev.smartrobot.bevy_app (client)' was disposed without first being removed with the input manager!
-05-03 10:12:20.338   642   642 I Layer   : id=12941 removeFromCurrentState Surface(name=8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal#0 (111)
+05-03 10:12:20.336 26231 28796 I WindowManager: Cancelling animation restarting=false, leash=Surface(name=Surface(name=8af2056 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal)/@0x1205bcf
+05-03 10:12:20.336 26231 28796 I WindowManager: Reparenting to original parent: Surface(name=ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12})/@0xd19e42e, destroy=false, surface=Surface(name=8af2056 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity)/@0x562e6a9
+05-03 10:12:20.336 26231 28796 W InputManager-JNI: Input channel object 'fcf25c5 Splash Screen dev.brain_machine.bevy_app (client)' was disposed without first being removed with the input manager!
+05-03 10:12:20.338   642   642 I Layer   : id=12941 removeFromCurrentState Surface(name=8af2056 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal#0 (111)
 05-03 10:12:20.339 26231 27048 V InputMethodManagerService: Creating new session for client ClientState{d7edaf uid=10728 pid=29974 displayId=0}
 05-03 10:12:20.341 29974 29974 V threaded_app: WindowInsetsChanged: 0x7446f4f1f0
-05-03 10:12:20.342   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd90370 | 0100 | RGBA_8888    |    0.0    0.0 1440.0  114.0 |    0  114 1440  228 | dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974#0
+05-03 10:12:20.342   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd90370 | 0100 | RGBA_8888    |    0.0    0.0 1440.0  114.0 |    0  114 1440  228 | dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity$_29974#0
 05-03 10:12:20.345 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::lighting with defs: {"TONEMAP_METHOD_TONY_MC_MAPFACE": Bool(true), "IRRADIANCE_VOLUMES_ARE_USABLE": Bool(true), "MAX_CASCADES_PER_LIGHT": UInt(4), "VIEW_PROJECTION_PERSPECTIVE": Bool(true), "AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "TONEMAPPING_LUT_TEXTURE_BINDING_INDEX": UInt(26), "VERTEX_OUTPUT_INSTANCE_INDEX": Bool(true), "SHADOW_FILTER_METHOD_GAUSSIAN": Bool(true), "TONEMAPPING_LUT_SAMPLER_BINDING_INDEX": UInt(27), "VERTEX_POSITIONS": Bool(true), "VERTEX_UVS": Bool(true), "DEBAND_DITHER": Bool(true), "MESH_PIPELINE": Bool(true), "VERTEX_NORMALS": Bool(true), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "SCREEN_SPACE_SPECULAR_TRANSMISSION_BLUR_TAPS": Int(8), "TONEMAP_IN_SHADER": Bool(true), "VERTEX_UVS_A": Bool(true)}
-05-03 10:12:20.345 26231 26250 I WindowManager: Reparenting to original parent: Surface(name=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12})/@0xd19e42e, destroy=true, surface=Surface(name=fcf25c5 Splash Screen dev.smartrobot.bevy_app)/@0x37e10d5
-05-03 10:12:20.345 26231 26250 E WindowManager: win=Window{fcf25c5 u0 Splash Screen dev.smartrobot.bevy_app EXITING} destroySurfaces: appStopped=false win.mWindowRemovalAllowed=true win.mRemoveOnExit=true win.mViewVisibility=8 caller=com.android.server.wm.ActivityRecord.destroySurfaces:5848 com.android.server.wm.ActivityRecord.destroySurfaces:5829 com.android.server.wm.WindowState.onExitAnimationDone:5968 com.android.server.wm.WindowStateAnimator.onAnimationFinished:242 com.android.server.wm.WindowState.onAnimationFinished:6221 com.android.server.wm.WindowContainer$$ExternalSyntheticLambda0.onAnimationFinished:2 com.android.server.wm.SurfaceAnimator.lambda$getFinishedCallback$0$SurfaceAnimator:113
+05-03 10:12:20.345 26231 26250 I WindowManager: Reparenting to original parent: Surface(name=ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12})/@0xd19e42e, destroy=true, surface=Surface(name=fcf25c5 Splash Screen dev.brain_machine.bevy_app)/@0x37e10d5
+05-03 10:12:20.345 26231 26250 E WindowManager: win=Window{fcf25c5 u0 Splash Screen dev.brain_machine.bevy_app EXITING} destroySurfaces: appStopped=false win.mWindowRemovalAllowed=true win.mRemoveOnExit=true win.mViewVisibility=8 caller=com.android.server.wm.ActivityRecord.destroySurfaces:5848 com.android.server.wm.ActivityRecord.destroySurfaces:5829 com.android.server.wm.WindowState.onExitAnimationDone:5968 com.android.server.wm.WindowStateAnimator.onAnimationFinished:242 com.android.server.wm.WindowState.onAnimationFinished:6221 com.android.server.wm.WindowContainer$$ExternalSyntheticLambda0.onAnimationFinished:2 com.android.server.wm.SurfaceAnimator.lambda$getFinishedCallback$0$SurfaceAnimator:113
 05-03 10:12:20.345 24309 24309 I HBD     : HoneyBoardService [IMI] onStartInput - caller pid : 29974 , caller uid : 10728
-05-03 10:12:20.345 26231 26250 I WindowManager: Destroying surface Surface(name=Splash Screen dev.smartrobot.bevy_app$_26526)/@0x7bfb5cb called by com.android.server.wm.WindowStateAnimator.destroySurface:987 com.android.server.wm.WindowStateAnimator.destroySurfaceLocked:518 com.android.server.wm.WindowState.destroySurfaceUnchecked:4229 com.android.server.wm.WindowState.destroySurface:4203 com.android.server.wm.ActivityRecord.destroySurfaces:5848 com.android.server.wm.ActivityRecord.destroySurfaces:5829 com.android.server.wm.WindowState.onExitAnimationDone:5968 com.android.server.wm.WindowStateAnimator.onAnimationFinished:242
-05-03 10:12:20.350 26231 27048 V WindowManager: Relayout Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: viewVisibility=0 req=1440x3040 d0
+05-03 10:12:20.345 26231 26250 I WindowManager: Destroying surface Surface(name=Splash Screen dev.brain_machine.bevy_app$_26526)/@0x7bfb5cb called by com.android.server.wm.WindowStateAnimator.destroySurface:987 com.android.server.wm.WindowStateAnimator.destroySurfaceLocked:518 com.android.server.wm.WindowState.destroySurfaceUnchecked:4229 com.android.server.wm.WindowState.destroySurface:4203 com.android.server.wm.ActivityRecord.destroySurfaces:5848 com.android.server.wm.ActivityRecord.destroySurfaces:5829 com.android.server.wm.WindowState.onExitAnimationDone:5968 com.android.server.wm.WindowStateAnimator.onAnimationFinished:242
+05-03 10:12:20.350 26231 27048 V WindowManager: Relayout Window{8af2056 u0 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity}: viewVisibility=0 req=1440x3040 d0
 05-03 10:12:20.353 26231 27048 V WindowManager: Relayout hash=8af2056, pid=29974: mAttrs={(0,0)(fillxfill) sim={adjust=resize} ty=BASE_APPLICATION fmt=TRANSLUCENT wanim=0x1030303
-05-03 10:12:20.355   642   642 I Layer   : id=12927 removeFromCurrentState Splash Screen dev.smartrobot.bevy_app$_26526#0 (112)
-05-03 10:12:20.355   642   642 I Layer   : id=12926 removeFromCurrentState fcf25c5 Splash Screen dev.smartrobot.bevy_app#0 (112)
-05-03 10:12:20.355   642   642 I Layer   : id=12942 removeFromCurrentState Surface(name=fcf25c5 Splash Screen dev.smartrobot.bevy_app)/@0x37e10d5 - animation-leash of window_animation#0 (112)
-05-03 10:12:20.356   642   642 I SurfaceFlinger: id=12926 Removed fcf25c5 Splash Screen dev.smartrobot.bevy_app#0 (112)
-05-03 10:12:20.356   642   642 I SurfaceFlinger: id=12927 Removed Splash Screen dev.smartrobot.bevy_app$_26526#0 (112)
-05-03 10:12:20.356   642   642 I SurfaceFlinger: id=12942 Removed Surface(name=fcf25c5 Splash Screen dev.smartrobot.bevy_app)/@0x37e10d5 - animation-leash of window_animation#0 (112)
+05-03 10:12:20.355   642   642 I Layer   : id=12927 removeFromCurrentState Splash Screen dev.brain_machine.bevy_app$_26526#0 (112)
+05-03 10:12:20.355   642   642 I Layer   : id=12926 removeFromCurrentState fcf25c5 Splash Screen dev.brain_machine.bevy_app#0 (112)
+05-03 10:12:20.355   642   642 I Layer   : id=12942 removeFromCurrentState Surface(name=fcf25c5 Splash Screen dev.brain_machine.bevy_app)/@0x37e10d5 - animation-leash of window_animation#0 (112)
+05-03 10:12:20.356   642   642 I SurfaceFlinger: id=12926 Removed fcf25c5 Splash Screen dev.brain_machine.bevy_app#0 (112)
+05-03 10:12:20.356   642   642 I SurfaceFlinger: id=12927 Removed Splash Screen dev.brain_machine.bevy_app$_26526#0 (112)
+05-03 10:12:20.356   642   642 I SurfaceFlinger: id=12942 Removed Surface(name=fcf25c5 Splash Screen dev.brain_machine.bevy_app)/@0x37e10d5 - animation-leash of window_animation#0 (112)
 05-03 10:12:20.356 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: Relayout returned: old=(0,0,1440,3040) new=(0,114,1440,3040) req=(1440,3040)0 dur=11 res=0x1 s={true 501823046144} ch=false fn=2
-05-03 10:12:20.356   642   642 I Layer   : id=12942 Destroyed Surface(name=fcf25c5 Splash Screen dev.smartrobot.bevy_app)/@0x37e10d5 - animation-leash of window_animation#0
-05-03 10:12:20.356   642   642 I Layer   : id=12926 Destroyed fcf25c5 Splash Screen dev.smartrobot.bevy_app#0
-05-03 10:12:20.357   642   642 I Layer   : id=12927 Destroyed Splash Screen dev.smartrobot.bevy_app$_26526#0
+05-03 10:12:20.356   642   642 I Layer   : id=12942 Destroyed Surface(name=fcf25c5 Splash Screen dev.brain_machine.bevy_app)/@0x37e10d5 - animation-leash of window_animation#0
+05-03 10:12:20.356   642   642 I Layer   : id=12926 Destroyed fcf25c5 Splash Screen dev.brain_machine.bevy_app#0
+05-03 10:12:20.357   642   642 I Layer   : id=12927 Destroyed Splash Screen dev.brain_machine.bevy_app$_26526#0
 05-03 10:12:20.357 29974 29974 V threaded_app: WindowInsetsChanged: 0x7446f4f1f0
 05-03 10:12:20.357 29974 30004 D OpenGLRenderer: setSurface() destroyed EGLSurface
 05-03 10:12:20.358 29974 30004 D OpenGLRenderer: destroyEglSurface
-05-03 10:12:20.358 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: updateBoundsLayer: t = android.view.SurfaceControl$Transaction@6416fe5 sc = Surface(name=Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0)/@0xa129aba frame = 2
+05-03 10:12:20.358 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: updateBoundsLayer: t = android.view.SurfaceControl$Transaction@6416fe5 sc = Surface(name=Bounds for - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@0)/@0xa129aba frame = 2
 05-03 10:12:20.359 29974 30004 D OpenGLRenderer: eglCreateWindowSurface
 05-03 10:12:20.359 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: mWNT: t = android.view.SurfaceControl$Transaction@6416fe5 fN = 2 android.view.ViewRootImpl.prepareSurfaces:2778 android.view.ViewRootImpl.performTraversals:4024 android.view.ViewRootImpl.doTraversal:2919
 05-03 10:12:20.359 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: mWNT: merge t to BBQ
-05-03 10:12:20.360   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd90370 | 0100 | RGBA_8888    |    0.0    0.0 1440.0  114.0 |    0  114 1440  228 | dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974#0
+05-03 10:12:20.360   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd90370 | 0100 | RGBA_8888    |    0.0    0.0 1440.0  114.0 |    0  114 1440  228 | dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity$_29974#0
 05-03 10:12:20.360 29974 29974 I SurfaceView@f0c4b33: pST: sr = Rect(0, 0 - 1440, 2926) sw = 1440 sh = 2926
 05-03 10:12:20.360 29974 29974 I SurfaceView@f0c4b33: onSSPAndSRT: pl = 0 pt = 0 sx = 1.0 sy = 1.0
 05-03 10:12:20.360 29974 29974 I SurfaceView@f0c4b33: pST: mTmpTransaction.apply, mTmpTransaction = android.view.SurfaceControl$Transaction@1361857
@@ -2519,7 +2519,7 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:20.362 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: [DP] pdf(0) 1 android.view.SurfaceView.notifyDrawFinished:599 android.view.SurfaceView.performDrawFinished:586 android.view.SurfaceView.$r8$lambda$st27mCkd9jfJkTrN_P3qIGKX6NY:0
 05-03 10:12:20.362 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: [DP] rdf()
 05-03 10:12:20.362 29974 29974 D ViewRootImpl@320ff7b[MainActivity]: reportDrawFinished (fn: 2)
-05-03 10:12:20.362 26231 28571 D WindowManager: finishDrawingWindow: Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} mDrawState=HAS_DRAWN
+05-03 10:12:20.362 26231 28571 D WindowManager: finishDrawingWindow: Window{8af2056 u0 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} mDrawState=HAS_DRAWN
 05-03 10:12:20.363 29974 29974 V threaded_app: ContentRectChanged: 0x7446f4f1f0 -- (0 0) (1440 2926)
 05-03 10:12:20.364 29974 30087 I SurfaceView@f0c4b33: uSP: rtp = Rect(0, 0 - 1440, 2926) rtsw = 1440 rtsh = 2926
 05-03 10:12:20.364 29974 30087 I SurfaceView@f0c4b33: onSSPAndSRT: pl = 0 pt = 0 sx = 1.0 sy = 1.0
@@ -2548,7 +2548,7 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:20.487 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::bindings with defs: {}
 05-03 10:12:20.487 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::bruneton_functions with defs: {}
 05-03 10:12:20.490 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/coadding module definition for bevy_pbr::atmosphere::functions with defs: {}
-05-03 10:12:20.491 26231 26560 D MdnieScenarioControlService:  packageName : dev.smartrobot.bevy_app    className : dev.smartrobot.bevy_app.MainActivity
+05-03 10:12:20.491 26231 26560 D MdnieScenarioControlService:  packageName : dev.brain_machine.bevy_app    className : dev.brain_machine.bevy_app.MainActivity
 05-03 10:12:20.492 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::types with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "MAX_CASCADES_PER_LIGHT": UInt(4)}
 05-03 10:12:20.492 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::bindings with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "MAX_CASCADES_PER_LIGHT": UInt(4)}
 05-03 10:12:20.495 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for bevy_pbr::atmosphere::bruneton_functions with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35), "MAX_DIRECTIONAL_LIGHTS": UInt(10), "MAX_CASCADES_PER_LIGHT": UInt(4)}
@@ -2563,16 +2563,16 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:20.670 29974 30025 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
 05-03 10:12:20.673 29974 30027 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga_oil-0.17.0/src/cocreating IR for  with defs: {"AVAILABLE_STORAGE_BUFFER_BINDINGS": UInt(35)}
 05-03 10:12:20.712 29974 30018 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: handle Android InsetsChanged notification
-05-03 10:12:20.714 29974 30034 I BufferQueueProducer: [SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#1(BLAST Consumer)1](id:751600000001,api:1,p:29974,c:29974) FrameBooster: VULKAN surface was catched
+05-03 10:12:20.714 29974 30034 I BufferQueueProducer: [SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0#1(BLAST Consumer)1](id:751600000001,api:1,p:29974,c:29974) FrameBooster: VULKAN surface was catched
 05-03 10:12:20.714 29974 30034 D trobot.bevy_ap: FrameBooster: InterpolationGui: UID 10728 detected as using Vulkan
-05-03 10:12:20.728   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd99eb0 | 0102 | RGBA_8888    |    0.0    0.0 4480.0 2520.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
-05-03 10:12:20.850 26231 26249 D SGM:GameManager: identifyForegroundApp. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0
-05-03 10:12:20.850 26231 26249 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
+05-03 10:12:20.728   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd99eb0 | 0102 | RGBA_8888    |    0.0    0.0 4480.0 2520.0 |    0  114 1440 3040 | SurfaceView - dev.brain_machine.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
+05-03 10:12:20.850 26231 26249 D SGM:GameManager: identifyForegroundApp. dev.brain_machine.bevy_app, mCurrentUserId: 0, callerUserId: 0
+05-03 10:12:20.850 26231 26249 D SGM:PkgDataHelper: getGamePkgData(). dev.brain_machine.bevy_app
 05-03 10:12:20.877 29974 30018 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: handle Android InsetsChanged notification
-05-03 10:12:20.928 29974 30034 I BufferQueueProducer: [SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#1(BLAST Consumer)1](id:751600000001,api:1,p:29974,c:29974) FrameBooster: VULKAN surface was catched
+05-03 10:12:20.928 29974 30034 I BufferQueueProducer: [SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0#1(BLAST Consumer)1](id:751600000001,api:1,p:29974,c:29974) FrameBooster: VULKAN surface was catched
 05-03 10:12:20.928 29974 30034 D trobot.bevy_ap: FrameBooster: InterpolationGui: UID 10728 detected as using Vulkan
 05-03 10:12:21.003 29974 30018 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: find a way to notify application of content rect change
-05-03 10:12:22.332 26231 27691 D PkgPredictorService-IpmNapPreloadController: app:0_&_com.android.settings die, remove from <launchTime:2025-05-03 10:12:19 hour:10 day:7 previous:[dev.smartrobot.bevy_app, dev.smartrobot.bevy_app, com.android.settings] running:dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity apkVersion:1.0 userId:0 screenOrientation:0 wifi:3 bt:0 predictTime:11 launching Time:766 predicted:false prediction:[0_&_com.android.settings, 0_&_com.netflix.mediaclient, 0_&_com.whatsapp] preloaded:false preloading:[0_&_com.android.settings, 0_&_com.netflix.mediaclient]>
+05-03 10:12:22.332 26231 27691 D PkgPredictorService-IpmNapPreloadController: app:0_&_com.android.settings die, remove from <launchTime:2025-05-03 10:12:19 hour:10 day:7 previous:[dev.brain_machine.bevy_app, dev.brain_machine.bevy_app, com.android.settings] running:dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity apkVersion:1.0 userId:0 screenOrientation:0 wifi:3 bt:0 predictTime:11 launching Time:766 predicted:false prediction:[0_&_com.android.settings, 0_&_com.netflix.mediaclient, 0_&_com.whatsapp] preloaded:false preloading:[0_&_com.android.settings, 0_&_com.netflix.mediaclient]>
 05-03 10:12:23.807 26231 26362 I InputDispatcher: Delivering touch to (29974): action: 0x0, f=0x0, d=0, '8af2056', t=1 +(0,-114)
 05-03 10:12:23.810 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: ViewPostIme pointer 0
 05-03 10:12:23.810 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
@@ -2588,12 +2588,12 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:23.920 29974 30032 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srUnable to get location for pointer Touch(0) during pointer out
 05-03 10:12:24.656 26231 26500 I Pageboost: IoRecord pid : 29974
 05-03 10:12:24.660 26231 26500 I Pageboost: IoRecord pid : 29974, result_size : 10508
-05-03 10:12:24.662 26231 26500 I Pageboost: db create : CREATE TABLE IF NOT EXISTS devsmartrobotbevy_app (FILENAME TEXT, OFFSET INTEGER, SIZE INTEGER, FORVRAMDISK INTEGER, BITMAP BLOB, unique (FILENAME, OFFSET) );
-05-03 10:12:24.671 26231 26500 I Pageboost: db create : CREATE TABLE IF NOT EXISTS devsmartrobotbevy_app (FILENAME TEXT, OFFSET INTEGER, SIZE INTEGER, FORVRAMDISK INTEGER, BITMAP BLOB, unique (FILENAME, OFFSET) );
-05-03 10:12:24.681 26231 26500 I Pageboost: db update :dev.smartrobot.bevy_app ret 1
-05-03 10:12:24.782 26231 26500 I Pageboost: memUsage collected : 159923 33463 1656 for dev.smartrobot.bevy_app 29974
-05-03 10:12:25.650 26231 31038 D SGM:GameManager: identifyGamePackage. dev.smartrobot.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.android.server.ssrm.SortingMachine.isGame(SortingMachine.java:162)
-05-03 10:12:25.650 26231 31038 D SGM:PkgDataHelper: getGamePkgData(). dev.smartrobot.bevy_app
+05-03 10:12:24.662 26231 26500 I Pageboost: db create : CREATE TABLE IF NOT EXISTS devbrain_machinebevy_app (FILENAME TEXT, OFFSET INTEGER, SIZE INTEGER, FORVRAMDISK INTEGER, BITMAP BLOB, unique (FILENAME, OFFSET) );
+05-03 10:12:24.671 26231 26500 I Pageboost: db create : CREATE TABLE IF NOT EXISTS devbrain_machinebevy_app (FILENAME TEXT, OFFSET INTEGER, SIZE INTEGER, FORVRAMDISK INTEGER, BITMAP BLOB, unique (FILENAME, OFFSET) );
+05-03 10:12:24.681 26231 26500 I Pageboost: db update :dev.brain_machine.bevy_app ret 1
+05-03 10:12:24.782 26231 26500 I Pageboost: memUsage collected : 159923 33463 1656 for dev.brain_machine.bevy_app 29974
+05-03 10:12:25.650 26231 31038 D SGM:GameManager: identifyGamePackage. dev.brain_machine.bevy_app, mCurrentUserId: 0, callerUserId: 0, callingMethodInfo: com.android.server.ssrm.SortingMachine.isGame(SortingMachine.java:162)
+05-03 10:12:25.650 26231 31038 D SGM:PkgDataHelper: getGamePkgData(). dev.brain_machine.bevy_app
 05-03 10:12:25.869 26231 26362 I InputDispatcher: Delivering touch to (29974): action: 0x0, f=0x0, d=0, '8af2056', t=1 +(0,-114)
 05-03 10:12:25.870 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: ViewPostIme pointer 0
 05-03 10:12:25.870 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
@@ -2607,7 +2607,7 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:26.032 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:26.048 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:26.066 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
-05-03 10:12:26.071 29974 30542 D ProfileInstaller: Installing profile for dev.smartrobot.bevy_app
+05-03 10:12:26.071 29974 30542 D ProfileInstaller: Installing profile for dev.brain_machine.bevy_app
 05-03 10:12:26.082 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:26.098 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:26.115 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
@@ -2680,15 +2680,15 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:28.269 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:28.303 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:28.319 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
-05-03 10:12:28.324 29974 29974 D [secipm]: mSecIpmManager setProfileLength dev.smartrobot.bevy_app profile:3386
-05-03 10:12:28.325 26231 27687 D PkgPredictorService-IpmAdcpController:  prepare a new task for pkg:dev.smartrobot.bevy_app dex2oat
-05-03 10:12:28.325 26231 30557 I PkgPredictorService-IpmAdcpController:  start a thread to run dex2oat task for pkg:dev.smartrobot.bevy_app
-05-03 10:12:28.330 26231 30557 I PackageDexOptimizer: Running dexopt (dexoptNeeded=1) on: /data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/base.apk pkg=dev.smartrobot.bevy_app isa=arm64 dexoptFlags=boot_complete,debuggable,public,enable_hidden_api_checks targetFilter=verify oatDir=/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/oat classLoaderContext=PCL[]{} async=false
+05-03 10:12:28.324 29974 29974 D [secipm]: mSecIpmManager setProfileLength dev.brain_machine.bevy_app profile:3386
+05-03 10:12:28.325 26231 27687 D PkgPredictorService-IpmAdcpController:  prepare a new task for pkg:dev.brain_machine.bevy_app dex2oat
+05-03 10:12:28.325 26231 30557 I PkgPredictorService-IpmAdcpController:  start a thread to run dex2oat task for pkg:dev.brain_machine.bevy_app
+05-03 10:12:28.330 26231 30557 I PackageDexOptimizer: Running dexopt (dexoptNeeded=1) on: /data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.brain_machine.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/base.apk pkg=dev.brain_machine.bevy_app isa=arm64 dexoptFlags=boot_complete,debuggable,public,enable_hidden_api_checks targetFilter=verify oatDir=/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.brain_machine.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/oat classLoaderContext=PCL[]{} async=false
 05-03 10:12:28.335 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
-05-03 10:12:28.343   794 19390 V installd: DexInv: --- BEGIN '/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/base.apk' ---
-05-03 10:12:28.344   794 19390 V installd: Running /apex/com.android.art/bin/dex2oat32 in=base.apk out=/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/oat/arm64/base.odex
+05-03 10:12:28.343   794 19390 V installd: DexInv: --- BEGIN '/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.brain_machine.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/base.apk' ---
+05-03 10:12:28.344   794 19390 V installd: Running /apex/com.android.art/bin/dex2oat32 in=base.apk out=/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.brain_machine.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/oat/arm64/base.odex
 05-03 10:12:28.353 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
-05-03 10:12:28.378 30561 30561 I dex2oat32: /apex/com.android.art/bin/dex2oat32 --input-vdex-fd=-1 --output-vdex-fd=10 --classpath-dir=/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA== --class-loader-context=PCL[]{} --compiler-filter=verify --compilation-reason=adcp --max-image-block-size=524288 --resolve-startup-const-strings=true --debuggable --generate-mini-debug-info -j6
+05-03 10:12:28.378 30561 30561 I dex2oat32: /apex/com.android.art/bin/dex2oat32 --input-vdex-fd=-1 --output-vdex-fd=10 --classpath-dir=/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.brain_machine.bevy_app-kE7C3dN4QWKzRPQRurQ_MA== --class-loader-context=PCL[]{} --compiler-filter=verify --compilation-reason=adcp --max-image-block-size=524288 --resolve-startup-const-strings=true --debuggable --generate-mini-debug-info -j6
 05-03 10:12:28.386 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:28.402 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:28.419 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
@@ -2734,7 +2734,7 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:29.024 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:29.042 29974 30032 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srDespawning pointer Touch(0)
 05-03 10:12:29.051 29974 30034 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srUnable to get location for pointer Touch(0) during pointer out
-05-03 10:12:29.304   794 19390 V installd: DexInv: --- END '/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.smartrobot.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/base.apk' (success) ---
+05-03 10:12:29.304   794 19390 V installd: DexInv: --- END '/data/app/~~D5AQRGf9CZ5I9e9-nOvQuQ==/dev.brain_machine.bevy_app-kE7C3dN4QWKzRPQRurQ_MA==/base.apk' (success) ---
 05-03 10:12:29.459 26231 26362 I InputDispatcher: Delivering touch to (29974): action: 0x0, f=0x0, d=0, '8af2056', t=1 +(0,-114)
 05-03 10:12:29.459 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: ViewPostIme pointer 0
 05-03 10:12:29.460 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
@@ -2755,8 +2755,8 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:29.788 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:29.804 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:29.823 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
-05-03 10:12:29.829   642   658 I SurfaceFlinger: id=12941 Removed Surface(name=8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal#0 (103)
-05-03 10:12:29.838   642   642 I Layer   : id=12941 Destroyed Surface(name=8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal#0
+05-03 10:12:29.829   642   658 I SurfaceFlinger: id=12941 Removed Surface(name=8af2056 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal#0 (103)
+05-03 10:12:29.838   642   642 I Layer   : id=12941 Destroyed Surface(name=8af2056 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity)/@0x562e6a9 - animation-leash of starting_reveal#0
 05-03 10:12:29.839 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:29.854 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:29.872 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
@@ -2764,12 +2764,12 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:29.905 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:29.922 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:29.938 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
-05-03 10:12:29.943 26231 26247 D WindowManager: requestTransientBars: swipeTarget=Window{6a3640c u0 NavigationBar0}, controlTarget=Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}, canShowTransient=true, restorePositionTypes=0x0, from=com.android.server.wm.DisplayPolicy.access$100:227 com.android.server.wm.DisplayPolicy$1.onSwipeFromBottom:581
+05-03 10:12:29.943 26231 26247 D WindowManager: requestTransientBars: swipeTarget=Window{6a3640c u0 NavigationBar0}, controlTarget=Window{8af2056 u0 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity}, canShowTransient=true, restorePositionTypes=0x0, from=com.android.server.wm.DisplayPolicy.access$100:227 com.android.server.wm.DisplayPolicy$1.onSwipeFromBottom:581
 05-03 10:12:29.955 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:29.972 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
-05-03 10:12:29.976   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd889f0 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
+05-03 10:12:29.976   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd889f0 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.brain_machine.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
 05-03 10:12:29.989 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
-05-03 10:12:29.991   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd8e630 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.smartrobot.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
+05-03 10:12:29.991   642   642 D SurfaceFlinger:      DEVICE | 0x6e7fd8e630 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    0  114 1440 3040 | SurfaceView - dev.brain_machine.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
 05-03 10:12:30.005 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:30.022 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:30.039 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
@@ -2816,36 +2816,36 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:31.074 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:31.091 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:31.107 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
-05-03 10:12:31.108 27039 27039 I RecentsView: onGestureAnimationStart, runningTaskInfo : TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} topActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} numActivities=1 lastActiveTime=990790576 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true token=WCT{android.window.IWindowContainerToken$Stub$Proxy@4198b8} topActivityType=1 pictureInPictureParams=PictureInPictureParams( aspectRatio=null sourceRectHint=null hasSetActions=false isAutoPipEnabled=false isSeamlessResizeEnabled=true) displayCutoutSafeInsets=Rect(0, 113 - 0, 0) topActivityInfo=ActivityInfo{ec64691 dev.smartrobot.bevy_app.MainActivity} launchCookies=[com.android.launcher3.util.ObjectWrapper@91269f6] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true topActivityInSizeCompat=false locusId= null topLaunchHome=false launchSplitWindowingMode=0 isPairTask=false pairedTaskIds=[] pairWindowingMode=0 pairDockSide=0 isAnimatingByRecent=false originallySupportedSplitScreen=true isAnimatingFreeformToFullscreen=false topActivityInFixedAspectRatio=false isTopTransparentActivity=true}
-05-03 10:12:31.113 27039 27039 I RecentsView: showCurrentTask : TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} topActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} numActivities=1 lastActiveTime=990790576 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true token=WCT{android.window.IWindowContainerToken$Stub$Proxy@4198b8} topActivityType=1 pictureInPictureParams=PictureInPictureParams( aspectRatio=null sourceRectHint=null hasSetActions=false isAutoPipEnabled=false isSeamlessResizeEnabled=true) displayCutoutSafeInsets=Rect(0, 113 - 0, 0) topActivityInfo=ActivityInfo{ec64691 dev.smartrobot.bevy_app.MainActivity} launchCookies=[com.android.launcher3.util.ObjectWrapper@91269f6] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true topActivityInSizeCompat=false locusId= null topLaunchHome=false launchSplitWindowingMode=0 isPairTask=false pairedTaskIds=[] pairWindowingMode=0 pairDockSide=0 isAnimatingByRecent=false originallySupportedSplitScreen=true isAnimatingFreeformToFullscreen=false topActivityInFixedAspectRatio=false isTopTransparentActivity=true}
+05-03 10:12:31.108 27039 27039 I RecentsView: onGestureAnimationStart, runningTaskInfo : TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.brain_machine.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} topActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} numActivities=1 lastActiveTime=990790576 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true token=WCT{android.window.IWindowContainerToken$Stub$Proxy@4198b8} topActivityType=1 pictureInPictureParams=PictureInPictureParams( aspectRatio=null sourceRectHint=null hasSetActions=false isAutoPipEnabled=false isSeamlessResizeEnabled=true) displayCutoutSafeInsets=Rect(0, 113 - 0, 0) topActivityInfo=ActivityInfo{ec64691 dev.brain_machine.bevy_app.MainActivity} launchCookies=[com.android.launcher3.util.ObjectWrapper@91269f6] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true topActivityInSizeCompat=false locusId= null topLaunchHome=false launchSplitWindowingMode=0 isPairTask=false pairedTaskIds=[] pairWindowingMode=0 pairDockSide=0 isAnimatingByRecent=false originallySupportedSplitScreen=true isAnimatingFreeformToFullscreen=false topActivityInFixedAspectRatio=false isTopTransparentActivity=true}
+05-03 10:12:31.113 27039 27039 I RecentsView: showCurrentTask : TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.brain_machine.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} topActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} numActivities=1 lastActiveTime=990790576 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true token=WCT{android.window.IWindowContainerToken$Stub$Proxy@4198b8} topActivityType=1 pictureInPictureParams=PictureInPictureParams( aspectRatio=null sourceRectHint=null hasSetActions=false isAutoPipEnabled=false isSeamlessResizeEnabled=true) displayCutoutSafeInsets=Rect(0, 113 - 0, 0) topActivityInfo=ActivityInfo{ec64691 dev.brain_machine.bevy_app.MainActivity} launchCookies=[com.android.launcher3.util.ObjectWrapper@91269f6] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true topActivityInSizeCompat=false locusId= null topLaunchHome=false launchSplitWindowingMode=0 isPairTask=false pairedTaskIds=[] pairWindowingMode=0 pairDockSide=0 isAnimatingByRecent=false originallySupportedSplitScreen=true isAnimatingFreeformToFullscreen=false topActivityInFixedAspectRatio=false isTopTransparentActivity=true}
 05-03 10:12:31.121 26231 26329 I InputDispatcher: Delivering touch to (29974): action: 0x3, f=0x0, d=0, '8af2056', t=1 +(0,-114)
-05-03 10:12:31.121 26231 26329 I InputDispatcher: Monitor swipe-up (server) is stealing touch from [8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity (server), ]
-05-03 10:12:31.122 27039 27039 I RecentsView: onGestureAnimationStart, runningTaskInfo : TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} topActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} numActivities=1 lastActiveTime=990790576 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true token=WCT{android.window.IWindowContainerToken$Stub$Proxy@4198b8} topActivityType=1 pictureInPictureParams=PictureInPictureParams( aspectRatio=null sourceRectHint=null hasSetActions=false isAutoPipEnabled=false isSeamlessResizeEnabled=true) displayCutoutSafeInsets=Rect(0, 113 - 0, 0) topActivityInfo=ActivityInfo{ec64691 dev.smartrobot.bevy_app.MainActivity} launchCookies=[com.android.launcher3.util.ObjectWrapper@91269f6] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true topActivityInSizeCompat=false locusId= null topLaunchHome=false launchSplitWindowingMode=0 isPairTask=false pairedTaskIds=[] pairWindowingMode=0 pairDockSide=0 isAnimatingByRecent=false originallySupportedSplitScreen=true isAnimatingFreeformToFullscreen=false topActivityInFixedAspectRatio=false isTopTransparentActivity=true}
-05-03 10:12:31.122 26231 26329 D WindowManager: Moved rootTask=Task{8b43d42 #1 type=home ?? U=0 visible=false mode=fullscreen translucent=true sz=1} behind rootTask=Task{f433d55 #12 type=standard A=10728:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
+05-03 10:12:31.121 26231 26329 I InputDispatcher: Monitor swipe-up (server) is stealing touch from [8af2056 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity (server), ]
+05-03 10:12:31.122 27039 27039 I RecentsView: onGestureAnimationStart, runningTaskInfo : TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.brain_machine.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} topActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} numActivities=1 lastActiveTime=990790576 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true token=WCT{android.window.IWindowContainerToken$Stub$Proxy@4198b8} topActivityType=1 pictureInPictureParams=PictureInPictureParams( aspectRatio=null sourceRectHint=null hasSetActions=false isAutoPipEnabled=false isSeamlessResizeEnabled=true) displayCutoutSafeInsets=Rect(0, 113 - 0, 0) topActivityInfo=ActivityInfo{ec64691 dev.brain_machine.bevy_app.MainActivity} launchCookies=[com.android.launcher3.util.ObjectWrapper@91269f6] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true topActivityInSizeCompat=false locusId= null topLaunchHome=false launchSplitWindowingMode=0 isPairTask=false pairedTaskIds=[] pairWindowingMode=0 pairDockSide=0 isAnimatingByRecent=false originallySupportedSplitScreen=true isAnimatingFreeformToFullscreen=false topActivityInFixedAspectRatio=false isTopTransparentActivity=true}
+05-03 10:12:31.122 26231 26329 D WindowManager: Moved rootTask=Task{8b43d42 #1 type=home ?? U=0 visible=false mode=fullscreen translucent=true sz=1} behind rootTask=Task{f433d55 #12 type=standard A=10728:dev.brain_machine.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
 05-03 10:12:31.122 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
-05-03 10:12:31.122 27039 27039 I RecentsView: showCurrentTask : TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.smartrobot.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} topActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} numActivities=1 lastActiveTime=990790576 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true token=WCT{android.window.IWindowContainerToken$Stub$Proxy@4198b8} topActivityType=1 pictureInPictureParams=PictureInPictureParams( aspectRatio=null sourceRectHint=null hasSetActions=false isAutoPipEnabled=false isSeamlessResizeEnabled=true) displayCutoutSafeInsets=Rect(0, 113 - 0, 0) topActivityInfo=ActivityInfo{ec64691 dev.smartrobot.bevy_app.MainActivity} launchCookies=[com.android.launcher3.util.ObjectWrapper@91269f6] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true topActivityInSizeCompat=false locusId= null topLaunchHome=false launchSplitWindowingMode=0 isPairTask=false pairedTaskIds=[] pairWindowingMode=0 pairDockSide=0 isAnimatingByRecent=false originallySupportedSplitScreen=true isAnimatingFreeformToFullscreen=false topActivityInFixedAspectRatio=false isTopTransparentActivity=true}
-05-03 10:12:31.125 26231 26329 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}
-05-03 10:12:31.160 27039 28533 I AppIconSolution: return the original icon because tray option is set to None for dev.smartrobot.bevy_app, isNight = true
-05-03 10:12:31.160 27039 28533 I LauncherActivityInfo: packageName: dev.smartrobot.bevy_app, useThemeIcon: true, height: 896, width: 896, density: 560
+05-03 10:12:31.122 27039 27039 I RecentsView: showCurrentTask : TaskInfo{userId=0 taskId=12 displayId=0 isRunning=true baseIntent=Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=dev.brain_machine.bevy_app/.MainActivity } baseActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} topActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} origActivity=null realActivity=ComponentInfo{dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} numActivities=1 lastActiveTime=990790576 supportsSplitScreenMultiWindow=true supportsMultiWindow=true resizeMode=1 isResizeable=true token=WCT{android.window.IWindowContainerToken$Stub$Proxy@4198b8} topActivityType=1 pictureInPictureParams=PictureInPictureParams( aspectRatio=null sourceRectHint=null hasSetActions=false isAutoPipEnabled=false isSeamlessResizeEnabled=true) displayCutoutSafeInsets=Rect(0, 113 - 0, 0) topActivityInfo=ActivityInfo{ec64691 dev.brain_machine.bevy_app.MainActivity} launchCookies=[com.android.launcher3.util.ObjectWrapper@91269f6] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true topActivityInSizeCompat=false locusId= null topLaunchHome=false launchSplitWindowingMode=0 isPairTask=false pairedTaskIds=[] pairWindowingMode=0 pairDockSide=0 isAnimatingByRecent=false originallySupportedSplitScreen=true isAnimatingFreeformToFullscreen=false topActivityInFixedAspectRatio=false isTopTransparentActivity=true}
+05-03 10:12:31.125 26231 26329 D WindowManager: rotationForOrientation, orientationSource=ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12}
+05-03 10:12:31.160 27039 28533 I AppIconSolution: return the original icon because tray option is set to None for dev.brain_machine.bevy_app, isNight = true
+05-03 10:12:31.160 27039 28533 I LauncherActivityInfo: packageName: dev.brain_machine.bevy_app, useThemeIcon: true, height: 896, width: 896, density: 560
 05-03 10:12:31.163 29974 30032 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bevy_picking-0.16.0/srDespawning pointer Touch(0)
-05-03 10:12:31.171 26231 28571 V WindowManager: Changing focus from Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} to null displayId=0 Callers=com.android.server.wm.RootWindowContainer.updateFocusedWindowLocked:583 com.android.server.wm.WindowManagerService.updateFocusedWindowLocked:6505 com.android.server.wm.WindowManagerService.relayoutWindow:2770 com.android.server.wm.Session.relayout:242
-05-03 10:12:31.171 26231 28571 D MARsPolicyManager: onPackageResumedFG pkgName = dev.smartrobot.bevy_app, userId = 0
-05-03 10:12:31.174 26231 28571 D InputDispatcher: Focus left window (0): 8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity
+05-03 10:12:31.171 26231 28571 V WindowManager: Changing focus from Window{8af2056 u0 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} to null displayId=0 Callers=com.android.server.wm.RootWindowContainer.updateFocusedWindowLocked:583 com.android.server.wm.WindowManagerService.updateFocusedWindowLocked:6505 com.android.server.wm.WindowManagerService.relayoutWindow:2770 com.android.server.wm.Session.relayout:242
+05-03 10:12:31.171 26231 28571 D MARsPolicyManager: onPackageResumedFG pkgName = dev.brain_machine.bevy_app, userId = 0
+05-03 10:12:31.174 26231 28571 D InputDispatcher: Focus left window (0): 8af2056 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity
 05-03 10:12:31.175 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: MSG_WINDOW_FOCUS_CHANGED 0 1
 05-03 10:12:31.175 29974 29974 V threaded_app: WindowFocusChanged: 0x7446f4f1f0 -- 0
-05-03 10:12:31.197   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd889f0 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    6  123 1434 3024 | SurfaceView - dev.smartrobot.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
-05-03 10:12:31.281 26231 26560 D MdnieScenarioControlService:  packageName : dev.smartrobot.bevy_app    className : dev.smartrobot.bevy_app.MainActivity
+05-03 10:12:31.197   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd889f0 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |    6  123 1434 3024 | SurfaceView - dev.brain_machine.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
+05-03 10:12:31.281 26231 26560 D MdnieScenarioControlService:  packageName : dev.brain_machine.bevy_app    className : dev.brain_machine.bevy_app.MainActivity
 05-03 10:12:31.760 29974 29974 V threaded_app: WindowInsetsChanged: 0x7446f4f1f0
 05-03 10:12:31.760 29974 30018 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: handle Android InsetsChanged notification
-05-03 10:12:31.768   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd9d150 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |   55  196 1385 2900 | SurfaceView - dev.smartrobot.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
-05-03 10:12:32.134   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd9d150 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2924.0 |  287  583 1152 2339 | SurfaceView - dev.smartrobot.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
-05-03 10:12:32.950 26231 28072 D WindowManager: onAnimationFinished(): targetRootTask=Task{8b43d42 #1 type=home ?? U=0 visible=false mode=fullscreen translucent=false sz=1} targetActivity=ActivityRecord{b9ddbef u0 com.sec.android.app.launcher/.activities.LauncherActivity t8} mRestoreTargetBehindRootTask=Task{f433d55 #12 type=standard A=10728:dev.smartrobot.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
-05-03 10:12:32.964 26231 28072 V WindowManager: Setting visibility of Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: false, caller=com.android.server.wm.WindowContainer.sendAppVisibilityToClients:1110 com.android.server.wm.WindowToken.setClientVisible:448 com.android.server.wm.ActivityRecord.setClientVisible:6991 com.android.server.wm.ActivityRecord.onAnimationFinished:7878 com.android.server.wm.ActivityRecord.postApplyAnimation:5579
+05-03 10:12:31.768   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd9d150 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2926.0 |   55  196 1385 2900 | SurfaceView - dev.brain_machine.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
+05-03 10:12:32.134   642   642 D SurfaceFlinger:      CLIENT | 0x6e7fd9d150 | 0102 | RGBA_8888    |    0.0    0.0 1440.0 2924.0 |  287  583 1152 2339 | SurfaceView - dev.brain_machine.bevy_ap[...]_app.MainActivity@f0c4b33@0(BLAST)#0
+05-03 10:12:32.950 26231 28072 D WindowManager: onAnimationFinished(): targetRootTask=Task{8b43d42 #1 type=home ?? U=0 visible=false mode=fullscreen translucent=false sz=1} targetActivity=ActivityRecord{b9ddbef u0 com.sec.android.app.launcher/.activities.LauncherActivity t8} mRestoreTargetBehindRootTask=Task{f433d55 #12 type=standard A=10728:dev.brain_machine.bevy_app U=0 visible=true mode=fullscreen translucent=false sz=1}
+05-03 10:12:32.964 26231 28072 V WindowManager: Setting visibility of Window{8af2056 u0 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity}: false, caller=com.android.server.wm.WindowContainer.sendAppVisibilityToClients:1110 com.android.server.wm.WindowToken.setClientVisible:448 com.android.server.wm.ActivityRecord.setClientVisible:6991 com.android.server.wm.ActivityRecord.onAnimationFinished:7878 com.android.server.wm.ActivityRecord.postApplyAnimation:5579
 05-03 10:12:32.969 29974 29974 V threaded_app: Pause: 0x7446f4f1f0
 05-03 10:12:32.969 29974 30018 V threaded_app: activityState=13
 05-03 10:12:32.969 29974 30018 D event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfApp Paused - stopped running
 05-03 10:12:32.970 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: handleAppVisibility mAppVisible=true visible=false
-05-03 10:12:32.973 26231 26249 D SGM:GameManager: notePauseComponent(), received pkgName: dev.smartrobot.bevy_app, userId: 0
+05-03 10:12:32.973 26231 26249 D SGM:GameManager: notePauseComponent(), received pkgName: dev.brain_machine.bevy_app, userId: 0
 05-03 10:12:32.977 29974 29974 I SurfaceView@f0c4b33: onWindowVisibilityChanged(8) false com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f0c4b33 V.E...... ........ 0,0-1440,2926} of ViewRootImpl@320ff7b[MainActivity]
 05-03 10:12:32.978 29974 29974 I SurfaceView@f0c4b33: pST: mTmpTransaction.apply, mTmpTransaction = android.view.SurfaceControl$Transaction@1361857
 05-03 10:12:32.978 29974 29974 I SurfaceView@f0c4b33: surfaceDestroyed callback.size 1 #2 com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f0c4b33 V.E...... ........ 0,0-1440,2926}
@@ -2856,8 +2856,8 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:32.989 29974 29974 I SurfaceView@f0c4b33: updateSurface: mVisible = false mSurface.isValid() = true
 05-03 10:12:32.990 29974 29974 I SurfaceView@f0c4b33: tryReleaseSurfaces: set mRtReleaseSurfaces = true
 05-03 10:12:32.991 29974 30004 I SurfaceView@f0c4b33: 215734107 wPL, frameNr = 0
-05-03 10:12:32.992 29974 30004 I SurfaceView@f0c4b33: remove() from RT android.view.SurfaceView$SurfaceViewPositionUpdateListener@cdbd75b Surface(name=SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0)/@0x9a9bf8
-05-03 10:12:32.992 29974 30004 I SurfaceView@f0c4b33: remove() com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f0c4b33 V.E...... ........ 0,0-1440,2926} Surface(name=SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0)/@0x9a9bf8
+05-03 10:12:32.992 29974 30004 I SurfaceView@f0c4b33: remove() from RT android.view.SurfaceView$SurfaceViewPositionUpdateListener@cdbd75b Surface(name=SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0)/@0x9a9bf8
+05-03 10:12:32.992 29974 30004 I SurfaceView@f0c4b33: remove() com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f0c4b33 V.E...... ........ 0,0-1440,2926} Surface(name=SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0)/@0x9a9bf8
 05-03 10:12:32.993 29974 30004 I SurfaceView@f0c4b33: aOrMT: uB = true t = android.view.SurfaceControl$Transaction@6f68e37 fN = 0 android.view.SurfaceView.access$500:124 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionLost:1785 android.graphics.RenderNode$CompositePositionUpdateListener.positionLost:326
 05-03 10:12:32.994 29974 30004 I SurfaceView@f0c4b33: aOrMT: vR.mWNT, vR = ViewRootImpl@320ff7b[MainActivity]
 05-03 10:12:32.994 29974 30004 I ViewRootImpl@320ff7b[MainActivity]: mWNT: t = android.view.SurfaceControl$Transaction@6f68e37 fN = 0 android.view.SurfaceView.applyOrMergeTransaction:1628 android.view.SurfaceView.access$500:124 android.view.SurfaceView$SurfaceViewPositionUpdateListener.positionLost:1785
@@ -2865,9 +2865,9 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:32.995 29974 30004 D OpenGLRenderer: setSurface called with nullptr
 05-03 10:12:32.995 29974 30004 D OpenGLRenderer: setSurface() destroyed EGLSurface
 05-03 10:12:32.995 29974 30004 D OpenGLRenderer: destroyEglSurface
-05-03 10:12:33.000 26231 27273 V WindowManager: Relayout Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}: viewVisibility=8 req=1440x2926 d0
+05-03 10:12:33.000 26231 27273 V WindowManager: Relayout Window{8af2056 u0 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity}: viewVisibility=8 req=1440x2926 d0
 05-03 10:12:33.003 26231 27273 V WindowManager: Relayout hash=8af2056, pid=29974: mAttrs={(0,0)(fillxfill) sim={adjust=resize} ty=BASE_APPLICATION fmt=TRANSLUCENT wanim=0x1030303
-05-03 10:12:33.005   642   658 I SurfaceFlinger: id=12937 Removed Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0 (104)
+05-03 10:12:33.005   642   658 I SurfaceFlinger: id=12937 Removed Bounds for - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@0#0 (104)
 05-03 10:12:33.006 29974 29974 I ViewRootImpl@320ff7b[MainActivity]: Relayout returned: old=(0,114,1440,3040) new=(0,114,1440,3040) req=(1440,2926)8 dur=7 res=0x5 s={false 0} ch=true fn=4
 05-03 10:12:33.006 29974 29974 I SurfaceView@f0c4b33: windowStopped(true) false com.google.androidgamesdk.GameActivity$InputEnabledSurfaceView{f0c4b33 V.E...... ........ 0,0-1440,2926} of ViewRootImpl@320ff7b[MainActivity]
 05-03 10:12:33.006 29974 29974 D SurfaceView@f0c4b33: updateSurface: surface is not valid
@@ -2876,54 +2876,54 @@ adb -d logcat | grep -e smartrobot -e 29974
 05-03 10:12:33.008 29974 29974 V threaded_app: Stop: 0x7446f4f1f0
 05-03 10:12:33.009 29974 30018 V threaded_app: activityState=14
 05-03 10:12:33.009 29974 30018 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: forward onStop notification to application
-05-03 10:12:33.009   642   642 I Layer   : id=12939 removeFromCurrentState SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0(BLAST)#0 (104)
+05-03 10:12:33.009   642   642 I Layer   : id=12939 removeFromCurrentState SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0(BLAST)#0 (104)
 05-03 10:12:33.009 29974 29974 V threaded_app: SaveInstanceState: 0x7446f4f1f0
 05-03 10:12:33.009 29974 30018 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: forward saveState notification to application
-05-03 10:12:33.009   642   642 I Layer   : id=12940 removeFromCurrentState Background for SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#0 (104)
+05-03 10:12:33.009   642   642 I Layer   : id=12940 removeFromCurrentState Background for SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0#0 (104)
 05-03 10:12:33.010 29974 30018 V threaded_app: APP_CMD_SAVE_STATE
-05-03 10:12:33.010   642   642 I Layer   : id=12938 removeFromCurrentState SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#0 (104)
-05-03 10:12:33.010   642   642 I SurfaceFlinger: id=12939 Removed SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0(BLAST)#0 (104)
-05-03 10:12:33.010   642   642 I SurfaceFlinger: id=12940 Removed Background for SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#0 (104)
-05-03 10:12:33.010   642   642 I SurfaceFlinger: id=12938 Removed SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#0 (104)
+05-03 10:12:33.010   642   642 I Layer   : id=12938 removeFromCurrentState SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0#0 (104)
+05-03 10:12:33.010   642   642 I SurfaceFlinger: id=12939 Removed SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0(BLAST)#0 (104)
+05-03 10:12:33.010   642   642 I SurfaceFlinger: id=12940 Removed Background for SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0#0 (104)
+05-03 10:12:33.010   642   642 I SurfaceFlinger: id=12938 Removed SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0#0 (104)
 05-03 10:12:33.010 29974 29974 I MSHandlerLifeCycle: isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@9d5c6ee[MainActivity]
 05-03 10:12:33.010 29974 29974 I MSHandlerLifeCycle: removeMultiSplitHandler: no exist. decor=DecorView@9d5c6ee[MainActivity]
-05-03 10:12:33.010   642   642 I Layer   : id=12938 Destroyed SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#0
-05-03 10:12:33.010   642   642 I Layer   : id=12940 Destroyed Background for SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0#0
-05-03 10:12:33.011   642   642 I Layer   : id=12939 Destroyed SurfaceView - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@f0c4b33@0(BLAST)#0
+05-03 10:12:33.010   642   642 I Layer   : id=12938 Destroyed SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0#0
+05-03 10:12:33.010   642   642 I Layer   : id=12940 Destroyed Background for SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0#0
+05-03 10:12:33.011   642   642 I Layer   : id=12939 Destroyed SurfaceView - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@f0c4b33@0(BLAST)#0
 05-03 10:12:33.014 29974 29974 D InputTransport: Input channel destroyed: 'ClientS', fd=116
 05-03 10:12:33.034 29974 29974 D SurfaceView@f0c4b33: updateSurface: surface is not valid
 05-03 10:12:33.035 29974 29974 V threaded_app: TrimMemory: 0x7446f4f1f0 20
-05-03 10:12:33.037 26231 26329 E WindowManager: win=Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity} destroySurfaces: appStopped=true win.mWindowRemovalAllowed=false win.mRemoveOnExit=false win.mViewVisibility=8 caller=com.android.server.wm.ActivityRecord.destroySurfaces:5848 com.android.server.wm.ActivityRecord.destroySurfaces:5829 com.android.server.wm.ActivityRecord.notifyAppStopped:5893 com.android.server.wm.ActivityRecord.activityStopped:6519 com.android.server.wm.ActivityClientController.activityStopped:253 android.app.IActivityClientController$Stub.onTransact:596 com.android.server.wm.ActivityClientController.onTransact:129
-05-03 10:12:33.037 26231 26329 I WindowManager: Destroying surface Surface(name=dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974)/@0xdd4e983 called by com.android.server.wm.WindowStateAnimator.destroySurface:987 com.android.server.wm.WindowStateAnimator.destroySurfaceLocked:518 com.android.server.wm.WindowState.destroySurfaceUnchecked:4229 com.android.server.wm.WindowState.destroySurface:4203 com.android.server.wm.ActivityRecord.destroySurfaces:5848 com.android.server.wm.ActivityRecord.destroySurfaces:5829 com.android.server.wm.ActivityRecord.notifyAppStopped:5893 com.android.server.wm.ActivityRecord.activityStopped:6519
-05-03 10:12:33.043   642   642 I Layer   : id=12934 removeFromCurrentState dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974#0 (102)
-05-03 10:12:33.043   642   642 I Layer   : id=12937 removeFromCurrentState Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0 (102)
-05-03 10:12:33.043   642   642 I SurfaceFlinger: id=12934 Removed dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974#0 (102)
-05-03 10:12:33.043   642   642 I Layer   : id=12934 Destroyed dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity$_29974#0
-05-03 10:12:33.043   642   642 I Layer   : id=12937 Destroyed Bounds for - dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity@0#0
-05-03 10:12:33.060 26231 28072 W InputDispatcher: Letterbox_top_ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12} has FLAG_SLIPPERY. Please report this in b/157929241
+05-03 10:12:33.037 26231 26329 E WindowManager: win=Window{8af2056 u0 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity} destroySurfaces: appStopped=true win.mWindowRemovalAllowed=false win.mRemoveOnExit=false win.mViewVisibility=8 caller=com.android.server.wm.ActivityRecord.destroySurfaces:5848 com.android.server.wm.ActivityRecord.destroySurfaces:5829 com.android.server.wm.ActivityRecord.notifyAppStopped:5893 com.android.server.wm.ActivityRecord.activityStopped:6519 com.android.server.wm.ActivityClientController.activityStopped:253 android.app.IActivityClientController$Stub.onTransact:596 com.android.server.wm.ActivityClientController.onTransact:129
+05-03 10:12:33.037 26231 26329 I WindowManager: Destroying surface Surface(name=dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity$_29974)/@0xdd4e983 called by com.android.server.wm.WindowStateAnimator.destroySurface:987 com.android.server.wm.WindowStateAnimator.destroySurfaceLocked:518 com.android.server.wm.WindowState.destroySurfaceUnchecked:4229 com.android.server.wm.WindowState.destroySurface:4203 com.android.server.wm.ActivityRecord.destroySurfaces:5848 com.android.server.wm.ActivityRecord.destroySurfaces:5829 com.android.server.wm.ActivityRecord.notifyAppStopped:5893 com.android.server.wm.ActivityRecord.activityStopped:6519
+05-03 10:12:33.043   642   642 I Layer   : id=12934 removeFromCurrentState dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity$_29974#0 (102)
+05-03 10:12:33.043   642   642 I Layer   : id=12937 removeFromCurrentState Bounds for - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@0#0 (102)
+05-03 10:12:33.043   642   642 I SurfaceFlinger: id=12934 Removed dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity$_29974#0 (102)
+05-03 10:12:33.043   642   642 I Layer   : id=12934 Destroyed dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity$_29974#0
+05-03 10:12:33.043   642   642 I Layer   : id=12937 Destroyed Bounds for - dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity@0#0
+05-03 10:12:33.060 26231 28072 W InputDispatcher: Letterbox_top_ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12} has FLAG_SLIPPERY. Please report this in b/157929241
 05-03 10:12:35.756 29974 29974 V threaded_app: Destroy: 0x7446f4f1f0
 05-03 10:12:35.756 29974 30018 V threaded_app: APP_CMD_DESTROY
 05-03 10:12:35.756 29974 30018 W event /home/cavani/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winit-0.30.9/src/platfTODO: forward onDestroy notification to application
-05-03 10:12:35.760 26231 26249 I ActivityManager: Killing 29974:dev.smartrobot.bevy_app/u0a728 (adj 850): remove task:remove-task
-05-03 10:12:35.760 26231 26249 D ActivityManager: [SD] user menu kill listen remove action name:dev.smartrobot.bevy_app uid:10728
+05-03 10:12:35.760 26231 26249 I ActivityManager: Killing 29974:dev.brain_machine.bevy_app/u0a728 (adj 850): remove task:remove-task
+05-03 10:12:35.760 26231 26249 D ActivityManager: [SD] user menu kill listen remove action name:dev.brain_machine.bevy_app uid:10728
 05-03 10:12:35.769 26231 26258 I libprocessgroup: Successfully killed process cgroup uid 10728 pid 29974 in 8ms
 05-03 10:12:36.065 26008 26072 I AudioFlinger: removeDlbCodecCallback pid:29974 type:-1
-05-03 10:12:36.065 26231 28087 I WindowManager: WIN DEATH: Window{8af2056 u0 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity}
-05-03 10:12:36.065 26231 28087 W InputManager-JNI: Input channel object '8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity (client)' was disposed without first being removed with the input manager!
+05-03 10:12:36.065 26231 28087 I WindowManager: WIN DEATH: Window{8af2056 u0 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity}
+05-03 10:12:36.065 26231 28087 W InputManager-JNI: Input channel object '8af2056 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity (client)' was disposed without first being removed with the input manager!
 05-03 10:12:36.067 26004 26004 I Zygote  : Process 29974 exited due to signal 9 (Killed)
-05-03 10:12:36.071 26231 28082 I ActivityTaskManager: Removing activity ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12 f}}(appDied)  from stack callers=com.android.server.wm.ActivityRecord.handleAppDied:4267 com.android.server.wm.WindowProcessController.handleAppDied:1287 com.android.server.wm.ActivityTaskManagerService$LocalService.handleAppDied:7078 com.android.server.am.ActivityManagerService.handleAppDiedLocked:3647 com.android.server.am.ActivityManagerService.appDiedLocked:3837
-05-03 10:12:36.073 26231 28082 W InputManager-JNI: Input channel object 'Letterbox_left_ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12} (client)' was disposed without first being removed with the input manager!
-05-03 10:12:36.073 26231 28082 W InputManager-JNI: Input channel object 'Letterbox_top_ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12} (client)' was disposed without first being removed with the input manager!
-05-03 10:12:36.074 26231 28082 W InputManager-JNI: Input channel object 'Letterbox_right_ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12} (client)' was disposed without first being removed with the input manager!
-05-03 10:12:36.074 26231 28082 W InputManager-JNI: Input channel object 'Letterbox_bottom_ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12} (client)' was disposed without first being removed with the input manager!
-05-03 10:12:36.080   642   642 I Layer   : id=12933 removeFromCurrentState 8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0 (100)
-05-03 10:12:36.080   642   642 I Layer   : id=12925 removeFromCurrentState ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}#0 (100)
-05-03 10:12:36.080   642   642 I SurfaceFlinger: id=12925 Removed ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}#0 (100)
+05-03 10:12:36.071 26231 28082 I ActivityTaskManager: Removing activity ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12 f}}(appDied)  from stack callers=com.android.server.wm.ActivityRecord.handleAppDied:4267 com.android.server.wm.WindowProcessController.handleAppDied:1287 com.android.server.wm.ActivityTaskManagerService$LocalService.handleAppDied:7078 com.android.server.am.ActivityManagerService.handleAppDiedLocked:3647 com.android.server.am.ActivityManagerService.appDiedLocked:3837
+05-03 10:12:36.073 26231 28082 W InputManager-JNI: Input channel object 'Letterbox_left_ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12} (client)' was disposed without first being removed with the input manager!
+05-03 10:12:36.073 26231 28082 W InputManager-JNI: Input channel object 'Letterbox_top_ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12} (client)' was disposed without first being removed with the input manager!
+05-03 10:12:36.074 26231 28082 W InputManager-JNI: Input channel object 'Letterbox_right_ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12} (client)' was disposed without first being removed with the input manager!
+05-03 10:12:36.074 26231 28082 W InputManager-JNI: Input channel object 'Letterbox_bottom_ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12} (client)' was disposed without first being removed with the input manager!
+05-03 10:12:36.080   642   642 I Layer   : id=12933 removeFromCurrentState 8af2056 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity#0 (100)
+05-03 10:12:36.080   642   642 I Layer   : id=12925 removeFromCurrentState ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12}#0 (100)
+05-03 10:12:36.080   642   642 I SurfaceFlinger: id=12925 Removed ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12}#0 (100)
 05-03 10:12:36.080 26231 26249 W ActivityManager: setHasOverlayUi called on unknown pid: 29974
-05-03 10:12:36.080   642   642 I SurfaceFlinger: id=12933 Removed 8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0 (100)
-05-03 10:12:36.081   642   642 I Layer   : id=12933 Destroyed 8af2056 dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity#0
-05-03 10:12:36.081   642   642 I Layer   : id=12925 Destroyed ActivityRecord{3b8e00c u0 dev.smartrobot.bevy_app/.MainActivity t12}#0
-05-03 10:12:36.082 26231 26255 W UsageStatsService: Unexpected activity event reported! (dev.smartrobot.bevy_app/dev.smartrobot.bevy_app.MainActivity event : 23 instanceId : 80321809)
+05-03 10:12:36.080   642   642 I SurfaceFlinger: id=12933 Removed 8af2056 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity#0 (100)
+05-03 10:12:36.081   642   642 I Layer   : id=12933 Destroyed 8af2056 dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity#0
+05-03 10:12:36.081   642   642 I Layer   : id=12925 Destroyed ActivityRecord{3b8e00c u0 dev.brain_machine.bevy_app/.MainActivity t12}#0
+05-03 10:12:36.082 26231 26255 W UsageStatsService: Unexpected activity event reported! (dev.brain_machine.bevy_app/dev.brain_machine.bevy_app.MainActivity event : 23 instanceId : 80321809)
 ```
 
 </details>
@@ -2936,10 +2936,10 @@ Workflows:
 - Commit:
     - format check, lint, test
 - Release:
-    - Linux x86_64 binary -> smartrobot-bevy-linux-x86_64
-    - Linux aarch64 binary -> smartrobot-bevy-linux-aarch64
-    - WASM package (site) -> smartrobot-bevy-web.zip
-    - APK package (android) -> smartrobot-bevy.apk
+    - Linux x86_64 binary -> brain-machine-bevy-linux-x86_64
+    - Linux aarch64 binary -> brain-machine-bevy-linux-aarch64
+    - WASM package (site) -> brain-machine-bevy-web.zip
+    - APK package (android) -> brain-machine-bevy.apk
 - Deploy
     - Web Package -> GitHub Pages
 
@@ -2963,24 +2963,24 @@ docker run \
 -v $PWD:/home/user/project \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
-smartrobot-bevy-ubuntu:latest \
+brain-machine-bevy-ubuntu:latest \
 cargo build \
 --profile release-lto \
 --target x86_64-unknown-linux-gnu \
 --features log-max,wayland
 
-ls -alh target/x86_64-unknown-linux-gnu/release-lto/smartrobot-bevy
+ls -alh target/x86_64-unknown-linux-gnu/release-lto/brain-machine-bevy
 
-# -rwxr-xr-x 2 cavani cavani 44M May  4 12:48 target/x86_64-unknown-linux-gnu/release-lto/smartrobot-bevy*
+# -rwxr-xr-x 2 cavani cavani 44M May  4 12:48 target/x86_64-unknown-linux-gnu/release-lto/brain-machine-bevy*
 
-file -b target/x86_64-unknown-linux-gnu/release-lto/smartrobot-bevy
+file -b target/x86_64-unknown-linux-gnu/release-lto/brain-machine-bevy
 
 # ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=7237a657dfe72c8ab4d4ebc13cc09b86234b7714, stripped
 
 docker run --rm --platform linux/amd64 \
 -v $PWD:/home/user/project \
-smartrobot-bevy-ubuntu:latest \
-ldd target/x86_64-unknown-linux-gnu/release-lto/smartrobot-bevy
+brain-machine-bevy-ubuntu:latest \
+ldd target/x86_64-unknown-linux-gnu/release-lto/brain-machine-bevy
 
 # linux-vdso.so.1 (0x000074f6c4186000)
 # libwayland-client.so.0 => /lib/x86_64-linux-gnu/libwayland-client.so.0 (0x000074f6c4169000)
@@ -2994,8 +2994,8 @@ ldd target/x86_64-unknown-linux-gnu/release-lto/smartrobot-bevy
 # /lib64/ld-linux-x86-64.so.2 (0x000074f6c4188000)
 
 
-cp target/x86_64-unknown-linux-gnu/release-lto/smartrobot-bevy \
-dist/v0.0.1/smartrobot-bevy-linux-x86_64
+cp target/x86_64-unknown-linux-gnu/release-lto/brain-machine-bevy \
+dist/v0.0.1/brain-machine-bevy-linux-x86_64
 
 
 
@@ -3009,25 +3009,25 @@ docker run \
 -v $PWD:/home/user/project \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
-smartrobot-bevy-debian:latest \
+brain-machine-bevy-debian:latest \
 cargo build \
 --profile release-lto \
 --target aarch64-unknown-linux-gnu \
 --features log-max,wayland
 
 
-ls -alh target/aarch64-unknown-linux-gnu/release-lto/smartrobot-bevy
+ls -alh target/aarch64-unknown-linux-gnu/release-lto/brain-machine-bevy
 
-# -rwxr-xr-x 2 cavani cavani 38M May  4 12:38 target/aarch64-unknown-linux-gnu/release-lto/smartrobot-bevy*
+# -rwxr-xr-x 2 cavani cavani 38M May  4 12:38 target/aarch64-unknown-linux-gnu/release-lto/brain-machine-bevy*
 
-file -b target/aarch64-unknown-linux-gnu/release-lto/smartrobot-bevy
+file -b target/aarch64-unknown-linux-gnu/release-lto/brain-machine-bevy
 
 # ELF 64-bit LSB pie executable, ARM aarch64, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-aarch64.so.1, for GNU/Linux 3.7.0, BuildID[sha1]=613d5badacc2a2fb492d0df3676f5bcc99baa191, stripped
 
 docker run --rm --platform linux/arm64 \
 -v $PWD:/home/user/project \
-smartrobot-bevy-debian:latest \
-ldd target/aarch64-unknown-linux-gnu/release-lto/smartrobot-bevy
+brain-machine-bevy-debian:latest \
+ldd target/aarch64-unknown-linux-gnu/release-lto/brain-machine-bevy
 
 
 # linux-vdso.so.1 (0x00007c236fdd4000)
@@ -3042,54 +3042,54 @@ ldd target/aarch64-unknown-linux-gnu/release-lto/smartrobot-bevy
 # /lib/ld-linux-aarch64.so.1 (0x00007c236edb0000)
 
 
-cp target/aarch64-unknown-linux-gnu/release-lto/smartrobot-bevy \
-dist/v0.0.1/smartrobot-bevy-linux-aarch64
+cp target/aarch64-unknown-linux-gnu/release-lto/brain-machine-bevy \
+dist/v0.0.1/brain-machine-bevy-linux-aarch64
 
 
 
 # WASM package (site)
 
 
-rm -rf smartrobot-bevy-web/
+rm -rf brain-machine-bevy-web/
 
-mkdir -p smartrobot-bevy-web/
+mkdir -p brain-machine-bevy-web/
 
-cp web/index.html smartrobot-bevy-web/
+cp web/index.html brain-machine-bevy-web/
 
 cargo build \
 --profile wasm-release \
 --target wasm32-unknown-unknown \
 --features log-max
 
-ls -alh target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
+ls -alh target/wasm32-unknown-unknown/wasm-release/brain-machine-bevy.wasm
 
-# -rwxrwxr-x 2 cavani cavani 25M May  4 11:44 target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
+# -rwxrwxr-x 2 cavani cavani 25M May  4 11:44 target/wasm32-unknown-unknown/wasm-release/brain-machine-bevy.wasm
 
 wasm-bindgen \
---out-name smartrobot_bevy \
---out-dir smartrobot-bevy-web/ \
+--out-name brain_machine_bevy \
+--out-dir brain-machine-bevy-web/ \
 --target web \
-target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
+target/wasm32-unknown-unknown/wasm-release/brain-machine-bevy.wasm
 
-ls -alh smartrobot-bevy-web/
+ls -alh brain-machine-bevy-web/
 
 # total 23M
 # drwxrwxr-x  2 cavani cavani 4.0K May  4 11:52 ./
 # drwxrwxr-x 13 cavani cavani 4.0K May  4 11:52 ../
 # -rw-rw-r--  1 cavani cavani  212 May  4 11:52 index.html
-# -rw-rw-r--  1 cavani cavani 1.8K May  4 11:52 smartrobot_bevy.d.ts
-# -rw-rw-r--  1 cavani cavani 105K May  4 11:52 smartrobot_bevy.js
-# -rw-rw-r--  1 cavani cavani  23M May  4 11:52 smartrobot_bevy_bg.wasm
-# -rw-rw-r--  1 cavani cavani  830 May  4 11:52 smartrobot_bevy_bg.wasm.d.ts
+# -rw-rw-r--  1 cavani cavani 1.8K May  4 11:52 brain_machine_bevy.d.ts
+# -rw-rw-r--  1 cavani cavani 105K May  4 11:52 brain_machine_bevy.js
+# -rw-rw-r--  1 cavani cavani  23M May  4 11:52 brain_machine_bevy_bg.wasm
+# -rw-rw-r--  1 cavani cavani  830 May  4 11:52 brain_machine_bevy_bg.wasm.d.ts
 
-zip -mr smartrobot-bevy-web.zip smartrobot-bevy-web/
+zip -mr brain-machine-bevy-web.zip brain-machine-bevy-web/
 
-ls -alh smartrobot-bevy-web.zip
+ls -alh brain-machine-bevy-web.zip
 
-# -rw-rw-r-- 1 cavani cavani 6.5M May  4 11:55 smartrobot-bevy-web.zip
+# -rw-rw-r-- 1 cavani cavani 6.5M May  4 11:55 brain-machine-bevy-web.zip
 
 
-mv smartrobot-bevy-web.zip dist/v0.0.1/
+mv brain-machine-bevy-web.zip dist/v0.0.1/
 
 
 
@@ -3109,12 +3109,12 @@ build \
 --profile mobile-release \
 --features log-max
 
-ls -alh android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libsmartrobot_bevy.so
+ls -alh android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libbrain_machine_bevy.so
 
-# -rwxrwxr-x 1 cavani cavani 29M May  4 12:14 android/app/src/main/jniLibs/arm64-v8a/libsmartrobot_bevy.so*
-# -rwxrwxr-x 1 cavani cavani 36M May  4 12:14 android/app/src/main/jniLibs/x86_64/libsmartrobot_bevy.so*
+# -rwxrwxr-x 1 cavani cavani 29M May  4 12:14 android/app/src/main/jniLibs/arm64-v8a/libbrain_machine_bevy.so*
+# -rwxrwxr-x 1 cavani cavani 36M May  4 12:14 android/app/src/main/jniLibs/x86_64/libbrain_machine_bevy.so*
 
-file -b android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libsmartrobot_bevy.so
+file -b android/app/src/main/jniLibs/{arm64-v8a,x86_64}/libbrain_machine_bevy.so
 
 # ELF 64-bit LSB shared object, ARM aarch64, version 1 (SYSV), dynamically linked, stripped
 # ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, stripped
@@ -3132,7 +3132,7 @@ ls -alh android/app/build/outputs/apk/debug/app-debug.apk
 
 
 cp android/app/build/outputs/apk/debug/app-debug.apk \
-dist/v0.0.1/smartrobot-bevy.apk
+dist/v0.0.1/brain-machine-bevy.apk
 
 
 
@@ -3144,8 +3144,8 @@ ls -alh dist/v0.0.1/
 # total 165M
 # drwxrwxr-x 2 cavani cavani 4.0K May  4 12:41 ./
 # drwxrwxr-x 3 cavani cavani 4.0K May  4 11:53 ../
-# -rwxr-xr-x 1 cavani cavani  38M May  4 12:41 smartrobot-bevy-linux-aarch64*
-# -rwxrwxr-x 1 cavani cavani  44M May  4 12:51 smartrobot-bevy-linux-x86_64*
-# -rw-rw-r-- 1 cavani cavani 6.5M May  4 11:55 smartrobot-bevy-web.zip
-# -rw-rw-r-- 1 cavani cavani  88M May  4 13:11 smartrobot-bevy.apk
+# -rwxr-xr-x 1 cavani cavani  38M May  4 12:41 brain-machine-bevy-linux-aarch64*
+# -rwxrwxr-x 1 cavani cavani  44M May  4 12:51 brain-machine-bevy-linux-x86_64*
+# -rw-rw-r-- 1 cavani cavani 6.5M May  4 11:55 brain-machine-bevy-web.zip
+# -rw-rw-r-- 1 cavani cavani  88M May  4 13:11 brain-machine-bevy.apk
 ```

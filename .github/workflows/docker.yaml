@@ -58,7 +58,7 @@ jobs:
           context: .
           file: docker/ubuntu/Dockerfile
           platforms: linux/amd64
-          tags: ghcr.io/cirocavani/smartrobot-bevy/smartrobot-bevy-ubuntu:latest
+          tags: ghcr.io/cirocavani/brain-machine-bevy/brain-machine-bevy-ubuntu:latest
           push: true
   
       - name: Debian ARM64 Build and push
@@ -68,7 +68,7 @@ jobs:
           context: .
           file: docker/debian/Dockerfile
           platforms: linux/arm64
-          tags: ghcr.io/cirocavani/smartrobot-bevy/smartrobot-bevy-debian:latest
+          tags: ghcr.io/cirocavani/brain-machine-bevy/brain-machine-bevy-debian:latest
           push: true
 
       # https://github.com/actions/attest-build-provenance
@@ -76,13 +76,13 @@ jobs:
       - name: Docker Ubuntu AMD64 artifact attestation
         uses: actions/attest-build-provenance@v2
         with:
-          subject-name: ghcr.io/cirocavani/smartrobot-bevy/smartrobot-bevy-ubuntu
+          subject-name: ghcr.io/cirocavani/brain-machine-bevy/brain-machine-bevy-ubuntu
           subject-digest: ${{ steps.docker-ubuntu-amd64.outputs.digest }}
           push-to-registry: true
 
       - name: Docker Debian ARM64 artifact attestation
         uses: actions/attest-build-provenance@v2
         with:
-          subject-name: ghcr.io/cirocavani/smartrobot-bevy/smartrobot-bevy-debian
+          subject-name: ghcr.io/cirocavani/brain-machine-bevy/brain-machine-bevy-debian
           subject-digest: ${{ steps.docker-debian-arm64.outputs.digest }}
           push-to-registry: true

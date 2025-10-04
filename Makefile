@@ -51,7 +51,7 @@ docker-build-ubuntu-amd64:
 	--platform linux/amd64 \
 	--build-arg USER_ID=`id -u` \
 	--build-arg GROUP_ID=`id -g` \
-	-t smartrobot-bevy-ubuntu:latest \
+	-t brain-machine-bevy-ubuntu:latest \
 	-f docker/ubuntu/Dockerfile \
 	.
 
@@ -69,7 +69,7 @@ docker-run-ubuntu-amd64:
 	-v ${PWD}:/home/user/project \
 	-v ${HOME}/.cargo/registry:/home/user/.cargo/registry \
 	-v ${HOME}/.cargo/git:/home/user/.cargo/git \
-	smartrobot-bevy-ubuntu:latest \
+	brain-machine-bevy-ubuntu:latest \
 	cargo run --features dev,wayland
 
 .PHONY: docker-run-ubuntu-amd64-nvidia
@@ -92,7 +92,7 @@ docker-run-ubuntu-amd64-nvidia:
 	-v ${PWD}:/home/user/project \
 	-v ${HOME}/.cargo/registry:/home/user/.cargo/registry \
 	-v ${HOME}/.cargo/git:/home/user/.cargo/git \
-	smartrobot-bevy-ubuntu:latest \
+	brain-machine-bevy-ubuntu:latest \
 	cargo run --features dev,wayland
 
 .PHONY: docker-ubuntu-amd64
@@ -116,7 +116,7 @@ docker-shell-ubuntu-amd64:
 	-v ${PWD}:/home/user/project \
 	-v ${HOME}/.cargo/registry:/home/user/.cargo/registry \
 	-v ${HOME}/.cargo/git:/home/user/.cargo/git \
-	smartrobot-bevy-ubuntu:latest
+	brain-machine-bevy-ubuntu:latest
 
 
 .PHONY: docker-build-debian-arm64
@@ -125,7 +125,7 @@ docker-build-debian-arm64:
 	--platform linux/arm64 \
 	--build-arg USER_ID=`id -u` \
 	--build-arg GROUP_ID=`id -g` \
-	-t smartrobot-bevy-debian:latest \
+	-t brain-machine-bevy-debian:latest \
 	-f docker/debian/Dockerfile \
 	.
 
@@ -143,7 +143,7 @@ docker-run-debian-arm64:
 	-v ${PWD}:/home/user/project \
 	-v ${HOME}/.cargo/registry:/home/user/.cargo/registry \
 	-v ${HOME}/.cargo/git:/home/user/.cargo/git \
-	smartrobot-bevy-debian:latest \
+	brain-machine-bevy-debian:latest \
 	cargo run --features dev,wayland
 
 .PHONY: docker-debian-arm64
@@ -164,7 +164,7 @@ docker-shell-debian-arm64:
 	-v ${PWD}:/home/user/project \
 	-v ${HOME}/.cargo/registry:/home/user/.cargo/registry \
 	-v ${HOME}/.cargo/git:/home/user/.cargo/git \
-	smartrobot-bevy-debian:latest
+	brain-machine-bevy-debian:latest
 
 
 # WebAssembly
@@ -178,12 +178,12 @@ build-wasm:
 
 .PHONY: build-web
 build-web: build-wasm
-	rm -f web/smartrobot_bevy*;
+	rm -f web/brain_machine_bevy*;
 	wasm-bindgen \
-	--out-name smartrobot_bevy \
+	--out-name brain_machine_bevy \
 	--out-dir web/ \
 	--target web \
-	target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
+	target/wasm32-unknown-unknown/wasm-release/brain-machine-bevy.wasm
 
 .PHONY: serve-web
 serve-web:

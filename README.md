@@ -1,4 +1,4 @@
-# Smart Robot - Bevy Experimental Project
+# Brain Machine - Bevy Experimental Project
 
 
 > Bevy is a refreshingly simple data-driven game engine built in Rust.
@@ -896,10 +896,10 @@ make clean
 ```sh
 # Ubuntu 25.04 x86_64 (development)
 
-# Build Docker Image `smartrobot-bevy-ubuntu`
+# Build Docker Image `brain-machine-bevy-ubuntu`
 make docker-build-ubuntu-amd64
 
-# Execute `cargo run` in a container based on `smartrobot-bevy-ubuntu`
+# Execute `cargo run` in a container based on `brain-machine-bevy-ubuntu`
 # (open a window using Wayland)
 make docker-run-ubuntu-amd64
 make docker-run-ubuntu-amd64-nvidia
@@ -912,10 +912,10 @@ make docker-ubuntu-amd64-nvidia
 
 # Debian 12 ARM64 (emulator) - Raspberry Pi
 
-# Build Docker Image `smartrobot-bevy-debian`
+# Build Docker Image `brain-machine-bevy-debian`
 make docker-build-debian-arm64
 
-# Execute `cargo run` in a container based on `smartrobot-bevy-debian`
+# Execute `cargo run` in a container based on `brain-machine-bevy-debian`
 # (open a window using Wayland)
 make docker-run-debian-arm64
 

@@ -19,14 +19,14 @@ docker run \
 -v $PWD:/home/user/project \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
-smartrobot-bevy-ubuntu:latest \
+brain-machine-bevy-ubuntu:latest \
 cargo build \
 --profile release-lto \
 --target x86_64-unknown-linux-gnu \
 --features log-max,wayland
 
-cp target/x86_64-unknown-linux-gnu/release-lto/smartrobot-bevy \
-dist/v0.0.1/smartrobot-bevy-linux-x86_64
+cp target/x86_64-unknown-linux-gnu/release-lto/brain-machine-bevy \
+dist/v0.0.1/brain-machine-bevy-linux-x86_64
 
 
 
@@ -41,14 +41,14 @@ docker run \
 -v $PWD:/home/user/project \
 -v $HOME/.cargo/registry:/home/user/.cargo/registry \
 -v $HOME/.cargo/git:/home/user/.cargo/git \
-smartrobot-bevy-debian:latest \
+brain-machine-bevy-debian:latest \
 cargo build \
 --profile release-lto \
 --target aarch64-unknown-linux-gnu \
 --features log-max,wayland
 
-cp target/aarch64-unknown-linux-gnu/release-lto/smartrobot-bevy \
-dist/v0.0.1/smartrobot-bevy-linux-aarch64
+cp target/aarch64-unknown-linux-gnu/release-lto/brain-machine-bevy \
+dist/v0.0.1/brain-machine-bevy-linux-aarch64
 
 
 
@@ -56,11 +56,11 @@ echo
 echo "WASM package (site)"
 echo
 
-rm -rf smartrobot-bevy-web/
+rm -rf brain-machine-bevy-web/
 
-mkdir -p smartrobot-bevy-web/
+mkdir -p brain-machine-bevy-web/
 
-cp web/index.html smartrobot-bevy-web/
+cp web/index.html brain-machine-bevy-web/
 
 cargo build \
 --profile wasm-release \
@@ -68,14 +68,14 @@ cargo build \
 --features log-max
 
 wasm-bindgen \
---out-name smartrobot_bevy \
---out-dir smartrobot-bevy-web/ \
+--out-name brain_machine_bevy \
+--out-dir brain-machine-bevy-web/ \
 --target web \
-target/wasm32-unknown-unknown/wasm-release/smartrobot-bevy.wasm
+target/wasm32-unknown-unknown/wasm-release/brain-machine-bevy.wasm
 
-zip -mr smartrobot-bevy-web.zip smartrobot-bevy-web/
+zip -mr brain-machine-bevy-web.zip brain-machine-bevy-web/
 
-mv smartrobot-bevy-web.zip dist/v0.0.1/
+mv brain-machine-bevy-web.zip dist/v0.0.1/
 
 
 
@@ -103,7 +103,7 @@ cd android/
 cd ..
 
 cp android/app/build/outputs/apk/debug/app-debug.apk \
-dist/v0.0.1/smartrobot-bevy.apk
+dist/v0.0.1/brain-machine-bevy.apk
 
 
 

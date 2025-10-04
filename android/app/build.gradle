@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "dev.smartrobot.bevy_app"
+    namespace = "dev.brain_machine.bevy_app"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "dev.smartrobot.bevy_app"
+        applicationId = "dev.brain_machine.bevy_app"
         minSdk = 31
         targetSdk = 35
         versionCode = 1

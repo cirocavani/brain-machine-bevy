@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Smart Robot"
+rootProject.name = "Brain Machine"
 include ":app"

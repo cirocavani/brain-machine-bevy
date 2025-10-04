@@ -6,4 +6,4 @@
 *.zip
 
 /dist
-/smartrobot-bevy-web*
+/brain-machine-bevy-web*
